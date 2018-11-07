@@ -4,7 +4,8 @@
   ok-text="Save"
   @keyup.native.esc="close">
     <div class="content has-text-centered">
-      What would you like to name this template?
+      What ID (short name) would you like to give to this new vertical? Please
+      use letters, numbers, and hyphens only.
     </div>
       <!-- <div class="block">
         <div class="control is-horizontal">
