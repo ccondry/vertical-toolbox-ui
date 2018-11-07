@@ -4,15 +4,9 @@ export const device = state => state.app.device
 export const sidebar = state => state.app.sidebar
 export const effect = state => state.app.effect
 export const menuitems = state => state.menu.items
-// const apiBase = state => state.app.apiBase
 export const authEnabled = state => true
 export const apiBase = state => state.app.apiBase
 export const instance = state => state.app.instance
-export const upnDomain = state => state.app.upnDomain
-export const shortDomain = state => state.app.shortDomain
-export const sessionId = state => state.app.sessionId
-export const datacenter = state => state.app.datacenter
 export const loading = state => state.loading
 export const working = state => state.working
-export const defaultChatEntryPointId = state => state.defaultChatEntryPointId
 export const endpoints = state => state.endpoints

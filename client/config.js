@@ -18,11 +18,6 @@ export default {
     defaultToken: 'a88ffa6256174c198e62e882d68af6fa'
   },
   lab: {
-    vpnAddress: 'vpn1.cdxdemo.net',
-    shortDomain: 'CDXDEMO',
-    upnDomain: 'cdxdemo.net',
-    taskMrd: 'SocialMiner',
-    voiceMrd: 'Cisco_Voice',
     caName: 'cdxdemo-CA1-CA',
     caCertUrl: 'http://static.cdxdemo.net/compete-ca.crt'
   },

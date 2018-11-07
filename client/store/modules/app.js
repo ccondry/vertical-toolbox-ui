@@ -1,25 +1,11 @@
-import { load } from '../../utils'
 import * as types from '../mutation-types'
 import config from '../../config'
 
 const getters = {
-  vpnAddress: state => state.vpnAddress,
-  tftp1: state => state.tftp1,
-  domain: state => state.upnDomain[state.instance]
 }
 
 const state = {
-  instance: 'pcce',
-  upnDomain: {
-    pcce: config.lab.upnDomain
-  },
-  shortDomain: config.lab.shortDomain,
-  vpnAddress: config.lab.vpnAddress,
-  tftp1: '198.18.133.3',
-  // returnPage: 'home',
   apiBase: config.app.apiBase[process.env.NODE_ENV],
-  sessionId: '',
-  datacenter: '',
   device: {
     isMobile: false,
     isTablet: false
@@ -64,17 +50,20 @@ const mutations = {
 }
 
 const actions = {
-  async getSession ({getters, commit, dispatch}, showNotification = true) {
+  async getEndpoints ({getters, commit, dispatch}, showNotification = true) {
+    dispatch('setLoading', {group: 'app', type: 'endpoints', value: true})
     try {
-      const response = await load(getters, 'session')
-      console.log('load DIDs:', response)
-      commit(types.SET_SESSION, response.data)
-      if (showNotification) {
-        dispatch('successNotification', 'Successfully loaded dCloud session info')
-      }
+      await dispatch('loadToState', {
+        name: 'endpoints',
+        endpoint: getters.endpoints.endpoints,
+        mutation: types.SET_ENDPOINTS,
+        showNotification
+      })
     } catch (e) {
-      console.log('error loading defaults', e)
-      dispatch('errorNotification', {title: 'Failed to load dCloud session info', error: e})
+      console.log('error loading endpoints', e)
+      dispatch('errorNotification', {title: 'Failed to load endpoints', error: e})
+    } finally {
+      dispatch('setLoading', {group: 'app', type: 'endpoints', value: false})
     }
   }
 }

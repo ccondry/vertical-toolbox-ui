@@ -100,11 +100,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import VerticalConfig from '../../components/vertical-config.vue'
+import SaveTemplateModal from '../../components/modals/save-template.vue'
 import moment from 'moment'
 
 export default {
   components: {
-    VerticalConfig
+    VerticalConfig,
+    SaveTemplateModal
   },
   data () {
     return {
@@ -121,12 +123,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'putUser',
       'loadVerticals',
-      'saveBrandingTemplate',
-      'errorNotification',
-      // 'searchCceObjects',
-      'loadDefaults'
+      'errorNotification'
     ]),
     isRecent (date) {
       try {
@@ -213,18 +211,6 @@ export default {
       'verticals',
       'loading',
       'working',
-      'device',
-      // 'myPqs',
-      'myCallTypes',
-      'cceObjects',
-      // 'myDepartment',
-      'myTaskPqs',
-      'taskPqs',
-      'myVoicePqs',
-      'voicePqs',
-      'defaultTaskPqId',
-      'defaultCtId',
-      'staticDids',
       'defaults'
     ]),
     sortedVerticals () {
