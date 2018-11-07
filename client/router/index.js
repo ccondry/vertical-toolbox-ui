@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import menuModule from 'vuex-store/modules/menu'
 Vue.use(Router)
-
+import config from '../../config'
+const publicPath = config.dev.assetsPublicPath
 /***
 Items in the menu module will be added using generateRoutesFromMenu
 Make sure you load all components here that are not listed in the menu module
@@ -14,7 +15,7 @@ export default new Router({
   routes: [
     {
       name: 'Home View',
-      path: '/cumulus/',
+      path: publicPath + '/',
       component: require('../views/main/Home')
     },
     // {
@@ -60,7 +61,7 @@ export default new Router({
     ...generateRoutesFromMenu(menuModule.state.items),
     {
       path: '*',
-      redirect: '/cumulus/'
+      redirect: publicPath + '/'
     }
   ]
 })

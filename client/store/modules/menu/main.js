@@ -1,4 +1,6 @@
 import lazyLoading from './lazyLoading'
+import config from '../../../../config'
+const publicPath = config.dev.assetsPublicPath
 
 export default {
   name: 'Main',
@@ -13,7 +15,7 @@ export default {
   children: [
     {
       name: 'Home',
-      path: '/cumulus/main/home',
+      path: publicPath + '/main/home',
       meta: {
         icon: 'home',
         description: 'Home',
@@ -24,7 +26,7 @@ export default {
     },
     {
       name: 'Verticals',
-      path: '/cumulus/main/verticals',
+      path: publicPath + '/main/verticals',
       meta: {
         icon: 'copyright',
         description: 'Custom branded demo website configuration',
