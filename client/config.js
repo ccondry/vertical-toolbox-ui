@@ -1,4 +1,4 @@
-const endpointUrl = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://localhost:3033/api/v1/cumulus/endpoints'
+const endpointUrl = process.env.NODE_ENV === 'production' ? '/api/v1/cumulus/endpoints' : 'http://localhost:3033/api/v1/cumulus/endpoints'
 
 export default {
   app: {
