@@ -13,7 +13,7 @@
       </div>
       <div class="card-content" v-else>
         <b-field label="ID">
-          <b-input v-model="model.id" :placeholder="defaults.id" @keyup.native.enter="submit" />
+          <b-input v-model="model.id" :placeholder="defaults.id" @keyup.native.enter="submit" disabled="true" />
         </b-field>
         <b-field label="Name">
           <b-input v-model="model.name" :placeholder="defaults.name" @keyup.native.enter="submit" />
@@ -152,7 +152,7 @@
                 <b-field grouped>
                   <b-field label="Icon">
                     <a @click.prevent="iconModalContext = {mobileOption}; showIconModal = true">
-                      <b-icon pack="fa" :icon="iconTranslations[mobileOption.icon] ? iconTranslations[mobileOption.icon] : mobileOption.icon" size="is-large" />
+                      <b-icon pack="fa" :icon="mobileOption.icon" size="is-large" />
                     </a>
                   </b-field>
                   <b-field label="Icon Name">
