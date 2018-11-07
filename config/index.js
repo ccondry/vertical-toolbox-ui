@@ -23,7 +23,7 @@ module.exports = {
     port: process.env.DEV_PORT || 8080,
     autoOpenBrowser: true,
     assetsSubDirectory: 'assets',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/cumulus/',
     proxyTable: {
         '/MODApis': {
             target: 'http://dev.markitondemand.com',

@@ -13,7 +13,7 @@ export default {
   children: [
     {
       name: 'Home',
-      path: '/main/home',
+      path: '/cumulus/main/home',
       meta: {
         icon: 'home',
         description: 'Home',
@@ -24,7 +24,7 @@ export default {
     },
     {
       name: 'Verticals',
-      path: '/main/verticals',
+      path: '/cumulus/main/verticals',
       meta: {
         icon: 'copyright',
         description: 'Custom branded demo website configuration',
