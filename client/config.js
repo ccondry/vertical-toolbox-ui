@@ -1,16 +1,8 @@
-const endpointUrl = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://localhost:3032/api/v1/cumulus/endpoints'
+const endpointUrl = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://localhost:3033/api/v1/cumulus/endpoints'
 
 export default {
   app: {
-    apiBase: {
-      'production': '/api/v1',
-      'development': 'http://localhost:3032/api/v1'
-      // 'development': 'https://toolbox.cdxdemo.net/api/v5'
-    },
     endpoints: {
-      login: 'http://localhost:3032/api/v1/auth/login',
-      logout: 'http://localhost:3032/api/v1/auth/logout',
-      verticals: 'http://localhost:3033/api/v1/cumulus/verticals',
       endpoints: endpointUrl
     }
   },

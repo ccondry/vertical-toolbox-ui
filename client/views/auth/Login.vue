@@ -57,7 +57,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      apiBase: 'apiBase',
       authenticated: 'authenticated',
       forwardTo: 'forwardTo',
       'working': 'working'

@@ -1,11 +1,9 @@
 import * as types from '../mutation-types'
-import config from '../../config'
 
 const getters = {
 }
 
 const state = {
-  apiBase: config.app.apiBase[process.env.NODE_ENV],
   device: {
     isMobile: false,
     isTablet: false
@@ -49,13 +47,15 @@ const mutations = {
   }
 }
 
+const endpoint = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://localhost:3033/api/v1/cumulus/endpoints'
+
 const actions = {
   async getEndpoints ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'endpoints', value: true})
     try {
       await dispatch('loadToState', {
         name: 'endpoints',
-        endpoint: getters.endpoints.endpoints,
+        endpoint,
         mutation: types.SET_ENDPOINTS,
         showNotification
       })

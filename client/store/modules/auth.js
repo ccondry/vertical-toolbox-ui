@@ -196,7 +196,7 @@ const actions = {
       } else {
         body = {username: data}
       }
-      const response = await axios.post(`${getters.apiBase}/auth/password/reset/request`, body)
+      const response = await axios.post(`/auth/password/reset/request`, body)
       // if successful
       if (response.status >= 200 && response.status < 300) {
         dispatch('successNotification', {
@@ -222,7 +222,7 @@ const actions = {
   async resetPassword ({getters, dispatch}, data) {
     // try password reset request
     try {
-      const response = await axios.post(`${getters.apiBase}/auth/password/reset`, data)
+      const response = await axios.post(`/auth/password/reset`, data)
       // if successful
       if (response.status >= 200 && response.status < 300) {
         dispatch('successNotification', {

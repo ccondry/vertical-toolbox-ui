@@ -36,7 +36,7 @@ const actions = {
         }
       }
       dispatch('setWorking', {group: 'app', type: 'user', value: true})
-      const response = await axios.patch(`${getters.apiBase}/users/${getters.user.username}?field=${field}`, body, options)
+      const response = await axios.patch(`/users/${getters.user.username}?field=${field}`, body, options)
       dispatch('setWorking', {group: 'app', type: 'user', value: false})
       console.log('response:', response)
       dispatch('successNotification', {
@@ -67,7 +67,7 @@ const actions = {
         }
       }
       dispatch('setWorking', {group: 'app', type: 'user', value: true})
-      await axios.put(`${getters.apiBase}/user`, data, options)
+      await axios.put(`/user`, data, options)
       dispatch('setWorking', {group: 'app', type: 'user', value: false})
       // console.log(response)
       dispatch('successNotification', {

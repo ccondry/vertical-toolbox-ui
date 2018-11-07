@@ -2,6 +2,9 @@ import * as types from './mutation-types'
 import Vue from 'vue'
 
 const mutations = {
+  [types.SET_ENDPOINTS] (state, data) {
+    state.endpoints = data
+  },
   [types.SET_WORKING] (state, data) {
     // if state container for this group is not existing, create it
     if (!state.working[data.group]) {

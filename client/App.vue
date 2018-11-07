@@ -60,6 +60,7 @@ export default {
     // check the JWT in localstorage to see if the user is already logged in
     // try {
     this.checkLogin()
+    await this.getEndpoints()
       // logged in
     // } catch (e) {
       // not logged in, so go to login page
@@ -98,7 +99,8 @@ export default {
     ...mapActions([
       'toggleDevice',
       'toggleSidebar',
-      'checkLogin'
+      'checkLogin',
+      'getEndpoints'
     ])
   },
   watch: {
