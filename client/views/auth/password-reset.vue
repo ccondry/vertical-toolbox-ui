@@ -56,7 +56,7 @@ export default {
           newPassword: this.password
         })
         // forward to the login page
-        this.$router.push('Login')
+        // this.$router.push('Login')
       } catch (e) {
         console.log(e)
       }

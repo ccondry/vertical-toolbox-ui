@@ -103,16 +103,16 @@ export default {
       if (val === true && oldVal === false) {
         console.log('became authenticated. going from login page to home page.')
         // go to the home page
-        console.log('router', this.$router)
-        // if the last page is a page here, go to it. otherwise go Home
-        // this.$router.go(-1)
-        if (this.forwardTo !== null) {
-          console.log('forwardTo', this.forwardTo)
-          this.$router.push(this.forwardTo.name)
-          this.setForwardTo(null)
-        } else {
-          this.$router.push('Home')
-        }
+        // console.log('router', this.$router)
+        // // if the last page is a page here, go to it. otherwise go Home
+        // // this.$router.go(-1)
+        // if (this.forwardTo !== null) {
+        //   console.log('forwardTo', this.forwardTo)
+        //   this.$router.push(this.forwardTo.name)
+        //   this.setForwardTo(null)
+        // } else {
+        //   this.$router.push('Home')
+        // }
       }
     }
   }

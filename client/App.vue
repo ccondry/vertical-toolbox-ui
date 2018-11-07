@@ -107,7 +107,7 @@ export default {
     authenticated (val, oldVal) {
       // if user goes from logged in to logged out, forward them to the login page
       if (oldVal === true && val === false) {
-        this.$router.push('Login')
+        // this.$router.push('Login')
       }
     }
   }
