@@ -44,7 +44,7 @@
             <p>
               You can update your verticals by using the save button
               on this panel. You will not be able to save over other users'
-              templates.
+              verticals.
             </p>
             <p>
               You can create new verticals by loading an existing vertical and
@@ -63,7 +63,7 @@
             <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
           <div class="block">
-            <button type="button" class="button is-success" @click.prevent="clickSave">Save</button>
+            <!-- <button type="button" class="button is-success" @click.prevent="clickSave">Save</button> -->
             <button type="button" class="button is-success" @click.prevent="clickSaveAs">Save As</button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
@@ -91,7 +91,7 @@
     <save-template-modal
     ref="modal"
     :visible="showModal"
-    title="Save Vertical As"
+    title="Save Vertical As..."
     @close="showModal = false"
     @submit="clickSaveVertical"></save-template-modal>
   </div>
@@ -124,7 +124,8 @@ export default {
   methods: {
     ...mapActions([
       'loadVerticals',
-      'errorNotification'
+      'errorNotification',
+      'saveVertical'
     ]),
     isRecent (date) {
       try {
@@ -145,42 +146,36 @@ export default {
       // load templates
       this.loadVerticals(false)
     },
-    clickSave () {
-      const id = this.selectedTemplate.id
+    async clickSave () {
+      const id = this.selectedTemplate
       console.log('click save vertical', id)
       try {
         if (this.activeTab === 0) {
           // use Form model
-          const verticalData = JSON.parse(JSON.stringify(this.formModel))
-          this.putVertical(id, verticalData)
+          const data = JSON.parse(JSON.stringify(this.formModel))
+          await this.saveVertical({id, data})
         } else if (this.activeTab === 1) {
           // use Raw JSON string
-          const user = JSON.parse(JSON.stringify(this.user))
-          user.brand = JSON.parse(this.verticalDataString)
-          this.putUser(user)
+          const data = JSON.parse(JSON.stringify(this.verticalDataString))
+          await this.saveVertical({id, data})
         }
+        this.loadVerticals(false)
       } catch (e) {
-        console.log('failed to save branding config', e.message)
-        this.errorNotification(`Failed to save branding. Check JSON syntax.`)
+        console.log('failed to save vertical', e.message)
+        this.errorNotification(`Failed to save vertical. Check JSON syntax.`)
       }
     },
     clickSaveAs () {
-      console.log('saving as branding template...')
+      console.log('saving vertical as...')
       this.showModal = true
     },
     updateCache (data) {
       // copy state data to local data
       this.verticalDataString = JSON.stringify(data, null, 2)
     },
-    // saveBranding (data) {
-    //   console.log('update branding', data)
-    //   const user = JSON.parse(JSON.stringify(this.user))
-    //   user.brand = data
-    //   this.putUser(user)
-    // },
     clickLoadTemplate () {
       // user clicked button to load a template into their user branding config
-      console.log('loading template', this.selectedTemplate)
+      console.log('loading vertical', this.selectedTemplate)
       // update the raw JSON string
       this.updateCache(this.selectedTemplateObject)
       // update the form with a copy of the template object
@@ -194,10 +189,15 @@ export default {
 
       console.log('saving vertical')
       try {
-        await this.saveVertical({
-          id,
-          data: JSON.parse(this.verticalDataString)
-        })
+        if (this.activeTab === 0) {
+          // use Form model
+          const data = JSON.parse(JSON.stringify(this.formModel))
+          await this.saveVertical({id, data})
+        } else if (this.activeTab === 1) {
+          // use Raw JSON string
+          const data = JSON.parse(JSON.stringify(this.verticalDataString))
+          await this.saveVertical({id, data})
+        }
         this.loadVerticals(false)
       } catch (e) {
         console.log('failed to save vertical', id, e)
@@ -219,8 +219,8 @@ export default {
         const copy = JSON.parse(JSON.stringify(this.verticals))
         // case-insensitive sort
         copy.sort((a, b) => {
-          var nameA = a.name.toUpperCase() // ignore upper and lowercase
-          var nameB = b.name.toUpperCase() // ignore upper and lowercase
+          var nameA = a.id.toUpperCase() // ignore upper and lowercase
+          var nameB = b.id.toUpperCase() // ignore upper and lowercase
           if (nameA < nameB) {
             return -1
           }
@@ -232,7 +232,7 @@ export default {
         })
         return copy
       } catch (e) {
-        console.log(`couldn't get sorted branding templates`, e)
+        console.log(`couldn't get sorted verticals`, e)
       }
     },
     filteredSortedVerticals () {

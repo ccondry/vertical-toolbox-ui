@@ -15,24 +15,27 @@ const mutations = {
 }
 
 const actions = {
-  async saveVertical ({getters, commit, dispatch}, data) {
-    console.log('saving vertical (not implemented) - data:', data)
-    // try {
-    //   const response = await post(getters, 'branding/templates', null, data)
-    //   console.log('saved branding template:', response)
-    //   commit(types.SET_VERTICALS, response.data)
-    //   dispatch('successNotification', 'Successfully saved branding template')
-    // } catch (e) {
-    //   console.log('error saving branding template', e)
-    //   // console.log(e)
-    //   // dispatch('errorNotification', {title: 'Failed to save branding template', error: e.response.data})
-    //   console.log(e.response)
-    //   dispatch('notification', {
-    //     title: 'Failed to save branding template',
-    //     message: e.response.data.message,
-    //     type: 'danger'
-    //   })
-    // }
+  async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
+    console.log('saving vertical (not implemented) - params:', {id, data})
+    delete data._id
+    try {
+      const response = await dispatch('putData', {
+        name: 'vertical',
+        endpoint: getters.endpoints.verticals + '/' + id,
+        data,
+        showNotification
+      })
+
+      console.log('saved vertical. response:', response)
+      dispatch('successNotification', 'Successfully saved vertical')
+    } catch (e) {
+      console.log('error saving vertical', e)
+      dispatch('notification', {
+        title: 'Failed to save vertical',
+        message: e.response.data.message,
+        type: 'danger'
+      })
+    }
   },
   async loadVerticals ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
