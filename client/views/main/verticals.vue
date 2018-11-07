@@ -33,9 +33,9 @@
             <button type="button" class="button is-primary"
             @click.prevent="clickLoadTemplate"
             :disabled="!selectedTemplate">Load</button>
-            <button type="button" class="button is-success"
+            <!-- <button type="button" class="button is-success"
             @click.prevent="clickSaveVertical(selectedTemplate)"
-            :disabled="disableSaveTemplate">Save</button>
+            :disabled="disableSaveTemplate">Save</button> -->
           </div>
           <div class="wysiwyg">
             <p>
@@ -63,7 +63,7 @@
             <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
           <div class="block">
-            <!-- <button type="button" class="button is-success" @click.prevent="clickSave">Save</button> -->
+            <button type="button" class="button is-success" @click.prevent="clickSave">Save</button>
             <button type="button" class="button is-success" @click.prevent="clickSaveAs">Save As</button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
