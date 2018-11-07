@@ -1,7 +1,0 @@
-add user
-context service
-agent phones
-CVP VXML file uploading
-outbound
-REM
-server administration (at least camelot restart)
