@@ -1,5 +1,8 @@
 <template>
   <div class="content has-text-centered">
+    <!-- Loading Indicator -->
+    <b-loading :is-full-page="false" :active="working.app.login" :can-cancel="false"></b-loading>
+
     <h1 class="is-title is-bold">Login</h1>
 
     <div class="columns is-vcentered">
@@ -56,14 +59,15 @@ export default {
     ...mapGetters({
       apiBase: 'apiBase',
       authenticated: 'authenticated',
-      forwardTo: 'forwardTo'
+      forwardTo: 'forwardTo',
+      'working': 'working'
     })
   },
   activated () {
     // forward user to home page if they're already authenticated
-    if (this.authenticated) {
-      this.$router.go(-1)
-    }
+    // if (this.authenticated) {
+    //   this.$router.go(-1)
+    // }
   },
   methods: {
     ...mapActions([

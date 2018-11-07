@@ -76,6 +76,7 @@ const actions = {
     }
   },
   async login ({getters, dispatch}, data) {
+    dispatch('setWorking', {group: 'app', type: 'login', value: true})
     // store a local copy of user/pass
     let username = data.username
     let password = data.password
@@ -113,6 +114,8 @@ const actions = {
         message: `${error.response.status} ${error.response.statusText}`
       })
       throw error
+    } finally {
+      dispatch('setWorking', {group: 'app', type: 'login', value: false})
     }
   },
   async checkLogin ({getters, dispatch, commit, rootState}) {
@@ -175,12 +178,12 @@ const actions = {
       //   }
       // }
     } else {
-      console.log('JWT not found in localstorage. forwarding to login page.')
+      console.log('JWT not found in localstorage.')
       // forward user to login page
-      const error = {
-        error: 'JWT not found'
-      }
-      throw error
+      // const error = {
+      //   error: 'JWT not found'
+      // }
+      // throw error
     }
   },
   async sendPasswordResetEmail ({getters, dispatch, commit, rootState}, data) {

@@ -3,8 +3,13 @@
     <nprogress-container></nprogress-container>
     <!-- <b-loading :is-full-page="true" :active="loading.app.user" :can-cancel="false"></b-loading> -->
     <navbar :show="true" :menu-filter.sync="menuFilter"></navbar>
-    <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
-    <app-main></app-main>
+    <div v-if="authenticated">
+      <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
+      <app-main></app-main>
+    </div>
+    <div v-else>
+      <login />
+    </div>
     <!-- <footer-bar></footer-bar> -->
   </div>
 </template>
@@ -13,7 +18,8 @@
 import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
 import { Navbar, Sidebar, AppMain } from 'components/layout/'
 import { mapGetters, mapActions } from 'vuex'
-import router from './router'
+// import router from './router'
+import Login from './views/auth/Login'
 
 export default {
   data () {
@@ -26,7 +32,8 @@ export default {
     Navbar,
     Sidebar,
     AppMain,
-    NprogressContainer
+    NprogressContainer,
+    Login
   },
 
   async beforeMount () {
@@ -51,13 +58,13 @@ export default {
     window.addEventListener('resize', handler)
 
     // check the JWT in localstorage to see if the user is already logged in
-    try {
-      await this.checkLogin()
+    // try {
+    this.checkLogin()
       // logged in
-    } catch (e) {
+    // } catch (e) {
       // not logged in, so go to login page
-      return router.push('Login')
-    }
+      // return router.push('Login')
+    // }
 
     // if (this.authEnabled === true) {
     //   try {

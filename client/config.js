@@ -1,3 +1,5 @@
+const endpointUrl = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://localhost:3032/api/v1/cumulus/endpoints'
+
 export default {
   app: {
     apiBase: {
@@ -7,8 +9,9 @@ export default {
     },
     endpoints: {
       login: 'http://localhost:3032/api/v1/auth/login',
-      logout: 'http://localhost:3033/api/v1/user/logout',
-      verticals: 'http://localhost:3033/api/v1/cumulus/verticals'
+      logout: 'http://localhost:3032/api/v1/auth/logout',
+      verticals: 'http://localhost:3033/api/v1/cumulus/verticals',
+      endpoints: endpointUrl
     }
   },
   ece: {

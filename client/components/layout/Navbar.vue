@@ -5,6 +5,7 @@
         <div class="nav-left">
           <b-field style="margin-top: 0.2em; margin-bottom: 0.2em;">
             <b-input placeholder="Search Menu..."
+            v-if="authenticated"
             type="search"
             icon="magnify"
             v-model="filter"
@@ -25,7 +26,7 @@
         </div>
         <div class="nav-right is-flex">
           <a v-if="authenticated" class="nav-item">{{ user.username }}</a>
-          <router-link v-if="!authenticated" to="/login" class="nav-item">Login</router-link>
+          <!-- <router-link v-if="!authenticated" to="/login" class="nav-item">Login</router-link> -->
           <a v-if="authenticated" @click="clickLogout" class="nav-item">Logout</a>
         </div>
       </nav>

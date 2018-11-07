@@ -17,16 +17,16 @@ export default new Router({
       path: '/',
       component: require('../views/main/Home')
     },
-    {
-      name: 'Login',
-      path: '/login',
-      component: require('../views/auth/Login')
-    },
-    {
-      name: 'Password Reset',
-      path: '/password-reset',
-      component: require('../views/auth/password-reset')
-    },
+    // {
+    //   name: 'Login',
+    //   path: '/login',
+    //   component: require('../views/auth/Login')
+    // },
+    // {
+    //   name: 'Password Reset',
+    //   path: '/password-reset',
+    //   component: require('../views/auth/password-reset')
+    // },
     // {
     //   name: 'CVP VXML App',
     //   path: '/cce/cvp/vxml-app/:appName',
