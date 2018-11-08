@@ -124,8 +124,8 @@ export default {
     isNew (item) {
       // menu items are new if less than 14 days old
       try {
-        if (item.meta.added) {
-          let diff = moment().diff(moment(item.meta.added), 'days')
+        if (item.meta.created) {
+          let diff = moment().diff(moment(item.meta.created), 'days')
           return diff < 14
         } else {
           return false
@@ -139,8 +139,8 @@ export default {
       try {
         // menu items are updated if updated property less than 14 days old
         // also prefer 'new' tag over 'updated' tag
-        if (!this.isNew(item) && item.meta.updated) {
-          let diff = moment().diff(moment(item.meta.updated), 'days')
+        if (!this.isNew(item) && item.meta.modified) {
+          let diff = moment().diff(moment(item.meta.modified), 'days')
           return diff < 14
         } else {
           return false
