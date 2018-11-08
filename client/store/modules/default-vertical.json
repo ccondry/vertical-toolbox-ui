@@ -1,6 +1,12 @@
 {
   "id": "travel",
   "name": "Cumulus Travel",
+  "address": "170 West Tasman Dr., San Jose, CA",
+  "domain": "cumulus.com",
+  "gps": {
+    "latitude": 37.4084425,
+    "longitude": -121.9561531
+  },
   "taskOptions": [
     {
       "text": "Send My Boarding Pass"
@@ -188,7 +194,7 @@
       "description": "Urbane sophistication and the grandness of nature, the epicurean pleasures of a fine glass of wine and the cultural delights of a tango show, the Great Outdoors and the Marvels of Civilization; all of this and more can be found in stupendous South America."
     }
   ],
-  "products": [
+  "services": [
     {
       "name": "Italy",
       "description": "Hidden Jewels of Italy’s Northern Route Tour",
@@ -246,7 +252,6 @@
       "price": "$3900"
     }
   ],
-  "services": [],
   "authors": [
     {
       "firstName": "Sandra",
@@ -287,7 +292,7 @@
       "text1": "Cumulus lets you arrange your travel safely and securely by providing you with real-time schedule and fare information.",
       "text2": "Once you've selected your itinerary, you'll be asked for your credit card to secure your online booking.",
       "buttonText": "Book Now",
-      "buttonLink": "products",
+      "buttonLink": "services",
       "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/slide2.jpg"
     },
     {

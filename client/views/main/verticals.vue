@@ -8,16 +8,24 @@
         <article class="tile is-child box">
           <h1 class="title">Information</h1>
           <p>
-            View and edit your Cumulus demo verticals.
+            View and edit your Cumulus demo verticals for the Cumulus mobile app and website.
           </p>
         </article>
       </div>
     </div>
 
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-vertical is-4">
+      <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">Existing Verticals</h1>
+          <div class="block">
+            <div class="wysiwyg">
+              <p>
+                Use this form to load an existing vertical config into the panel
+                below.
+              </p>
+            </div>
+          </div>
           <div class="block">
             <div class="field">
               <b-checkbox v-model="filterTemplates">Only show my verticals</b-checkbox>
@@ -37,10 +45,18 @@
             @click.prevent="clickSaveVertical(selectedTemplate)"
             :disabled="disableSaveTemplate">Save</button> -->
           </div>
-          <div class="wysiwyg">
-            <p>
-              Use this form to load and save existing verticals.
-            </p>
+        </article>
+      </div>
+    </div>
+    <div class="tile is-ancestor">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child box">
+          <h1 class="title">
+            Vertical Config
+            <!-- 'updated' tag -->
+            <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
+          </h1>
+          <div class="block wysiwyg">
             <p>
               You can update your verticals by using the save button
               on this panel. You will not be able to save over other users'
@@ -53,21 +69,13 @@
               ID, it will be replace the existing one (if you own it).
             </p>
           </div>
-        </article>
-      </div>
-      <div class="tile is-parent is-vertical">
-        <article class="tile is-child box">
-          <h1 class="title">
-            Vertical Config
-            <!-- 'updated' tag -->
-            <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
-          </h1>
           <div class="block">
-            <button type="button" class="button is-success" @click.prevent="clickSave">Save</button>
-            <button type="button" class="button is-success" @click.prevent="clickSaveAs">Save As</button>
+            <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
+            <button type="button" class="button is-success" @click.prevent="clickSaveAs" :disabled="disableSaveAs">Save As</button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
-          <b-tabs v-model="activeTab">
+          <!-- Only offer raw JSON to admins -->
+          <b-tabs v-model="activeTab" v-if="user.admin">
             <b-tab-item label="Form">
               <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
               <vertical-config
@@ -76,6 +84,7 @@
               :working="working.app.verticals"
               :loading="loading.app.verticals"
               :defaults="defaults.verticals"
+              :user="user"
               ></vertical-config>
             </b-tab-item>
 
@@ -83,6 +92,16 @@
               <textarea class="input is-12" v-model="verticalDataString" style="min-height: 25em;"></textarea>
             </b-tab-item>
           </b-tabs>
+
+          <vertical-config
+          v-if="!user.admin"
+          :model.sync="formModel"
+          @save="clickSave"
+          :working="working.app.verticals"
+          :loading="loading.app.verticals"
+          :defaults="defaults.verticals"
+          :user="user"
+          ></vertical-config>
 
         </article>
       </div>
@@ -156,7 +175,7 @@ export default {
           await this.saveVertical({id, data})
         } else if (this.activeTab === 1) {
           // use Raw JSON string
-          const data = JSON.parse(JSON.stringify(this.verticalDataString))
+          const data = JSON.parse(this.verticalDataString)
           await this.saveVertical({id, data})
         }
         this.loadVerticals(false)
@@ -195,7 +214,7 @@ export default {
           await this.saveVertical({id, data})
         } else if (this.activeTab === 1) {
           // use Raw JSON string
-          const data = JSON.parse(JSON.stringify(this.verticalDataString))
+          const data = JSON.parse(this.verticalDataString)
           await this.saveVertical({id, data})
         }
         this.loadVerticals(false)
@@ -244,7 +263,7 @@ export default {
         return this.sortedVerticals
       }
     },
-    disableSaveTemplate () {
+    disableSave () {
       if (this.selectedTemplate.length) {
         // any template has been selected
         if (this.selectedTemplateObject.owner === this.user.username || this.user.admin) {
@@ -259,6 +278,9 @@ export default {
         // template selection still on placeholder option
         return true
       }
+    },
+    disableSaveAs () {
+      return !Object.keys(this.formModel).length
     },
     selectedTemplateObject () {
       if (this.verticals && this.verticals.length && this.selectedTemplate.length) {
