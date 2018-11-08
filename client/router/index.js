@@ -14,7 +14,7 @@ export default new Router({
   routes: [
     {
       name: 'Home View',
-      path: '/cumulus/',
+      path: '/verticals',
       component: require('../views/main/Home')
     },
     // {
@@ -60,7 +60,7 @@ export default new Router({
     ...generateRoutesFromMenu(menuModule.state.items),
     {
       path: '*',
-      redirect: '/cumulus/'
+      redirect: '/verticals'
     }
   ]
 })

@@ -3,7 +3,7 @@
     <nprogress-container></nprogress-container>
     <!-- <b-loading :is-full-page="true" :active="loading.app.user" :can-cancel="false"></b-loading> -->
     <navbar :show="true" :menu-filter.sync="menuFilter"></navbar>
-    <div v-if="authenticated">
+    <div v-if="authenticated && endpoints">
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
       <app-main></app-main>
     </div>
@@ -59,7 +59,7 @@ export default {
 
     // check the JWT in localstorage to see if the user is already logged in
     // try {
-    this.checkLogin()
+    await this.checkLogin()
     await this.getEndpoints()
       // logged in
     // } catch (e) {
@@ -91,7 +91,8 @@ export default {
       'sidebar',
       'authEnabled',
       'authenticated',
-      'loading'
+      'loading',
+      'endpoints'
     ])
   },
 

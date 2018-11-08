@@ -3,26 +3,39 @@
     <div class="hero-head">
       <nav class="nav">
         <div class="nav-left">
-          <b-field style="margin-top: 0.2em; margin-bottom: 0.2em;">
+          <!-- <b-field style="margin-top: 0.2em; margin-bottom: 0.2em;">
             <b-input placeholder="Search Menu..."
             v-if="authenticated"
             type="search"
             icon="magnify"
             v-model="filter"
             @keyup.esc="filter = ''"/>
-          </b-field>
+          </b-field> -->
           <!-- <a class="nav-item is-hidden-tablet" @click="toggleSidebar({opened: !sidebar.opened})">
             <b-icon icon="bars" v-show="!sidebar.hidden" />
           </a> -->
         </div>
         <div class="nav-center">
-          <router-link class="nav-item hero-brand" to="Home">
-            <tooltip :label="'v' + pkginfo.version" placement="right" type="success" size="small" :no-animate="true" :always="true" :rounded="true">
-              <div class="is-hidden-mobile">
-                <strong class="admin">dCloud Toolbox - Cumulus</strong>
-              </div>
-            </tooltip>
-          </router-link>
+          <!-- <router-link class="nav-item hero-brand" to="Home"> -->
+            <!-- <tooltip :label="'v' + pkginfo.version" placement="right" type="success" size="small" :no-animate="true" :always="true" :rounded="true"> -->
+              <!-- <div class="is-hidden-mobile"> -->
+              <nav class="level">
+                <div class="level-item">
+                  <p>
+                    <strong>
+                      dCloud Toolbox -&nbsp;
+                    </strong>
+                  </p>
+                </div>
+                <div class="level-item">
+                  <b-select v-model="pageSelection" @change="changePage">
+                    <option value="Verticals">Verticals</option>
+                  </b-select>
+                </div>
+              </nav>
+              <!-- </div> -->
+            <!-- </tooltip> -->
+          <!-- </router-link> -->
         </div>
         <div class="nav-right is-flex">
           <a v-if="authenticated" class="nav-item">{{ user.username }}</a>
@@ -41,7 +54,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      filter: ''
+      filter: '',
+      pageSelection: 'Verticals'
     }
   },
 
@@ -70,6 +84,10 @@ export default {
     ]),
     clickLogout () {
       this.logout()
+    },
+    changePage (data) {
+      // user changed the page select
+      console.log('changing page to', data)
     }
   },
 
@@ -86,6 +104,10 @@ export default {
 @import '~bulma/sass/utilities/variables';
 
 .app-navbar {
+  color: #28374B;
+  a {
+    color: #28374B;
+  }
   position: fixed;
   min-width: 100%;
   z-index: 4;
@@ -110,13 +132,13 @@ export default {
   }
 }
 
-.hero-brand {
-  .vue {
-    margin-left: 10px;
-    color: #36AC70;
-  }
-  .admin {
-    color: #28374B;
-  }
+.hero-head {
+
+  // .vue {
+  //   margin-left: 10px;
+  //   color: #36AC70;
+  // }
+  // .admin {
+  // }
 }
 </style>
