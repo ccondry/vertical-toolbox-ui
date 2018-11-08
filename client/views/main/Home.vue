@@ -156,7 +156,7 @@ export default {
       }
     },
     refresh () {
-      // load templates
+      // load verticals
       this.loadVerticals(false)
     },
     async clickSave () {
@@ -172,6 +172,7 @@ export default {
           const data = JSON.parse(this.verticalDataString)
           await this.saveVertical({id, data})
         }
+        // load verticals again
         this.loadVerticals(false)
       } catch (e) {
         console.log('failed to save vertical', e.message)
@@ -211,6 +212,7 @@ export default {
           const data = JSON.parse(this.verticalDataString)
           await this.saveVertical({id, data})
         }
+        // load verticals again
         this.loadVerticals(false)
       } catch (e) {
         console.log('failed to save vertical', id, e)
