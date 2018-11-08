@@ -156,12 +156,6 @@ export default {
       }
     },
     refresh () {
-      if (this.user.brand) {
-        // update raw JSON string
-        this.updateCache(this.user.brand)
-        // update the form with a copy of the brand object
-        this.formModel = JSON.parse(JSON.stringify(this.user.brand))
-      }
       // load templates
       this.loadVerticals(false)
     },
