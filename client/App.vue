@@ -59,8 +59,12 @@ export default {
 
     // check the JWT in localstorage to see if the user is already logged in
     // try {
+    console.log('checking login...')
     await this.checkLogin()
+    console.log('checking login done.')
+    console.log('getting endpoints...')
     await this.getEndpoints()
+    console.log('getting endpoints done.')
       // logged in
     // } catch (e) {
       // not logged in, so go to login page
