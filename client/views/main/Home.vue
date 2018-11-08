@@ -30,7 +30,7 @@
             <div class="field">
               <b-checkbox v-model="filterTemplates">Only show my verticals</b-checkbox>
             </div>
-            <div class="select is-fullwidth">
+            <div class="select">
               <select class="input" v-model="selectedTemplate">
                 <option value="" disabled selected>Choose a vertical to load</option>
                 <option v-for="vertical in filteredSortedVerticals" :value="vertical.id">{{ vertical.id }}</option>
