@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-
+import {load} from '../../utils'
 const getters = {
 }
 
@@ -53,15 +53,12 @@ const actions = {
   async getEndpoints ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'endpoints', value: true})
     try {
-      await dispatch('loadToState', {
-        name: 'endpoints',
-        endpoint,
-        mutation: types.SET_ENDPOINTS,
-        showNotification
-      })
+      const response = await load(getters.jwt, endpoint)
+      commit(types.SET_ENDPOINTS, response.data)
+      // dispatch('successNotification', `Successfully loaded endpoints`)
     } catch (e) {
-      console.log('error loading endpoints', e)
-      dispatch('errorNotification', {title: 'Failed to load endpoints', error: e})
+      console.error(`error during GET endpoints`, e)
+      dispatch('errorNotification', {title: `Failed to GET endpoints`, error: e})
     } finally {
       dispatch('setLoading', {group: 'app', type: 'endpoints', value: false})
     }
