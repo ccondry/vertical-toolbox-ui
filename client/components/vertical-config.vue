@@ -35,7 +35,6 @@
           <b-field label="Upload">
             <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
           </b-field>
-          <input type="file" style="display:none" ref="logoFile" v-uploader />
         </b-field>
       </div>
     </b-collapse>
@@ -138,14 +137,21 @@
         <b-field label="Homepage Title">
           <b-input v-model="model.mobileTitle" :placeholder="defaults.mobileTitle" @keyup.native.enter="submit" />
         </b-field>
+        <b-field label="Wallpaper URL" v-if="user.admin">
+          <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" @keyup.native.enter="submit" />
+        </b-field>
         <b-field grouped>
+          <b-loading :is-full-page="false" :active="working.images.mobileWallpaper" :can-cancel="false"></b-loading>
           <b-field label="Wallpaper">
-            <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" @keyup.native.enter="submit" />
-            <img :src="model.mobileWallpaper" style="max-height: 256px;" />
+            <img :src="model.mobileWallpaper" style="max-height: 256px;"/>
           </b-field>
+          <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
           <b-field label="Upload">
-            <button>Browse</button>
+            <button class="button is-primary" type="button" @click="launchFilePicker('mobileWallpaper')">Browse...</button>
           </b-field>
+
         </b-field>
 
         <!-- Mobile Menu Options -->
@@ -483,11 +489,19 @@
                   <b-input v-model.lazy="slider.image" :placeholder="defaults.sliders[i] ? defaults.sliders[i].image : defaults.sliders[0].image" @keyup.native.enter="submit" />
                 </b-field>
                 <b-field grouped>
-                  <b-field label="Banner Image">
+                  <b-loading v-if="i === 0" :is-full-page="false" :active="working.images.slider0" :can-cancel="false"></b-loading>
+                  <b-loading v-if="i === 1" :is-full-page="false" :active="working.images.slider1" :can-cancel="false"></b-loading>
+                  <b-loading v-if="i === 2" :is-full-page="false" :active="working.images.slider2" :can-cancel="false"></b-loading>
+                  <b-loading v-if="i === 3" :is-full-page="false" :active="working.images.slider3" :can-cancel="false"></b-loading>
+                  <b-loading v-if="i === 4" :is-full-page="false" :active="working.images.slider4" :can-cancel="false"></b-loading>
+                  <b-field label="Wallpaper">
                     <img :src="slider.image" style="max-height: 256px;"/>
                   </b-field>
+                  <b-tooltip :label="getTooltip('sliderUpload')" multilined position="is-top">
+                    <b-icon type="is-primary" icon="information" />
+                  </b-tooltip>
                   <b-field label="Upload">
-                    <button>Browse...</button>
+                    <button class="button is-primary" type="button" @click="launchFilePicker('slider' + i)">Browse...</button>
                   </b-field>
                 </b-field>
               </div>
@@ -535,11 +549,19 @@
                 <b-input v-model.lazy="entry.image" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].image : defaults.blogItems[0].image" @keyup.native.enter="submit" />
               </b-field>
               <b-field grouped>
+                <b-loading v-if="i === 0" :is-full-page="false" :active="working.images.blogItem0" :can-cancel="false"></b-loading>
+                <b-loading v-if="i === 1" :is-full-page="false" :active="working.images.blogItem1" :can-cancel="false"></b-loading>
+                <b-loading v-if="i === 2" :is-full-page="false" :active="working.images.blogItem2" :can-cancel="false"></b-loading>
+                <b-loading v-if="i === 3" :is-full-page="false" :active="working.images.blogItem3" :can-cancel="false"></b-loading>
+                <b-loading v-if="i === 4" :is-full-page="false" :active="working.images.blogItem4" :can-cancel="false"></b-loading>
                 <b-field label="Blog Image">
                   <img :src="entry.image" style="max-height: 256px;"/>
                 </b-field>
+                <b-tooltip :label="getTooltip('blogItemUpload')" multilined position="is-top">
+                  <b-icon type="is-primary" icon="information" />
+                </b-tooltip>
                 <b-field label="Upload">
-                  <button>Browse...</button>
+                  <button class="button is-primary" type="button" @click="launchFilePicker('blogItem' + i)">Browse...</button>
                 </b-field>
               </b-field>
             </div>
@@ -736,6 +758,19 @@ title="Select Icon"
 @submit="selectIcon">
 </select-icon-modal>
 
+<input type="file" style="display:none" ref="logoFile" v-uploader />
+<input type="file" style="display:none" ref="mobileWallpaper" v-uploader />
+<input type="file" style="display:none" ref="slider0" v-uploader />
+<input type="file" style="display:none" ref="slider1" v-uploader />
+<input type="file" style="display:none" ref="slider2" v-uploader />
+<input type="file" style="display:none" ref="slider3" v-uploader />
+<input type="file" style="display:none" ref="slider4" v-uploader />
+<input type="file" style="display:none" ref="blogItem0" v-uploader />
+<input type="file" style="display:none" ref="blogItem1" v-uploader />
+<input type="file" style="display:none" ref="blogItem2" v-uploader />
+<input type="file" style="display:none" ref="blogItem3" v-uploader />
+<input type="file" style="display:none" ref="blogItem4" v-uploader />
+
 </div>
 </template>
 
@@ -882,6 +917,7 @@ export default {
 
   methods: {
     launchFilePicker (ref) {
+      console.log('launching file picker for', ref)
       // launch native file picker
       this.$refs[ref].click()
     },
@@ -892,12 +928,31 @@ export default {
       reader.onload = (e) => {
         const data = e.currentTarget.result
         const name = file.name.substring(0, file.name.lastIndexOf('.'))
+        // set up callback for when the file is done uploading
         const callback = (url) => {
-          // set logo file
-          if (node === 'logoFile') {
-            this.model.logo.rasterised = url
+          // map out the node names to model data references
+          const map = {
+            'logoFile': (url) => { this.model.logo.rasterised = url },
+            'mobileWallpaper': (url) => { this.model.mobileWallpaper = url },
+            'slider0': (url) => { this.model.sliders[0].image = url },
+            'slider1': (url) => { this.model.sliders[1].image = url },
+            'slider2': (url) => { this.model.sliders[2].image = url },
+            'slider3': (url) => { this.model.sliders[3].image = url },
+            'slider4': (url) => { this.model.sliders[4].image = url },
+            'blogItem0': (url) => { this.model.blogItems[0].image = url },
+            'blogItem1': (url) => { this.model.blogItems[1].image = url },
+            'blogItem2': (url) => { this.model.blogItems[2].image = url },
+            'blogItem3': (url) => { this.model.blogItems[3].image = url },
+            'blogItem4': (url) => { this.model.blogItems[4].image = url }
+          }
+          // update our model with the new file URL
+          try {
+            map[node](url)
+          } catch (e) {
+            // continue
           }
         }
+        // actually upload the file now
         this.$emit('upload', {name, node, vertical: this.model.id, data, callback})
       }
       // read the file data
