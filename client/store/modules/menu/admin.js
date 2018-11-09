@@ -27,7 +27,7 @@ export default {
     // }
     {
       name: 'Usage',
-      path: '/admin/usage',
+      path: '/verticals/admin/usage',
       component: lazyLoading('admin/usage'),
       meta: {
         icon: 'finance'
