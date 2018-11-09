@@ -269,7 +269,7 @@ export default {
       }
     },
     disableSave () {
-      if (this.selectedTemplate.length) {
+      if (this.selectedTemplate && this.selectedTemplate.length) {
         // any template has been selected
         if (this.selectedTemplateObject.owner === this.user.username || this.user.admin) {
           // this user owns this template or is an admin
@@ -309,6 +309,16 @@ export default {
           // switched to Raw JSON tab
           // sync the form model to the raw JSON string
           this.updateCache(this.formModel)
+        }
+      }
+    },
+    filterTemplates (val, oldVal) {
+      // console.log('filter template selected', this.selectedTemplate)
+      // did the user check the filter verticals option?
+      if (val === true) {
+        if (this.selectedTemplate === undefined || !this.filteredSortedVerticals.find(v => v.id === this.selectedTemplate)) {
+          // console.log('template selected is no longer in list', this.selectedTemplate)
+          this.selectedTemplate = this.filteredSortedVerticals[0].id
         }
       }
     }
