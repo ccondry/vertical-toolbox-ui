@@ -220,7 +220,9 @@ export default {
           await this.saveVertical({id, data})
         }
         // load verticals again
-        this.loadVerticals(false)
+        await this.loadVerticals(false)
+        // select new vertical
+        this.selectedTemplate = id
       } catch (e) {
         console.log('failed to save vertical', id, e)
         this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
