@@ -53,6 +53,9 @@
       </div>
       <div class="card-content" v-else>
 
+        <b-field label="Welcome Prompt">
+          <b-input v-model="model.cvp.welcomePrompt" :placeholder="defaults.cvp.welcomePrompt" @keyup.native.enter="submit" />
+        </b-field>
         <!-- Main and Second Menu -->
         <b-collapse class="content card" v-for="(menu, i) of ['mainMenu', 'secondMenu']" :key="menu">
           <div slot="trigger" slot-scope="props" class="card-header">

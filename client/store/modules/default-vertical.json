@@ -51,6 +51,7 @@
     "subreason": "Booking Form"
   },
   "cvp": {
+    "welcomePrompt": "Thank you for calling Cumulus Travel!",
     "jacadaMenu": {
       "interactionId": "1504902996437-2345b2a39832f45634e58e8004815e61d35ee1-38df",
       "applicationKey": "f652b15a-999c-45f9-88ef-ff302451600a"
