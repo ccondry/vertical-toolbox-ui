@@ -80,6 +80,9 @@ function makeCsvData (array) {
   if (!array || !Array.isArray(array)) {
     throw Error('data is not an array')
   }
+  if (!array.length) {
+    throw Error('data is an empty array')
+  }
   let str = ''
   // add column titles row
   let line1 = ''
@@ -133,11 +136,10 @@ export default {
   computed: {
     ...mapGetters(['usage']),
     csvData () {
-      // var csv = 'a,b,c\n1,2,3\n'
-      if (this.usage) {
+      try {
         const csv = makeCsvData(this.usage)
         return 'data:text/csv;base64,' + window.btoa(csv)
-      } else {
+      } catch (e) {
         return ''
       }
     },
