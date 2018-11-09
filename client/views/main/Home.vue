@@ -262,7 +262,7 @@ export default {
     filteredSortedVerticals () {
       if (this.filterTemplates) {
         return this.sortedVerticals.filter(v => {
-          return v.username === this.user.username
+          return v.owner === this.user.username
         })
       } else {
         return this.sortedVerticals
