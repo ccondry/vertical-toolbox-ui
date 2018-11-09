@@ -9,20 +9,28 @@ export default {
     expanded: false
   },
   children: [
+    // {
+    //   name: 'Admin Links',
+    //   path: '/admin/links',
+    //   component: lazyLoading('admin/Links'),
+    //   meta: {
+    //     icon: 'link'
+    //   }
+    // },
+    // {
+    //   name: 'Users',
+    //   path: '/admin/users',
+    //   component: lazyLoading('admin/Users'),
+    //   meta: {
+    //     icon: 'account-multiple'
+    //   }
+    // }
     {
-      name: 'Admin Links',
-      path: '/admin/links',
-      component: lazyLoading('admin/Links'),
+      name: 'Usage',
+      path: '/admin/usage',
+      component: lazyLoading('admin/usage'),
       meta: {
-        icon: 'link'
-      }
-    },
-    {
-      name: 'Users',
-      path: '/admin/users',
-      component: lazyLoading('admin/Users'),
-      meta: {
-        icon: 'account-multiple'
+        icon: 'finance'
       }
     }
   ]

@@ -5,6 +5,7 @@ import auth from './auth'
 import verticals from './verticals'
 import defaults from './defaults'
 import user from './user'
+import usage from './usage'
 
 export default {
   app,
@@ -13,5 +14,6 @@ export default {
   auth,
   verticals,
   user,
+  usage,
   defaults
 }
