@@ -1,4 +1,6 @@
 import * as types from '../mutation-types'
+// import {post} from '../../utils'
+// import Vue from 'vue'
 
 const state = {
   verticals: []
@@ -15,6 +17,30 @@ const mutations = {
 }
 
 const actions = {
+  async uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
+    dispatch('setWorking', {group: 'images', type: data.node, value: true})
+    console.log(`uploading file`, data)
+    try {
+      const response = await dispatch('postData', {
+        endpoint: getters.endpoints.images,
+        // query: {vertical: data.vertical},
+        data
+      })
+      console.log('upload file successful. path = ', response.data)
+      // commit(types.SET_IMAGE, {url: response.data, node: data.node, vertical: data.vertical})
+      // callback to the emitter
+      data.callback(response.data)
+      // return response.data
+      // if (showNotification) {
+      //   dispatch('successNotification', 'Successfully uploaded file')
+      // }
+    } catch (e) {
+      console.error('error uploading file', e)
+      dispatch('errorNotification', {title: 'Failed to upload file', error: e})
+    } finally {
+      dispatch('setWorking', {group: 'images', type: data.node, value: false})
+    }
+  },
   async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
     console.log('saving vertical (not implemented) - params:', {id, data})
     delete data._id

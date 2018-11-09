@@ -9,7 +9,7 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.id || !model.name">
-        <button class="button" @click="$set(model, 'id', defaults.id); $set(model, 'name', defaults.name); $set(model, 'logo', {rasterised: defaults.logo.rasterised})">Configure</button>
+        <button class="button is-primary" @click="$set(model, 'id', defaults.id); $set(model, 'name', defaults.name); $set(model, 'logo', {rasterised: defaults.logo.rasterised})">Configure</button>
       </div>
       <div class="card-content" v-else>
         <b-field label="ID">
@@ -22,12 +22,20 @@
           <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" @keyup.native.enter="submit" />
         </b-field>
         <b-field grouped>
+          <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+          <b-tooltip :label="getTooltip('logo')" multilined position="is-right">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
           <b-field label="Logo Image">
             <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
           </b-field>
+          <b-tooltip :label="getTooltip('logoUpload')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
           <b-field label="Upload">
-            <button>Browse...</button>
+            <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
           </b-field>
+          <input type="file" style="display:none" ref="logoFile" v-uploader />
         </b-field>
       </div>
     </b-collapse>
@@ -42,7 +50,7 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.cvp">
-        <button class="button" @click="$set(model, 'cvp', JSON.parse(JSON.stringify(defaults.cvp)))">Configure</button>
+        <button class="button is-primary" @click="$set(model, 'cvp', JSON.parse(JSON.stringify(defaults.cvp)))">Configure</button>
       </div>
       <div class="card-content" v-else>
 
@@ -95,7 +103,7 @@
             </a>
           </div>
           <div class="card-content" v-if="!model.cvp.jacadaMenu || !model.cvp.jacadaMenu.interactionId || !model.cvp.jacadaMenu.applicationKey">
-            <button class="button" @click="$set(model.cvp, 'jacadaMenu', defaults.cvp.jacadaMenu)">Configure</button>
+            <button class="button is-primary" @click="$set(model.cvp, 'jacadaMenu', defaults.cvp.jacadaMenu)">Configure</button>
           </div>
           <div class="card-content" v-else>
 
@@ -123,7 +131,7 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.mobileWallpaper || !model.mobileTitle || !model.mobileOptions">
-        <button class="button" @click="$set(model, 'mobileWallpaper', defaults.mobileWallpaper); $set(model, 'mobileTitle', defaults.mobileTitle); $set(model, 'mobileOptions', JSON.parse(JSON.stringify(defaults.mobileOptions)))">Configure</button>
+        <button class="button is-primary" @click="$set(model, 'mobileWallpaper', defaults.mobileWallpaper); $set(model, 'mobileTitle', defaults.mobileTitle); $set(model, 'mobileOptions', JSON.parse(JSON.stringify(defaults.mobileOptions)))">Configure</button>
       </div>
       <div class="card-content" v-else>
 
@@ -201,20 +209,13 @@
                         </b-select>
                       </b-field>
                       <b-field label="TTS Type">
-                        <b-select :placeholder="defaults.mobileOptions[i].fields[j].ttstype" v-model="field.ttstype">
-                          <option value="address">Address</option>
-                          <option value="characters">Characters</option>
-                          <option value="date">Date</option>
-                          <option value="digits">Digits</option>
-                          <option value="name">Name</option>
-                          <option value="number">Number</option>
-                          <option value="ordinal">Ordinal</option>
-                          <option value="telephone">Telephone</option>
-                          <option value="text">Text</option>
-                          <option value="time">Time</option>
-                        </b-select>
+                        <b-tooltip :label="getTtsTooltip(field.ttstype)" multilined>
+                          <b-select :placeholder="defaults.mobileOptions[i].fields[j].ttstype" v-model="field.ttstype">
+                            <option v-for="type of ttsTypes" :value="type.value">{{ type.name }}</option>
+                          </b-select>
+                        </b-tooltip>
                       </b-field>
-                      <b-field label="Default Value">
+                      <b-field label="Default Value" expanded>
                         <b-input v-model="field.value" :placeholder="defaults.mobileOptions[i].fields[j].value" @keyup.native.enter="submit" />
                       </b-field>
                     </b-field>
@@ -242,7 +243,7 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.chat || !model.chat.entryPointId">
-        <button class="button" @click="$set(model, 'chat', JSON.parse(JSON.stringify(defaults.chat)))">Configure</button>
+        <button class="button is-primary" @click="$set(model, 'chat', JSON.parse(JSON.stringify(defaults.chat)))">Configure</button>
       </div>
       <div class="card-content" v-else>
         <b-field label="Entry Point ID">
@@ -288,7 +289,7 @@
             </a>
           </div>
           <div class="card-content" v-if="model.address === undefined || model.domain === undefined || model.gps === undefined|| model.gps.latitude === undefined || model.gps.longitude === undefined">
-            <button class="button" @click="$set(model, 'address', defaults.address); $set(model, 'domain', defaults.domain); $set(model, 'gps', JSON.parse(JSON.stringify(defaults.gps)));">Configure</button>
+            <button class="button is-primary" @click="$set(model, 'address', defaults.address); $set(model, 'domain', defaults.domain); $set(model, 'gps', JSON.parse(JSON.stringify(defaults.gps)));">Configure</button>
           </div>
           <div class="card-content" v-else>
             <b-field label="Address">
@@ -315,7 +316,7 @@
                 </a>
               </div>
               <div class="card-content" v-if="!model.taskOptions || !model.taskOptions.length">
-                <button class="button" @click="$set(model, 'taskOptions', JSON.parse(JSON.stringify(defaults.taskOptions)))">Configure</button>
+                <button class="button is-primary" @click="$set(model, 'taskOptions', JSON.parse(JSON.stringify(defaults.taskOptions)))">Configure</button>
               </div>
               <div class="card-content" v-else>
                 <ol>
@@ -347,7 +348,7 @@
             </a>
           </div>
           <div class="card-content" v-if="!model.rem || !model.rem.reason || !model.rem.subreason">
-            <button class="button" @click="$set(model, 'rem', {reason: defaults.rem.reason, subreason: defaults.rem.subreason})">Configure</button>
+            <button class="button is-primary" @click="$set(model, 'rem', {reason: defaults.rem.reason, subreason: defaults.rem.subreason})">Configure</button>
           </div>
           <div class="card-content" v-else>
             <b-field label="Finesse Reason Call Variable">
@@ -366,7 +367,7 @@
                 </a>
               </div>
               <div class="card-content" v-if="!model.form || !model.form.title || !model.form.fields || !model.form.fields.length || !model.form.private || !model.form.private.length">
-                <button class="button" @click="$set(model, 'form', JSON.parse(JSON.stringify(defaults.form)))">Configure</button>
+                <button class="button is-primary" @click="$set(model, 'form', JSON.parse(JSON.stringify(defaults.form)))">Configure</button>
               </div>
               <div class="card-content" v-else>
 
@@ -441,7 +442,7 @@
             </a>
           </div>
           <div class="card-content" v-if="!model.sliders || !model.sliders.length">
-            <button class="button" @click="$set(model, 'sliders', JSON.parse(JSON.stringify(defaults.sliders)))">Configure</button>
+            <button class="button is-primary" @click="$set(model, 'sliders', JSON.parse(JSON.stringify(defaults.sliders)))">Configure</button>
           </div>
           <div class="card-content" v-else>
 
@@ -506,7 +507,7 @@
             </a>
           </div>
           <div class="card-content" v-if="!model.blogItems || !model.blogItems.length">
-            <button class="button" @click="$set(model, 'blogItems', JSON.parse(JSON.stringify(defaults.blogItems)))">Configure</button>
+            <button class="button is-primary" @click="$set(model, 'blogItems', JSON.parse(JSON.stringify(defaults.blogItems)))">Configure</button>
           </div>
           <div class="card-content" v-else>
             <b-collapse class="content card" v-for="(entry, i) of model.blogItems" :key="'blogItem' + i">
@@ -558,7 +559,7 @@
           </a>
         </div>
         <div class="card-content" v-if="!model.services || !model.services.length">
-          <button class="button" @click="$set(model, 'services', JSON.parse(JSON.stringify(defaults.services)))">Configure</button>
+          <button class="button is-primary" @click="$set(model, 'services', JSON.parse(JSON.stringify(defaults.services)))">Configure</button>
         </div>
         <div class="card-content" v-else>
           <b-collapse class="content card" v-for="(entry, i) of model.services" :key="'blogItem' + i">
@@ -606,7 +607,7 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.authors || !model.authors.length">
-        <button class="button" @click="$set(model, 'authors', JSON.parse(JSON.stringify(defaults.authors)))">Configure</button>
+        <button class="button is-primary" @click="$set(model, 'authors', JSON.parse(JSON.stringify(defaults.authors)))">Configure</button>
       </div>
       <div class="card-content" v-else>
         <b-collapse class="content card" v-for="(entry, i) of model.authors" :key="'author' + i">
@@ -650,7 +651,7 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.timelinePosts || !model.timelinePosts.length">
-        <button class="button" @click="$set(model, 'timelinePosts', JSON.parse(JSON.stringify(defaults.timelinePosts)))">Configure</button>
+        <button class="button is-primary" @click="$set(model, 'timelinePosts', JSON.parse(JSON.stringify(defaults.timelinePosts)))">Configure</button>
       </div>
       <div class="card-content" v-else>
         <b-collapse class="content card" v-for="(entry, i) of model.timelinePosts" :key="'timelinePost' + i">
@@ -694,7 +695,7 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.testimonials || !model.testimonials.length">
-        <button class="button" @click="$set(model, 'testimonials', JSON.parse(JSON.stringify(defaults.testimonials)))">Configure</button>
+        <button class="button is-primary" @click="$set(model, 'testimonials', JSON.parse(JSON.stringify(defaults.testimonials)))">Configure</button>
       </div>
       <div class="card-content" v-else>
         <b-collapse class="content card" v-for="(entry, i) of model.testimonials" :key="'testimonials' + i">
@@ -741,10 +742,98 @@ title="Select Icon"
 <script>
 import moment from 'moment'
 import SelectIconModal from './modals/select-icon'
+// import Vue from 'vue'
+
+// const TtsTypeSelector = Vue.component('TtsTypeSelector', {
+//   props: ['field', 'types'],
+//   computed: {
+//     tooltip () {
+//       try {
+//         return this.types[this.field.ttstype].tooltip
+//       } catch (e) {
+//         return ''
+//       }
+//     }
+//   }
+// })
+
+const ttsTypes = [
+  {
+    value: 'address',
+    name: 'Address',
+    tooltip: 'Interpret a value as part of street address.'
+  },
+  {
+    value: 'date',
+    name: 'Date',
+    tooltip: 'Interpret the value as a date. Specify the format with the format attribute.'
+  },
+  {
+    value: 'digits',
+    name: 'Digits',
+    tooltip: 'Spell each digit separately.'
+  },
+  {
+    value: 'number',
+    name: 'Number',
+    tooltip: 'Interpret the value as a cardinal number (1, 37, 2000, etc.).'
+  },
+  {
+    value: 'ordinal',
+    name: 'Ordinal',
+    tooltip: 'Interpret the value as an ordinal number (1st, 2nd, 3rd, etc.).'
+  },
+  {
+    value: 'telephone',
+    name: 'Telephone',
+    tooltip: 'Interpret a value as a 7-digit or 10-digit telephone number. This can also handle extensions (for example, 2025551212x345).'
+  },
+  {
+    value: 'text',
+    name: 'Text',
+    tooltip: 'Interpret as normal text (attempt to pronounce all words).'
+  },
+  {
+    value: 'time',
+    name: 'Time',
+    tooltip: 'Interpret a value such as 1\'21" as duration in minutes and seconds.'
+  },
+  {
+    value: 'characters',
+    name: 'Characters',
+    tooltip: 'Spell out each letter.'
+  },
+  {
+    value: 'fraction',
+    name: 'Fraction',
+    tooltip: 'Interpret the value as a fraction. This works for both common fractions (such as 3/20) and mixed fractions (such as 1+1/2).'
+  },
+  {
+    value: 'unit',
+    name: 'Unit',
+    tooltip: 'Interpret a value as a measurement. The value should be either a number or fraction followed by a unit (with no space in between) or just a unit.'
+  }
+  // {
+  //   value: 'interjection',
+  //   name: 'Interjection',
+  //   tooltip: 'Interpret the value as an interjection. Alexa speaks the text in a more expressive voice. For optimal results, only use the supported interjections and surround each speechcon with a pause. For example: <say-as interpret-as="interjection">Wow.</say-as>. Speechcons are supported for the languages listed below.'
+  // },
+  // {
+  //   value: 'expletive',
+  //   name: 'Expletive',
+  //   tooltip: '"Bleep" out the content inside the tag.'
+  // }
+]
+
+const tooltips = {
+  logo: 'The logo image is used for both the website and the mobile app.',
+  logoUpload: 'We recommend using an image that has a 4:1 aspect ratio.'
+}
 
 export default {
   components: {
     SelectIconModal
+    // TtsTypeSelector
   },
 
   props: {
@@ -753,12 +842,10 @@ export default {
       default () { return {} }
     },
     'working': {
-      type: Boolean,
-      default: false
+      type: Object
     },
     'loading': {
-      type: Boolean,
-      default: false
+      type: Object
     },
     'user': {
       type: Object
@@ -769,15 +856,67 @@ export default {
     }
   },
 
+  directives: {
+    uploader: {
+      bind (el, binding, vnode) {
+        el.addEventListener('change', e => {
+          console.log('change uploader with ref', vnode.data.ref, e.target.files)
+          vnode.context.uploadFile(vnode.data.ref, e.target.files[0])
+          // vnode.context.chosenFiles = e.target.files
+        })
+      }
+    }
+  },
+
   data () {
     return {
       showIconModal: false,
       iconModalContext: {},
-      active: {}
+      active: {},
+      ttsTypes,
+      tooltips,
+      files: [],
+      images: []
     }
   },
 
   methods: {
+    launchFilePicker (ref) {
+      // launch native file picker
+      this.$refs[ref].click()
+    },
+    uploadFile (node, file) {
+      console.log('vertical-config.vue - uploading file', node, file)
+      // init file reader
+      const reader = new window.FileReader()
+      reader.onload = (e) => {
+        const data = e.currentTarget.result
+        const name = file.name.substring(0, file.name.lastIndexOf('.'))
+        const callback = (url) => {
+          // set logo file
+          if (node === 'logoFile') {
+            this.model.logo.rasterised = url
+          }
+        }
+        this.$emit('upload', {name, node, vertical: this.model.id, data, callback})
+      }
+      // read the file data
+      reader.readAsDataURL(file)
+    },
+    getTooltip (type) {
+      try {
+        return this.tooltips[type]
+      } catch (e) {
+        return ''
+      }
+    },
+    getTtsTooltip (type) {
+      try {
+        return this.ttsTypes.find(v => v.value === type).tooltip
+      } catch (e) {
+        return ''
+      }
+    },
     selectIcon ({icon, context}) {
       console.log('selectIcon', icon)
       // close modal

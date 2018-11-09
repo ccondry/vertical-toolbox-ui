@@ -81,8 +81,9 @@
               <vertical-config
               :model.sync="formModel"
               @save="clickSave"
-              :working="working.app.verticals"
-              :loading="loading.app.verticals"
+              @upload="upload"
+              :working="working"
+              :loading="loading"
               :defaults="defaults.verticals"
               :user="user"
               ></vertical-config>
@@ -97,8 +98,9 @@
           v-if="!user.admin"
           :model.sync="formModel"
           @save="clickSave"
-          :working="working.app.verticals"
-          :loading="loading.app.verticals"
+          @upload="upload"
+          :working="working"
+          :loading="loading"
           :defaults="defaults.verticals"
           :user="user"
           ></vertical-config>
@@ -144,8 +146,13 @@ export default {
     ...mapActions([
       'loadVerticals',
       'errorNotification',
-      'saveVertical'
+      'saveVertical',
+      'uploadImage'
     ]),
+    upload (data) {
+      console.log('Home.vue - upload vertical image', data)
+      this.uploadImage({data})
+    },
     isRecent (date) {
       try {
         // items are updated if updated property is less than 14 days old

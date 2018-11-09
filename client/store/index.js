@@ -19,7 +19,7 @@ const store = new Vuex.Store({
     pkg,
     working: {
       app: {},
-      cce: {},
+      images: {},
       cvp: {},
       admin: {},
       facebook: {},
@@ -28,7 +28,7 @@ const store = new Vuex.Store({
     },
     loading: {
       app: {},
-      cce: {},
+      images: {},
       cvp: {},
       admin: {},
       facebook: {},

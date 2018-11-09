@@ -15,6 +15,7 @@ export const SET_ENDPOINTS = 'SET_ENDPOINTS'
 
 // dCloud Cumulus
 export const SET_VERTICALS = 'SET_VERTICALS'
+export const SET_IMAGE = 'SET_IMAGE'
 
 // user
 export const SET_JWT = 'SET_JWT'
