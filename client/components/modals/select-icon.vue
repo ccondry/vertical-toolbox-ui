@@ -5,8 +5,8 @@
   <!-- <div class="content has-text-centered">
     Please select the icon you wish to use
   </div> -->
-    <a v-for="icon of iconList" @click.prevent="$emit('submit', {icon, context})" :title="icon" >
-      <b-icon pack="fa" :icon="icon" size="is-large" />
+    <a v-for="icon of iconList" @click.prevent="$emit('submit', {icon, context})" :title="icon">
+      <b-icon pack="fa" :icon="icon" size="is-large" style="margin-left: 8px;" />
     </a>
 </card-modal>
 </template>
