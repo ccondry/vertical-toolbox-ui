@@ -1061,8 +1061,13 @@ export default {
             // continue
           }
         }
+        // determine node name - if node has index, suffix node name with it
+        let nodeName = node
+        if (index) {
+          nodeName += index
+        }
         // actually upload the file now
-        this.$emit('upload', {name, node: node + index, vertical: this.model.id, data, callback})
+        this.$emit('upload', {name, node: nodeName, vertical: this.model.id, data, callback})
         // reset the file input
         this.$refs.file.value = ''
       }
