@@ -28,7 +28,7 @@
           </div>
           <div class="block">
             <div class="field">
-              <b-checkbox v-model="filterTemplates">Only show my verticals</b-checkbox>
+              <b-checkbox v-model="filterTemplates">Hide other users' verticals</b-checkbox>
             </div>
             <div class="select">
               <select class="input" v-model="selectedTemplate">
@@ -277,11 +277,19 @@ export default {
       }
     },
     filteredSortedVerticals () {
+      // is the filter turned on?
       if (this.filterTemplates) {
+        // filter to hide other user templates
         return this.sortedVerticals.filter(v => {
-          return v.owner === this.user.username
+          // show verticals with no owner (same as owner === 'system')
+          if (!v.owner) {
+            return true
+          }
+          // show verticals owned by this user or by 'system'
+          return v.owner === this.user.username || v.owner === 'system'
         })
       } else {
+        // filter turned off - return all
         return this.sortedVerticals
       }
     },
