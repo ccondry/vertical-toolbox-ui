@@ -814,6 +814,21 @@ const ttsTypes = [
     tooltip: 'Interpret a value as part of street address.'
   },
   {
+    value: 'characters',
+    name: 'Characters',
+    tooltip: 'Spell out each letter.'
+  },
+  {
+    value: 'credit-card',
+    name: 'Credit Card',
+    tooltip: 'Interpret a value as a credit card number.'
+  },
+  {
+    value: 'currency',
+    name: 'Currency ($)',
+    tooltip: 'Interpret a value as an amount of currency.'
+  },
+  {
     value: 'date',
     name: 'Date',
     tooltip: 'Interpret the value as a date. Specify the format with the format attribute.'
@@ -847,11 +862,6 @@ const ttsTypes = [
     value: 'time',
     name: 'Time',
     tooltip: 'Interpret a value such as 1\'21" as duration in minutes and seconds.'
-  },
-  {
-    value: 'characters',
-    name: 'Characters',
-    tooltip: 'Spell out each letter.'
   },
   // {
   //   value: 'fraction',
