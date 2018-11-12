@@ -564,11 +564,7 @@
                 <b-input v-model.lazy="entry.image" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].image : defaults.blogItems[0].image" />
               </b-field>
               <b-field grouped>
-                <b-loading v-if="i === 0" :is-full-page="false" :active="working.images.blogItem0" :can-cancel="false"></b-loading>
-                <b-loading v-if="i === 1" :is-full-page="false" :active="working.images.blogItem1" :can-cancel="false"></b-loading>
-                <b-loading v-if="i === 2" :is-full-page="false" :active="working.images.blogItem2" :can-cancel="false"></b-loading>
-                <b-loading v-if="i === 3" :is-full-page="false" :active="working.images.blogItem3" :can-cancel="false"></b-loading>
-                <b-loading v-if="i === 4" :is-full-page="false" :active="working.images.blogItem4" :can-cancel="false"></b-loading>
+                <b-loading :is-full-page="false" :active="working.images['blogItem' + i]" :can-cancel="false"></b-loading>
                 <b-field label="Blog Image">
                   <img :src="entry.image" style="max-height: 256px;"/>
                 </b-field>
