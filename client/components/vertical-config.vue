@@ -616,17 +616,41 @@
               <b-field label="Description">
                 <b-input v-model="entry.description" :placeholder="defaults.services[i] ? defaults.services[i].description : defaults.services[0].description" />
               </b-field>
-              <!-- <b-field label="Price" v-if="type === 'products'">
-              <b-input v-model="entry.price" :placeholder="defaults.services[i] ? defaults.services[i].price : defaults.services[0].price" />
-            </b-field> -->
-            <b-field label="Thumbnail Image URL">
+              <b-field label="Price">
+                <b-input v-model="entry.price" :placeholder="defaults.services[i] ? defaults.services[i].price : defaults.services[0].price" />
+              </b-field>
+
+            <b-field label="Thumbnail Image URL" v-if="user.admin">
               <b-input v-model.lazy="entry.thumbnail" :placeholder="defaults.services[i] ? defaults.services[i].thumbnail : defaults.services[0].thumbnail" />
             </b-field>
-            <img :src="entry.image" style="max-height: 128px;"/>
-            <b-field label="Image URL">
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images['servicesThumbnail' + i]" :can-cancel="false"></b-loading>
+              <b-field label="Thumbnail Image">
+                <img :src="entry.thumbnail" style="max-height: 128px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('servicesThumbnailImageUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('servicesThumbnail', i)">Browse...</button>
+              </b-field>
+            </b-field>
+
+            <b-field label="Image URL" v-if="user.admin">
               <b-input v-model.lazy="entry.image" :placeholder="defaults.services[i] ? defaults.services[i].image : defaults.services[0].image" />
             </b-field>
-            <img :src="entry.image" style="max-height: 512px;"/>
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images['services' + i]" :can-cancel="false"></b-loading>
+              <b-field label="Image">
+                <img :src="entry.image" style="max-height: 256px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('servicesImageUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('services', i)">Browse...</button>
+              </b-field>
+            </b-field>
           </div>
         </b-collapse>
 
@@ -667,10 +691,22 @@
             <b-field label="Role">
               <b-input v-model="entry.role" :placeholder="defaults.authors[i] ? defaults.authors[i].role : defaults.authors[0].role" />
             </b-field>
-            <b-field label="Image URL">
+
+            <b-field label="Image URL" v-if="user.admin">
               <b-input v-model.lazy="entry.image" :placeholder="defaults.authors[i] ? defaults.authors[i].image : defaults.authors[0].image" />
             </b-field>
-            <img :src="entry.image" style="max-height: 256px;"/>
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images['authors' + i]" :can-cancel="false"></b-loading>
+              <b-field label="Image">
+                <img :src="entry.image" style="max-height: 256px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('authorsImageUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('authors', i)">Browse...</button>
+              </b-field>
+            </b-field>
           </div>
         </b-collapse>
 
@@ -711,10 +747,23 @@
             <b-field label="Text">
               <b-input v-model="entry.text" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].text : defaults.timelinePosts[0].text" />
             </b-field>
-            <b-field label="Image URL">
+
+            <b-field label="Image URL" v-if="user.admin">
               <b-input v-model.lazy="entry.image" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].image : defaults.timelinePosts[0].image" />
             </b-field>
-            <img :src="entry.image" style="max-height: 256px;"/>
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images['timeline' + i]" :can-cancel="false"></b-loading>
+              <b-field label="Image">
+                <img :src="entry.image" style="max-height: 256px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('timelineImageUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('timelinePosts', i)">Browse...</button>
+              </b-field>
+            </b-field>
+
           </div>
         </b-collapse>
 
@@ -1003,7 +1052,11 @@ export default {
             'logoFile': (url) => { this.model.logo.rasterised = url },
             'mobileWallpaper': (url) => { this.model.mobileWallpaper = url },
             'slider': (url, index) => { this.model.sliders[index].image = url },
-            'blogItem': (url, index) => { this.model.blogItems[index].image = url }
+            'blogItem': (url, index) => { this.model.blogItems[index].image = url },
+            'authors': (url, index) => { this.model.authors[index].image = url },
+            'services': (url, index) => { this.model.services[index].image = url },
+            'servicesThumbnail': (url, index) => { this.model.services[index].thumbnail = url },
+            'timelinePosts': (url, index) => { this.model.timelinePosts[index].image = url }
           }
           // update our model with the new file URL
           try {
