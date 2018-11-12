@@ -819,7 +819,7 @@ const ttsTypes = [
     tooltip: 'Spell out each letter.'
   },
   {
-    value: 'credit-card',
+    value: 'creditcard',
     name: 'Credit Card',
     tooltip: 'Interpret a value as a credit card number.'
   },
