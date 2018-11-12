@@ -13,13 +13,13 @@
       </div>
       <div class="card-content" v-else>
         <b-field label="ID">
-          <b-input v-model="model.id" :placeholder="defaults.id" @keyup.native.enter="submit" disabled="true" />
+          <b-input v-model="model.id" :placeholder="defaults.id" disabled="true" />
         </b-field>
         <b-field label="Name">
-          <b-input v-model="model.name" :placeholder="defaults.name" @keyup.native.enter="submit" />
+          <b-input v-model="model.name" :placeholder="defaults.name" />
         </b-field>
         <b-field label="Logo URL" v-if="user.admin">
-          <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" @keyup.native.enter="submit" />
+          <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" />
         </b-field>
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
@@ -54,7 +54,7 @@
       <div class="card-content" v-else>
 
         <b-field label="Welcome Prompt">
-          <b-input v-model="model.cvp.welcomePrompt" :placeholder="defaults.cvp.welcomePrompt" @keyup.native.enter="submit" />
+          <b-input v-model="model.cvp.welcomePrompt" :placeholder="defaults.cvp.welcomePrompt" />
         </b-field>
         <!-- Main and Second Menu -->
         <b-collapse class="content card" v-for="(menu, i) of ['mainMenu', 'secondMenu']" :key="menu">
@@ -67,7 +67,7 @@
           <div class="card-content">
 
             <b-field label="TTS">
-              <b-input v-model="model.cvp[menu].tts" :placeholder="defaults.cvp[menu].tts" @keyup.native.enter="submit" />
+              <b-input v-model="model.cvp[menu].tts" :placeholder="defaults.cvp[menu].tts" />
             </b-field>
 
             <b-collapse class="content card" v-for="(option, j) of model.cvp[menu].options" :key="menu + j">
@@ -82,10 +82,10 @@
 
                 <b-field grouped>
                   <b-field label="ASR Keyword">
-                    <b-input v-model="option.name" :placeholder="defaults.cvp[menu].options[j].name" @keyup.native.enter="submit" />
+                    <b-input v-model="option.name" :placeholder="defaults.cvp[menu].options[j].name" />
                   </b-field>
                   <b-field label="Finesse Reason Call Variable" expanded>
-                    <b-input v-model="option.description" :placeholder="defaults.cvp[menu].options[j].description" @keyup.native.enter="submit" />
+                    <b-input v-model="option.description" :placeholder="defaults.cvp[menu].options[j].description" />
                   </b-field>
                 </b-field>
 
@@ -110,10 +110,10 @@
           <div class="card-content" v-else>
 
             <b-field label="interactionId">
-              <b-input v-model="model.cvp.jacadaMenu.interactionId" :placeholder="defaults.cvp.jacadaMenu.interactionId" @keyup.native.enter="submit" />
+              <b-input v-model="model.cvp.jacadaMenu.interactionId" :placeholder="defaults.cvp.jacadaMenu.interactionId" />
             </b-field>
             <b-field label="applicationKey" expanded>
-              <b-input v-model="model.cvp.jacadaMenu.applicationKey" :placeholder="defaults.cvp.jacadaMenu.applicationKey" @keyup.native.enter="submit" />
+              <b-input v-model="model.cvp.jacadaMenu.applicationKey" :placeholder="defaults.cvp.jacadaMenu.applicationKey" />
             </b-field>
 
           </div>
@@ -138,10 +138,10 @@
       <div class="card-content" v-else>
 
         <b-field label="Homepage Title">
-          <b-input v-model="model.mobileTitle" :placeholder="defaults.mobileTitle" @keyup.native.enter="submit" />
+          <b-input v-model="model.mobileTitle" :placeholder="defaults.mobileTitle" />
         </b-field>
         <b-field label="Wallpaper URL" v-if="user.admin">
-          <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" @keyup.native.enter="submit" />
+          <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" />
         </b-field>
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.mobileWallpaper" :can-cancel="false"></b-loading>
@@ -179,12 +179,12 @@
               <div class="card-content">
 
                 <b-field label="Option Title">
-                  <b-input v-model="mobileOption.caption" :placeholder="defaults.mobileOptions[i].caption" @keyup.native.enter="submit" />
+                  <b-input v-model="mobileOption.caption" :placeholder="defaults.mobileOptions[i].caption" />
                 </b-field>
 
                 <b-field grouped>
                   <b-field label="Icon Name">
-                    <b-input v-model="mobileOption.icon" :placeholder="defaults.mobileOptions[i].icon" @keyup.native.enter="submit" />
+                    <b-input v-model="mobileOption.icon" :placeholder="defaults.mobileOptions[i].icon" />
                   </b-field>
                   <b-field label="Icon">
                     <a @click.prevent="iconModalContext = {mobileOption}; showIconModal = true">
@@ -209,7 +209,7 @@
                   <div class="card-content">
                     <b-field grouped>
                       <b-field label="Title" expanded>
-                        <b-input v-model="field.name" :placeholder="defaults.mobileOptions[i].fields[j].name" @keyup.native.enter="submit" />
+                        <b-input v-model="field.name" :placeholder="defaults.mobileOptions[i].fields[j].name" />
                       </b-field>
                       <b-field label="Data Type">
                         <b-select :placeholder="defaults.mobileOptions[i].fields[j].type" v-model="field.type">
@@ -225,7 +225,7 @@
                         </b-tooltip>
                       </b-field>
                       <b-field label="Default Value" expanded>
-                        <b-input v-model="field.value" :placeholder="defaults.mobileOptions[i].fields[j].value" @keyup.native.enter="submit" />
+                        <b-input v-model="field.value" :placeholder="defaults.mobileOptions[i].fields[j].value" />
                       </b-field>
                     </b-field>
 
@@ -256,7 +256,7 @@
       </div>
       <div class="card-content" v-else>
         <b-field label="Entry Point ID">
-          <b-input v-model="model.chat.entryPointId" :placeholder="defaults.chat.entryPointId" @keyup.native.enter="submit" />
+          <b-input v-model="model.chat.entryPointId" :placeholder="defaults.chat.entryPointId" />
         </b-field>
 
         <b-collapse class="content card">
@@ -270,7 +270,7 @@
           <div class="card-content">
 
             <b-field label="DialogFlow Client Token">
-              <b-input v-model="model.chat.bot.aiToken" :placeholder="defaults.chat.bot.aiToken" @keyup.native.enter="submit" />
+              <b-input v-model="model.chat.bot.aiToken" :placeholder="defaults.chat.bot.aiToken" />
             </b-field>
 
           </div>
@@ -302,17 +302,17 @@
           </div>
           <div class="card-content" v-else>
             <b-field label="Address">
-              <b-input v-model="model.address" :placeholder="defaults.address" @keyup.native.enter="submit" />
+              <b-input v-model="model.address" :placeholder="defaults.address" />
             </b-field>
             <b-field label="Domain Name">
-              <b-input v-model="model.domain" :placeholder="defaults.domain" @keyup.native.enter="submit" />
+              <b-input v-model="model.domain" :placeholder="defaults.domain" />
             </b-field>
             <b-field grouped>
               <b-field label="Map Latitude">
-                <b-input type="number" step="0.0000001" min="-90" max="90" v-model="model.gps.latitude" :placeholder="defaults.gps.latitude" @keyup.native.enter="submit" />
+                <b-input type="number" step="0.0000001" min="-90" max="90" v-model="model.gps.latitude" :placeholder="defaults.gps.latitude" />
               </b-field>
               <b-field label="Map Longitude">
-                <b-input type="number" step="0.0000001" min="-180" max="180" v-model="model.gps.longitude" :placeholder="defaults.gps.longitude" @keyup.native.enter="submit" />
+                <b-input type="number" step="0.0000001" min="-180" max="180" v-model="model.gps.longitude" :placeholder="defaults.gps.longitude" />
               </b-field>
             </b-field>
 
@@ -332,7 +332,7 @@
                   <li v-for="(task, i) of model.taskOptions" :key="i">
                     <b-field grouped>
                       <b-field expanded>
-                        <b-input v-model="task.text" :placeholder="defaults.taskOptions[i] ? defaults.taskOptions[i].text : defaults.taskOptions[0].text" @keyup.native.enter="submit" />
+                        <b-input v-model="task.text" :placeholder="defaults.taskOptions[i] ? defaults.taskOptions[i].text : defaults.taskOptions[0].text" />
                       </b-field>
                       <b-field>
                         <button class="button is-danger" @click="model.taskOptions.splice(i, 1)">Remove Option</button>
@@ -361,10 +361,10 @@
           </div>
           <div class="card-content" v-else>
             <b-field label="Finesse Reason Call Variable">
-              <b-input v-model="model.rem.reason" :placeholder="defaults.rem.reason" @keyup.native.enter="submit" />
+              <b-input v-model="model.rem.reason" :placeholder="defaults.rem.reason" />
             </b-field>
             <b-field label="Finesse Subreason Call Variable">
-              <b-input v-model="model.rem.subreason" :placeholder="defaults.rem.subreason" @keyup.native.enter="submit" />
+              <b-input v-model="model.rem.subreason" :placeholder="defaults.rem.subreason" />
             </b-field>
 
             <!-- Cobrowse Form -->
@@ -381,7 +381,7 @@
               <div class="card-content" v-else>
 
                 <b-field label="Title">
-                  <b-input v-model="model.form.title" :placeholder="defaults.form.title" @keyup.native.enter="submit" />
+                  <b-input v-model="model.form.title" :placeholder="defaults.form.title" />
                 </b-field>
 
                 <b-collapse class="content card">
@@ -396,7 +396,7 @@
                       <li v-for="(entry, i) of model.form.fields" :key="'formField' + i">
                         <b-field grouped>
                           <b-field expanded>
-                            <b-input v-model="model.form.fields[i]" :placeholder="defaults.form.fields[i] ? defaults.form.fields[i] : defaults.form.fields[0]" @keyup.native.enter="submit" />
+                            <b-input v-model="model.form.fields[i]" :placeholder="defaults.form.fields[i] ? defaults.form.fields[i] : defaults.form.fields[0]" />
                           </b-field>
                           <b-field>
                             <button class="button is-danger" @click="model.form.fields.splice(i, 1)">Remove Option</button>
@@ -468,16 +468,16 @@
               </div>
               <div class="card-content">
                 <b-field label="Title">
-                  <b-input v-model="slider.title" :placeholder="defaults.sliders[i] ? defaults.sliders[i].title : defaults.sliders[0].title" @keyup.native.enter="submit" />
+                  <b-input v-model="slider.title" :placeholder="defaults.sliders[i] ? defaults.sliders[i].title : defaults.sliders[0].title" />
                 </b-field>
                 <b-field label="Text Line 1">
-                  <b-input v-model="slider.text1" :placeholder="defaults.sliders[i] ? defaults.sliders[i].text1 : defaults.sliders[0].text1" @keyup.native.enter="submit" />
+                  <b-input v-model="slider.text1" :placeholder="defaults.sliders[i] ? defaults.sliders[i].text1 : defaults.sliders[0].text1" />
                 </b-field>
                 <b-field label="Text Line 2">
-                  <b-input v-model="slider.text2" :placeholder="defaults.sliders[i] ? defaults.sliders[i].text2 : defaults.sliders[0].text2" @keyup.native.enter="submit" />
+                  <b-input v-model="slider.text2" :placeholder="defaults.sliders[i] ? defaults.sliders[i].text2 : defaults.sliders[0].text2" />
                 </b-field>
                 <b-field label="Button Text">
-                  <b-input v-model="slider.buttonText" :placeholder="defaults.sliders[i] ? defaults.sliders[i].buttonText : defaults.sliders[0].buttonText" @keyup.native.enter="submit" />
+                  <b-input v-model="slider.buttonText" :placeholder="defaults.sliders[i] ? defaults.sliders[i].buttonText : defaults.sliders[0].buttonText" />
                 </b-field>
                 <b-field label="Button Destination">
                   <b-select :placeholder="defaults.sliders[i] ? defaults.sliders[i].buttonLink : defaults.sliders[0].buttonLink" v-model="slider.buttonLink">
@@ -489,7 +489,7 @@
                   </b-select>
                 </b-field>
                 <b-field label="Image URL" v-if="user.admin">
-                  <b-input v-model.lazy="slider.image" :placeholder="defaults.sliders[i] ? defaults.sliders[i].image : defaults.sliders[0].image" @keyup.native.enter="submit" />
+                  <b-input v-model.lazy="slider.image" :placeholder="defaults.sliders[i] ? defaults.sliders[i].image : defaults.sliders[0].image" />
                 </b-field>
                 <b-field grouped>
                   <b-loading v-if="i === 0" :is-full-page="false" :active="working.images.slider0" :can-cancel="false"></b-loading>
@@ -540,16 +540,16 @@
               </div>
               <div class="card-content">
                 <b-field label="Title">
-                  <b-input v-model="entry.title" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].title : defaults.blogItems[0].title" @keyup.native.enter="submit" />
+                  <b-input v-model="entry.title" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].title : defaults.blogItems[0].title" />
                 </b-field>
                 <b-field label="Subtitle">
-                  <b-input v-model="entry.subTitle" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].subTitle : defaults.blogItems[0].subTitle" @keyup.native.enter="submit" />
+                  <b-input v-model="entry.subTitle" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].subTitle : defaults.blogItems[0].subTitle" />
                 </b-field>
                 <!-- <b-field label="Description">
-                <b-input type="textarea" v-model="entry.description" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].description : defaults.blogItems[0].description" @keyup.native.enter="submit" />
+                <b-input type="textarea" v-model="entry.description" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].description : defaults.blogItems[0].description" />
               </b-field> -->
               <b-field label="Image URL" v-if="user.admin">
-                <b-input v-model.lazy="entry.image" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].image : defaults.blogItems[0].image" @keyup.native.enter="submit" />
+                <b-input v-model.lazy="entry.image" :placeholder="defaults.blogItems[i] ? defaults.blogItems[i].image : defaults.blogItems[0].image" />
               </b-field>
               <b-field grouped>
                 <b-loading v-if="i === 0" :is-full-page="false" :active="working.images.blogItem0" :can-cancel="false"></b-loading>
@@ -599,20 +599,20 @@
             </div>
             <div class="card-content">
               <b-field label="Name">
-                <b-input v-model="entry.name" :placeholder="defaults.services[i] ? defaults.services[i].title : defaults.services[0].title" @keyup.native.enter="submit" />
+                <b-input v-model="entry.name" :placeholder="defaults.services[i] ? defaults.services[i].title : defaults.services[0].title" />
               </b-field>
               <b-field label="Description">
-                <b-input v-model="entry.description" :placeholder="defaults.services[i] ? defaults.services[i].description : defaults.services[0].description" @keyup.native.enter="submit" />
+                <b-input v-model="entry.description" :placeholder="defaults.services[i] ? defaults.services[i].description : defaults.services[0].description" />
               </b-field>
               <!-- <b-field label="Price" v-if="type === 'products'">
-              <b-input v-model="entry.price" :placeholder="defaults.services[i] ? defaults.services[i].price : defaults.services[0].price" @keyup.native.enter="submit" />
+              <b-input v-model="entry.price" :placeholder="defaults.services[i] ? defaults.services[i].price : defaults.services[0].price" />
             </b-field> -->
             <b-field label="Thumbnail Image URL">
-              <b-input v-model.lazy="entry.thumbnail" :placeholder="defaults.services[i] ? defaults.services[i].thumbnail : defaults.services[0].thumbnail" @keyup.native.enter="submit" />
+              <b-input v-model.lazy="entry.thumbnail" :placeholder="defaults.services[i] ? defaults.services[i].thumbnail : defaults.services[0].thumbnail" />
             </b-field>
             <img :src="entry.image" style="max-height: 128px;"/>
             <b-field label="Image URL">
-              <b-input v-model.lazy="entry.image" :placeholder="defaults.services[i] ? defaults.services[i].image : defaults.services[0].image" @keyup.native.enter="submit" />
+              <b-input v-model.lazy="entry.image" :placeholder="defaults.services[i] ? defaults.services[i].image : defaults.services[0].image" />
             </b-field>
             <img :src="entry.image" style="max-height: 512px;"/>
           </div>
@@ -647,16 +647,16 @@
           </div>
           <div class="card-content">
             <b-field label="First Name">
-              <b-input v-model="entry.firstName" :placeholder="defaults.authors[i] ? defaults.authors[i].firstName : defaults.authors[0].firstName" @keyup.native.enter="submit" />
+              <b-input v-model="entry.firstName" :placeholder="defaults.authors[i] ? defaults.authors[i].firstName : defaults.authors[0].firstName" />
             </b-field>
             <b-field label="Last Name">
-              <b-input v-model="entry.firstName" :placeholder="defaults.authors[i] ? defaults.authors[i].lastName : defaults.authors[0].lastName" @keyup.native.enter="submit" />
+              <b-input v-model="entry.firstName" :placeholder="defaults.authors[i] ? defaults.authors[i].lastName : defaults.authors[0].lastName" />
             </b-field>
             <b-field label="Role">
-              <b-input v-model="entry.role" :placeholder="defaults.authors[i] ? defaults.authors[i].role : defaults.authors[0].role" @keyup.native.enter="submit" />
+              <b-input v-model="entry.role" :placeholder="defaults.authors[i] ? defaults.authors[i].role : defaults.authors[0].role" />
             </b-field>
             <b-field label="Image URL">
-              <b-input v-model.lazy="entry.image" :placeholder="defaults.authors[i] ? defaults.authors[i].image : defaults.authors[0].image" @keyup.native.enter="submit" />
+              <b-input v-model.lazy="entry.image" :placeholder="defaults.authors[i] ? defaults.authors[i].image : defaults.authors[0].image" />
             </b-field>
             <img :src="entry.image" style="max-height: 256px;"/>
           </div>
@@ -691,16 +691,16 @@
           </div>
           <div class="card-content">
             <b-field label="Title">
-              <b-input v-model="entry.title" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].title : defaults.timelinePosts[0].title" @keyup.native.enter="submit" />
+              <b-input v-model="entry.title" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].title : defaults.timelinePosts[0].title" />
             </b-field>
             <b-field label="Link">
-              <b-input v-model="entry.link" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].link : defaults.timelinePosts[0].link" @keyup.native.enter="submit" />
+              <b-input v-model="entry.link" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].link : defaults.timelinePosts[0].link" />
             </b-field>
             <b-field label="Text">
-              <b-input v-model="entry.text" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].text : defaults.timelinePosts[0].text" @keyup.native.enter="submit" />
+              <b-input v-model="entry.text" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].text : defaults.timelinePosts[0].text" />
             </b-field>
             <b-field label="Image URL">
-              <b-input v-model.lazy="entry.image" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].image : defaults.timelinePosts[0].image" @keyup.native.enter="submit" />
+              <b-input v-model.lazy="entry.image" :placeholder="defaults.timelinePosts[i] ? defaults.timelinePosts[i].image : defaults.timelinePosts[0].image" />
             </b-field>
             <img :src="entry.image" style="max-height: 256px;"/>
           </div>
@@ -735,10 +735,10 @@
           </div>
           <div class="card-content">
             <b-field label="Text">
-              <b-input type="textarea" v-model="entry.text" :placeholder="defaults.testimonials[i] ? defaults.testimonials[i].text : defaults.testimonials[0].text" @keyup.native.enter="submit" />
+              <b-input type="textarea" v-model="entry.text" :placeholder="defaults.testimonials[i] ? defaults.testimonials[i].text : defaults.testimonials[0].text" />
             </b-field>
             <b-field label="Author">
-              <b-input v-model="entry.author" :placeholder="defaults.testimonials[i] ? defaults.testimonials[i].author : defaults.testimonials[0].author" @keyup.native.enter="submit" />
+              <b-input v-model="entry.author" :placeholder="defaults.testimonials[i] ? defaults.testimonials[i].author : defaults.testimonials[0].author" />
             </b-field>
           </div>
         </b-collapse>
