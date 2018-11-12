@@ -224,8 +224,20 @@
                           </b-select>
                         </b-tooltip>
                       </b-field>
-                      <b-field label="Default Value" expanded>
-                        <b-input v-model="field.value" :placeholder="defaults.mobileOptions[i].fields[j].value" />
+                      <b-field label="Default Value" expanded v-if="field.type === 'text'">
+                        <b-input type="text" v-model="field.value" :placeholder="defaults.mobileOptions[i].fields[j].value" />
+                      </b-field>
+                      <b-field label="Default Value" expanded v-if="field.type === 'date'">
+                        <datepick inline-template :field="field">
+                          <b-datepicker
+                          placeholder="Click to select..."
+                          icon="calendar-today"
+                          v-model="model"
+                          @input="input"
+                          :date-parser="dateParser"
+                          :date-formatter="dateFormatter"></b-datepicker>
+                        </datepick>
+
                       </b-field>
                     </b-field>
 
@@ -780,7 +792,7 @@ title="Select Icon"
 <script>
 import moment from 'moment'
 import SelectIconModal from './modals/select-icon'
-// import Vue from 'vue'
+import Vue from 'vue'
 
 // const TtsTypeSelector = Vue.component('TtsTypeSelector', {
 //   props: ['field', 'types'],
@@ -869,9 +881,39 @@ const tooltips = {
   mobileWallpaperUpload: 'Note: the mobile wallpaper image will have a light blue filter applied by the mobile app. We recommend using an image that is at least 1242 x 2208 pixels.'
 }
 
+const Datepick = Vue.component('Datepick', {
+  props: ['field'],
+  data () {
+    return {
+      model: this.getDateValue()
+    }
+  },
+  methods: {
+    input (data) {
+      // date picker chose a date, so update the field
+      this.field.value = this.dateFormatter(data)
+    },
+    getDateValue () {
+      // get a Date object for the current field value
+      return new Date(moment(this.field.value).toDate())
+    },
+    dateParser (date) {
+      // return new Date(Date.parse(date))
+      const parsedDate = new Date(moment(date).format('MMM DD, YYYY HH:MM'))
+      console.log('parsedDate', parsedDate)
+      return parsedDate
+    },
+    dateFormatter (date) {
+      // return date.toLocaleDateString()
+      return moment(date).format('DD MMM YYYY')
+    }
+  }
+})
+
 export default {
   components: {
-    SelectIconModal
+    SelectIconModal,
+    Datepick
     // TtsTypeSelector
   },
 
