@@ -33,7 +33,7 @@
             <div class="select">
               <select class="input" v-model="selectedTemplate">
                 <option value="" disabled selected>Choose a vertical to load</option>
-                <option v-for="vertical in filteredSortedVerticals" :value="vertical.id">{{ vertical.id }}</option>
+                <option v-for="vertical in filteredSortedVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id}) (${vertical.owner})` }}</option>
               </select>
             </div>
           </div>
