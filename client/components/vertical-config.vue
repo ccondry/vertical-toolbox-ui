@@ -853,11 +853,11 @@ const ttsTypes = [
     name: 'Characters',
     tooltip: 'Spell out each letter.'
   },
-  {
-    value: 'fraction',
-    name: 'Fraction',
-    tooltip: 'Interpret the value as a fraction. This works for both common fractions (such as 3/20) and mixed fractions (such as 1+1/2).'
-  },
+  // {
+  //   value: 'fraction',
+  //   name: 'Fraction',
+  //   tooltip: 'Interpret the value as a fraction. This works for both common fractions (such as 3/20) and mixed fractions (such as 1+1/2).'
+  // },
   {
     value: 'unit',
     name: 'Unit',
