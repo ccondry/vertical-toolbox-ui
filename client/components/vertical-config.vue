@@ -865,7 +865,7 @@ const ttsTypes = [
 
 const tooltips = {
   logo: 'The logo image is used for both the website and the mobile app.',
-  logoUpload: 'We recommend using an image that has a 4:1 aspect ratio.'
+  logoUpload: 'We recommend using an image that has a 4:1 aspect ratio (i.e. 1000px by 250px).'
 }
 
 export default {
