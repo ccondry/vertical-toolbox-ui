@@ -115,6 +115,8 @@
     title="Save Vertical As..."
     @close="showModal = false"
     @submit="clickSaveVertical"></save-template-modal>
+
+
   </div>
 </template>
 
@@ -149,6 +151,24 @@ export default {
       'saveVertical',
       'uploadImage'
     ]),
+    confirmSaveVertical ({id, data}) {
+      console.log('confirmSaveVertical', id, data)
+      // pop confirmation dialog
+      this.$dialog.confirm({
+        message: `Are you sure you want to save vertical ${data.name} (${id})?`,
+        onConfirm: async () => {
+          this.$toast.open('Save vertical confirmed')
+          await this.saveVertical({id, data})
+          // update verticals data in state with current server data
+          await this.loadVerticals(false)
+          // make sure the the new vertical is the selected one
+          this.selectedTemplate = id
+          // load the selected vertical - so that after Save As, the vertical ID
+          // will be correctly displayed
+          this.clickLoadTemplate()
+        }
+      })
+    },
     upload (data) {
       console.log('Home.vue - upload vertical image', data)
       this.uploadImage({data})
@@ -170,18 +190,18 @@ export default {
       const id = this.selectedTemplate
       console.log('click save vertical', id)
       try {
+        let data
         if (this.activeTab === 0) {
           // use Form model
-          const data = JSON.parse(JSON.stringify(this.formModel))
-          await this.saveVertical({id, data})
+          data = JSON.parse(JSON.stringify(this.formModel))
         } else if (this.activeTab === 1) {
           // use Raw JSON string
-          const data = JSON.parse(this.verticalDataString)
-          await this.saveVertical({id, data})
+          data = JSON.parse(this.verticalDataString)
         }
-        // load verticals again
-        this.loadVerticals(false)
+        // confirm with user and save the data to the server
+        this.confirmSaveVertical({id, data})
       } catch (e) {
+        // failed to save data
         console.log('failed to save vertical', e.message)
         this.errorNotification(`Failed to save vertical. Check JSON syntax.`)
       }
@@ -210,19 +230,16 @@ export default {
 
       console.log('saving vertical')
       try {
+        let data
         if (this.activeTab === 0) {
           // use Form model
-          const data = JSON.parse(JSON.stringify(this.formModel))
-          await this.saveVertical({id, data})
+          data = JSON.parse(JSON.stringify(this.formModel))
         } else if (this.activeTab === 1) {
           // use Raw JSON string
-          const data = JSON.parse(this.verticalDataString)
-          await this.saveVertical({id, data})
+          data = JSON.parse(this.verticalDataString)
         }
-        // load verticals again
-        await this.loadVerticals(false)
-        // select new vertical
-        this.selectedTemplate = id
+        // confirm with user and save the data to the server
+        await this.confirmSaveVertical({id, data})
       } catch (e) {
         console.log('failed to save vertical', id, e)
         this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
@@ -269,7 +286,7 @@ export default {
       }
     },
     disableSave () {
-      if (this.selectedTemplate && this.selectedTemplate.length) {
+      if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
         // any template has been selected
         if (this.selectedTemplateObject.owner === this.user.username || this.user.admin) {
           // this user owns this template or is an admin
