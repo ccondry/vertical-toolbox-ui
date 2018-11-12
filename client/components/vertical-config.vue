@@ -504,11 +504,11 @@
                   <b-input v-model.lazy="slider.image" :placeholder="defaults.sliders[i] ? defaults.sliders[i].image : defaults.sliders[0].image" />
                 </b-field>
                 <b-field grouped>
-                  <b-loading v-if="i === 0" :is-full-page="false" :active="working.images.slider0" :can-cancel="false"></b-loading>
-                  <b-loading v-if="i === 1" :is-full-page="false" :active="working.images.slider1" :can-cancel="false"></b-loading>
+                  <b-loading :is-full-page="false" :active="working.images['slider' + i]" :can-cancel="false"></b-loading>
+                  <!-- <b-loading v-if="i === 1" :is-full-page="false" :active="working.images.slider1" :can-cancel="false"></b-loading>
                   <b-loading v-if="i === 2" :is-full-page="false" :active="working.images.slider2" :can-cancel="false"></b-loading>
                   <b-loading v-if="i === 3" :is-full-page="false" :active="working.images.slider3" :can-cancel="false"></b-loading>
-                  <b-loading v-if="i === 4" :is-full-page="false" :active="working.images.slider4" :can-cancel="false"></b-loading>
+                  <b-loading v-if="i === 4" :is-full-page="false" :active="working.images.slider4" :can-cancel="false"></b-loading> -->
                   <b-field label="Wallpaper">
                     <img :src="slider.image" style="max-height: 256px;"/>
                   </b-field>
@@ -516,7 +516,7 @@
                     <b-icon type="is-primary" icon="information" />
                   </b-tooltip>
                   <b-field label="Upload">
-                    <button class="button is-primary" type="button" @click="launchFilePicker('slider' + i)">Browse...</button>
+                    <button class="button is-primary" type="button" @click="launchFilePicker('slider', i)">Browse...</button>
                   </b-field>
                 </b-field>
               </div>
@@ -576,7 +576,7 @@
                   <b-icon type="is-primary" icon="information" />
                 </b-tooltip>
                 <b-field label="Upload">
-                  <button class="button is-primary" type="button" @click="launchFilePicker('blogItem' + i)">Browse...</button>
+                  <button class="button is-primary" type="button" @click="launchFilePicker('blogItem', i)">Browse...</button>
                 </b-field>
               </b-field>
             </div>
@@ -773,8 +773,8 @@ title="Select Icon"
 @submit="selectIcon">
 </select-icon-modal>
 
-<input type="file" style="display:none" ref="logoFile" v-uploader />
-<input type="file" style="display:none" ref="mobileWallpaper" v-uploader />
+<input type="file" style="display:none" ref="file" accept="image/*" v-uploader />
+<!-- <input type="file" style="display:none" ref="mobileWallpaper" v-uploader />
 <input type="file" style="display:none" ref="slider0" v-uploader />
 <input type="file" style="display:none" ref="slider1" v-uploader />
 <input type="file" style="display:none" ref="slider2" v-uploader />
@@ -784,7 +784,7 @@ title="Select Icon"
 <input type="file" style="display:none" ref="blogItem1" v-uploader />
 <input type="file" style="display:none" ref="blogItem2" v-uploader />
 <input type="file" style="display:none" ref="blogItem3" v-uploader />
-<input type="file" style="display:none" ref="blogItem4" v-uploader />
+<input type="file" style="display:none" ref="blogItem4" v-uploader /> -->
 
 </div>
 </template>
@@ -951,8 +951,14 @@ export default {
     uploader: {
       bind (el, binding, vnode) {
         el.addEventListener('change', e => {
-          console.log('change uploader with ref', vnode.data.ref, e.target.files)
-          vnode.context.uploadFile(vnode.data.ref, e.target.files[0])
+          // validate that a file was selected
+          if (!e.target.files || !e.target.files[0]) {
+            return
+          }
+          // console.log('change uploader with ref', vnode.data.ref, e.target.files)
+          console.log('change uploader with ref', vnode.context.uploadRef, vnode.context.uploadIndex, e.target.files)
+          // vnode.context.uploadFile(vnode.data.ref, e.target.files[0])
+          vnode.context.uploadFile(vnode.context.uploadRef, vnode.context.uploadIndex, e.target.files[0])
           // vnode.context.chosenFiles = e.target.files
         })
       }
@@ -967,18 +973,24 @@ export default {
       ttsTypes,
       tooltips,
       files: [],
-      images: []
+      images: [],
+      uploadRef: null,
+      uploadIndex: null
     }
   },
 
   methods: {
-    launchFilePicker (ref) {
-      console.log('launching file picker for', ref)
+    launchFilePicker (ref, index) {
+      console.log('launching file picker for', ref, index)
+      // set ref
+      this.uploadRef = ref
+      // set index
+      this.uploadIndex = index
       // launch native file picker
-      this.$refs[ref].click()
+      this.$refs.file.click()
     },
-    uploadFile (node, file) {
-      console.log('vertical-config.vue - uploading file', node, file)
+    uploadFile (node, index, file) {
+      console.log('vertical-config.vue - uploading file', node, index, file)
       // init file reader
       const reader = new window.FileReader()
       reader.onload = (e) => {
@@ -990,26 +1002,20 @@ export default {
           const map = {
             'logoFile': (url) => { this.model.logo.rasterised = url },
             'mobileWallpaper': (url) => { this.model.mobileWallpaper = url },
-            'slider0': (url) => { this.model.sliders[0].image = url },
-            'slider1': (url) => { this.model.sliders[1].image = url },
-            'slider2': (url) => { this.model.sliders[2].image = url },
-            'slider3': (url) => { this.model.sliders[3].image = url },
-            'slider4': (url) => { this.model.sliders[4].image = url },
-            'blogItem0': (url) => { this.model.blogItems[0].image = url },
-            'blogItem1': (url) => { this.model.blogItems[1].image = url },
-            'blogItem2': (url) => { this.model.blogItems[2].image = url },
-            'blogItem3': (url) => { this.model.blogItems[3].image = url },
-            'blogItem4': (url) => { this.model.blogItems[4].image = url }
+            'slider': (url, index) => { this.model.sliders[index].image = url },
+            'blogItem': (url, index) => { this.model.blogItems[index].image = url }
           }
           // update our model with the new file URL
           try {
-            map[node](url)
+            map[node](url, index)
           } catch (e) {
             // continue
           }
         }
         // actually upload the file now
-        this.$emit('upload', {name, node, vertical: this.model.id, data, callback})
+        this.$emit('upload', {name, node: node + index, vertical: this.model.id, data, callback})
+        // reset the file input
+        this.$refs.file.value = ''
       }
       // read the file data
       reader.readAsDataURL(file)
