@@ -309,24 +309,53 @@
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
           </div>
-          <div class="card-content" v-if="model.address === undefined || model.domain === undefined || model.gps === undefined|| model.gps.latitude === undefined || model.gps.longitude === undefined">
-            <button class="button is-primary" @click="$set(model, 'address', defaults.address); $set(model, 'domain', defaults.domain); $set(model, 'gps', JSON.parse(JSON.stringify(defaults.gps)));">Configure</button>
-          </div>
-          <div class="card-content" v-else>
-            <b-field label="Address">
-              <b-input v-model="model.address" :placeholder="defaults.address" />
-            </b-field>
-            <b-field label="Domain Name">
-              <b-input v-model="model.domain" :placeholder="defaults.domain" />
-            </b-field>
-            <b-field grouped>
-              <b-field label="Map Latitude">
-                <b-input type="number" step="0.0000001" min="-90" max="90" v-model="model.gps.latitude" :placeholder="defaults.gps.latitude" />
-              </b-field>
-              <b-field label="Map Longitude">
-                <b-input type="number" step="0.0000001" min="-180" max="180" v-model="model.gps.longitude" :placeholder="defaults.gps.longitude" />
-              </b-field>
-            </b-field>
+          <div class="card-content">
+
+            <!-- Contact Information -->
+            <b-collapse class="content card">
+              <div slot="trigger" slot-scope="props" class="card-header">
+                <p class="card-header-title">Contact Information</p>
+                <a class="card-header-icon">
+                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                </a>
+              </div>
+              <div class="card-content" v-if="model.address === undefined || model.domain === undefined">
+                <button class="button is-primary" @click="$set(model, 'address', defaults.address); $set(model, 'domain', defaults.domain);">Configure</button>
+              </div>
+              <div class="card-content" v-else>
+                <b-field label="Address">
+                  <b-input v-model="model.address" :placeholder="defaults.address" />
+                </b-field>
+                <b-field label="Domain Name">
+                  <b-input v-model="model.domain" :placeholder="defaults.domain" />
+                </b-field>
+              </div>
+            </b-collapse>
+            <!-- /Contact Information -->
+
+            <!-- Map GPS -->
+            <b-collapse class="content card">
+              <div slot="trigger" slot-scope="props" class="card-header">
+                <p class="card-header-title">Map Location</p>
+                <a class="card-header-icon">
+                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                </a>
+              </div>
+              <div class="card-content" v-if="model.gps === undefined || model.gps.latitude === undefined || model.gps.longitude === undefined">
+                <button class="button is-primary" @click="$set(model, 'gps', JSON.parse(JSON.stringify(defaults.gps)))">Configure</button>
+              </div>
+              <div class="card-content" v-else>
+                <b-field grouped>
+                  <b-field label="Latitude">
+                    <b-input type="number" step="0.0000001" min="-90" max="90" v-model="model.gps.latitude" :placeholder="defaults.gps.latitude" />
+                  </b-field>
+                  <b-field label="Longitude">
+                    <b-input type="number" step="0.0000001" min="-180" max="180" v-model="model.gps.longitude" :placeholder="defaults.gps.longitude" />
+                  </b-field>
+                </b-field>
+              </div>
+            </b-collapse>
+            <!-- /Map GPS -->
 
             <!-- Task Routing Request Options -->
             <b-collapse class="content card">
