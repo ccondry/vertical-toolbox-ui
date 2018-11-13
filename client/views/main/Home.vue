@@ -224,11 +224,9 @@ export default {
       // remove database _id
       delete this.formModel._id
     },
-    async clickSaveVertical (id) {
-      console.log('saving vertical as', id)
+    async clickSaveVertical ({id, name}) {
+      console.log('saving vertical as', id, '-', name)
       this.showModal = false
-
-      console.log('saving vertical')
       try {
         let data
         if (this.activeTab === 0) {
@@ -238,6 +236,9 @@ export default {
           // use Raw JSON string
           data = JSON.parse(this.verticalDataString)
         }
+        // set id and name in the request data
+        data.id = id
+        data.name = name
         // confirm with user and save the data to the server
         await this.confirmSaveVertical({id, data})
       } catch (e) {

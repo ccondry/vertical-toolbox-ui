@@ -4,8 +4,7 @@
   ok-text="Save"
   @keyup.native.esc="close">
     <div class="content has-text-centered">
-      What ID (short name) would you like to give to this new vertical? Please
-      use letters, numbers, and hyphens only.
+      What ID and name (title) would you like to give to this new vertical?
     </div>
       <!-- <div class="block">
         <div class="control is-horizontal">
@@ -19,6 +18,15 @@
       </div> -->
 
       <div class="block">
+        <div class="control is-horizontal">
+          <div class="control-label">
+            <label class="label">ID</label>
+          </div>
+          <div class="control">
+            <input type="text" autofocus v-model="templateId" @keyup.enter="ok">
+          </div>
+        </div>
+
         <div class="control is-horizontal">
           <div class="control-label">
             <label class="label">Name</label>
@@ -46,13 +54,14 @@ export default {
 
   data () {
     return {
-      templateName: ''
+      templateName: '',
+      templateId: ''
     }
   },
 
   methods: {
     ok () {
-      this.$emit('submit', this.templateName)
+      this.$emit('submit', {id: this.templateId, name: this.templateName})
     },
     close () {
       this.$emit('close')
