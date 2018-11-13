@@ -28,12 +28,42 @@
           </div>
           <div class="block">
             <div class="field">
-              <b-checkbox v-model="filterTemplates">Hide other users' verticals</b-checkbox>
+              <div class="field">
+                <b-radio v-model="verticalFilter"
+                native-value="all">Show all verticals</b-radio>
+              </div>
+              <div class="field">
+                <b-radio v-model="verticalFilter"
+                native-value="mine">Show only my verticals</b-radio>
+              </div>
+              <div class="field">
+                <b-radio v-model="verticalFilter"
+                native-value="other">
+                Show only this user's verticals:
+                <b-autocomplete
+                  v-model="ownerFilter"
+                  :data="autocompleteOwners"
+                  :placeholder="user.username">
+                  <template slot="empty">No results found</template>
+                </b-autocomplete>
+              </b-radio>
+              </div>
+              <!-- <b-field>
+                <b-checkbox v-model="showOnlyMyVerticals">Show only my verticals</b-checkbox>
+              </b-field> -->
+              <!-- <b-checkbox v-model="filterTemplates">Show only this user's verticals:</b-checkbox> -->
+              <b-field grouped>
+                <!-- <b-input v-model="ownerFilter" /> -->
+
+              </b-field>
             </div>
             <div class="select">
               <select class="input" v-model="selectedTemplate">
                 <option value="" disabled selected>Choose a vertical to load</option>
-                <option v-for="vertical in filteredSortedVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
+                <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
+                <option disabled v-if="verticalFilter !== 'all'">-----------------------------------------</option>
+                <option v-for="vertical in myVerticals" :value="vertical.id" v-if="verticalFilter === 'mine'">{{ `${vertical.name} (${vertical.id})` }}</option>
+                <option v-for="vertical in filteredSortedVerticals" :value="vertical.id" v-if="verticalFilter === 'other'">{{ `${vertical.name} (${vertical.id})` }}</option>
               </select>
             </div>
           </div>
@@ -138,7 +168,10 @@ export default {
       selectedTemplate: '',
       showModal: false,
       filterTemplates: false,
-      formModel: {}
+      formModel: {},
+      ownerFilter: '',
+      // selectedOwner: null,
+      verticalFilter: 'all'
     }
   },
   mounted () {
@@ -255,6 +288,16 @@ export default {
       'working',
       'defaults'
     ]),
+    autocompleteOwners () {
+      const allOwners = this.verticals.map(v => v.owner)
+      const uniqueOwners = Array.from(new Set(allOwners))
+      return uniqueOwners.filter((option) => {
+        return option
+        .toString()
+        .toLowerCase()
+        .indexOf(this.ownerFilter.toLowerCase()) >= 0
+      })
+    },
     sortedVerticals () {
       // make a mutable copy of the store data
       try {
@@ -277,22 +320,18 @@ export default {
         console.log(`couldn't get sorted verticals`, e)
       }
     },
+    systemVerticals () {
+      return this.sortedVerticals.filter(v => !v.owner || v.owner === 'system' || v.owner === null)
+    },
+    userVerticals () {
+      return this.sortedVerticals.filter(v => v.owner && v.owner !== 'system' && v.owner !== null)
+    },
+    myVerticals () {
+      return this.sortedVerticals.filter(v => v.owner === this.user.username)
+    },
     filteredSortedVerticals () {
-      // is the filter turned on?
-      if (this.filterTemplates) {
-        // filter to hide other user templates
-        return this.sortedVerticals.filter(v => {
-          // show verticals with no owner (same as owner === 'system')
-          if (!v.owner) {
-            return true
-          }
-          // show verticals owned by this user or by 'system'
-          return v.owner === this.user.username || v.owner === 'system'
-        })
-      } else {
-        // filter turned off - return all
-        return this.sortedVerticals
-      }
+      // filter to only show the verticals owned by specified user
+      return this.sortedVerticals.filter(v => v.owner === this.ownerFilter)
     },
     disableSave () {
       if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
