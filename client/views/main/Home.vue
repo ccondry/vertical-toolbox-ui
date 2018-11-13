@@ -303,10 +303,10 @@ export default {
       // make a mutable copy of the store data
       try {
         const copy = JSON.parse(JSON.stringify(this.verticals))
-        // case-insensitive sort
+        // case-insensitive sort by name
         copy.sort((a, b) => {
-          var nameA = a.id.toUpperCase() // ignore upper and lowercase
-          var nameB = b.id.toUpperCase() // ignore upper and lowercase
+          var nameA = a.name.toUpperCase() // ignore upper and lowercase
+          var nameB = b.name.toUpperCase() // ignore upper and lowercase
           if (nameA < nameB) {
             return -1
           }
