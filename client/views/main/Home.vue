@@ -61,7 +61,8 @@
               <select class="input" v-model="selectedTemplate">
                 <option value="" disabled selected>Choose a vertical to load</option>
                 <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
-                <option disabled v-if="verticalFilter !== 'all'">-----------------------------------------</option>
+                <option disabled>-----------------------------------------</option>
+                <option v-for="vertical in userVerticals" :value="vertical.id" v-if="verticalFilter === 'all'">{{ `${vertical.name} (${vertical.id})` }}</option>
                 <option v-for="vertical in myVerticals" :value="vertical.id" v-if="verticalFilter === 'mine'">{{ `${vertical.name} (${vertical.id})` }}</option>
                 <option v-for="vertical in filteredSortedVerticals" :value="vertical.id" v-if="verticalFilter === 'other'">{{ `${vertical.name} (${vertical.id})` }}</option>
               </select>
