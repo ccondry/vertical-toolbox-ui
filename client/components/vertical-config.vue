@@ -848,17 +848,6 @@ title="Select Icon"
 </select-icon-modal>
 
 <input type="file" style="display:none" ref="file" accept="image/*" v-uploader />
-<!-- <input type="file" style="display:none" ref="mobileWallpaper" v-uploader />
-<input type="file" style="display:none" ref="slider0" v-uploader />
-<input type="file" style="display:none" ref="slider1" v-uploader />
-<input type="file" style="display:none" ref="slider2" v-uploader />
-<input type="file" style="display:none" ref="slider3" v-uploader />
-<input type="file" style="display:none" ref="slider4" v-uploader />
-<input type="file" style="display:none" ref="blogItem0" v-uploader />
-<input type="file" style="display:none" ref="blogItem1" v-uploader />
-<input type="file" style="display:none" ref="blogItem2" v-uploader />
-<input type="file" style="display:none" ref="blogItem3" v-uploader />
-<input type="file" style="display:none" ref="blogItem4" v-uploader /> -->
 
 </div>
 </template>
