@@ -256,7 +256,7 @@
     <!-- /Mobile -->
 
     <!-- Chat Configuration -->
-    <b-collapse class="content card">
+    <!-- <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
         <p class="card-header-title">Chat</p>
         <a class="card-header-icon">
@@ -288,7 +288,7 @@
           </div>
         </b-collapse>
       </div>
-    </b-collapse>
+    </b-collapse> -->
     <!-- /Chat -->
 
     <!-- Website Configuration -->
