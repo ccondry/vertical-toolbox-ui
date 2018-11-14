@@ -12,11 +12,6 @@ export default new Router({
   linkExactActiveClass: 'is-active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
-    {
-      name: 'Home View',
-      path: '/verticals',
-      component: require('../views/main/Home')
-    },
     // {
     //   name: 'Login',
     //   path: '/login',
