@@ -9,7 +9,7 @@ Make sure you load all components here that are not listed in the menu module
 ***/
 export default new Router({
   mode: 'history',
-  linkActiveClass: 'is-active',
+  linkExactActiveClass: 'is-active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
