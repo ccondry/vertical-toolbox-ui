@@ -12,15 +12,15 @@ export default {
   },
   children: [
     {
-      name: 'Home',
+      name: 'Verticals',
       path: '/verticals',
       meta: {
-        icon: 'home',
-        description: 'Home',
+        icon: 'copyright',
+        description: 'cumulus vertical configuration',
         created: '2018-11-07',
         modified: '2018-11-07'
       },
-      component: lazyLoading('main/Home')
+      component: lazyLoading('main/verticals')
     }
     // {
     //   name: 'Verticals',
