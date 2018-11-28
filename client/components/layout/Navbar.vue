@@ -28,7 +28,8 @@
                   </p>
                 </div>
                 <div class="level-item">
-                  <b-select v-model="pageSelection" @change="changePage">
+                  <b-select v-model="pageSelection">
+                    <option value="PCCE">PCCE</option>
                     <option value="Verticals">Verticals</option>
                   </b-select>
                 </div>
@@ -84,14 +85,18 @@ export default {
     ]),
     clickLogout () {
       this.logout()
-    },
-    changePage (data) {
-      // user changed the page select
-      console.log('changing page to', data)
     }
   },
 
   watch: {
+    pageSelection (val, oldVal) {
+      // user changed the page select
+      if (val && val.length && val !== 'Verticals') {
+        // change to another page
+        console.log('changing page to', val)
+        window.location = '/' + val.toLowerCase()
+      }
+    },
     filter (val) {
       // this.$emit('update:menuFilter', $event.target.value)"
       this.$emit('update:menuFilter', val)
