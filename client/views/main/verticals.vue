@@ -204,7 +204,7 @@ export default {
         }
       })
     },
-    confirmDeleteVertical ({id}) {
+    confirmDeleteVertical (id) {
       console.log('confirmDeleteVertical', id)
       // pop confirmation dialog
       this.$dialog.confirm({
@@ -299,10 +299,10 @@ export default {
         this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
       }
     },
-    clickDeleteVertical ({id}) {
+    clickDeleteVertical (id) {
       console.log('deleting vertical', id)
       // confirm with user and save the data to the server
-      this.confirmDeleteVertical({id})
+      this.confirmDeleteVertical(id)
     }
   },
   computed: {
