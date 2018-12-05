@@ -72,9 +72,9 @@
             <button type="button" class="button is-primary"
             @click.prevent="clickLoadTemplate"
             :disabled="!selectedTemplate">Load</button>
-            <!-- <button type="button" class="button is-success"
-            @click.prevent="clickSaveVertical(selectedTemplate)"
-            :disabled="disableSaveTemplate">Save</button> -->
+            <button v-if="user.admin" type="button" class="button is-danger"
+            @click.prevent="clickDeleteVertical(selectedTemplate)"
+            :disabled="disableDeleteVertical">Delete</button>
           </div>
         </article>
       </div>
@@ -183,7 +183,8 @@ export default {
       'loadVerticals',
       'errorNotification',
       'saveVertical',
-      'uploadImage'
+      'uploadImage',
+      'deleteVertical'
     ]),
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
@@ -198,6 +199,24 @@ export default {
           // make sure the the new vertical is the selected one
           this.selectedTemplate = id
           // load the selected vertical - so that after Save As, the vertical ID
+          // will be correctly displayed
+          this.clickLoadTemplate()
+        }
+      })
+    },
+    confirmDeleteVertical ({id}) {
+      console.log('confirmDeleteVertical', id)
+      // pop confirmation dialog
+      this.$dialog.confirm({
+        message: `Are you sure you want to delete vertical ${id}?`,
+        onConfirm: async () => {
+          this.$toast.open('Delete vertical confirmed')
+          await this.deleteVertical({id})
+          // update verticals data in state with current server data
+          await this.loadVerticals(false)
+          // make sure the the new vertical is the selected one
+          this.selectedTemplate = this.verticals[0]
+          // load the selected vertical - so that after delete, the vertical ID
           // will be correctly displayed
           this.clickLoadTemplate()
         }
@@ -279,6 +298,11 @@ export default {
         console.log('failed to save vertical', id, e)
         this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
       }
+    },
+    clickDeleteVertical ({id}) {
+      console.log('deleting vertical', id)
+      // confirm with user and save the data to the server
+      this.confirmDeleteVertical({id})
     }
   },
   computed: {
@@ -352,6 +376,26 @@ export default {
     },
     disableSaveAs () {
       return !Object.keys(this.formModel).length
+    },
+    disableDeleteVertical () {
+      if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
+        // any template has been selected
+        if (this.selectedTemplateObject.owner === this.user.username ||
+          (this.user.admin &&
+            this.selectedTemplateObject.owner !== 'system' &&
+            this.selectedTemplateObject.owner !== null)
+          ) {
+          // this user owns this template, or the user is an admin and the selected template's owner is not system
+          return false
+        } else {
+          // this user doesn't have access to delete this template,
+          // so disable the button
+          return true
+        }
+      } else {
+        // template selection still on placeholder option
+        return false
+      }
     },
     selectedTemplateObject () {
       if (this.verticals && this.verticals.length && this.selectedTemplate.length) {

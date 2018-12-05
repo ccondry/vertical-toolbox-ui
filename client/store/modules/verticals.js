@@ -42,7 +42,6 @@ const actions = {
     }
   },
   async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
-    console.log('saving vertical (not implemented) - params:', {id, data})
     delete data._id
     try {
       const response = await dispatch('putData', {
@@ -58,6 +57,25 @@ const actions = {
       console.log('error saving vertical', e)
       dispatch('notification', {
         title: 'Failed to save vertical',
+        message: e.response.data.message,
+        type: 'danger'
+      })
+    }
+  },
+  async deleteVertical ({getters, commit, dispatch}, {id, showNotification}) {
+    try {
+      const response = await dispatch('deleteData', {
+        name: 'vertical',
+        endpoint: getters.endpoints.verticals + '/' + id,
+        showNotification
+      })
+
+      console.log('deleted vertical. response:', response)
+      dispatch('successNotification', 'Successfully deleted vertical')
+    } catch (e) {
+      console.log('error deleting vertical', e)
+      dispatch('notification', {
+        title: 'Failed to delete vertical',
         message: e.response.data.message,
         type: 'danger'
       })
