@@ -394,7 +394,7 @@ export default {
         }
       } else {
         // template selection still on placeholder option
-        return false
+        return true
       }
     },
     selectedTemplateObject () {
