@@ -23,7 +23,7 @@
             </p>
             <a @click.prevent="clickResetPassword">Reset Password</a>
             |
-            <a :href="accountRequestUrl" target="account_request">Request an Account</a>
+            <a :href="createAccountUrl">Create Account</a>
           </form>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default {
     return {
       username: null,
       password: null,
-      accountRequestUrl: 'https://docs.google.com/forms/d/1if5pG64yZiZbk5hwGKpU-KGDOfGUC7GDDGwC96aL210/viewform',
+      createAccountUrl: '/auth/create-user?destination=/verticals',
       showModal: false
     }
   },
