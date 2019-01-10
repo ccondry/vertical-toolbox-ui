@@ -21,7 +21,7 @@
             <p class="control">
               <button type="submit" class="button is-primary is-fullwidth">Log In</button>
             </p>
-            <a href="" @click.prevent="clickResetPassword">Reset Password</a>
+            <a @click.prevent="clickResetPassword">Reset Password</a>
             |
             <a :href="accountRequestUrl" target="account_request">Request an Account</a>
           </form>
