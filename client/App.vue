@@ -2,7 +2,7 @@
   <div id="app">
     <nprogress-container></nprogress-container>
     <!-- <b-loading :is-full-page="true" :active="loading.app.user" :can-cancel="false"></b-loading> -->
-    <navbar :show="true" :menu-filter.sync="menuFilter"></navbar>
+    <!-- <navbar :show="true" :menu-filter.sync="menuFilter"></navbar> -->
     <div v-if="authenticated && endpoints">
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
       <app-main></app-main>
