@@ -7,9 +7,6 @@
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
       <app-main></app-main>
     </div>
-    <!-- <div v-else>
-      <login />
-    </div> -->
     <!-- <footer-bar></footer-bar> -->
   </div>
 </template>
@@ -18,8 +15,6 @@
 import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
 import { Navbar, Sidebar, AppMain } from 'components/layout/'
 import { mapGetters, mapActions } from 'vuex'
-// import router from './router'
-import Login from './views/auth/Login'
 
 export default {
   data () {
@@ -32,8 +27,7 @@ export default {
     Navbar,
     Sidebar,
     AppMain,
-    NprogressContainer,
-    Login
+    NprogressContainer
   },
 
   async beforeMount () {
@@ -65,26 +59,6 @@ export default {
     console.log('getting endpoints...')
     await this.getEndpoints()
     console.log('getting endpoints done.')
-      // logged in
-    // } catch (e) {
-      // not logged in, so go to login page
-      // return router.push('Login')
-    // }
-
-    // if (this.authEnabled === true) {
-    //   try {
-    //     await this.checkLogin()
-    //   } catch (e) {
-    //     console.log(e.message)
-    //     console.log('this.$route', this.$route)
-    //     if (this.$route.name === 'Password Reset') {
-    //       // leave it
-    //     } else {
-    //       // go to login screen
-    //       this.$router.push('Login')
-    //     }
-    //   }
-    // }
   },
 
   async mounted () {

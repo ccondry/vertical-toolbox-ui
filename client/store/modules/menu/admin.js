@@ -9,22 +9,6 @@ export default {
     expanded: false
   },
   children: [
-    // {
-    //   name: 'Admin Links',
-    //   path: '/admin/links',
-    //   component: lazyLoading('admin/Links'),
-    //   meta: {
-    //     icon: 'link'
-    //   }
-    // },
-    // {
-    //   name: 'Users',
-    //   path: '/admin/users',
-    //   component: lazyLoading('admin/Users'),
-    //   meta: {
-    //     icon: 'account-multiple'
-    //   }
-    // }
     {
       name: 'Usage',
       path: '/verticals/admin/usage',
