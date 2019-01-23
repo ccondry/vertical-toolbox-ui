@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <nprogress-container></nprogress-container>
-    <!-- <b-loading :is-full-page="true" :active="loading.app.user" :can-cancel="false"></b-loading> -->
+    <b-loading :is-full-page="true" :active="loading.app.endpoints" :can-cancel="false"></b-loading>
     <navbar :show="true" :menu-filter.sync="menuFilter"></navbar>
     <div v-if="authenticated && endpoints">
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
       <app-main></app-main>
     </div>
-    <div v-else>
+    <!-- <div v-else>
       <login />
-    </div>
+    </div> -->
     <!-- <footer-bar></footer-bar> -->
   </div>
 </template>
@@ -113,6 +113,7 @@ export default {
       // if user goes from logged in to logged out, forward them to the login page
       if (oldVal === true && val === false) {
         // this.$router.push('Login')
+        window.location = '/auth/login?destination=/verticals'
       }
     }
   }
