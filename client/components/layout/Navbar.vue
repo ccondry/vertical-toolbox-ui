@@ -28,10 +28,11 @@
                   </p>
                 </div>
                 <div class="level-item">
-                  <b-select v-model="pageSelection">
+                  Verticals
+                  <!-- <b-select v-model="pageSelection">
                     <option value="PCCE">PCCE</option>
                     <option value="Verticals">Verticals</option>
-                  </b-select>
+                  </b-select> -->
                 </div>
               </nav>
               <!-- </div> -->
