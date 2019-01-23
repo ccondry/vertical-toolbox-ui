@@ -75,7 +75,7 @@ export default {
     //   try {
     //     await this.checkLogin()
     //   } catch (e) {
-    //     console.log(e)
+    //     console.log(e.message)
     //     console.log('this.$route', this.$route)
     //     if (this.$route.name === 'Password Reset') {
     //       // leave it

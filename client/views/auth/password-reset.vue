@@ -58,7 +58,7 @@ export default {
         // forward to the login page
         // this.$router.push('Login')
       } catch (e) {
-        console.log(e)
+        console.log(e.message)
       }
     }
   }
