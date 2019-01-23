@@ -1,8 +1,9 @@
 <template>
-  <section class="app-main" :style="[hiddenSidebarStyle]">
-    <div class="container is-fluid is-marginless app-content">
-      <!-- <levelbar></levelbar> -->
-      <transition
+  <div>
+    <section class="app-main" :style="[hiddenSidebarStyle]">
+      <div class="container is-fluid is-marginless app-content">
+        <!-- <levelbar></levelbar> -->
+        <transition
         mode="out-in"
         enter-active-class="fadeIn"
         leave-active-class="fadeOut"
@@ -13,6 +14,7 @@
       </transition>
     </div>
   </section>
+</div>
 </template>
 
 <script>
