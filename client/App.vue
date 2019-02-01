@@ -87,7 +87,7 @@ export default {
       // if user goes from logged in to logged out, forward them to the login page
       if (oldVal === true && val === false) {
         // this.$router.push('Login')
-        window.location = '/auth/login?destination=/verticals'
+        window.location = this.endpoints.login + '?destination=' + window.location
       }
     }
   }
