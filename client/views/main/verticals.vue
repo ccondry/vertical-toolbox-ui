@@ -56,6 +56,7 @@
                 <!-- <b-input v-model="ownerFilter" /> -->
 
               </b-field>
+              Choose your desired vertical here:
             </div>
             <div class="select">
               <select class="input" v-model="selectedTemplate">
