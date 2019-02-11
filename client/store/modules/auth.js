@@ -180,7 +180,7 @@ const actions = {
     } else {
       console.log('JWT not found in localstorage.')
       // forward user to login page
-      window.location = getters.endpoints.login + '?destination=' + window.location
+      window.location = '/auth/login?destination=' + window.location
       // const error = {
       //   error: 'JWT not found'
       // }
