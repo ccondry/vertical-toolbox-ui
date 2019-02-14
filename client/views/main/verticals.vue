@@ -29,7 +29,7 @@
           </div>
           <div class="block">
             <div class="field">
-              <div class="field">
+              <div v-if="user.admin" class="field">
                 <b-radio v-model="verticalFilter"
                 native-value="all">Show all verticals</b-radio>
               </div>
@@ -174,7 +174,7 @@ export default {
       formModel: {},
       ownerFilter: '',
       // selectedOwner: null,
-      verticalFilter: 'all'
+      verticalFilter: 'mine'
     }
   },
   mounted () {
