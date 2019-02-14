@@ -35,12 +35,12 @@
               </div>
               <div class="field">
                 <b-radio v-model="verticalFilter"
-                native-value="mine">Show only my verticals</b-radio>
+                native-value="mine">Show my verticals</b-radio>
               </div>
               <div class="field">
                 <b-radio v-model="verticalFilter"
                 native-value="other">
-                Show only this user's verticals:
+                Show this user's verticals:
                 <b-autocomplete
                   v-model="ownerFilter"
                   :data="autocompleteOwners"
