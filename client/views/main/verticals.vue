@@ -8,7 +8,8 @@
         <article class="tile is-child box">
           <h1 class="title">Information</h1>
           <p>
-            View and edit your Cumulus demo verticals for the Cumulus mobile app and website.
+            View and edit your Cumulus demo verticals for the Cumulus mobile
+            app, website, AI chat bot, and IVR prompts.
           </p>
         </article>
       </div>
