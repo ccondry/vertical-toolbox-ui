@@ -74,7 +74,7 @@
             <button type="button" class="button is-primary"
             @click.prevent="clickLoadTemplate"
             :disabled="!selectedTemplate">Load</button>
-            <button v-if="user.admin" type="button" class="button is-danger"
+            <button type="button" class="button is-danger"
             @click.prevent="clickDeleteVertical(selectedTemplate)"
             :disabled="disableDeleteVertical">Delete</button>
           </div>
