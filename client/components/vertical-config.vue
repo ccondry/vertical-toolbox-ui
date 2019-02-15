@@ -129,13 +129,10 @@
         <!-- logo image editor for users -->
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
-          <b-tooltip multilined position="is-right">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
           <b-field label="Logo Image">
             <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
           </b-field>
-          <b-tooltip multilined position="is-top">
+          <b-tooltip :label="getTooltip('logoUpload')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Upload">
@@ -310,9 +307,6 @@
         <!-- logo image editor for users -->
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.websiteLogoFile" :can-cancel="false"></b-loading>
-          <b-tooltip multilined position="is-right">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
           <b-field label="Logo Image">
             <img :src="model.logo.website" style="max-width: 256px; max-height: 64px;"/>
           </b-field>
