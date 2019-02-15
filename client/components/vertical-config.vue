@@ -301,94 +301,6 @@
       </div>
       <div class="card-content">
 
-        <!-- Contact Us Options -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Contact Us Page Options</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-          <div class="card-content">
-
-            <!-- Contact Information -->
-            <b-collapse class="content card">
-              <div slot="trigger" slot-scope="props" class="card-header">
-                <p class="card-header-title">Contact Information</p>
-                <a class="card-header-icon">
-                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-                </a>
-              </div>
-              <div class="card-content" v-if="model.address === undefined || model.domain === undefined">
-                <button class="button is-primary" @click="$set(model, 'address', defaults.address); $set(model, 'domain', defaults.domain);">Configure</button>
-              </div>
-              <div class="card-content" v-else>
-                <b-field label="Address">
-                  <b-input v-model="model.address" :placeholder="defaults.address" />
-                </b-field>
-                <b-field label="Domain Name">
-                  <b-input v-model="model.domain" :placeholder="defaults.domain" />
-                </b-field>
-              </div>
-            </b-collapse>
-            <!-- /Contact Information -->
-
-            <!-- Map GPS -->
-            <b-collapse class="content card">
-              <div slot="trigger" slot-scope="props" class="card-header">
-                <p class="card-header-title">Map Location</p>
-                <a class="card-header-icon">
-                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-                </a>
-              </div>
-              <div class="card-content" v-if="model.gps === undefined || model.gps.latitude === undefined || model.gps.longitude === undefined">
-                <button class="button is-primary" @click="$set(model, 'gps', JSON.parse(JSON.stringify(defaults.gps)))">Configure</button>
-              </div>
-              <div class="card-content" v-else>
-                <b-field grouped>
-                  <b-field label="Latitude">
-                    <b-input type="number" step="0.0000001" min="-90" max="90" v-model="model.gps.latitude" :placeholder="defaults.gps.latitude" />
-                  </b-field>
-                  <b-field label="Longitude">
-                    <b-input type="number" step="0.0000001" min="-180" max="180" v-model="model.gps.longitude" :placeholder="defaults.gps.longitude" />
-                  </b-field>
-                </b-field>
-              </div>
-            </b-collapse>
-            <!-- /Map GPS -->
-
-            <!-- Task Routing Request Options -->
-            <b-collapse class="content card">
-              <div slot="trigger" slot-scope="props" class="card-header">
-                <p class="card-header-title">Task Routing Request Options</p>
-                <a class="card-header-icon">
-                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-                </a>
-              </div>
-              <div class="card-content" v-if="!model.taskOptions || !model.taskOptions.length">
-                <button class="button is-primary" @click="$set(model, 'taskOptions', JSON.parse(JSON.stringify(defaults.taskOptions)))">Configure</button>
-              </div>
-              <div class="card-content" v-else>
-                <ol>
-                  <li v-for="(task, i) of model.taskOptions" :key="i">
-                    <b-field grouped>
-                      <b-field expanded>
-                        <b-input v-model="task.text" :placeholder="defaults.taskOptions[i] ? defaults.taskOptions[i].text : defaults.taskOptions[0].text" />
-                      </b-field>
-                      <b-field>
-                        <button class="button is-danger" @click="model.taskOptions.splice(i, 1)">Remove Option</button>
-                      </b-field>
-                    </b-field>
-                  </li>
-                </ol>
-                <button class="button is-success" @click="model.taskOptions.push({text:''})">Add Option</button>
-              </div>
-            </b-collapse>
-            <!-- /Task Routing Request Options -->
-          </div>
-        </b-collapse>
-        <!-- /Contact Us Page Options -->
-
         <!-- Homepage Banner -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
@@ -517,6 +429,94 @@
         </div>
       </b-collapse>
       <!-- /Blog Entries -->
+
+      <!-- Contact Us Options -->
+      <b-collapse class="content card">
+        <div slot="trigger" slot-scope="props" class="card-header">
+          <p class="card-header-title">Contact Us Page Options</p>
+          <a class="card-header-icon">
+            <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+          </a>
+        </div>
+        <div class="card-content">
+
+          <!-- Contact Information -->
+          <b-collapse class="content card">
+            <div slot="trigger" slot-scope="props" class="card-header">
+              <p class="card-header-title">Contact Information</p>
+              <a class="card-header-icon">
+                <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+              </a>
+            </div>
+            <div class="card-content" v-if="model.address === undefined || model.domain === undefined">
+              <button class="button is-primary" @click="$set(model, 'address', defaults.address); $set(model, 'domain', defaults.domain);">Configure</button>
+            </div>
+            <div class="card-content" v-else>
+              <b-field label="Address">
+                <b-input v-model="model.address" :placeholder="defaults.address" />
+              </b-field>
+              <b-field label="Domain Name">
+                <b-input v-model="model.domain" :placeholder="defaults.domain" />
+              </b-field>
+            </div>
+          </b-collapse>
+          <!-- /Contact Information -->
+
+          <!-- Map GPS -->
+          <b-collapse class="content card">
+            <div slot="trigger" slot-scope="props" class="card-header">
+              <p class="card-header-title">Map Location</p>
+              <a class="card-header-icon">
+                <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+              </a>
+            </div>
+            <div class="card-content" v-if="model.gps === undefined || model.gps.latitude === undefined || model.gps.longitude === undefined">
+              <button class="button is-primary" @click="$set(model, 'gps', JSON.parse(JSON.stringify(defaults.gps)))">Configure</button>
+            </div>
+            <div class="card-content" v-else>
+              <b-field grouped>
+                <b-field label="Latitude">
+                  <b-input type="number" step="0.0000001" min="-90" max="90" v-model="model.gps.latitude" :placeholder="defaults.gps.latitude" />
+                </b-field>
+                <b-field label="Longitude">
+                  <b-input type="number" step="0.0000001" min="-180" max="180" v-model="model.gps.longitude" :placeholder="defaults.gps.longitude" />
+                </b-field>
+              </b-field>
+            </div>
+          </b-collapse>
+          <!-- /Map GPS -->
+
+          <!-- Task Routing Request Options -->
+          <b-collapse class="content card">
+            <div slot="trigger" slot-scope="props" class="card-header">
+              <p class="card-header-title">Task Routing Request Options</p>
+              <a class="card-header-icon">
+                <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+              </a>
+            </div>
+            <div class="card-content" v-if="!model.taskOptions || !model.taskOptions.length">
+              <button class="button is-primary" @click="$set(model, 'taskOptions', JSON.parse(JSON.stringify(defaults.taskOptions)))">Configure</button>
+            </div>
+            <div class="card-content" v-else>
+              <ol>
+                <li v-for="(task, i) of model.taskOptions" :key="i">
+                  <b-field grouped>
+                    <b-field expanded>
+                      <b-input v-model="task.text" :placeholder="defaults.taskOptions[i] ? defaults.taskOptions[i].text : defaults.taskOptions[0].text" />
+                    </b-field>
+                    <b-field>
+                      <button class="button is-danger" @click="model.taskOptions.splice(i, 1)">Remove Option</button>
+                    </b-field>
+                  </b-field>
+                </li>
+              </ol>
+              <button class="button is-success" @click="model.taskOptions.push({text:''})">Add Option</button>
+            </div>
+          </b-collapse>
+          <!-- /Task Routing Request Options -->
+        </div>
+      </b-collapse>
+      <!-- /Contact Us Page Options -->
 
       <!-- Services -->
       <b-collapse class="content card" v-if="user.admin">
