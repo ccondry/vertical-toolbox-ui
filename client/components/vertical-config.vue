@@ -18,21 +18,6 @@
         <b-field label="Name">
           <b-input v-model="model.name" :placeholder="defaults.name" />
         </b-field>
-        <b-field grouped>
-          <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
-          <b-tooltip :label="getTooltip('logo')" multilined position="is-right">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field label="Logo Image">
-            <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
-          </b-field>
-          <b-tooltip :label="getTooltip('logoUpload')" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field label="Upload">
-            <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
-          </b-field>
-        </b-field>
       </div>
     </b-collapse>
     <!-- /Basic Information -->
