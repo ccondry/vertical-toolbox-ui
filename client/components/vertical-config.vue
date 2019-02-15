@@ -135,7 +135,7 @@
           <b-field label="Logo Image">
             <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
           </b-field>
-          <b-tooltip :label="getTooltip('logoUpload')" multilined position="is-top">
+          <b-tooltip multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Upload">
