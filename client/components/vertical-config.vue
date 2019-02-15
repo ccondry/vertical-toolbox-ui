@@ -447,10 +447,10 @@
       </b-collapse>
       <!-- /Blog Entries -->
 
-      <!-- Contact Us Options -->
+      <!-- Contact Us Page -->
       <b-collapse class="content card">
         <div slot="trigger" slot-scope="props" class="card-header">
-          <p class="card-header-title">Contact Us Page Options</p>
+          <p class="card-header-title">Contact Us Page</p>
           <a class="card-header-icon">
             <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
           </a>
@@ -533,7 +533,7 @@
           <!-- /Task Routing Request Options -->
         </div>
       </b-collapse>
-      <!-- /Contact Us Page Options -->
+      <!-- /Contact Us Page -->
 
       <!-- Services -->
       <b-collapse class="content card" v-if="user.admin">
