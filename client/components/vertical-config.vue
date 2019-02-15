@@ -386,7 +386,7 @@
               </div>
             </b-collapse>
 
-            <button class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button>
+            <button v-if="user.admin" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button>
           </div>
         </b-collapse>
         <!-- /Homepage Banner -->
@@ -442,7 +442,7 @@
             </div>
           </b-collapse>
 
-          <button class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button>
+          <button v-if="user.admin" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button>
         </div>
       </b-collapse>
       <!-- /Blog Entries -->
@@ -602,7 +602,7 @@
           </div>
         </b-collapse>
 
-        <button class="button is-success" @click="model.services.push(JSON.parse(JSON.stringify(defaults.services[0])))">Add Option</button>
+        <button v-if="user.admin" class="button is-success" @click="model.services.push(JSON.parse(JSON.stringify(defaults.services[0])))">Add Option</button>
       </div>
     </b-collapse>
     <!-- /Services -->
@@ -658,7 +658,7 @@
           </div>
         </b-collapse>
 
-        <button class="button is-success" @click="model.authors.push(JSON.parse(JSON.stringify(defaults.authors[0])))">Add Option</button>
+        <button v-if="user.admin" class="button is-success" @click="model.authors.push(JSON.parse(JSON.stringify(defaults.authors[0])))">Add Option</button>
       </div>
     </b-collapse>
     <!-- /Authors -->
@@ -715,7 +715,7 @@
           </div>
         </b-collapse>
 
-        <button class="button is-success" @click="model.timelinePosts.push(JSON.parse(JSON.stringify(defaults.timelinePosts[0])))">Add Option</button>
+        <button v-if="user.admin" class="button is-success" @click="model.timelinePosts.push(JSON.parse(JSON.stringify(defaults.timelinePosts[0])))">Add Option</button>
       </div>
     </b-collapse>
     <!-- /Timeline Posts -->
@@ -752,7 +752,7 @@
           </div>
         </b-collapse>
 
-        <button class="button is-success" @click="model.testimonials.push(JSON.parse(JSON.stringify(defaults.testimonials[0])))">Add Option</button>
+        <button v-if="user.admin" class="button is-success" @click="model.testimonials.push(JSON.parse(JSON.stringify(defaults.testimonials[0])))">Add Option</button>
       </div>
     </b-collapse>
     <!-- /Testimonials -->
