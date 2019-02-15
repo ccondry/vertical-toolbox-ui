@@ -18,9 +18,6 @@
         <b-field label="Name">
           <b-input v-model="model.name" :placeholder="defaults.name" />
         </b-field>
-        <b-field label="Logo URL" v-if="user.admin">
-          <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" />
-        </b-field>
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
           <b-tooltip :label="getTooltip('logo')" multilined position="is-right">
@@ -139,6 +136,9 @@
 
         <b-field label="Homepage Title">
           <b-input v-model="model.mobileTitle" :placeholder="defaults.mobileTitle" />
+        </b-field>
+        <b-field label="Logo URL" v-if="user.admin">
+          <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" />
         </b-field>
         <b-field label="Wallpaper URL" v-if="user.admin">
           <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" />
