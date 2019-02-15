@@ -129,7 +129,7 @@
         <!-- logo image editor for users -->
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
-          <b-tooltip :label="getTooltip('logo')" multilined position="is-right">
+          <b-tooltip multilined position="is-right">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Logo Image">
@@ -310,7 +310,7 @@
         <!-- logo image editor for users -->
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.websiteLogoFile" :can-cancel="false"></b-loading>
-          <b-tooltip :label="getTooltip('logo')" multilined position="is-right">
+          <b-tooltip multilined position="is-right">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Logo Image">
