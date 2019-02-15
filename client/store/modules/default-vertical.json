@@ -94,6 +94,7 @@
   "logo": {
     "vector": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.svg",
     "rasterised": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.png",
+    "website": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.png",
     "title": "CUMULUS",
     "subtitle": "TRAVEL",
     "color": "#7CC153"
