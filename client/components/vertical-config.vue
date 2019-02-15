@@ -386,7 +386,7 @@
               </div>
             </b-collapse>
 
-            <button v-if="user.admin" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button>
+            <button v-if="user.admin || model.sliders.length < 3" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button>
           </div>
         </b-collapse>
         <!-- /Homepage Banner -->
@@ -442,7 +442,7 @@
             </div>
           </b-collapse>
 
-          <button v-if="user.admin" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button>
+          <button v-if="user.admin || model.blogItems.length < 3" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button>
         </div>
       </b-collapse>
       <!-- /Blog Entries -->
