@@ -48,7 +48,7 @@
           </div>
           <div class="card-content">
 
-            <b-field label="TTS">
+            <b-field label="Menu Prompt">
               <b-input v-model="model.cvp[menu].tts" :placeholder="defaults.cvp[menu].tts" />
             </b-field>
 
