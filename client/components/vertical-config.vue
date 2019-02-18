@@ -19,7 +19,7 @@
           <b-input v-model="model.name" :placeholder="defaults.name" />
         </b-field>
         <b-field>
-          value
+          <button class="button is-success" @click="submit">Save</button>
         </b-field>
       </div>
     </b-collapse>
@@ -76,9 +76,6 @@
 
               </div>
             </b-collapse>
-            <b-field>
-              <button class="button is-success" @click="submit">Save</button>
-            </b-field>
           </div>
         </b-collapse>
         <!-- /Main and SecondMenu -->
@@ -106,7 +103,9 @@
           </div>
         </b-collapse>
         <!-- /Jacada -->
-
+        <b-field>
+          <button class="button is-success" @click="submit">Save</button>
+        </b-field>
       </div>
     </b-collapse>
     <!-- /IVR Menu -->
@@ -394,9 +393,6 @@
             </b-collapse>
 
             <button v-if="user.admin || model.sliders.length < 3" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button>
-            <b-field>
-              <button class="button is-success" @click="submit">Save</button>
-            </b-field>
           </div>
         </b-collapse>
         <!-- /Homepage Banner -->
@@ -453,9 +449,6 @@
           </b-collapse>
 
           <button v-if="user.admin || model.blogItems.length < 3" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button>
-          <b-field>
-            <button class="button is-success" @click="submit">Save</button>
-          </b-field>
         </div>
       </b-collapse>
       <!-- /Blog Entries -->
@@ -545,7 +538,6 @@
           </b-collapse>
           <!-- /Task Routing Request Options -->
         </div>
-        <button class="button is-success" @click="submit">Save</button>
       </b-collapse>
       <!-- /Contact Us Page -->
 
@@ -618,7 +610,6 @@
 
         <button v-if="user.admin" class="button is-success" @click="model.services.push(JSON.parse(JSON.stringify(defaults.services[0])))">Add Option</button>
       </div>
-      <button class="button is-success" @click="submit">Save</button>
     </b-collapse>
     <!-- /Services -->
 
@@ -675,7 +666,6 @@
 
         <button v-if="user.admin" class="button is-success" @click="model.authors.push(JSON.parse(JSON.stringify(defaults.authors[0])))">Add Option</button>
       </div>
-      <button class="button is-success" @click="submit">Save</button>
     </b-collapse>
     <!-- /Authors -->
 
@@ -733,8 +723,8 @@
 
         <button v-if="user.admin" class="button is-success" @click="model.timelinePosts.push(JSON.parse(JSON.stringify(defaults.timelinePosts[0])))">Add Option</button>
       </div>
-      <button class="button is-success" @click="submit">Save</button>
     </b-collapse>
+
     <!-- /Timeline Posts -->
 
     <!-- Testimonials (About Us page) -->
@@ -771,10 +761,11 @@
 
         <button v-if="user.admin" class="button is-success" @click="model.testimonials.push(JSON.parse(JSON.stringify(defaults.testimonials[0])))">Add Option</button>
       </div>
-      <button class="button is-success" @click="submit">Save</button>
     </b-collapse>
     <!-- /Testimonials -->
-
+    <b-field>
+      <button class="button is-success" @click="submit">Save</button>
+    </b-field>
   </div>
 </b-collapse>
 <!-- /Website Configuration -->
