@@ -18,8 +18,10 @@
         <b-field label="Name">
           <b-input v-model="model.name" :placeholder="defaults.name" />
         </b-field>
+        <b-field>
+          value
+        </b-field>
       </div>
-      <button class="button is-success" @click="submit">Save</button>
     </b-collapse>
     <!-- /Basic Information -->
 
@@ -74,9 +76,10 @@
 
               </div>
             </b-collapse>
-
+            <b-field>
+              <button class="button is-success" @click="submit">Save</button>
+            </b-field>
           </div>
-          <button class="button is-success" @click="submit">Save</button>
         </b-collapse>
         <!-- /Main and SecondMenu -->
 
@@ -251,9 +254,10 @@
           </div>
         </b-collapse>
         <!-- /Mobile Menu Options -->
-
+        <b-field>
+          <button class="button is-success" @click="submit">Save</button>
+        </b-field>
       </div>
-      <button class="button is-success" @click="submit">Save</button>
     </b-collapse>
     <!-- /Mobile -->
 
@@ -390,8 +394,10 @@
             </b-collapse>
 
             <button v-if="user.admin || model.sliders.length < 3" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button>
+            <b-field>
+              <button class="button is-success" @click="submit">Save</button>
+            </b-field>
           </div>
-          <button class="button is-success" @click="submit">Save</button>
         </b-collapse>
         <!-- /Homepage Banner -->
 
@@ -447,8 +453,10 @@
           </b-collapse>
 
           <button v-if="user.admin || model.blogItems.length < 3" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button>
+          <b-field>
+            <button class="button is-success" @click="submit">Save</button>
+          </b-field>
         </div>
-        <button class="button is-success" @click="submit">Save</button>
       </b-collapse>
       <!-- /Blog Entries -->
 
