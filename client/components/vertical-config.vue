@@ -197,6 +197,9 @@
                   <b-field label="Choose Icon">
                     <button class="button is-primary" @click.prevent="iconModalContext = {mobileOption}; showIconModal = true">Browse...</button>
                   </b-field>
+                  <b-field label="See All Icons">
+                    <a class="button is-info" :href="https://fontawesome.com/v4.7.0/icons/" target="fontawesome">Font Awesome 4.7.0 Icons</a>
+                  </b-field>
                 </b-field>
 
                 <!-- Mobile Menu Option Field -->
