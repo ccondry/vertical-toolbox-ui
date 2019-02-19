@@ -345,7 +345,7 @@
                 <p class="card-header-title">
                   Banner {{ i + 1 }}
                   <!-- {{ slider.title }} -->
-                  <!-- <button class="button is-danger" @click="model.sliders.splice(i, 1)" style="margin-left: auto;">Remove</button> -->
+                  <button class="button is-danger" @click="model.sliders.splice(i, 1)" style="margin-left: auto;">Remove</button>
                 </p>
                 <a class="card-header-icon">
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
@@ -395,7 +395,7 @@
               </div>
             </b-collapse>
 
-            <!-- <button v-if="user.admin || model.sliders.length < 3" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button> -->
+            <button v-if="user.admin || model.sliders.length < 3" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button>
           </div>
         </b-collapse>
         <!-- /Homepage Banner -->
@@ -417,7 +417,7 @@
                 <p class="card-header-title">
                   Blog Entry {{ i + 1 }}
                   <!-- {{ entry.title }} -->
-                  <!-- <button class="button is-danger" @click="model.blogItems.splice(i, 1)" style="margin-left: auto;">Remove</button> -->
+                  <button class="button is-danger" @click="model.blogItems.splice(i, 1)" style="margin-left: auto;">Remove</button>
                 </p>
                 <a class="card-header-icon">
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
@@ -451,7 +451,7 @@
             </div>
           </b-collapse>
 
-          <!-- <button v-if="user.admin || model.blogItems.length < 3" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button> -->
+          <button v-if="user.admin || model.blogItems.length < 3" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button>
         </div>
       </b-collapse>
       <!-- /Blog Entries -->
@@ -560,7 +560,7 @@
             <div slot="trigger" slot-scope="props" class="card-header">
               <p class="card-header-title">
                 {{ entry.name }}
-                <!-- <button class="button is-danger" @click="model.services.splice(i, 1)" style="margin-left: auto;">Remove</button> -->
+                <button class="button is-danger" @click="model.services.splice(i, 1)" style="margin-left: auto;">Remove</button>
               </p>
               <a class="card-header-icon">
                 <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
@@ -611,7 +611,7 @@
           </div>
         </b-collapse>
 
-        <!-- <button v-if="user.admin" class="button is-success" @click="model.services.push(JSON.parse(JSON.stringify(defaults.services[0])))">Add Option</button> -->
+        <button v-if="user.admin" class="button is-success" @click="model.services.push(JSON.parse(JSON.stringify(defaults.services[0])))">Add Option</button>
       </div>
     </b-collapse>
     <!-- /Services -->
@@ -632,7 +632,7 @@
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
               {{ entry.firstName }} {{ entry.lastName }}
-              <!-- <button class="button is-danger" @click="model.authors.splice(i, 1)" style="margin-left: auto;">Remove</button> -->
+              <button class="button is-danger" @click="model.authors.splice(i, 1)" style="margin-left: auto;">Remove</button>
             </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
@@ -667,7 +667,7 @@
           </div>
         </b-collapse>
 
-        <!-- <button v-if="user.admin" class="button is-success" @click="model.authors.push(JSON.parse(JSON.stringify(defaults.authors[0])))">Add Option</button> -->
+        <button v-if="user.admin" class="button is-success" @click="model.authors.push(JSON.parse(JSON.stringify(defaults.authors[0])))">Add Option</button>
       </div>
     </b-collapse>
     <!-- /Authors -->
@@ -688,7 +688,7 @@
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
               {{ entry.title }}
-              <!-- <button class="button is-danger" @click="model.timelinePosts.splice(i, 1)" style="margin-left: auto;">Remove</button> -->
+              <button class="button is-danger" @click="model.timelinePosts.splice(i, 1)" style="margin-left: auto;">Remove</button>
             </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
@@ -724,7 +724,7 @@
           </div>
         </b-collapse>
 
-        <!-- <button v-if="user.admin" class="button is-success" @click="model.timelinePosts.push(JSON.parse(JSON.stringify(defaults.timelinePosts[0])))">Add Option</button> -->
+        <button v-if="user.admin" class="button is-success" @click="model.timelinePosts.push(JSON.parse(JSON.stringify(defaults.timelinePosts[0])))">Add Option</button>
       </div>
     </b-collapse>
 
@@ -746,7 +746,7 @@
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
               {{ entry.text.slice(0, 48) }}...
-              <!-- <button class="button is-danger" @click="model.testimonials.splice(i, 1)" style="margin-left: auto;">Remove</button> -->
+              <button class="button is-danger" @click="model.testimonials.splice(i, 1)" style="margin-left: auto;">Remove</button>
             </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
@@ -762,7 +762,7 @@
           </div>
         </b-collapse>
 
-        <!-- <button v-if="user.admin" class="button is-success" @click="model.testimonials.push(JSON.parse(JSON.stringify(defaults.testimonials[0])))">Add Option</button> -->
+        <button v-if="user.admin" class="button is-success" @click="model.testimonials.push(JSON.parse(JSON.stringify(defaults.testimonials[0])))">Add Option</button>
       </div>
     </b-collapse>
     <!-- /Testimonials -->
