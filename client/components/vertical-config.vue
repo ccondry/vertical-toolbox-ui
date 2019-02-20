@@ -1004,15 +1004,60 @@ export default {
         const callback = (url) => {
           // map out the node names to model data references
           const map = {
-            'logoFile': (url) => { this.model.logo.rasterised = url },
-            'websiteLogoFile': (url) => { this.model.logo.website = url },
-            'mobileWallpaper': (url) => { this.model.mobileWallpaper = url },
-            'slider': (url, index) => { this.model.sliders[index].image = url },
-            'blogItem': (url, index) => { this.model.blogItems[index].image = url },
-            'authors': (url, index) => { this.model.authors[index].image = url },
-            'services': (url, index) => { this.model.services[index].image = url },
-            'servicesThumbnail': (url, index) => { this.model.services[index].thumbnail = url },
-            'timelinePosts': (url, index) => { this.model.timelinePosts[index].image = url }
+            'logoFile': (url) => {
+              // reset img
+              this.model.logo.rasterised = ''
+              // set img url
+              this.model.logo.rasterised = url
+            },
+            'websiteLogoFile': (url) => {
+              // reset img
+              this.model.logo.website = ''
+              // set img url
+              this.model.logo.website = url
+            },
+            'mobileWallpaper': (url) => {
+              // reset img
+              this.model.mobileWallpaper = ''
+              // set img url
+              this.model.mobileWallpaper = url
+            },
+            'slider': (url, index) => {
+              // reset img
+              this.model.sliders[index].image = ''
+              // set img url
+              this.model.sliders[index].image = url
+            },
+            'blogItem': (url, index) => {
+              // reset img
+              this.model.blogItems[index].image = ''
+              // set img url
+              this.model.blogItems[index].image = url
+            },
+            'authors': (url, index) => {
+              // reset img
+              this.model.authors[index].image = ''
+              // set img url
+              this.model.authors[index].image = url
+            },
+            'services': (url, index) => {
+              // reset img
+              this.model.services[index].image = ''
+              // set img url
+              this.model.services[index].image = url
+            },
+            'servicesThumbnail': (url, index) => {
+              // reset img
+              this.model.services[index].thumbnail = ''
+              // set img url
+              this.model.services[index].thumbnail = url
+            },
+            'timelinePosts': (url, index) => {
+              // reset img
+              this.model.timelinePosts[index].image = ''
+              // set img url
+              this.model.timelinePosts[index].image = url
+            }
           }
           // update our model with the new file URL
           try {
