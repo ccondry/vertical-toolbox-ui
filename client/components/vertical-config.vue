@@ -1169,23 +1169,18 @@ export default {
     },
     faviconWebsite (val) {
       this.changeFavicon(val)
-    },
-    modelFavicon (val) {
-      // when this.model.favicon changes, extract the domain of the google favicon
-      // tool url and set the v-model value for the "Favicon Website URL" of the favicon
-      const url = val
-      const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
-      try {
-        this.faviconWebsite = arr[1] || ''
-      } catch (e) {
-        this.faviconWebsite = ''
-      }
     }
   },
 
-  computed: {
-    modelFavicon () {
-      return this.model.favicon
+  mounted () {
+    // when this.model.favicon changes, extract the domain of the google favicon
+    // tool url and set the v-model value for the "Favicon Website URL" of the favicon
+    const url = this.model.favicon
+    const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
+    try {
+      this.faviconWebsite = arr[1] || ''
+    } catch (e) {
+      this.faviconWebsite = ''
     }
   }
 }
