@@ -332,8 +332,8 @@
           <b-input v-model.lazy="model.favicon" :placeholder="defaults.favicon" />
         </b-field>
         <!-- google favicon url -->
-        <b-field grouped v-if="user.admin">
-          <b-field label="Favicon Image" v-if="user.admin">
+        <b-field grouped>
+          <b-field label="Favicon Image">
             <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
           </b-field>
           &nbsp;&nbsp;
