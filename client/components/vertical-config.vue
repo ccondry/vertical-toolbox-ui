@@ -337,7 +337,7 @@
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Website URL">
-            <b-input v-model="faviconWebsite" @change="changeFavicon($event)" placeholder="google.com" />
+            <b-input v-model="faviconWebsite" @change.native="changeFavicon($event)" placeholder="google.com" />
           </b-field>
         </b-field>
         <b-field label="Favicon Image" v-if="user.admin">
