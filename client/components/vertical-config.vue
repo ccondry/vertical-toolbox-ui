@@ -333,7 +333,7 @@
         </b-field>
         <!-- google favicon url -->
         <b-field grouped v-if="user.admin">
-          <b-field label="Website URL">
+          <b-field label="Favicon Website Domain Name">
             <b-input :expanded="true" v-model="faviconWebsite"
             placeholder="google.com" />
           </b-field>
@@ -1172,7 +1172,7 @@ export default {
     },
     modelFavicon (val) {
       // when this.model.favicon changes, extract the domain of the google favicon
-      // tool url and set the v-model value for the "Website URL" of the favicon
+      // tool url and set the v-model value for the "Favicon Website URL" of the favicon
       const url = val
       const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
       try {
