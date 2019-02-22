@@ -71,9 +71,9 @@
             </div>
           </div>
           <div class="block">
-            <button type="button" class="button is-primary"
+            <!-- <button type="button" class="button is-primary"
             @click.prevent="clickLoadTemplate"
-            :disabled="!selectedTemplate">Load</button>
+            :disabled="!selectedTemplate">Load</button> -->
             <button type="button" class="button is-danger"
             @click.prevent="clickDeleteVertical(selectedTemplate)"
             :disabled="disableDeleteVertical">Delete</button>
@@ -433,6 +433,10 @@ export default {
           this.selectedTemplate = this.filteredSortedVerticals[0].id
         }
       }
+    },
+    selectedTemplate (val) {
+      // selected template changed - load it now
+      clickLoadTemplate()
     }
   }
 }
