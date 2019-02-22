@@ -333,8 +333,8 @@
         </b-field>
         <!-- google favicon url -->
         <b-field grouped v-if="user.admin">
-          <b-field label="Favicon Website Domain Name">
-            <b-input :expanded="true" v-model="faviconWebsite"
+          <b-field expanded label="Favicon Website Domain Name">
+            <b-input v-model="faviconWebsite"
             placeholder="apple.com" />
           </b-field>
           <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
