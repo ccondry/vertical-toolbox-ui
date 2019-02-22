@@ -91,15 +91,15 @@
           </h1>
           <div class="block wysiwyg">
             <p>
-              You can update your verticals by using the save button
-              on this panel. You will not be able to save over other users'
-              verticals.
+              You can update your verticals by using any of the save buttons
+              on this panel. You will only be able to save verticals that you own.
             </p>
             <p>
               You can create new verticals by loading an existing vertical and
               then using the 'Save As' button. Choose a new unique vertical ID to
-              save a new vertical. If you Save As using with an existing vertical
-              ID, it will be replace the existing one (if you own it).
+              save a new vertical. If you click Save As and specify a vertical
+              ID that already exists, it will overwrite the existing vertical
+              configuration.
             </p>
           </div>
           <div class="block">
