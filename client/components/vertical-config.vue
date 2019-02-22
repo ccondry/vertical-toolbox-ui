@@ -333,16 +333,16 @@
         </b-field>
         <!-- google favicon url -->
         <b-field grouped v-if="user.admin">
-          <b-field expanded label="Favicon Website Domain Name">
-            <b-input v-model="faviconWebsite"
-            placeholder="apple.com" />
+          <b-field label="Favicon Image" v-if="user.admin">
+            <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
           </b-field>
           <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
-        </b-field>
-        <b-field label="Favicon Image" v-if="user.admin">
-          <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
+          <b-field expanded label="Favicon Website Domain Name">
+            <b-input v-model="faviconWebsite"
+            placeholder="apple.com" />
+          </b-field>
         </b-field>
 
         <!-- Homepage Banner -->
