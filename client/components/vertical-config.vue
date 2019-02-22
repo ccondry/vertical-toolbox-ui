@@ -333,16 +333,15 @@
         </b-field>
         <!-- google favicon url -->
         <b-field grouped v-if="user.admin">
+          <b-field label="Favicon Image">
+            <img :src="model.favicon" style="max-width: 32px; max-height: 32px;"/>
+          </b-field>
           <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Website URL">
             <b-input :v-model="faviconWebsite" @change="changeFavicon" placeholder="google.com" />
           </b-field>
-        </b-field>
-
-        <b-field label="Favicon" v-if="user.admin">
-          <img :src="model.favicon" style="max-width: 32px; max-height: 32px;"/>
         </b-field>
 
         <!-- Homepage Banner -->
@@ -1004,14 +1003,25 @@ export default {
 
   methods: {
     changeFavicon (e) {
+      console.log('favicon website URL changed', e)
       // get input value
       const url = e.target.value
-      // remove https:// from it
-      const arr = url.match(/https:\/\/(.*)/m)
-      // if no value, use the url as-is
-      const trimDomain = arr[1] || url
+      console.log('favicon website URL =', url)
+      let trimDomain = url
+      try {
+        // remove https:// from it
+        const arr = url.match(/http[s?]:\/\/(.*)/m)
+        console.log('favicon website regex matches =', arr)
+        // if no value, use the url as-is
+        trimDomain = arr[1]
+        console.log('favicon website without http:// or https:// =', trimDomain)
+      } catch (e) {
+        console.log('couldn\'t find http:// or http:// in URL. URL =', url)
+      }
+
       // update model favicon to prefix it with the google favicons getter url
       this.model.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
+      console.log('set this.model.favicon. it is now', this.model.favicon)
     },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
