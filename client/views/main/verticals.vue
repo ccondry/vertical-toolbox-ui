@@ -23,8 +23,7 @@
           <div class="block">
             <div class="wysiwyg">
               <p>
-                Use this form to load an existing vertical config into the panel
-                below.
+                Use this form to load an existing vertical config.
               </p>
             </div>
           </div>
