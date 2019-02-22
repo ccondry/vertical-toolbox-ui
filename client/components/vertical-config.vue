@@ -342,7 +342,7 @@
           </b-tooltip>
         </b-field>
         <b-field label="Favicon Image" v-if="user.admin">
-          <img :src="model.favicon" style="max-width: 32px; max-height: 32px;"/>
+          <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
         </b-field>
 
         <!-- Homepage Banner -->
