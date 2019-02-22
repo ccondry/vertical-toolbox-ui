@@ -82,7 +82,8 @@
         </article>
       </div>
     </div>
-    <div class="tile is-ancestor">
+
+    <div class="tile is-ancestor" v-if="selectedTemplate">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
