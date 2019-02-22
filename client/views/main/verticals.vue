@@ -442,7 +442,7 @@ export default {
     },
     selectedTemplate (val) {
       // selected template changed - load it now
-      clickLoadTemplate()
+      this.clickLoadTemplate()
     }
   }
 }
