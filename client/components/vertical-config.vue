@@ -333,15 +333,15 @@
         </b-field>
         <!-- google favicon url -->
         <b-field grouped v-if="user.admin">
-          <b-field label="Favicon Image">
-            <img :src="model.favicon" style="max-width: 32px; max-height: 32px;"/>
-          </b-field>
           <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Website URL">
             <b-input v-model="faviconWebsite" @change="changeFavicon($event)" placeholder="google.com" />
           </b-field>
+        </b-field>
+        <b-field label="Favicon Image" v-if="user.admin">
+          <img :src="model.favicon" style="max-width: 32px; max-height: 32px;"/>
         </b-field>
 
         <!-- Homepage Banner -->
