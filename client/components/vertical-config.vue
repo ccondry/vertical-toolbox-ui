@@ -333,12 +333,13 @@
         </b-field>
         <!-- google favicon url -->
         <b-field grouped v-if="user.admin">
-          <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
+          <b-field label="Website URL">
+            <b-input :expanded="true" v-model="faviconWebsite"
+            placeholder="google.com" />
+          </b-field>
+          <b-tooltip :label="getTooltip('favicon')" position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
-          <b-field label="Website URL">
-            <b-input v-model="faviconWebsite" @change.native="changeFavicon($event)" placeholder="google.com" />
-          </b-field>
         </b-field>
         <b-field label="Favicon Image" v-if="user.admin">
           <img :src="model.favicon" style="max-width: 32px; max-height: 32px;"/>
@@ -1006,7 +1007,8 @@ export default {
     changeFavicon (e) {
       console.log('favicon website URL changed', e)
       // get input value
-      const url = e.target.value
+      // const url = e.target.value
+      const url = e
       console.log('favicon website URL =', url)
       let trimDomain = url
       try {
@@ -1164,6 +1166,9 @@ export default {
       // console.log('branding config form model changed', val)
       // model changed - format and push those changes back to the parent
       this.pushChanges(val)
+    },
+    faviconWebsite (val) {
+      this.changeFavicon(val)
     }
   }
 }
