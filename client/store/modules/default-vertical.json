@@ -3,6 +3,7 @@
   "name": "Cumulus Travel",
   "address": "170 West Tasman Dr., San Jose, CA",
   "domain": "cumulus.com",
+  "favicon": "https://www.google.com/s2/favicons?domain=www.google.com",
   "gps": {
     "latitude": 37.4084425,
     "longitude": -121.9561531
