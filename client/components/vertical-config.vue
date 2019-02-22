@@ -327,6 +327,24 @@
           </b-field>
         </b-field>
 
+        <!-- favicon URL -->
+        <b-field label="Favicon URL" v-if="user.admin">
+          <b-input v-model.lazy="model.favicon" :placeholder="defaults.favicon" />
+        </b-field>
+        <!-- google favicon url -->
+        <b-field grouped v-if="user.admin">
+          <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
+          <b-field label="Website URL">
+            <b-input :v-model="faviconWebsite" @change="changeFavicon" placeholder="google.com" />
+          </b-field>
+        </b-field>
+
+        <b-field label="Favicon" v-if="user.admin">
+          <img :src="model.favicon" style="max-width: 32px; max-height: 32px;"/>
+        </b-field>
+
         <!-- Homepage Banner -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
@@ -979,11 +997,22 @@ export default {
       files: [],
       images: [],
       uploadRef: null,
-      uploadIndex: null
+      uploadIndex: null,
+      faviconWebsite: 'google.com'
     }
   },
 
   methods: {
+    changeFavicon (e) {
+      // get input value
+      const url = e.target.value
+      // remove https:// from it
+      const arr = url.match(/https:\/\/(.*)/m)
+      // if no value, use the url as-is
+      const trimDomain = arr[1] || url
+      // update model favicon to prefix it with the google favicons getter url
+      this.model.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
+    },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
       // set ref
