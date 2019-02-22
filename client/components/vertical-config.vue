@@ -337,7 +337,7 @@
             <b-input :expanded="true" v-model="faviconWebsite"
             placeholder="google.com" />
           </b-field>
-          <b-tooltip :label="getTooltip('favicon')" position="is-top">
+          <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
         </b-field>
