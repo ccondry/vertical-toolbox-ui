@@ -309,42 +309,60 @@
       </div>
       <div class="card-content">
 
-        <!-- logo URL manual edit, for admins only -->
-        <b-field label="Logo URL" v-if="user.admin">
-          <b-input v-model.lazy="model.logo.website" :placeholder="defaults.logo.website" />
-        </b-field>
-        <!-- logo image editor for users -->
-        <b-field grouped>
-          <b-loading :is-full-page="false" :active="working.images.websiteLogoFile" :can-cancel="false"></b-loading>
-          <b-field label="Logo Image">
-            <img :src="model.logo.website" style="max-width: 256px; max-height: 64px;"/>
-          </b-field>
-          <b-tooltip :label="getTooltip('logoUpload')" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field label="Upload">
-            <button class="button is-primary" type="button" @click="launchFilePicker('websiteLogoFile')">Browse...</button>
-          </b-field>
-        </b-field>
 
-        <!-- favicon URL -->
-        <b-field label="Favicon URL" v-if="user.admin">
-          <b-input v-model.lazy="model.favicon" :placeholder="defaults.favicon" />
-        </b-field>
-        <!-- google favicon url -->
-        <b-field grouped>
-          <b-field label="Favicon Image">
-            <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
-          </b-field>
-          &nbsp;&nbsp;
-          <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field expanded label="Favicon Website Domain Name">
-            <b-input v-model="faviconWebsite"
-            placeholder="apple.com" />
-          </b-field>
-        </b-field>
+        <!-- Logo and Icon -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Logo and Icon</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content" v-if="!model.logo">
+            <button class="button is-primary" @click="$set(model, 'logo', JSON.parse(JSON.stringify(defaults.logo)))">Configure</button>
+          </div>
+          <div class="card-content" v-else>
+
+            <!-- logo URL manual edit, for admins only -->
+            <b-field label="Logo URL" v-if="user.admin">
+              <b-input v-model.lazy="model.logo.website" :placeholder="defaults.logo.website" />
+            </b-field>
+            <!-- logo image editor for users -->
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images.websiteLogoFile" :can-cancel="false"></b-loading>
+              <b-field label="Logo Image">
+                <img :src="model.logo.website" style="max-width: 256px; max-height: 64px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('logoUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('websiteLogoFile')">Browse...</button>
+              </b-field>
+            </b-field>
+
+            <!-- favicon URL -->
+            <b-field label="Favicon URL" v-if="user.admin">
+              <b-input v-model.lazy="model.favicon" :placeholder="defaults.favicon" />
+            </b-field>
+            <!-- google favicon url -->
+            <b-field grouped>
+              <b-field label="Favicon Image">
+                <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
+              </b-field>
+              &nbsp;&nbsp;
+              <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field expanded label="Favicon Website Domain Name">
+                <b-input v-model="faviconWebsite"
+                placeholder="apple.com" />
+              </b-field>
+            </b-field>
+
+          </div>
+        </b-collapse>
+        <!-- /Logo and Icon -->
 
         <!-- Homepage Banner -->
         <b-collapse class="content card">
