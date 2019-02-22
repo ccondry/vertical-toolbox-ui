@@ -74,9 +74,9 @@
             <!-- <button type="button" class="button is-primary"
             @click.prevent="clickLoadTemplate"
             :disabled="!selectedTemplate">Load</button> -->
-            <button type="button" class="button is-danger"
+            <!-- <button type="button" class="button is-danger"
             @click.prevent="clickDeleteVertical(selectedTemplate)"
-            :disabled="disableDeleteVertical">Delete</button>
+            :disabled="disableDeleteVertical">Delete</button> -->
           </div>
         </article>
       </div>
@@ -103,8 +103,13 @@
             </p>
           </div>
           <div class="block">
-            <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
-            <button type="button" class="button is-success" @click.prevent="clickSaveAs" :disabled="disableSaveAs">Save As</button>
+            <button type="button" class="button is-success"
+            @click.prevent="clickSave" :disabled="disableSave">Save</button>
+            <button type="button" class="button is-success"
+            @click.prevent="clickSaveAs" :disabled="disableSaveAs">Save As</button>
+            <button type="button" class="button is-danger"
+            @click.prevent="clickDeleteVertical(selectedTemplate)"
+            :disabled="disableDeleteVertical">Delete</button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
           <!-- Only offer raw JSON to admins -->
