@@ -9,7 +9,8 @@
           <h1 class="title">Information</h1>
           <p>
             View and edit your Cumulus demo verticals for the Cumulus mobile
-            app, website, AI chat bot, and IVR prompts.
+            app, website, AI chat bot, IVR prompts, and Courtesy Callback SMS
+            configuration.
           </p>
         </article>
       </div>
