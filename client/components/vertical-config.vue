@@ -1005,11 +1005,12 @@ export default {
   },
 
   methods: {
-    changeFavicon (e) {
-      console.log('favicon website URL changed', e)
+    changeFavicon (event) {
+      if (!event) return
+      console.log('favicon website URL changed', event)
       // get input value
-      // const url = e.target.value
-      const url = e
+      // const url = event.target.value
+      const url = event
       console.log('favicon website URL =', url)
       let trimDomain = url
       try {
