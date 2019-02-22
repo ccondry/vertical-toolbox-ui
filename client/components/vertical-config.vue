@@ -909,7 +909,8 @@ const tooltips = {
   servicesThumbnailImageUpload: '',
   servicesImageUpload: '',
   authorsImageUpload: '',
-  timelineImageUpload: ''
+  timelineImageUpload: '',
+  favicon: 'Enter a customer website here to automatically find and copy the favicon to this vertical.'
 }
 
 const Datepick = Vue.component('Datepick', {
