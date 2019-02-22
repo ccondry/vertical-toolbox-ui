@@ -333,9 +333,10 @@
         </b-field>
         <!-- google favicon url -->
         <b-field grouped v-if="user.admin">
-          <b-field label="Favicon Image  " v-if="user.admin">
+          <b-field label="Favicon Image" v-if="user.admin">
             <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
           </b-field>
+          &nbsp;&nbsp;
           <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
