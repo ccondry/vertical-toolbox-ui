@@ -340,7 +340,7 @@
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Website URL">
-            <b-input :v-model="faviconWebsite" @change="changeFavicon" placeholder="google.com" />
+            <b-input v-model="faviconWebsite" @input="changeFavicon" placeholder="google.com" />
           </b-field>
         </b-field>
 
