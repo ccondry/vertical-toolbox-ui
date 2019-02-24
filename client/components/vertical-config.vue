@@ -220,7 +220,7 @@
                       <b-field label="Data Type">
                         <b-select :placeholder="defaults.mobileOptions[i].fields[j].type"
                         v-model="field.type"
-                        @change.native="changeDataType(field, $event)">
+                        @input="changeDataType(field, $event)">
                           <option value="date">Date</option>
                           <option value="text">Text</option>
                         </b-select>
