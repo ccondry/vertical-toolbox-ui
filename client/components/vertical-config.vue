@@ -220,7 +220,7 @@
                       <b-field label="Data Type">
                         <b-select :placeholder="defaults.mobileOptions[i].fields[j].type"
                         v-model="field.type"
-                        @change.native="changeDataType($event)">
+                        @change.native="changeDataType(field, $event)">
                           <option value="date">Date</option>
                           <option value="text">Text</option>
                         </b-select>
@@ -1184,9 +1184,10 @@ export default {
     changeDataType (field, event) {
       // when choosing date type for mobile options, make sure the value is a valid date
       console.log('date type changed', field, event)
-      if (event.type === 'date') {
-        event.value = new Date()
-      }
+      // const a = event.target.value
+      // if (event.type === 'date') {
+      //   event.value = new Date()
+      // }
     }
   },
 
