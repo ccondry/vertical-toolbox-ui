@@ -964,7 +964,7 @@ const Datepick = Vue.component('Datepick', {
     changeDataType (field, event) {
       // when choosing date type for mobile options, make sure the value is a valid date
       console.log('date type changed', field, event)
-      console.log('date type changed - event.target.value =',event.target.value)
+      console.log('date type changed - event.target.value =', event.target.value)
       if (event.target.value === 'date') {
         field.value = new Date()
       }
