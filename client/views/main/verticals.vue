@@ -183,8 +183,12 @@ export default {
       verticalFilter: 'mine'
     }
   },
-  mounted () {
-    this.refresh()
+  async mounted () {
+    await this.refresh()
+    if (this.$route.query.vertical) {
+      console.log('vertical query is set to', this.$route.query.vertical)
+      this.selectedTemplate = this.$route.query.vertical
+    }
   },
   methods: {
     ...mapActions([
@@ -243,9 +247,9 @@ export default {
         return false
       }
     },
-    refresh () {
+    async refresh () {
       // load verticals
-      this.loadVerticals(false)
+      await this.loadVerticals(false)
     },
     async clickSave () {
       const id = this.selectedTemplate
@@ -443,6 +447,8 @@ export default {
     selectedTemplate (val) {
       // selected template changed - load it now
       this.clickLoadTemplate()
+      // and also set the URL query parameter for it
+      this.$route.query.vertical = val
     }
   }
 }
