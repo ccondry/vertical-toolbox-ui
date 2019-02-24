@@ -448,7 +448,7 @@ export default {
       // selected template changed - load it now
       this.clickLoadTemplate()
       // and also set the URL query parameter for it
-      this.$route.query.vertical = val
+      this.$router.push({query: {vertical: val}})
     }
   }
 }
