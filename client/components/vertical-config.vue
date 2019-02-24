@@ -1185,9 +1185,9 @@ export default {
       // when choosing date type for mobile options, make sure the value is a valid date
       console.log('date type changed', field, event)
       // const a = event.target.value
-      // if (event.type === 'date') {
-      //   event.value = new Date()
-      // }
+      if (event.target.value === 'date') {
+        field.value = new Date()
+      }
     }
   },
 
