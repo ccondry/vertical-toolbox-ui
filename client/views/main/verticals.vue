@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="loading.app.user || working.app.user" :can-cancel="false"></b-loading>
+    <b-loading :is-full-page="false" :active="loading.app.user || working.app.user || loading.app.verticals" :can-cancel="false"></b-loading>
 
     <div class="tile is-ancestor">
       <div class="tile is-parent is-vertical">
