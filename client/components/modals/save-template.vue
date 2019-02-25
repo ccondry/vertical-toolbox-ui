@@ -23,7 +23,10 @@
             <label class="label">ID</label>
           </div>
           <div class="control">
-            <input type="text" autofocus :value="templateId" @input="updateTemplateId($event)" @keyup.enter="ok">
+            <input type="text" autofocus :value="templateId" 
+            @input="updateTemplateId($event)"
+            @change="updateTemplateId($event)"
+            @keyup.enter="ok">
           </div>
         </div>
 
