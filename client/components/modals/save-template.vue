@@ -23,7 +23,7 @@
             <label class="label">ID</label>
           </div>
           <div class="control">
-            <input type="text" autofocus :value="templateId" 
+            <input type="text" autofocus :value="templateId"
             @input="updateTemplateId($event)"
             @change="updateTemplateId($event)"
             @keyup.enter="ok">
@@ -72,7 +72,9 @@ export default {
     updateTemplateId (event) {
       // remove invalid characters as user types template ID
       try {
-        this.templateId = event.target.value.replace(/[\W_]+/g, '')
+        // replace spaces with hyphens, and remove all other non-alphanumerics
+        this.templateId = event.target.value.replace(/ /g, '-').replace(/[\W_]+/g, '')
+        // this.templateId = event.target.value.replace(/[\W_]+/g, '')
       } catch (e) {
         console.log('failed to update template ID', e)
       }
