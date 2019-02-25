@@ -23,7 +23,7 @@
             <label class="label">ID</label>
           </div>
           <div class="control">
-            <input type="text" autofocus v-model="templateId" @keyup.enter="ok">
+            <input type="text" autofocus :value="templateId" @change="updateTemplateId($event)" @keyup.enter="ok">
           </div>
         </div>
 
@@ -65,6 +65,9 @@ export default {
     },
     close () {
       this.$emit('close')
+    },
+    updateTemplateId (event) {
+      this.templateId = event.target.value.replace(/[a-zA-Z0-9_- ]*/g, '')
     }
   }
 }
