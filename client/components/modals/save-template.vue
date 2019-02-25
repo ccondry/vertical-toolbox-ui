@@ -69,7 +69,7 @@ export default {
     updateTemplateId (event) {
       // remove invalid characters as user types template ID
       try {
-        this.templateId = event.target.value.replace(/[a-zA-Z0-9_- ]/g, '')
+        this.templateId = event.target.value.replace(/[\W_]+/g, '')
       } catch (e) {
         console.log('failed to update template ID', e)
       }
