@@ -222,7 +222,7 @@
                       <b-field label="Data Type">
                         <b-select :placeholder="defaults.mobileOptions[i].fields[j].type"
                         v-model="field.type"
-                        @change.native="changeDataType(field, $event)">
+                        @change.native="changeDataType(field, $event, i, j)">
                           <option value="date">Date</option>
                           <option value="text">Text</option>
                         </b-select>
@@ -1199,12 +1199,14 @@ export default {
       console.log('vertical config form submitted')
       this.$emit('save', this.model)
     },
-    changeDataType (field, event) {
+    changeDataType (field, event, i, j) {
       // when choosing date type for mobile options, make sure the value is a valid date
       console.log('date type changed', field, event)
       // const a = event.target.value
       if (event.target.value === 'date') {
         field.value = new Date()
+      } else {
+        field.value = this.defaults.mobileOptions[i].fields[j].value
       }
     }
   },
