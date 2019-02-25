@@ -67,6 +67,7 @@ export default {
       this.$emit('close')
     },
     updateTemplateId (event) {
+      // remove invalid characters as user types template ID
       this.templateId = event.target.value.replace(/[a-zA-Z0-9_- ]*/g, '')
     }
   }
