@@ -19,7 +19,8 @@
           <b-input v-model="model.name" :placeholder="defaults.name" />
         </b-field>
         <b-field>
-          <button class="button is-success" @click="submit">Save</button>
+          <button type="button" class="button is-success"
+@click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
       </div>
     </b-collapse>
@@ -104,7 +105,8 @@
         </b-collapse>
         <!-- /Jacada -->
         <b-field>
-          <button class="button is-success" @click="submit">Save</button>
+          <button type="button" class="button is-success"
+@click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
       </div>
     </b-collapse>
@@ -259,7 +261,8 @@
         </b-collapse>
         <!-- /Mobile Menu Options -->
         <b-field>
-          <button class="button is-success" @click="submit">Save</button>
+          <button type="button" class="button is-success"
+@click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
       </div>
     </b-collapse>
@@ -806,7 +809,8 @@
     </b-collapse>
     <!-- /Testimonials -->
     <b-field>
-      <button class="button is-success" @click="submit">Save</button>
+      <button type="button" class="button is-success"
+@click.prevent="submit" :disabled="disableSave">Save</button>
     </b-field>
   </div>
 </b-collapse>
@@ -1021,6 +1025,20 @@ export default {
       uploadRef: null,
       uploadIndex: null,
       faviconWebsite: ''
+    }
+  },
+
+  computed: {
+    disableSave () {
+      // any template has been selected
+      if (this.model.owner === this.user.username || this.user.admin) {
+        // this user owns this template or is an admin
+        return false
+      } else {
+        // this user doesn't have access to save over this template,
+        // so disable the button
+        return true
+      }
     }
   },
 
