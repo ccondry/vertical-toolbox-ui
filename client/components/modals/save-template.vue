@@ -73,7 +73,7 @@ export default {
       // remove invalid characters as user types template ID
       try {
         // replace spaces with hyphens, and remove all other non-alphanumerics
-        this.templateId = event.target.value.replace(/ /g, '-').replace(/[\W_]+/g, '')
+        this.templateId = event.target.value.replace(/ /g, '-').replace(/[^a-zA-Z0-9_-]+/g, '')
         // this.templateId = event.target.value.replace(/[\W_]+/g, '')
       } catch (e) {
         console.log('failed to update template ID', e)
