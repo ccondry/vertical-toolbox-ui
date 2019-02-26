@@ -71,7 +71,10 @@
                     <b-input v-model="option.name" :placeholder="defaults.cvp[menu].options[j].name" />
                   </b-field>
                   <b-field label="Finesse Reason Call Variable" expanded>
-                    <b-input v-model="option.description" :placeholder="defaults.cvp[menu].options[j].description" />
+                    <b-input v-model="option.description"
+                    :placeholder="defaults.cvp[menu].options[j].description"
+                    @change.native="changeFinesseReasonCallVariable(option, $event)"/>
+
                   </b-field>
                 </b-field>
 
@@ -1207,6 +1210,16 @@ export default {
         field.value = new Date()
       } else {
         field.value = this.defaults.mobileOptions[i].fields[j].value
+      }
+    },
+    changeFinesseReasonCallVariable (option, event) {
+      // when typing the finesse reason call variable "description", replace
+      // characters that would cause an error in CVP subdialog return element
+      try {
+        // remove invalid characters (for CVP compatibility)
+        option.description = event.target.value.replace(/[\<\>\'\"]/g, '')
+      } catch (e) {
+        console.log('failed to changeFinesseReasonCallVariable', e)
       }
     }
   },
