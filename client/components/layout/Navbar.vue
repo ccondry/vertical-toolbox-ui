@@ -73,6 +73,7 @@ export default {
   }
   position: fixed;
   min-width: 100%;
+  line-height: 2.35em;
   z-index: 4;
   box-shadow: 0 2px 3px rgba(17, 17, 17, 0.1), 0 0 0 1px rgba(17, 17, 17, 0.1);
 
