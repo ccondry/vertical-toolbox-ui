@@ -1,50 +1,23 @@
 <template>
   <section class="hero is-bold app-navbar animated" :class="{ slideInDown: show, slideOutDown: !show }">
     <div class="hero-head">
-      <nav class="nav">
-        <div class="nav-left">
-          <!-- <b-field style="margin-top: 0.2em; margin-bottom: 0.2em;">
-            <b-input placeholder="Search Menu..."
-            v-if="authenticated"
-            type="search"
-            icon="magnify"
-            v-model="filter"
-            @keyup.esc="filter = ''"/>
-          </b-field> -->
-          <!-- <a class="nav-item is-hidden-tablet" @click="toggleSidebar({opened: !sidebar.opened})">
-            <b-icon icon="bars" v-show="!sidebar.hidden" />
-          </a> -->
+      <div class="columns">
+        <div class="column is-4">
         </div>
-        <div class="nav-center">
-          <!-- <router-link class="nav-item hero-brand" to="Home"> -->
-            <!-- <tooltip :label="'v' + pkginfo.version" placement="right" type="success" size="small" :no-animate="true" :always="true" :rounded="true"> -->
-              <!-- <div class="is-hidden-mobile"> -->
-              <nav class="level">
-                <div class="level-item">
-                  <p>
-                    <strong>
-                      dCloud Toolbox -&nbsp;
-                    </strong>
-                  </p>
-                </div>
-                <div class="level-item">
-                  Verticals
-                  <!-- <b-select v-model="pageSelection">
-                    <option value="PCCE">PCCE</option>
-                    <option value="Verticals">Verticals</option>
-                  </b-select> -->
-                </div>
-              </nav>
-              <!-- </div> -->
-            <!-- </tooltip> -->
-          <!-- </router-link> -->
+        <div class="column is-4">
+          <p class="level-item has-text-centered">
+            <strong>dCloud Demo Branding Editor</strong>
+          </p>
         </div>
-        <div class="nav-right is-flex">
-          <a v-if="authenticated" class="nav-item">{{ user.username }}</a>
-          <!-- <router-link v-if="!authenticated" to="/login" class="nav-item">Login</router-link> -->
-          <a v-if="authenticated" @click="clickLogout" class="nav-item">Logout</a>
+        <div class="column is-4">
+          <div class="level-right">
+            {{ user.username }}
+            &nbsp;
+            <a v-if="authenticated" @click="clickLogout">Logout</a>
+            &nbsp;&nbsp;
+          </div>
         </div>
-      </nav>
+      </div>
     </div>
   </section>
 </template>
@@ -88,25 +61,11 @@ export default {
   },
 
   watch: {
-    pageSelection (val, oldVal) {
-      // user changed the page select
-      if (val && val.length && val !== 'Verticals') {
-        // change to another page
-        console.log('changing page to', val)
-        window.location = '/' + val.toLowerCase()
-      }
-    },
-    filter (val) {
-      // this.$emit('update:menuFilter', $event.target.value)"
-      this.$emit('update:menuFilter', val)
-    }
   }
 }
 </script>
 
 <style lang="scss">
-@import '~bulma/sass/utilities/initial-variables';
-
 .app-navbar {
   color: #28374B;
   a {
