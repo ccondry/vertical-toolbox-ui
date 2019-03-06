@@ -94,6 +94,7 @@ export default {
     overflow-x: auto;
     white-space: nowrap;
   }
+
 }
 
 .hero-head {
