@@ -141,7 +141,7 @@
           <b-field label="Logo Image">
             <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
           </b-field>
-          <b-tooltip :label="getTooltip('logoUpload')" multilined position="is-top">
+          <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Upload">
@@ -931,6 +931,11 @@ const ttsTypes = [
 
 const tooltips = {
   logo: 'The logo image is used for both the website and the mobile app.',
+  mobileLogoUpload: `The mobile app wallpaper image will have a light blue
+    filter applied by the mobile app to provide proper contrast with the menu
+    options. The wallpaper must be in Portrait format as the mobile app does not
+    support Landscape view. We recommend using an image that is at least full HD
+    resolution (i.e. 1080 x 1920).`,
   logoUpload: 'This image will be proportionally scaled down to 50px height.',
   mobileWallpaperUpload: 'The mobile wallpaper image will have a light blue filter applied by the mobile app. We recommend using an image that is at least 1242 x 2208 pixels.',
   sliderUpload: 'We recommend using an image that has a 2:1 aspect ratio (i.e. 1000 x 500 pixels).',
