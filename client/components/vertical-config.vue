@@ -19,8 +19,10 @@
           <b-input v-model="model.name" :placeholder="defaults.name" />
         </b-field>
         <b-field>
-          <button type="button" class="button is-success"
-@click.prevent="submit" :disabled="disableSave">Save</button>
+          <button type="button"
+          class="button is-success"
+          @click.prevent="submit"
+          :disabled="disableSave">Save</button>
         </b-field>
       </div>
     </b-collapse>
@@ -115,7 +117,7 @@
     </b-collapse>
     <!-- /IVR Menu -->
 
-    <!-- Mobile -->
+    <!-- Mobile App -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
         <p class="card-header-title">Mobile App</p>
@@ -138,6 +140,7 @@
         <!-- logo image editor for users -->
         <b-field grouped>
           <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+          <!-- Mobile App Logo -->
           <b-field label="Logo Image">
             <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
           </b-field>
@@ -148,6 +151,7 @@
             <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
           </b-field>
         </b-field>
+        <!-- Mobile App Wallpaper -->
         <b-field label="Wallpaper URL" v-if="user.admin">
           <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" />
         </b-field>
@@ -162,7 +166,6 @@
           <b-field label="Upload">
             <button class="button is-primary" type="button" @click="launchFilePicker('mobileWallpaper')">Browse...</button>
           </b-field>
-
         </b-field>
 
         <!-- Mobile Menu Options -->
@@ -905,7 +908,7 @@ const ttsTypes = [
   {
     value: 'time',
     name: 'Time',
-    tooltip: 'Interpret a value such as 1\'21" as duration in minutes and seconds.'
+    tooltip: `Interpret a value such as 1'21" as duration in minutes and seconds.`
   },
   // {
   //   value: 'fraction',
@@ -937,14 +940,19 @@ const tooltips = {
     support Landscape view. We recommend using an image that is at least full HD
     resolution (i.e. 1080 x 1920).`,
   logoUpload: 'This image will be proportionally scaled down to 50px height.',
-  mobileWallpaperUpload: 'The mobile wallpaper image will have a light blue filter applied by the mobile app. We recommend using an image that is at least 1242 x 2208 pixels.',
-  sliderUpload: 'We recommend using an image that has a 2:1 aspect ratio (i.e. 1000 x 500 pixels).',
-  blogItemUpload: 'We recommend using an image that has a 3:2 aspect ratio (i.e. 800 x 500 pixels).',
+  mobileWallpaperUpload: `The mobile wallpaper image will have a light blue
+    filter applied by the mobile app. We recommend using an image that is at least
+    1242 x 2208 pixels.`,
+  sliderUpload: `We recommend using an image that has a 2:1 aspect ratio
+    (i.e. 1000 x 500 pixels).`,
+  blogItemUpload: `We recommend using an image that has a 3:2 aspect ratio
+    (i.e. 800 x 500 pixels).`,
   servicesThumbnailImageUpload: '',
   servicesImageUpload: '',
   authorsImageUpload: '',
   timelineImageUpload: '',
-  favicon: 'Enter a customer website here to automatically find and copy the favicon image to this vertical.'
+  favicon: `Enter a customer website here to automatically find and copy the
+    favicon image to this vertical.`
 }
 
 const Datepick = Vue.component('Datepick', {
@@ -1095,6 +1103,7 @@ export default {
         const callback = (url) => {
           // map out the node names to model data references
           const map = {
+            // mobile app logo
             'logoFile': (url) => {
               // reset img
               this.model.logo.rasterised = ''
@@ -1113,6 +1122,7 @@ export default {
               // set img url
               this.model.mobileWallpaper = url + '?nocache=' + Date.now()
             },
+            // homepage banner images
             'slider': (url, index) => {
               // reset img
               this.model.sliders[index].image = ''
