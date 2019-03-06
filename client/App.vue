@@ -95,18 +95,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '~animate.css';
-// .animated {
-//   animation-duration: .377s;
-// }
-
-@import '~bulma';
-
-@import '~wysiwyg.css/wysiwyg.sass';
-
-$fa-font-path: '~font-awesome/fonts/';
-@import '~font-awesome/scss/font-awesome';
-
 html {
   background-color: whitesmoke;
 }

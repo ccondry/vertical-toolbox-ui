@@ -11,7 +11,7 @@ export default {
   children: [
     {
       name: 'Usage',
-      path: '/verticals/admin/usage',
+      path: '/branding/admin/usage',
       component: lazyLoading('admin/usage'),
       meta: {
         icon: 'finance'

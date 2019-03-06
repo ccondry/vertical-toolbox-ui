@@ -12,8 +12,17 @@ export default {
   },
   children: [
     {
+      name: 'Brands',
+      path: '/branding/brand',
+      meta: {
+        icon: 'copyright',
+        description: 'brand customization'
+      },
+      component: lazyLoading('main/brands')
+    },
+    {
       name: 'Verticals',
-      path: '/verticals',
+      path: '/branding/verticals',
       meta: {
         icon: 'copyright',
         description: 'cumulus vertical configuration',

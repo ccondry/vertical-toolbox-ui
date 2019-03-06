@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import Tooltip from 'vue-bulma-tooltip'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -62,7 +61,6 @@ export default {
   },
 
   components: {
-    Tooltip
   },
 
   props: {
@@ -107,7 +105,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bulma/sass/utilities/variables';
+@import '~bulma/sass/utilities/initial-variables';
 
 .app-navbar {
   color: #28374B;
