@@ -15,7 +15,7 @@ export default new Router({
     ...generateRoutesFromMenu(menuModule.state.items),
     {
       path: '*',
-      redirect: '/verticals'
+      redirect: '/branding/verticals'
     }
   ]
 })
