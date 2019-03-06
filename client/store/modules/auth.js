@@ -179,8 +179,8 @@ const actions = {
       // }
     } else {
       console.log('JWT not found in localstorage.')
-      // forward user to login page
-      if (!process.env.NODE_ENV === 'production') {
+      // forward user to login page, if in production
+      if (process.env.NODE_ENV === 'production') {
         window.location = '/auth/login?destination=' + window.location
       }
       // const error = {
