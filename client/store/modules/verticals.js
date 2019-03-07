@@ -51,7 +51,7 @@ const actions = {
       name: 'vertical',
       endpoint: getters.endpoints.verticals + '/' + id,
       showNotification,
-      success: 'Successfully deleted vertical ' + id
+      success: 'Successfully deleted vertical ' + id,
       fail: 'Failed to delete vertical ' + id
     }).finally(() => {
       dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
