@@ -366,8 +366,9 @@ export default {
         if (index) {
           nodeName += index
         }
-        // actually upload the file now
-        this.$emit('upload', {name, node: nodeName, brand: this.model.id, data, callback})
+        // actually upload the file now. set brand ID in the 'vertical' property
+        // to use the brand ID for the path
+        this.$emit('upload', {name, node: nodeName, vertical: this.model.id, data, callback})
         // reset the file input
         this.$refs.file.value = ''
       }
