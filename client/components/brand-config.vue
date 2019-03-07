@@ -157,7 +157,7 @@
             <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
           </b-field>
           <b-field label="Select Existing Image">
-            <b-select @change.native="changeAdvisorImage($event)">
+            <b-select :value="model.advisorImage" @change.native="changeAdvisorImage($event)">
               <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
                 Sandra Jefferson
               </option>
