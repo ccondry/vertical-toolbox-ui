@@ -93,6 +93,56 @@
           </b-field>
         </div>
 
+        <!-- Expert Advisor Enable -->
+        <b-field label="Show Expert Advisor Header">
+          <b-select v-model="model.advisorEnabled">
+            <option :value="true">
+              Shown
+            </option>
+            <option :value="false">
+              Hidden
+            </option>
+          </b-select>
+        </b-field>
+        <!-- /Expert Advisor Enable -->
+
+        <!-- Expert Advisor Image -->
+        <b-field grouped v-show="model.advisorEnabled">
+          <b-field label="Expert Advisor Image">
+            <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
+          </b-field>
+          <b-field label="Select Existing Image">
+            <b-select :value="model.advisorImage" @change.native="changeAdvisorImage($event)">
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
+                Sandra Jefferson
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author2.png">
+                Josh Peterson
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author3.png">
+                Rick Barrows
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author4.png">
+                Jamie Bracksted
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author5.png">
+                Helen Liang
+              </option>
+            </b-select>
+          </b-field>
+          <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
+          <b-field label="Upload New Image">
+            <button class="button is-primary" type="button"
+            :disabled="working.images.advisor"
+            @click="launchFilePicker('advisor')">
+              {{ working.images.advisor ? 'Working...' : 'Browse...' }}
+            </button>
+          </b-field>
+        </b-field>
+        <!-- /Expert Advisor Image -->
+
         <!-- Save button -->
         <b-field>
           <button type="button" class="button is-success"
@@ -115,92 +165,71 @@
       <div class="card-content">
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Button and Menu Heading</p>
+            <p class="card-header-title">Localization</p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
           </div>
 
           <div class="card-content">
+
+            <!-- Expert Heading -->
+            <b-field expanded label="Advisor Heading Text Line 1" v-show="model.advisorEnabled">
+              <b-input v-model="model.advisorHeading" placeholder="Expert Advisor" />
+            </b-field>
+
+            <b-field expanded label="Advisor Heading Text Line 2" v-show="model.advisorEnabled">
+              <b-input v-model="model.advisorText" placeholder="We're here to help" />
+            </b-field>
+            <!-- /Expert Heading -->
+
             <!-- Contact Button -->
-            <b-field expanded label="Contact Button Text">
+            <b-field expanded label="Contact Button Text (the button to open contact panel)">
               <b-input v-model="model.contactButtonText" placeholder="Talk to an Expert" />
             </b-field>
             <!-- /Contact Button -->
 
             <!-- Contact Menu Title -->
-            <b-field expanded label="Contact Menu Title">
+            <b-field expanded label="Contact Menu Title (normal)">
               <b-input v-model="model.menuTitle" placeholder="Need Help?" />
             </b-field>
             <!-- /Contact Menu Title -->
 
             <!-- Chat Menu Title -->
-            <b-field expanded label="Chat Menu Title">
+            <b-field expanded label="Contact Menu Title (while chatting)">
               <b-input v-model="model.chatMenuTitle" placeholder="Now Chatting" />
             </b-field>
             <!-- /Chat Menu Title -->
 
-            <!-- Expert Advisor Enable -->
-            <b-field label="Show Expert Advisor Header">
-              <b-select v-model="model.advisorEnabled">
-                <option :value="true">
-                  Shown
-                </option>
-                <option :value="false">
-                  Hidden
-                </option>
-              </b-select>
+            <!-- Form Input Labels -->
+            <b-field label="Name Input Label">
+              <b-input v-model="model.nameLabel" placeholder="Your Name" />
             </b-field>
-            <!-- /Expert Advisor Enable -->
-
-            <div v-show="model.advisorEnabled">
-              <!-- Expert Heading -->
-              <b-field expanded label="Advisor Heading Text Line 1">
-                <b-input v-model="model.advisorHeading" placeholder="Expert Advisor" />
-              </b-field>
-
-              <b-field expanded label="Advisor Heading Text Line 2">
-                <b-input v-model="model.advisorText" placeholder="We're here to help" />
-              </b-field>
-              <!-- /Expert Heading -->
-
-              <!-- Expert Advisor Image -->
-              <b-field grouped>
-                <b-field label="Expert Advisor Image">
-                  <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
-                </b-field>
-                <b-field label="Select Existing Image">
-                  <b-select :value="model.advisorImage" @change.native="changeAdvisorImage($event)">
-                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
-                      Sandra Jefferson
-                    </option>
-                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author2.png">
-                      Josh Peterson
-                    </option>
-                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author3.png">
-                      Rick Barrows
-                    </option>
-                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author4.png">
-                      Jamie Bracksted
-                    </option>
-                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author5.png">
-                      Helen Liang
-                    </option>
-                  </b-select>
-                </b-field>
-                <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
-                  <b-icon type="is-primary" icon="information" />
-                </b-tooltip>
-                <b-field label="Upload New Image">
-                  <button class="button is-primary" type="button"
-                  :disabled="working.images.advisor"
-                  @click="launchFilePicker('advisor')">
-                    {{ working.images.advisor ? 'Working...' : 'Browse...' }}
-                  </button>
-                </b-field>
-              </b-field>
-              <!-- /Expert Advisor Image -->
-            </div>
+            <b-field label="Phone Input Label">
+              <b-input v-model="model.phoneLabel" placeholder="Your Phone Number" />
+            </b-field>
+            <b-field label="Email Input Label">
+              <b-input v-model="model.emailLabel" placeholder="Your Email Address" />
+            </b-field>
+            <b-field label="Subject Input Label">
+              <b-input v-model="model.subjectLabel" placeholder="Subject" />
+            </b-field>
+            <b-field label="Message Input Label">
+              <b-input v-model="model.messageLabel" placeholder="Message" />
+            </b-field>
+            <b-field label="Request Type Input Label">
+              <b-input v-model="model.requestTypeLabel" placeholder="Request Type" />
+            </b-field>
+            <b-field label="OK Button Text">
+              <b-input v-model="model.okButton" placeholder="OK" />
+            </b-field>
+            <b-field label="Send Button Text">
+              <b-input v-model="model.sendButton" placeholder="Send" />
+            </b-field>
+            <b-field label="Cancel Button Text">
+              <b-input v-model="model.cancelButton" placeholder="Cancel" />
+            </b-field>
+            <!-- Form Input Labels -->
 
             <!-- Save button -->
             <b-field>
@@ -316,6 +345,10 @@
                 <b-input v-model="model.smsWaitTime" placeholder="1 min wait time" />
               </b-field>
 
+              <b-field label="Popup Window Text">
+                <b-input v-model="model.smsModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting with one of our experts." />
+              </b-field>
+
               <!-- Save button -->
               <b-field>
                 <button type="button" class="button is-success"
@@ -372,6 +405,10 @@
 
               <b-field label="Wait Time">
                 <b-input v-model="model.callWaitTime" placeholder="8 min wait time" />
+              </b-field>
+
+              <b-field label="Popup Window Text">
+                <b-input v-model="model.callModalText" placeholder="You can reach one of our experts by phone at <strong>{0}</strong>" />
               </b-field>
 
               <!-- Save button -->
@@ -432,6 +469,10 @@
                 <b-input v-model="model.callbackWaitTime" placeholder="8 min wait time" />
               </b-field>
 
+              <b-field label="Popup Window Text">
+                <b-input v-model="model.callbackModalText" placeholder="Enter your name and phone number and one of our experts will call you." />
+              </b-field>
+
               <!-- Save button -->
               <b-field>
                 <button type="button" class="button is-success"
@@ -490,6 +531,10 @@
                 <b-input v-model="model.emailWaitTime" placeholder="12-24 hour wait time" />
               </b-field>
 
+              <b-field label="Popup Window Text">
+                <b-input v-model="model.emailModalText" placeholder="Enter your information and question and one of our experts will email you back." />
+              </b-field>
+
               <!-- Save button -->
               <b-field>
                 <button type="button" class="button is-success"
@@ -546,6 +591,10 @@
 
               <b-field expanded label="Wait Time">
                 <b-input v-model="model.taskWaitTime" placeholder="" />
+              </b-field>
+
+              <b-field label="Popup Window Text">
+                <b-input v-model="model.taskModalText" placeholder="Enter your information and choose the task you would like to submit to our experts." />
               </b-field>
 
               <!-- Task Request Options -->
