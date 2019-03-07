@@ -19,6 +19,7 @@
           <b-input v-model="model.name" placeholder="My Brand" />
         </b-field>
 
+        <!-- Save button -->
         <b-field>
           <button type="button" class="button is-success"
           @click.prevent="submit" :disabled="disableSave">Save</button>
@@ -91,6 +92,8 @@
             </b-field>
           </b-field>
         </div>
+
+        <!-- Save button -->
         <b-field>
           <button type="button" class="button is-success"
           @click.prevent="submit" :disabled="disableSave">Save</button>
@@ -198,6 +201,12 @@
               </b-field>
               <!-- /Expert Advisor Image -->
             </div>
+
+            <!-- Save button -->
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
         </b-collapse>
         <!-- /Button and Menu Heading -->
@@ -248,7 +257,14 @@
               <b-field expanded label="Wait Time">
                 <b-input v-model="model.chatWaitTime" placeholder="1 min wait time" />
               </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
+
           </div>
         </b-collapse>
         <!-- /Chat -->
@@ -299,7 +315,14 @@
               <b-field label="Wait Time">
                 <b-input v-model="model.smsWaitTime" placeholder="1 min wait time" />
               </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
+
           </div>
         </b-collapse>
         <!-- /SMS -->
@@ -350,7 +373,14 @@
               <b-field label="Wait Time">
                 <b-input v-model="model.callWaitTime" placeholder="8 min wait time" />
               </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
+
           </div>
         </b-collapse>
         <!-- /Call -->
@@ -401,7 +431,14 @@
               <b-field expanded label="Wait Time">
                 <b-input v-model="model.callbackWaitTime" placeholder="8 min wait time" />
               </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
+
           </div>
         </b-collapse>
         <!-- /Callback -->
@@ -452,7 +489,14 @@
               <b-field expanded label="Wait Time">
                 <b-input v-model="model.emailWaitTime" placeholder="12-24 hour wait time" />
               </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
+
           </div>
         </b-collapse>
         <!-- /Email -->
@@ -503,7 +547,40 @@
               <b-field expanded label="Wait Time">
                 <b-input v-model="model.taskWaitTime" placeholder="" />
               </b-field>
+
+              <!-- Task Request Options -->
+              <b-collapse class="content card">
+                <div slot="trigger" slot-scope="props" class="card-header">
+                  <p class="card-header-title">Task Request Types</p>
+                  <a class="card-header-icon">
+                    <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                  </a>
+                </div>
+                <div class="card-content">
+                  <ol v-if="Array.isArray(model.taskOptions)">
+                    <li v-for="(task, i) of model.taskOptions" :key="i">
+                      <b-field grouped>
+                        <b-field expanded>
+                          <b-input v-model="task.text" placeholder="Report a Problem" />
+                        </b-field>
+                        <b-field>
+                          <button class="button is-danger" @click="model.taskOptions.splice(i, 1)">Remove Type</button>
+                        </b-field>
+                      </b-field>
+                    </li>
+                  </ol>
+                  <button class="button is-success" @click="model.taskOptions.push({text:''})">Add Type</button>
+                </div>
+              </b-collapse>
+              <!-- /Task Request Options -->
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
+
           </div>
         </b-collapse>
         <!-- /Task -->
@@ -554,16 +631,18 @@
               <b-field expanded label="Wait Time">
                 <b-input v-model="model.cobrowseWaitTime" placeholder="8 min wait time" />
               </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
+
           </div>
         </b-collapse>
         <!-- /Cobrowse -->
 
-        <!-- Save button -->
-        <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
-        </b-field>
       </div>
     </b-collapse>
     <!-- /Advanced Website Customization -->

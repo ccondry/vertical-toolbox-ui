@@ -200,7 +200,9 @@ export default {
       selectedTemplate: '',
       showModal: false,
       filterTemplates: false,
-      formModel: {},
+      formModel: {
+        taskOptions: []
+      },
       ownerFilter: '',
       // selectedOwner: null,
       brandFilter: 'mine'
@@ -305,6 +307,10 @@ export default {
       this.updateCache(this.selectedTemplateObject)
       // update the form with a copy of the template object
       this.formModel = JSON.parse(JSON.stringify(this.selectedTemplateObject))
+      // make sure taskOptions is an array
+      if (!Array.isArray(this.formModel.taskOptions)) {
+        this.$set(this.formModel, 'taskOptions', [])
+      }
       // remove database _id
       delete this.formModel._id
     },
@@ -446,6 +452,10 @@ export default {
           // switched to Form tab
           // sync the raw JSON to the form model
           this.formModel = JSON.parse(this.brandDataString)
+          // make sure taskOptions is an array
+          if (!Array.isArray(this.formModel.taskOptions)) {
+            this.$set(this.formModel, 'taskOptions', [])
+          }
         } else if (val === 1) {
           // switched to Raw JSON tab
           // sync the form model to the raw JSON string
