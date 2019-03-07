@@ -426,6 +426,11 @@ export default {
   },
 
   methods: {
+    changeAdvisorImage (event) {
+      // advsior image b-select changed. update model.
+      console.log('changeAdvisorImage', event.target.value)
+      this.model.advisorImage = event.target.value
+    },
     changeFavicon (event) {
       if (!event) return
       console.log('favicon website URL changed', event)
