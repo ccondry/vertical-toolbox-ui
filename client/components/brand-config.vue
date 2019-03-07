@@ -178,7 +178,7 @@
           <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
-          <b-field label="Upload">
+          <b-field label="Upload New Image">
             <button class="button is-primary" type="button"
             :disabled="working.images.advisor"
             @click="launchFilePicker('advisor')">
