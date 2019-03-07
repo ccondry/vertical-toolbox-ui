@@ -233,7 +233,7 @@
                   <b-icon pack="mdi" :icon="model.chatIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.5.94</a>
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
 
@@ -284,7 +284,7 @@
                   <b-icon pack="mdi" :icon="model.smsIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.5.94</a>
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
 
@@ -335,7 +335,7 @@
                   <b-icon pack="mdi" :icon="model.callIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.5.94</a>
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
 
@@ -386,7 +386,7 @@
                   <b-icon pack="mdi" :icon="model.callbackIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.5.94</a>
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
 
@@ -437,7 +437,7 @@
                   <b-icon pack="mdi" :icon="model.emailIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.5.94</a>
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
 
@@ -488,7 +488,7 @@
                   <b-icon pack="mdi" :icon="model.taskIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.5.94</a>
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
 
@@ -539,7 +539,7 @@
                   <b-icon pack="mdi" :icon="model.cobrowseIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.5.94</a>
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
 
@@ -717,6 +717,7 @@ export default {
   data () {
     return {
       materialDesignIconsUrl: 'https://materialdesignicons.com/cdn/2.5.94/',
+      materialDesignIconsVersion: '2.5.94',
       showIconModal: false,
       iconModalContext: {},
       active: {},
