@@ -10,10 +10,14 @@
           </p>
         </div>
         <div class="column is-4">
-          <div class="level-right">
+          <div v-if="authenticated" class="level-right">
             {{ user.username }}
             &nbsp;
-            <a v-if="authenticated" @click="clickLogout">Logout</a>
+            <a @click="clickLogout">Logout</a>
+            &nbsp;&nbsp;
+          </div>
+          <div v-if="!authenticated && !production" class="level-right">
+            <a @click="clickLogin">Login</a>
             &nbsp;&nbsp;
           </div>
         </div>
@@ -46,17 +50,30 @@ export default {
       pkginfo: 'pkg',
       sidebar: 'sidebar',
       authenticated: 'authenticated',
-      user: 'user'
+      user: 'user',
+      production: 'production'
     })
   },
 
   methods: {
     ...mapActions([
       'toggleSidebar',
-      'logout'
+      'logout',
+      'setJwt'
     ]),
     clickLogout () {
       this.logout()
+    },
+    clickLogin () {
+      this.$dialog.prompt({
+        message: `Enter your JWT`,
+        inputAttrs: {
+          placeholder: 'JWT'
+        },
+        onConfirm: (value) => {
+          this.setJwt(value)
+        }
+      })
     }
   },
 
