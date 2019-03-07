@@ -189,7 +189,7 @@
         <!-- /Expert Advisor Image -->
 
         <!-- Chat -->
-        <b-collapse class="content card" :open="false">
+        <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Chat Option</p>
             <a class="card-header-icon">
