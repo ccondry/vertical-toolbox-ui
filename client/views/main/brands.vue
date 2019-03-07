@@ -190,10 +190,6 @@ export default {
   },
   async mounted () {
     await this.refresh()
-    if (this.$route.query.brand) {
-      console.log('brand query is set to', this.$route.query.brand)
-      this.selectedTemplate = this.$route.query.brand
-    }
   },
   methods: {
     ...mapActions([
@@ -454,6 +450,13 @@ export default {
       this.clickLoadTemplate()
       // and also set the URL query parameter for it
       this.$router.push({query: {brand: val}})
+    },
+    brands (val) {
+      // brands loaded - check if user has a selected brand in query string
+      if (this.$route.query.brand) {
+        console.log('brand query is set to', this.$route.query.brand)
+        this.selectedTemplate = this.$route.query.brand
+      }
     }
   }
 }
