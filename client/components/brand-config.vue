@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- Hidden File Uploader -->
+    <input type="file" style="display:none" ref="file" accept="image/*;text/html" v-uploader />
+
     <!-- Basic Information -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -97,8 +100,6 @@
     </b-collapse>
     <!-- /Website Customization -->
 
-    <!-- Hidden File Uploader -->
-    <input type="file" style="display:none" ref="file" accept="image/*;text/html" v-uploader />
 
   </div>
 </template>
