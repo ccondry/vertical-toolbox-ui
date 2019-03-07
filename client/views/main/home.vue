@@ -19,9 +19,9 @@
     <div class="tile is-ancestor">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
-          <h1 class="title">Load Vertical Configuration</h1>
+          <h1 class="title">Load a Vertical</h1>
           <div class="block">
-            <div class="wysiwyg">
+            <div class="content">
               <p>
                 Use this form to load an existing vertical config.
               </p>
@@ -71,12 +71,6 @@
             </div>
           </div>
           <div class="block">
-            <!-- <button type="button" class="button is-primary"
-            @click.prevent="clickLoadTemplate"
-            :disabled="!selectedTemplate">Load</button> -->
-            <!-- <button type="button" class="button is-danger"
-            @click.prevent="clickDeleteVertical(selectedTemplate)"
-            :disabled="disableDeleteVertical">Delete</button> -->
           </div>
         </article>
       </div>
@@ -86,11 +80,11 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
-            Vertical Config {{ selectedTemplate ? '- ' + selectedTemplate : '' }}
+            Vertical {{ selectedTemplate }}
             <!-- 'updated' tag -->
             <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
-          <div class="block wysiwyg">
+          <div class="block content">
             <p>
               You can update your verticals by using any of the save buttons
               on this panel. You will only be able to save verticals that you own.
@@ -146,6 +140,40 @@
       </div>
     </div>
 
+
+    <div class="tile is-ancestor">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child box">
+          <h1 class="title">Configure {{ vertical.id }}</h1>
+          <div class="content">
+            <ul>
+              <li>
+                <router-link :to="{ name: 'Cumulus Website' }">
+                  Cumulus Website
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'Branded Website' }">
+                  Branded Website
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'IVR Prompts' }">
+                  IVR Prompts
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'Mobile App' }">
+                  Mobile App
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+
+
     <save-template-modal
     ref="modal"
     :visible="showModal"
@@ -173,7 +201,6 @@ export default {
       verticalDataString: '',
       selectedTemplate: '',
       showModal: false,
-      filterTemplates: false,
       model: {},
       ownerFilter: '',
       // selectedOwner: null,
@@ -181,10 +208,24 @@ export default {
     }
   },
   async mounted () {
-    await this.refresh()
-    if (this.$route.query.vertical) {
-      console.log('vertical query is set to', this.$route.query.vertical)
-      this.selectedTemplate = this.$route.query.vertical
+    if (this.selectedVerticalId) {
+      this.selectedTemplate = this.selectedVerticalId
+    }
+    if (!this.verticals.length) {
+      // load verticals
+      this.loadVerticals(false)
+    }
+    if (this.vertical) {
+      console.log('this.vertical exists')
+      // update cache if state data already exists
+      this.updateCache(this.vertical)
+      this.selectedTemplate = this.vertical.id
+    } else if (this.$route.query.vertical) {
+      console.log('this.$route.query.vertical exist')
+      // if vertical was set in query params, load it
+      this.setSelectedVertical(this.$route.query.vertical)
+    } else {
+      // no vertical selected - allow user to select one now
     }
   },
   methods: {
@@ -193,7 +234,8 @@ export default {
       'errorNotification',
       'saveVertical',
       'uploadImage',
-      'deleteVertical'
+      'deleteVertical',
+      'setSelectedVertical'
     ]),
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
@@ -206,10 +248,9 @@ export default {
           // update verticals data in state with current server data
           await this.loadVerticals(false)
           // make sure the the new vertical is the selected one
-          this.selectedTemplate = id
+          this.setSelectedVertical(id)
           // load the selected vertical - so that after Save As, the vertical ID
           // will be correctly displayed
-          this.clickLoadTemplate()
         }
       })
     },
@@ -224,10 +265,8 @@ export default {
           // update verticals data in state with current server data
           await this.loadVerticals(false)
           // make sure the the new vertical is the selected one
-          this.selectedTemplate = this.verticals[0]
+          this.setSelectedVertical(this.verticals[0].id)
           // load the selected vertical - so that after delete, the vertical ID
-          // will be correctly displayed
-          this.clickLoadTemplate()
         }
       })
     },
@@ -244,22 +283,13 @@ export default {
         return false
       }
     },
-    async refresh () {
-      // load verticals
-      await this.loadVerticals(false)
-    },
     async clickSave () {
-      const id = this.selectedTemplate
+      const id = this.vertical.id
       console.log('click save vertical', id)
       try {
-        let data
-        if (this.activeTab === 0) {
-          // use Form model
-          data = JSON.parse(JSON.stringify(this.model))
-        } else if (this.activeTab === 1) {
-          // use Raw JSON string
-          data = JSON.parse(this.verticalDataString)
-        }
+        // copy data by reparsing local cache
+        let data = JSON.parse(JSON.stringify(this.model))
+
         // confirm with user and save the data to the server
         this.confirmSaveVertical({id, data})
       } catch (e) {
@@ -274,17 +304,7 @@ export default {
     },
     updateCache (data) {
       // copy state data to local data
-      this.verticalDataString = JSON.stringify(data, null, 2)
-    },
-    clickLoadTemplate () {
-      // user clicked button to load a template into their user branding config
-      console.log('loading vertical', this.selectedTemplate)
-      // update the raw JSON string
-      this.updateCache(this.selectedTemplateObject)
-      // update the form with a copy of the template object
-      this.model = JSON.parse(JSON.stringify(this.selectedTemplateObject))
-      // remove database _id
-      delete this.model._id
+      this.model = JSON.parse(JSON.stringify(data))
     },
     async clickSaveVertical ({id, name}) {
       console.log('saving vertical as', id, '-', name)
@@ -320,7 +340,8 @@ export default {
       'verticals',
       'loading',
       'working',
-      'defaults'
+      'defaults',
+      'vertical'
     ]),
     autocompleteOwners () {
       const allOwners = this.verticals.map(v => v.owner)
@@ -368,18 +389,10 @@ export default {
       return this.sortedVerticals.filter(v => v.owner === this.ownerFilter)
     },
     disableSave () {
-      if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
-        // any template has been selected
-        if (this.selectedTemplateObject.owner === this.user.username || this.user.admin) {
-          // this user owns this template or is an admin
-          return false
-        } else {
-          // this user doesn't have access to save over this template,
-          // so disable the button
-          return true
-        }
-      } else {
-        // template selection still on placeholder option
+      try {
+        // this user owns this template or is an admin
+        return this.vertical.owner === this.user.username || this.user.admin
+      } catch (e) {
         return true
       }
     },
@@ -387,12 +400,12 @@ export default {
       return !Object.keys(this.model).length
     },
     disableDeleteVertical () {
-      if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
+      if (this.vertical) {
         // any template has been selected
-        if (this.selectedTemplateObject.owner === this.user.username ||
+        if (this.vertical.owner === this.user.username ||
           (this.user.admin &&
-            this.selectedTemplateObject.owner !== 'system' &&
-            this.selectedTemplateObject.owner !== null)
+            this.vertical.owner !== 'system' &&
+            this.vertical.owner !== null)
           ) {
           // this user owns this template, or the user is an admin and the selected template's owner is not system
           return false
@@ -405,47 +418,18 @@ export default {
         // template selection still on placeholder option
         return true
       }
-    },
-    selectedTemplateObject () {
-      if (this.verticals && this.verticals.length && this.selectedTemplate.length) {
-        return this.verticals.find(v => v.id === this.selectedTemplate)
-      } else {
-        return {}
-      }
     }
   },
 
   watch: {
-    activeTab (val, oldVal) {
-      console.log('activeTab changed')
-      if (val !== oldVal) {
-        // editor tab changed, so sync the changes to the destination editor tab
-        if (val === 0) {
-          // switched to Form tab
-          // sync the raw JSON to the form model
-          this.model = JSON.parse(this.verticalDataString)
-        } else if (val === 1) {
-          // switched to Raw JSON tab
-          // sync the form model to the raw JSON string
-          this.updateCache(this.model)
-        }
-      }
-    },
-    filterTemplates (val, oldVal) {
-      // console.log('filter template selected', this.selectedTemplate)
-      // did the user check the filter verticals option?
-      if (val === true) {
-        if (this.selectedTemplate === undefined || !this.filteredSortedVerticals.find(v => v.id === this.selectedTemplate)) {
-          // console.log('template selected is no longer in list', this.selectedTemplate)
-          this.selectedTemplate = this.filteredSortedVerticals[0].id
-        }
-      }
-    },
     selectedTemplate (val) {
-      // selected template changed - load it now
-      this.clickLoadTemplate()
       // and also set the URL query parameter for it
       this.$router.push({query: {vertical: val}})
+    },
+    vertical (val) {
+      // selected vertical object in state has changed
+      // update mutable cache of the state object
+      this.updateCache(val)
     }
   }
 }

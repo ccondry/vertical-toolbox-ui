@@ -15,7 +15,7 @@ const router = new Router({
     ...generateRoutesFromMenu(menuModule.state.items),
     {
       path: '*',
-      redirect: '/branding/verticals'
+      redirect: '/branding/home'
     }
   ]
 })

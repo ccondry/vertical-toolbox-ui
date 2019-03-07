@@ -1,22 +1,36 @@
 import * as types from '../mutation-types'
-// import {post} from '../../utils'
-// import Vue from 'vue'
 
 const state = {
-  verticals: []
+  verticals: [],
+  selectedVerticalId: ''
 }
 
 const getters = {
-  verticals: state => state.verticals
+  verticals: state => state.verticals,
+  selectedVerticalId: state => state.selectedVerticalId,
+  vertical: state => {
+    try {
+      return state.verticals.find(v => v.id === state.selectedVerticalId)
+    } catch (e) {
+      return {}
+    }
+  }
 }
 
 const mutations = {
   [types.SET_VERTICALS] (state, data) {
     state.verticals = data
+  },
+  [types.SET_SELECTED_VERTICAL] (state, data) {
+    state.selectedVerticalId = data
   }
 }
 
 const actions = {
+  setSelectedVertical ({commit}, data) {
+    console.log('setSelectedVertical action', data)
+    commit(types.SET_SELECTED_VERTICAL, data)
+  },
   uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
     dispatch('setWorking', {group: 'images', type: data.node, value: true})
     console.log(`uploading file`, data)

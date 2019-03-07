@@ -12,6 +12,15 @@ export default {
   },
   children: [
     {
+      name: 'Home',
+      path: '/branding/home',
+      meta: {
+        icon: 'home',
+        description: 'Home'
+      },
+      component: lazyLoading('main/home')
+    },
+    {
       name: 'Brands',
       path: '/branding/brand',
       meta: {
@@ -19,6 +28,15 @@ export default {
         description: 'brand customization'
       },
       component: lazyLoading('main/brands')
+    },
+    {
+      name: 'Cumulus Website',
+      path: '/branding/cumulus',
+      meta: {
+        icon: 'cloud',
+        description: 'Cumulus website customization'
+      },
+      component: lazyLoading('main/cumulus')
     },
     {
       name: 'Verticals',
