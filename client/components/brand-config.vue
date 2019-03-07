@@ -167,7 +167,7 @@
             </button>
           </b-field>
           <b-field label="Select Existing Image">
-            <b-select @change.native="model.advisorImage = $event.target.value">
+            <b-select @input.native="model.advisorImage = $event.target.value">
               <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
                 Sandra Jefferson
               </option>
