@@ -392,7 +392,7 @@ export default {
       }
     },
     disableSaveAs () {
-      return !Object.keys(this.formModel).length
+      return !this.formModel
     },
     disableDeleteBrand () {
       if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
