@@ -233,15 +233,303 @@
             <b-field expanded label="Wait Time">
               <b-input v-model="model.chatWaitTime" placeholder="1 min wait time" />
             </b-field>
-            <!-- // chat
-            chatEnabled: true,
-            chatIcon: 'message-processing',
-            chatHeading: 'Chat Now',
-            chatText: 'An expert will chat with you live',
-            chatWaitTime: '1 min wait time', -->
           </div>
         </b-collapse>
         <!-- /Chat -->
+
+        <!-- SMS -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">SMS Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.smsEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <b-field grouped>
+              <b-field label="Icon Name">
+                <b-input v-model="model.smsIcon" placeholder="message-processing" />
+              </b-field>
+              <b-field label="Icon">
+                <b-icon pack="mdi" :icon="model.smsIcon" size="is-large" />
+              </b-field>
+              <b-field label="Search Icons">
+                <a class="button is-info" href="https://materialdesignicons.com/" target="materialdesignicons">Material Design Icons</a>
+              </b-field>
+            </b-field>
+
+            <b-field expanded label="Heading">
+              <b-input v-model="model.smsHeading" placeholder="Text Us" />
+            </b-field>
+
+            <b-field expanded label="Text">
+              <b-input v-model="model.smsText" placeholder="{0}" />
+            </b-field>
+
+            <b-field expanded label="Wait Time">
+              <b-input v-model="model.smsWaitTime" placeholder="1 min wait time" />
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /SMS -->
+
+        <!-- Call -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Call Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.callEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <b-field grouped>
+              <b-field label="Icon Name">
+                <b-input v-model="model.callIcon" placeholder="phone" />
+              </b-field>
+              <b-field label="Icon">
+                <b-icon pack="mdi" :icon="model.callIcon" size="is-large" />
+              </b-field>
+              <b-field label="Search Icons">
+                <a class="button is-info" href="https://materialdesignicons.com/" target="materialdesignicons">Material Design Icons</a>
+              </b-field>
+            </b-field>
+
+            <b-field expanded label="Heading">
+              <b-input v-model="model.callHeading" placeholder="Call Us" />
+            </b-field>
+
+            <b-field expanded label="Text">
+              <b-input v-model="model.callText" placeholder="{0}" />
+            </b-field>
+
+            <b-field expanded label="Wait Time">
+              <b-input v-model="model.callWaitTime" placeholder="8 min wait time" />
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Call -->
+
+        <!-- Callback -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Callback Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.callbackEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <b-field grouped>
+              <b-field label="Icon Name">
+                <b-input v-model="model.callbackIcon" placeholder="phone-forward" />
+              </b-field>
+              <b-field label="Icon">
+                <b-icon pack="mdi" :icon="model.callbackIcon" size="is-large" />
+              </b-field>
+              <b-field label="Search Icons">
+                <a class="button is-info" href="https://materialdesignicons.com/" target="materialdesignicons">Material Design Icons</a>
+              </b-field>
+            </b-field>
+
+            <b-field expanded label="Heading">
+              <b-input v-model="model.callbackHeading" placeholder="We'll Call You" />
+            </b-field>
+
+            <b-field expanded label="Text">
+              <b-input v-model="model.callbackText" placeholder="Receive a call back from an expert" />
+            </b-field>
+
+            <b-field expanded label="Wait Time">
+              <b-input v-model="model.callbackWaitTime" placeholder="8 min wait time" />
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Callback -->
+
+        <!-- Email -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Email Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.emailEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <b-field grouped>
+              <b-field label="Icon Name">
+                <b-input v-model="model.emailIcon" placeholder="email" />
+              </b-field>
+              <b-field label="Icon">
+                <b-icon pack="mdi" :icon="model.emailIcon" size="is-large" />
+              </b-field>
+              <b-field label="Search Icons">
+                <a class="button is-info" href="https://materialdesignicons.com/" target="materialdesignicons">Material Design Icons</a>
+              </b-field>
+            </b-field>
+
+            <b-field expanded label="Heading">
+              <b-input v-model="model.emailHeading" placeholder="Email an Expert" />
+            </b-field>
+
+            <b-field expanded label="Text">
+              <b-input v-model="model.emailText" placeholder="An expert will respond to your email" />
+            </b-field>
+
+            <b-field expanded label="Wait Time">
+              <b-input v-model="model.emailWaitTime" placeholder="12-24 hour wait time" />
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Email -->
+
+        <!-- Task -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Task Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.taskEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <b-field grouped>
+              <b-field label="Icon Name">
+                <b-input v-model="model.taskIcon" placeholder="clipboard-check" />
+              </b-field>
+              <b-field label="Icon">
+                <b-icon pack="mdi" :icon="model.taskIcon" size="is-large" />
+              </b-field>
+              <b-field label="Search Icons">
+                <a class="button is-info" href="https://materialdesignicons.com/" target="materialdesignicons">Material Design Icons</a>
+              </b-field>
+            </b-field>
+
+            <b-field expanded label="Heading">
+              <b-input v-model="model.taskHeading" placeholder="Request" />
+            </b-field>
+
+            <b-field expanded label="Text">
+              <b-input v-model="model.taskText" placeholder="An expert will handle your task" />
+            </b-field>
+
+            <b-field expanded label="Wait Time">
+              <b-input v-model="model.taskWaitTime" placeholder="" />
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Task -->
+
+        <!-- Cobrowse -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Cobrowse Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.cobrowseEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <b-field grouped>
+              <b-field label="Icon Name">
+                <b-input v-model="model.cobrowseIcon" placeholder="lan-connect" />
+              </b-field>
+              <b-field label="Icon">
+                <b-icon pack="mdi" :icon="model.cobrowseIcon" size="is-large" />
+              </b-field>
+              <b-field label="Search Icons">
+                <a class="button is-info" href="https://materialdesignicons.com/" target="materialdesignicons">Material Design Icons</a>
+              </b-field>
+            </b-field>
+
+            <b-field expanded label="Heading">
+              <b-input v-model="model.cobrowseHeading" placeholder="Cobrowse" />
+            </b-field>
+
+            <b-field expanded label="Text">
+              <b-input v-model="model.cobrowseText" placeholder="An expert will cobrowse with you live" />
+            </b-field>
+
+            <b-field expanded label="Wait Time">
+              <b-input v-model="model.cobrowseWaitTime" placeholder="8 min wait time" />
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Cobrowse -->
 
         <!-- Save button -->
         <b-field>
