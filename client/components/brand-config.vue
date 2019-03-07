@@ -67,8 +67,7 @@
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field expanded label="Favicon Website Domain Name">
-            <b-input v-model="faviconWebsite"
-            placeholder="apple.com" />
+            <b-input v-model="faviconWebsite" placeholder="apple.com" />
           </b-field>
         </b-field>
 
@@ -834,6 +833,9 @@ export default {
       } catch (e) {
         console.log('failed to changeFinesseReasonCallVariable', e)
       }
+    },
+    modelFavicon () {
+      return this.model.favicon
     }
   },
 
@@ -842,25 +844,22 @@ export default {
       // console.log('branding config form model changed', val)
       // model changed - format and push those changes back to the parent
       this.pushChanges(val)
+      // when this.model changes, extract the domain of the google favicon
+      // tool url and set the v-model value for the "Favicon Website URL" of the favicon
+      try {
+        const url = val.favicon
+        const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
+        try {
+          this.faviconWebsite = arr[1] || ''
+        } catch (e) {
+          this.faviconWebsite = ''
+        }
+      } catch (e) {
+        // url was probably undefined - do nothing
+      }
     },
     faviconWebsite (val) {
       this.changeFavicon(val)
-    }
-  },
-
-  mounted () {
-    // when this.model.favicon changes, extract the domain of the google favicon
-    // tool url and set the v-model value for the "Favicon Website URL" of the favicon
-    try {
-      const url = this.model.favicon
-      const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
-      try {
-        this.faviconWebsite = arr[1] || ''
-      } catch (e) {
-        this.faviconWebsite = ''
-      }
-    } catch (e) {
-      // url was probably undefined - do nothing
     }
   }
 }
