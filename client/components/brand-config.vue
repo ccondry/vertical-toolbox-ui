@@ -101,7 +101,7 @@
     <!-- /Website Customization -->
 
     <!-- Advanced Website Customization -->
-    <b-collapse class="content card">
+    <b-collapse class="content card" :open="false">
       <div slot="trigger" slot-scope="props" class="card-header">
         <p class="card-header-title">Advanced Website Customization</p>
         <a class="card-header-icon">
