@@ -285,11 +285,12 @@ const ttsTypes = [
 
 const tooltips = {
   favicon: `Enter a customer website here to automatically find and copy the
-  favicon image to this vertical.`,
+    favicon image to this vertical.`,
   iframe: `Enter the URL of a customer's website, or upload an HTML file saved
-  using the SingleFile browser extension, or upload a screenshot of the
-  customer's website.`,
-  advisor: 'Choose a round or square image.'
+    using the SingleFile browser extension, or upload a screenshot of the
+    customer's website.`,
+  advisorImage: `Choose a round or square image for the expert advisor agent
+    picture.`
 }
 
 const Datepick = Vue.component('Datepick', {
