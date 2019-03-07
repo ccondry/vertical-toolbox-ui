@@ -108,84 +108,99 @@
         </a>
       </div>
 
+      <!-- Button and Menu Heading -->
       <div class="card-content">
-        <!-- Contact Button -->
-        <b-field expanded label="Contact Button Text">
-          <b-input v-model="model.contactButtonText" placeholder="Talk to an Expert" />
-        </b-field>
-        <!-- /Contact Button -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Button and Menu Heading</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
 
-        <!-- Contact Menu Title -->
-        <b-field expanded label="Contact Menu Title">
-          <b-input v-model="model.menuTitle" placeholder="Need Help?" />
-        </b-field>
-        <!-- /Contact Menu Title -->
+          <div class="card-content">
+            <!-- Contact Button -->
+            <b-field expanded label="Contact Button Text">
+              <b-input v-model="model.contactButtonText" placeholder="Talk to an Expert" />
+            </b-field>
+            <!-- /Contact Button -->
 
-        <!-- Chat Menu Title -->
-        <b-field expanded label="Chat Menu Title">
-          <b-input v-model="model.chatMenuTitle" placeholder="Now Chatting" />
-        </b-field>
-        <!-- /Chat Menu Title -->
+            <!-- Contact Menu Title -->
+            <b-field expanded label="Contact Menu Title">
+              <b-input v-model="model.menuTitle" placeholder="Need Help?" />
+            </b-field>
+            <!-- /Contact Menu Title -->
 
-        <!-- Expert Advisor Enable -->
-        <b-field label="Show Expert Advisor Header">
-          <b-select v-model="model.advisorEnabled">
-            <option :value="true">
-              Shown
-            </option>
-            <option :value="false">
-              Hidden
-            </option>
-          </b-select>
-        </b-field>
-        <!-- /Expert Advisor Enable -->
+            <!-- Chat Menu Title -->
+            <b-field expanded label="Chat Menu Title">
+              <b-input v-model="model.chatMenuTitle" placeholder="Now Chatting" />
+            </b-field>
+            <!-- /Chat Menu Title -->
 
-        <!-- Expert Heading -->
-        <b-field expanded label="Advisor Heading Text Line 1">
-          <b-input v-model="model.advisorHeading" placeholder="Expert Advisor" />
-        </b-field>
+            <!-- Expert Advisor Enable -->
+            <b-field label="Show Expert Advisor Header">
+              <b-select v-model="model.advisorEnabled">
+                <option :value="true">
+                  Shown
+                </option>
+                <option :value="false">
+                  Hidden
+                </option>
+              </b-select>
+            </b-field>
+            <!-- /Expert Advisor Enable -->
 
-        <b-field expanded label="Advisor Heading Text Line 2">
-          <b-input v-model="model.advisorText" placeholder="We're here to help" />
-        </b-field>
-        <!-- /Expert Heading -->
+            <div v-show="model.advisorEnabled">
+              <!-- Expert Heading -->
+              <b-field expanded label="Advisor Heading Text Line 1">
+                <b-input v-model="model.advisorHeading" placeholder="Expert Advisor" />
+              </b-field>
 
-        <!-- Expert Advisor Image -->
-        <b-field grouped>
-          <b-field label="Expert Advisor Image">
-            <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
-          </b-field>
-          <b-field label="Select Existing Image">
-            <b-select :value="model.advisorImage" @change.native="changeAdvisorImage($event)">
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
-                Sandra Jefferson
-              </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author2.png">
-                Josh Peterson
-              </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author3.png">
-                Rick Barrows
-              </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author4.png">
-                Jamie Bracksted
-              </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author5.png">
-                Helen Liang
-              </option>
-            </b-select>
-          </b-field>
-          <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field label="Upload New Image">
-            <button class="button is-primary" type="button"
-            :disabled="working.images.advisor"
-            @click="launchFilePicker('advisor')">
-              {{ working.images.advisor ? 'Working...' : 'Browse...' }}
-            </button>
-          </b-field>
-        </b-field>
-        <!-- /Expert Advisor Image -->
+              <b-field expanded label="Advisor Heading Text Line 2">
+                <b-input v-model="model.advisorText" placeholder="We're here to help" />
+              </b-field>
+              <!-- /Expert Heading -->
+
+              <!-- Expert Advisor Image -->
+              <b-field grouped>
+                <b-field label="Expert Advisor Image">
+                  <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
+                </b-field>
+                <b-field label="Select Existing Image">
+                  <b-select :value="model.advisorImage" @change.native="changeAdvisorImage($event)">
+                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
+                      Sandra Jefferson
+                    </option>
+                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author2.png">
+                      Josh Peterson
+                    </option>
+                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author3.png">
+                      Rick Barrows
+                    </option>
+                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author4.png">
+                      Jamie Bracksted
+                    </option>
+                    <option value="https://mm.cxdemo.net/static/images/cumulus/common/author5.png">
+                      Helen Liang
+                    </option>
+                  </b-select>
+                </b-field>
+                <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
+                  <b-icon type="is-primary" icon="information" />
+                </b-tooltip>
+                <b-field label="Upload New Image">
+                  <button class="button is-primary" type="button"
+                  :disabled="working.images.advisor"
+                  @click="launchFilePicker('advisor')">
+                    {{ working.images.advisor ? 'Working...' : 'Browse...' }}
+                  </button>
+                </b-field>
+              </b-field>
+              <!-- /Expert Advisor Image -->
+            </div>
+          </div>
+        </b-collapse>
+        <!-- /Button and Menu Heading -->
 
         <!-- Chat -->
         <b-collapse class="content card">
@@ -209,29 +224,31 @@
               </b-select>
             </b-field>
 
-            <b-field grouped>
-              <b-field label="Icon Name">
-                <b-input v-model="model.chatIcon" placeholder="message-processing" />
+            <div v-show="model.chatEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.chatIcon" placeholder="message-processing" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.chatIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+                </b-field>
               </b-field>
-              <b-field label="Icon">
-                <b-icon pack="mdi" :icon="model.chatIcon" size="is-large" />
+
+              <b-field expanded label="Heading">
+                <b-input v-model="model.chatHeading" placeholder="Chat Now" />
               </b-field>
-              <b-field label="Search Icons">
-                <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+
+              <b-field expanded label="Text">
+                <b-input v-model="model.chatText" placeholder="An expert will chat with you live" />
               </b-field>
-            </b-field>
 
-            <b-field expanded label="Heading">
-              <b-input v-model="model.chatHeading" placeholder="Chat Now" />
-            </b-field>
-
-            <b-field expanded label="Text">
-              <b-input v-model="model.chatText" placeholder="An expert will chat with you live" />
-            </b-field>
-
-            <b-field expanded label="Wait Time">
-              <b-input v-model="model.chatWaitTime" placeholder="1 min wait time" />
-            </b-field>
+              <b-field expanded label="Wait Time">
+                <b-input v-model="model.chatWaitTime" placeholder="1 min wait time" />
+              </b-field>
+            </div>
           </div>
         </b-collapse>
         <!-- /Chat -->
@@ -258,29 +275,31 @@
               </b-select>
             </b-field>
 
-            <b-field grouped>
-              <b-field label="Icon Name">
-                <b-input v-model="model.smsIcon" placeholder="message-processing" />
+            <div v-show="model.smsEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.smsIcon" placeholder="message-processing" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.smsIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+                </b-field>
               </b-field>
-              <b-field label="Icon">
-                <b-icon pack="mdi" :icon="model.smsIcon" size="is-large" />
+
+              <b-field label="Heading">
+                <b-input v-model="model.smsHeading" placeholder="Text Us" />
               </b-field>
-              <b-field label="Search Icons">
-                <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+
+              <b-field label="Text" :message="getTooltip('smsText')" >
+                <b-input v-model="model.smsText" placeholder="{0}" />
               </b-field>
-            </b-field>
 
-            <b-field expanded label="Heading">
-              <b-input v-model="model.smsHeading" placeholder="Text Us" />
-            </b-field>
-
-            <b-field expanded label="Text">
-              <b-input v-model="model.smsText" placeholder="{0}" />
-            </b-field>
-
-            <b-field expanded label="Wait Time">
-              <b-input v-model="model.smsWaitTime" placeholder="1 min wait time" />
-            </b-field>
+              <b-field label="Wait Time">
+                <b-input v-model="model.smsWaitTime" placeholder="1 min wait time" />
+              </b-field>
+            </div>
           </div>
         </b-collapse>
         <!-- /SMS -->
@@ -307,29 +326,31 @@
               </b-select>
             </b-field>
 
-            <b-field grouped>
-              <b-field label="Icon Name">
-                <b-input v-model="model.callIcon" placeholder="phone" />
+            <div v-show="model.callEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.callIcon" placeholder="phone" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.callIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+                </b-field>
               </b-field>
-              <b-field label="Icon">
-                <b-icon pack="mdi" :icon="model.callIcon" size="is-large" />
+
+              <b-field label="Heading">
+                <b-input v-model="model.callHeading" placeholder="Call Us" />
               </b-field>
-              <b-field label="Search Icons">
-                <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+
+              <b-field label="Text" :message="getTooltip('callText')">
+                <b-input v-model="model.callText" placeholder="{0}" />
               </b-field>
-            </b-field>
 
-            <b-field expanded label="Heading">
-              <b-input v-model="model.callHeading" placeholder="Call Us" />
-            </b-field>
-
-            <b-field expanded label="Text">
-              <b-input v-model="model.callText" placeholder="{0}" />
-            </b-field>
-
-            <b-field expanded label="Wait Time">
-              <b-input v-model="model.callWaitTime" placeholder="8 min wait time" />
-            </b-field>
+              <b-field label="Wait Time">
+                <b-input v-model="model.callWaitTime" placeholder="8 min wait time" />
+              </b-field>
+            </div>
           </div>
         </b-collapse>
         <!-- /Call -->
@@ -356,29 +377,31 @@
               </b-select>
             </b-field>
 
-            <b-field grouped>
-              <b-field label="Icon Name">
-                <b-input v-model="model.callbackIcon" placeholder="phone-forward" />
+            <div v-show="model.callbackEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.callbackIcon" placeholder="phone-forward" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.callbackIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+                </b-field>
               </b-field>
-              <b-field label="Icon">
-                <b-icon pack="mdi" :icon="model.callbackIcon" size="is-large" />
+
+              <b-field expanded label="Heading">
+                <b-input v-model="model.callbackHeading" placeholder="We'll Call You" />
               </b-field>
-              <b-field label="Search Icons">
-                <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+
+              <b-field expanded label="Text">
+                <b-input v-model="model.callbackText" placeholder="Receive a call back from an expert" />
               </b-field>
-            </b-field>
 
-            <b-field expanded label="Heading">
-              <b-input v-model="model.callbackHeading" placeholder="We'll Call You" />
-            </b-field>
-
-            <b-field expanded label="Text">
-              <b-input v-model="model.callbackText" placeholder="Receive a call back from an expert" />
-            </b-field>
-
-            <b-field expanded label="Wait Time">
-              <b-input v-model="model.callbackWaitTime" placeholder="8 min wait time" />
-            </b-field>
+              <b-field expanded label="Wait Time">
+                <b-input v-model="model.callbackWaitTime" placeholder="8 min wait time" />
+              </b-field>
+            </div>
           </div>
         </b-collapse>
         <!-- /Callback -->
@@ -405,29 +428,31 @@
               </b-select>
             </b-field>
 
-            <b-field grouped>
-              <b-field label="Icon Name">
-                <b-input v-model="model.emailIcon" placeholder="email" />
+            <div v-show="model.emailEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.emailIcon" placeholder="email" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.emailIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+                </b-field>
               </b-field>
-              <b-field label="Icon">
-                <b-icon pack="mdi" :icon="model.emailIcon" size="is-large" />
+
+              <b-field expanded label="Heading">
+                <b-input v-model="model.emailHeading" placeholder="Email an Expert" />
               </b-field>
-              <b-field label="Search Icons">
-                <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+
+              <b-field expanded label="Text">
+                <b-input v-model="model.emailText" placeholder="An expert will respond to your email" />
               </b-field>
-            </b-field>
 
-            <b-field expanded label="Heading">
-              <b-input v-model="model.emailHeading" placeholder="Email an Expert" />
-            </b-field>
-
-            <b-field expanded label="Text">
-              <b-input v-model="model.emailText" placeholder="An expert will respond to your email" />
-            </b-field>
-
-            <b-field expanded label="Wait Time">
-              <b-input v-model="model.emailWaitTime" placeholder="12-24 hour wait time" />
-            </b-field>
+              <b-field expanded label="Wait Time">
+                <b-input v-model="model.emailWaitTime" placeholder="12-24 hour wait time" />
+              </b-field>
+            </div>
           </div>
         </b-collapse>
         <!-- /Email -->
@@ -454,29 +479,31 @@
               </b-select>
             </b-field>
 
-            <b-field grouped>
-              <b-field label="Icon Name">
-                <b-input v-model="model.taskIcon" placeholder="clipboard-check" />
+            <div v-show="model.taskEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.taskIcon" placeholder="clipboard-check" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.taskIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+                </b-field>
               </b-field>
-              <b-field label="Icon">
-                <b-icon pack="mdi" :icon="model.taskIcon" size="is-large" />
+
+              <b-field expanded label="Heading">
+                <b-input v-model="model.taskHeading" placeholder="Request" />
               </b-field>
-              <b-field label="Search Icons">
-                <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+
+              <b-field expanded label="Text">
+                <b-input v-model="model.taskText" placeholder="An expert will handle your task" />
               </b-field>
-            </b-field>
 
-            <b-field expanded label="Heading">
-              <b-input v-model="model.taskHeading" placeholder="Request" />
-            </b-field>
-
-            <b-field expanded label="Text">
-              <b-input v-model="model.taskText" placeholder="An expert will handle your task" />
-            </b-field>
-
-            <b-field expanded label="Wait Time">
-              <b-input v-model="model.taskWaitTime" placeholder="" />
-            </b-field>
+              <b-field expanded label="Wait Time">
+                <b-input v-model="model.taskWaitTime" placeholder="" />
+              </b-field>
+            </div>
           </div>
         </b-collapse>
         <!-- /Task -->
@@ -503,29 +530,31 @@
               </b-select>
             </b-field>
 
-            <b-field grouped>
-              <b-field label="Icon Name">
-                <b-input v-model="model.cobrowseIcon" placeholder="lan-connect" />
+            <div v-show="model.cobrowseEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.cobrowseIcon" placeholder="lan-connect" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.cobrowseIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+                </b-field>
               </b-field>
-              <b-field label="Icon">
-                <b-icon pack="mdi" :icon="model.cobrowseIcon" size="is-large" />
+
+              <b-field expanded label="Heading">
+                <b-input v-model="model.cobrowseHeading" placeholder="Cobrowse" />
               </b-field>
-              <b-field label="Search Icons">
-                <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons 2.7.94</a>
+
+              <b-field expanded label="Text">
+                <b-input v-model="model.cobrowseText" placeholder="An expert will cobrowse with you live" />
               </b-field>
-            </b-field>
 
-            <b-field expanded label="Heading">
-              <b-input v-model="model.cobrowseHeading" placeholder="Cobrowse" />
-            </b-field>
-
-            <b-field expanded label="Text">
-              <b-input v-model="model.cobrowseText" placeholder="An expert will cobrowse with you live" />
-            </b-field>
-
-            <b-field expanded label="Wait Time">
-              <b-input v-model="model.cobrowseWaitTime" placeholder="8 min wait time" />
-            </b-field>
+              <b-field expanded label="Wait Time">
+                <b-input v-model="model.cobrowseWaitTime" placeholder="8 min wait time" />
+              </b-field>
+            </div>
           </div>
         </b-collapse>
         <!-- /Cobrowse -->
@@ -630,7 +659,11 @@ const tooltips = {
     using the SingleFile browser extension, or upload a screenshot of the
     customer's website.`,
   advisorImage: `Choose a round or square image for the expert advisor agent
-    picture.`
+    picture.`,
+  smsText: `You can use {0} to fill in the SMS number associated with your
+    dCloud datacenter.`,
+  callText: `You can use {0} to fill in the main phone number associated with
+    your dCloud demo session.`
 }
 
 export default {
