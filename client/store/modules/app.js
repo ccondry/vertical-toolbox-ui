@@ -1,7 +1,5 @@
 import * as types from '../mutation-types'
 import {load} from '../../utils'
-const getters = {
-}
 
 const state = {
   device: {
@@ -68,6 +66,5 @@ const actions = {
 export default {
   state,
   actions,
-  getters,
   mutations
 }
