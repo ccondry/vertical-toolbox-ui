@@ -7,7 +7,7 @@ Vue.use(Router)
 Items in the menu module will be added using generateRoutesFromMenu
 Make sure you load all components here that are not listed in the menu module
 ***/
-export default new Router({
+const router = new Router({
   mode: 'history',
   linkExactActiveClass: 'is-active',
   scrollBehavior: () => ({ y: 0 }),
@@ -19,6 +19,16 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (!hasQueryParams(to) && hasQueryParams(from)) {
+    next({name: to.name, query: from.query})
+  } else {
+    next()
+  }
+})
+
+export default router
 
 // Menu should have 2 levels.
 function generateRoutesFromMenu (menu = [], routes = []) {
@@ -32,4 +42,8 @@ function generateRoutesFromMenu (menu = [], routes = []) {
     }
   }
   return routes
+}
+
+function hasQueryParams (route) {
+  return !!Object.keys(route.query).length
 }
