@@ -17,10 +17,10 @@ const mutations = {
 }
 
 const actions = {
-  async uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
+  uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
     dispatch('setWorking', {group: 'images', type: data.node, value: true})
     console.log(`uploading file`, data)
-    dispatch('postData', {
+    return dispatch('postData', {
       endpoint: getters.endpoints.images,
       data
     }).then(response => {
@@ -31,10 +31,10 @@ const actions = {
       dispatch('setWorking', {group: 'images', type: data.node, value: false})
     })
   },
-  async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
+  saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
     dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
     delete data._id
-    dispatch('putData', {
+    return dispatch('putData', {
       name: 'vertical',
       endpoint: getters.endpoints.verticals + '/' + id,
       data,
@@ -45,9 +45,9 @@ const actions = {
       dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
     })
   },
-  async deleteVertical ({getters, commit, dispatch}, {id, showNotification}) {
+  deleteVertical ({getters, commit, dispatch}, {id, showNotification}) {
     dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
-    dispatch('deleteData', {
+    return dispatch('deleteData', {
       name: 'vertical',
       endpoint: getters.endpoints.verticals + '/' + id,
       showNotification,
@@ -59,7 +59,7 @@ const actions = {
   },
   loadVerticals ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
-    dispatch('loadToState', {
+    return dispatch('loadToState', {
       name: 'verticals',
       endpoint: getters.endpoints.verticals,
       mutation: types.SET_VERTICALS,

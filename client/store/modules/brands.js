@@ -17,41 +17,41 @@ const mutations = {
 }
 
 const actions = {
-  saveBrand ({getters, commit, dispatch}, {id, data, showNotification}) {
+  saveBrand ({getters, commit, dispatch}, {id, data, showNotification = true}) {
     dispatch('setWorking', {group: 'app', type: 'brands', value: true})
     // remove database ID, if any
     delete data._id
-    dispatch('putData', {
+    return dispatch('putData', {
       name: 'brand',
       endpoint: getters.endpoints.brands + '/' + id,
       data,
       showNotification,
-      success: 'Successfully saved Brand config.',
-      fail: 'Failed to save brand'
+      success: 'Successfully saved brand ' + id,
+      fail: 'Failed to save brand ' + id
     }).finally(() => {
       dispatch('setWorking', {group: 'app', type: 'brands', value: false})
     })
   },
-  deleteBrand ({getters, commit, dispatch}, {id, showNotification}) {
+  deleteBrand ({getters, commit, dispatch}, {id, showNotification = true}) {
     dispatch('setWorking', {group: 'app', type: 'brands', value: true})
-    dispatch('deleteData', {
+    return dispatch('deleteData', {
       name: 'brand',
       endpoint: getters.endpoints.brands + '/' + id,
       showNotification,
-      success: 'Successfully deleted Brand ' + id,
-      fail: 'Failed to delete Brand ' + id
+      success: 'Successfully deleted brand ' + id,
+      fail: 'Failed to delete brand ' + id
     }).finally(() => {
       dispatch('setWorking', {group: 'app', type: 'brands', value: false})
     })
   },
   loadBrands ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'brands', value: true})
-    dispatch('loadToState', {
+    return dispatch('loadToState', {
       name: 'brands',
       endpoint: getters.endpoints.brands,
       mutation: types.SET_BRANDS,
       showNotification,
-      success: 'Successfully loaded Brands',
+      success: 'Successfully loaded brands',
       fail: 'Failed to load brands'
     }).finally(() => {
       dispatch('setLoading', {group: 'app', type: 'brands', value: false})

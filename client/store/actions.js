@@ -42,8 +42,8 @@ export const loadToState = async function ({getters, commit, dispatch}, options)
     commit(options.mutation, data)
     if (options.showNotification) {
       Toast.open({
-        // duration: 5000,
-        message: options.name + ' succeeded',
+        duration: 15000,
+        message: options.success,
         type: 'is-success'
       })
     }
@@ -64,8 +64,8 @@ export const loadToState = async function ({getters, commit, dispatch}, options)
       // continue with default error
     }
     Toast.open({
-      // duration: 5000,
-      message: options.name + ' failed: ' + e.message,
+      duration: 15000,
+      message: options.fail + ': ' + e.message,
       type: 'is-danger'
     })
   }
@@ -86,8 +86,8 @@ export const putData = async function ({getters, commit, dispatch}, options) {
     console.log(`put ${options.name}`, response)
     if (options.showNotification) {
       Toast.open({
-        // duration: 5000,
-        message: options.name + ' succeeded',
+        duration: 15000,
+        message: options.success,
         type: 'is-success'
       })
     }
@@ -95,8 +95,8 @@ export const putData = async function ({getters, commit, dispatch}, options) {
   } catch (e) {
     console.log(`error during PUT ${options.name}`, e)
     Toast.open({
-      // duration: 5000,
-      message: options.name + ' failed: ' + e.message,
+      duration: 15000,
+      message: options.fail + ': ' + e.message,
       type: 'is-danger'
     })
   }
@@ -111,7 +111,7 @@ export const postData = async function ({getters, commit, dispatch}, options) {
       Toast.open({
         duration: 15000,
         message: options.success,
-        type: 'is-primary'
+        type: 'is-success'
       })
     }
     let data
@@ -143,8 +143,8 @@ export const deleteData = async function ({getters, commit, dispatch}, options) 
     console.log(`delete ${options.name}`, response)
     if (options.showNotification) {
       Toast.open({
-        // duration: 5000,
-        message: options.name + ' succeeded',
+        duration: 15000,
+        message: options.success,
         type: 'is-success'
       })
     }
@@ -152,8 +152,8 @@ export const deleteData = async function ({getters, commit, dispatch}, options) 
   } catch (e) {
     console.log(`error during DELETE ${options.name}`, e)
     Toast.open({
-      // duration: 5000,
-      message: options.name + ' failed: ' + e.message,
+      duration: 15000,
+      message: options.fail + ': ' + e.message,
       type: 'is-danger'
     })
   }

@@ -182,7 +182,7 @@ export default {
       selectedTemplate: '',
       showModal: false,
       filterTemplates: false,
-      formModel: null,
+      formModel: {},
       ownerFilter: '',
       // selectedOwner: null,
       brandFilter: 'mine'
