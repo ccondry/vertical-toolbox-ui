@@ -12,7 +12,7 @@
             website. You can get your link to the brand website from the Demo
             Links homepage in the dCloud scheduled demo, or the
             <a href="/pcce/demos/brand" target="pcce">
-              PCCE Instant Demo Toolbox - Brand Demo
+              <strong>PCCE Instant Demo Toolbox - Brand Demo</strong>
             </a>
             for the instant demo.
           </p>
