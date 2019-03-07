@@ -17,62 +17,45 @@ const mutations = {
 }
 
 const actions = {
-  async saveBrand ({getters, commit, dispatch}, {id, data, showNotification}) {
+  saveBrand ({getters, commit, dispatch}, {id, data, showNotification}) {
+    dispatch('setWorking', {group: 'app', type: 'brands', value: true})
     // remove database ID, if any
     delete data._id
-    try {
-      const response = await dispatch('putData', {
-        name: 'brand',
-        endpoint: getters.endpoints.brands + '/' + id,
-        data,
-        showNotification
-      })
-
-      console.log('saved brand. response:', response)
-      dispatch('successNotification', 'Successfully saved brand')
-    } catch (e) {
-      console.log('error saving brand', e)
-      dispatch('notification', {
-        title: 'Failed to save brand',
-        message: e.response.data.message,
-        type: 'danger'
-      })
-    }
+    dispatch('putData', {
+      name: 'brand',
+      endpoint: getters.endpoints.brands + '/' + id,
+      data,
+      showNotification,
+      success: 'Successfully saved Brand config.',
+      fail: 'Failed to save brand'
+    }).finally(() => {
+      dispatch('setWorking', {group: 'app', type: 'brands', value: false})
+    })
   },
-  async deleteBrand ({getters, commit, dispatch}, {id, showNotification}) {
-    try {
-      const response = await dispatch('deleteData', {
-        name: 'brand',
-        endpoint: getters.endpoints.brands + '/' + id,
-        showNotification
-      })
-
-      console.log('deleted brand. response:', response)
-      dispatch('successNotification', 'Successfully deleted brand')
-    } catch (e) {
-      console.log('error deleting brand', e)
-      dispatch('notification', {
-        title: 'Failed to delete brand',
-        message: e.response.data.message,
-        type: 'danger'
-      })
-    }
+  deleteBrand ({getters, commit, dispatch}, {id, showNotification}) {
+    dispatch('setWorking', {group: 'app', type: 'brands', value: true})
+    dispatch('deleteData', {
+      name: 'brand',
+      endpoint: getters.endpoints.brands + '/' + id,
+      showNotification,
+      success: 'Successfully deleted Brand ' + id,
+      fail: 'Failed to delete Brand ' + id
+    }).finally(() => {
+      dispatch('setWorking', {group: 'app', type: 'brands', value: false})
+    })
   },
-  async loadBrands ({getters, commit, dispatch}, showNotification = true) {
+  loadBrands ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'brands', value: true})
-    try {
-      await dispatch('loadToState', {
-        name: 'brands',
-        endpoint: getters.endpoints.brands,
-        mutation: types.SET_BRANDS,
-        showNotification
-      })
-    } catch (e) {
-      console.log('error loading brands', e)
-      dispatch('errorNotification', {title: 'Failed to load brands', error: e})
-    } finally {
+    dispatch('loadToState', {
+      name: 'brands',
+      endpoint: getters.endpoints.brands,
+      mutation: types.SET_BRANDS,
+      showNotification,
+      success: 'Successfully loaded Brands',
+      fail: 'Failed to load brands'
+    }).finally(() => {
       dispatch('setLoading', {group: 'app', type: 'brands', value: false})
-    }
+    })
   }
 }
 
