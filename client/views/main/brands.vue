@@ -122,6 +122,7 @@
             <b-tab-item label="Form">
               <b-loading :is-full-page="false" :active="loading.app.brands || working.app.brands" :can-cancel="false"></b-loading>
               <brand-config
+              v-if="this.formModel"
               :model.sync="formModel"
               @save="clickSave"
               @upload="upload"
@@ -138,7 +139,7 @@
           </b-tabs>
 
           <brand-config
-          v-if="!user.admin"
+          v-if="this.formModel && !user.admin"
           :model.sync="formModel"
           @save="clickSave"
           @upload="upload"
@@ -181,7 +182,7 @@ export default {
       selectedTemplate: '',
       showModal: false,
       filterTemplates: false,
-      formModel: {},
+      formModel: null,
       ownerFilter: '',
       // selectedOwner: null,
       brandFilter: 'mine'
