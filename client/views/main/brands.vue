@@ -7,15 +7,33 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">Information</h1>
-          <p>
-            View and edit your demo brands for use with the custom-branded demo
-            website. You can get your link to the brand website from the Demo
-            Links homepage in the dCloud scheduled demo, or the
-            <a href="/pcce/demos/brand" target="pcce">
-              <strong>PCCE Instant Demo Toolbox - Brand Demo</strong>
-            </a>
-            for the instant demo.
-          </p>
+          <div class="content">
+            <p>
+              Use this page to view and edit your demo brands, for use with the
+              <a href="https://mm-brand.cxdemo.net" target="brand">
+                <strong>Brand Demo Website</strong>
+              </a>
+              website.
+            </p>
+            <p>
+              You can get also get a link to the brand demo website that
+              doesn't ask for your session information:
+              <ul>
+                <li>Use the
+                  <a href="https://ad1.dcloud.cisco.com/dCloud/default.html" target="links">
+                    <strong>Demo Links</strong>
+                  </a>
+                  homepage for the dCloud PCCE or UCCX scheduled demos
+                </li>
+                <li>Or use the
+                  <a href="/pcce/demos/brand" target="pcce">
+                    <strong>PCCE Instant Demo Toolbox</strong>
+                  </a>
+                  for the PCCE instant demo
+                </li>
+              </ul>
+            </p>
+          </div>
         </article>
       </div>
     </div>
