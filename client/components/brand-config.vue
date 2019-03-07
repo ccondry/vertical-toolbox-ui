@@ -157,7 +157,7 @@
             <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
           </b-field>
           <b-field label="Select Existing Image">
-            <b-select @change.native="model.advisorImage = $event.target.value">
+            <b-select @change.native="changeAdvisorImage($event)">
               <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
                 Sandra Jefferson
               </option>
@@ -301,6 +301,11 @@ const Datepick = Vue.component('Datepick', {
     }
   },
   methods: {
+    changeAdvisorImage (event) {
+      // advsior image b-select changed. update model.
+      console.log('changeAdvisorImage', event.target.value)
+      this.model.advisorImage = event.target.value
+    },
     input (data) {
       // date picker chose a date, so update the field
       this.field.value = this.dateFormatter(data)
