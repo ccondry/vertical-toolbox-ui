@@ -188,6 +188,61 @@
         </b-field>
         <!-- /Expert Advisor Image -->
 
+        <!-- Chat -->
+        <b-collapse class="content card" :open="false">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Chat Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.chatEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <b-field grouped>
+              <b-field label="Icon Name">
+                <b-input v-model="model.chatIcon" placeholder="message-processing" />
+              </b-field>
+              <b-field label="Icon">
+                <b-icon pack="mdi" :icon="model.chatIcon" size="is-large" />
+              </b-field>
+              <b-field label="Search Icons">
+                <a class="button is-info" href="https://materialdesignicons.com/" target="materialdesignicons">Material Design Icons</a>
+              </b-field>
+            </b-field>
+
+            <b-field expanded label="Heading">
+              <b-input v-model="model.chatHeading" placeholder="Chat Now" />
+            </b-field>
+
+            <b-field expanded label="Text">
+              <b-input v-model="model.chatText" placeholder="An expert will chat with you live" />
+            </b-field>
+
+            <b-field expanded label="Wait Time">
+              <b-input v-model="model.chatWaitTime" placeholder="1 min wait time" />
+            </b-field>
+            <!-- // chat
+            chatEnabled: true,
+            chatIcon: 'message-processing',
+            chatHeading: 'Chat Now',
+            chatText: 'An expert will chat with you live',
+            chatWaitTime: '1 min wait time', -->
+          </div>
+        </b-collapse>
+        <!-- /Chat -->
+
         <!-- Save button -->
         <b-field>
           <button type="button" class="button is-success"
