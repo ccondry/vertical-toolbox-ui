@@ -643,8 +643,8 @@ export default {
       type: Object,
       default () {
         return {
-          // color1: '#0b63ac',
-          // color2: '#2b83cc'
+          color1: '#0b63ac',
+          color2: '#2b83cc'
         }
       }
     },
