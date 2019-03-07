@@ -100,6 +100,102 @@
     </b-collapse>
     <!-- /Website Customization -->
 
+    <!-- Advanced Website Customization -->
+    <b-collapse class="content card">
+      <div slot="trigger" slot-scope="props" class="card-header">
+        <p class="card-header-title">Advanced Website Customization</p>
+        <a class="card-header-icon">
+          <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+        </a>
+      </div>
+
+      <div class="card-content">
+        <!-- Contact Button -->
+        <b-field expanded label="Contact Button Text">
+          <b-input v-model="model.contactButtonText" placeholder="Talk to an Expert" />
+        </b-field>
+        <!-- /Contact Button -->
+
+        <!-- Contact Menu Title -->
+        <b-field expanded label="Contact Menu Title">
+          <b-input v-model="model.menuTitle" placeholder="Need Help?" />
+        </b-field>
+        <!-- /Contact Menu Title -->
+
+        <!-- Chat Menu Title -->
+        <b-field expanded label="Chat Menu Title">
+          <b-input v-model="model.chatMenuTitle" placeholder="Now Chatting" />
+        </b-field>
+        <!-- /Chat Menu Title -->
+
+        <!-- Expert Advisor Enable -->
+        <b-field label="Show Expert Advisor Header">
+          <b-select v-model="model.advisorEnabled">
+            <option :value="true">
+              Shown
+            </option>
+            <option :value="false">
+              Hidden
+            </option>
+          </b-select>
+        </b-field>
+        <!-- /Expert Advisor Enable -->
+
+        <!-- Expert Heading -->
+        <b-field expanded label="Advisor Heading Text Line 1">
+          <b-input v-model="model.advisorHeading" placeholder="Expert Advisor" />
+        </b-field>
+
+        <b-field expanded label="Advisor Heading Text Line 2">
+          <b-input v-model="model.advisorText" placeholder="We're here to help" />
+        </b-field>
+        <!-- /Expert Heading -->
+
+        <!-- Expert Advisor Image -->
+        <b-field grouped>
+          <b-field label="Expert Advisor Image">
+            <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
+          </b-field>
+          <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
+          <b-field label="Upload">
+            <button class="button is-primary" type="button"
+            :disabled="working.images.advisor"
+            @click="launchFilePicker('advisor')">
+              {{ working.images.advisor ? 'Working...' : 'Browse...' }}
+            </button>
+          </b-field>
+          <b-field label="Select Existing Image">
+            <b-select @change.native="model.advisorImage = $event.target.value">
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
+                Sandra Jefferson
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author2.png">
+                Josh Peterson
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author3.png">
+                Rick Barrows
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author4.png">
+                Jamie Bracksted
+              </option>
+              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author5.png">
+                Helen Liang
+              </option>
+            </b-select>
+          </b-field>
+        </b-field>
+        <!-- /Expert Advisor Image -->
+
+        <!-- Save button -->
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+        </b-field>
+      </div>
+    </b-collapse>
+    <!-- /Advanced Website Customization -->
 
   </div>
 </template>
@@ -192,7 +288,8 @@ const tooltips = {
   favicon image to this vertical.`,
   iframe: `Enter the URL of a customer's website, or upload an HTML file saved
   using the SingleFile browser extension, or upload a screenshot of the
-  customer's website.`
+  customer's website.`,
+  advisor: 'Choose a round or square image.'
 }
 
 const Datepick = Vue.component('Datepick', {
@@ -352,6 +449,10 @@ export default {
             'iframe': (url) => {
               // set iframe url
               this.model.iframe = url
+            },
+            'advisor': (url) => {
+              // set iframe url
+              this.model.advisor = url
             }
           }
           // update our model with the new file URL
