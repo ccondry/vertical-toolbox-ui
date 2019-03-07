@@ -256,8 +256,6 @@
 </template>
 
 <script>
-import moment from 'moment'
-import Vue from 'vue'
 import { Chrome } from 'vue-color'
 
 const ttsTypes = [
@@ -348,43 +346,8 @@ const tooltips = {
     picture.`
 }
 
-const Datepick = Vue.component('Datepick', {
-  props: ['field'],
-  data () {
-    return {
-      model: this.getDateValue()
-    }
-  },
-  methods: {
-    changeAdvisorImage (event) {
-      // advsior image b-select changed. update model.
-      console.log('changeAdvisorImage', event.target.value)
-      this.model.advisorImage = event.target.value
-    },
-    input (data) {
-      // date picker chose a date, so update the field
-      this.field.value = this.dateFormatter(data)
-    },
-    getDateValue () {
-      // get a Date object for the current field value
-      return new Date(moment(this.field.value).toDate())
-    },
-    dateParser (date) {
-      // return new Date(Date.parse(date))
-      const parsedDate = new Date(moment(date).format('MMM DD, YYYY HH:MM'))
-      console.log('parsedDate', parsedDate)
-      return parsedDate
-    },
-    dateFormatter (date) {
-      // return date.toLocaleDateString()
-      return moment(date).format('DD MMM YYYY')
-    }
-  }
-})
-
 export default {
   components: {
-    Datepick,
     Chrome
   },
 
