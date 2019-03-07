@@ -156,18 +156,8 @@
           <b-field label="Expert Advisor Image">
             <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
           </b-field>
-          <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field label="Upload">
-            <button class="button is-primary" type="button"
-            :disabled="working.images.advisor"
-            @click="launchFilePicker('advisor')">
-              {{ working.images.advisor ? 'Working...' : 'Browse...' }}
-            </button>
-          </b-field>
           <b-field label="Select Existing Image">
-            <b-select @input.native="model.advisorImage = $event.target.value">
+            <b-select @change.native="model.advisorImage = $event.target.value">
               <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
                 Sandra Jefferson
               </option>
@@ -184,6 +174,16 @@
                 Helen Liang
               </option>
             </b-select>
+          </b-field>
+          <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
+          <b-field label="Upload">
+            <button class="button is-primary" type="button"
+            :disabled="working.images.advisor"
+            @click="launchFilePicker('advisor')">
+              {{ working.images.advisor ? 'Working...' : 'Browse...' }}
+            </button>
           </b-field>
         </b-field>
         <!-- /Expert Advisor Image -->
