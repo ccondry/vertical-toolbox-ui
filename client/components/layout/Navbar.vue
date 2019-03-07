@@ -68,6 +68,7 @@ export default {
 <style lang="scss">
 .app-navbar {
   color: #28374B;
+  background-color: white;
   a {
     color: #28374B;
   }
