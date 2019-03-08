@@ -423,6 +423,9 @@ export default {
 
   watch: {
     selectedTemplate (val) {
+      // user chose vertical in selection box
+      // update the vertical ID in state
+      this.setSelectedVertical(val)
       // and also set the URL query parameter for it
       this.$router.push({query: {vertical: val}})
     },
