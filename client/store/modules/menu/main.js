@@ -39,6 +39,15 @@ export default {
       component: lazyLoading('main/cumulus')
     },
     {
+      name: 'IVR Prompts',
+      path: '/branding/ivr',
+      meta: {
+        icon: 'phone',
+        description: 'IVR prompt customization'
+      },
+      component: lazyLoading('main/ivr')
+    },
+    {
       name: 'Verticals',
       path: '/branding/verticals',
       meta: {
