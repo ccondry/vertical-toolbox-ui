@@ -148,13 +148,13 @@
           <div class="content">
             <ul>
               <li>
-                <router-link :to="{ name: 'Cumulus Website' }">
-                  Cumulus Website
+                <router-link :to="{ name: 'Branded Website' }">
+                  Branded Website
                 </router-link>
               </li>
               <li>
-                <router-link :to="{ name: 'Branded Website' }">
-                  Branded Website
+                <router-link :to="{ name: 'Cumulus Website' }">
+                  Cumulus Website
                 </router-link>
               </li>
               <li>
