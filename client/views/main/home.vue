@@ -186,13 +186,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import VerticalConfig from '../../components/vertical-config.vue'
 import SaveTemplateModal from '../../components/modals/save-template.vue'
 import moment from 'moment'
 
 export default {
   components: {
-    VerticalConfig,
     SaveTemplateModal
   },
   data () {
