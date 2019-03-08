@@ -60,9 +60,9 @@
         <!-- /Main and SecondMenu -->
 
         <!-- Jacada -->
-        <b-collapse class="content card" v-if="user.admin">
+        <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Jacada</p>
+            <p class="card-header-title">Jacada VIVR</p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
@@ -71,6 +71,14 @@
             <button class="button is-primary" @click="$set(model.cvp, 'jacadaMenu', defaults.cvp.jacadaMenu)">Configure</button>
           </div>
           <div class="card-content" v-else>
+
+            <b-select placeholder="Select a preconfigured VIVR vertical" @change.native="changeJacadaVertical($event)">
+              <option value="travel">Travel</option>
+              <option value="finance">Finance</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="city">City</option>
+              <option value="utility">Utility</option>
+            </b-select>
 
             <b-field label="interactionId">
               <b-input v-model="model.cvp.jacadaMenu.interactionId" :placeholder="defaults.cvp.jacadaMenu.interactionId" />
@@ -188,6 +196,29 @@ const tooltips = {
     favicon image to this vertical.`
 }
 
+const jacadaVerticals = {
+  travel: {
+    interactionId: '1504902996437-2345b2a39832f45634e58e8004815e61d35ee1-38df',
+    applicationKey: 'f652b15a-999c-45f9-88ef-ff302451600a'
+  },
+  finance: {
+    interactionId: '1504903078933-63535b2a39832f45634e58e8004815e61d35ee1-20f4',
+    applicationKey: '4c051dde-ca1c-4682-8536-8795938ac63e'
+  },
+  utility: {
+    interactionId: '1504907031358-5725b2a39832f45634e58e8004815e636ed7c-810e',
+    applicationKey: '521a87ee-569a-4db6-8ed1-28162926ada2'
+  },
+  healthcare: {
+    interactionId: '1504906590396-97225b2a39832f45634e58e8004815e61d35ee1-3a5c',
+    applicationKey: '5057e750-7f76-466d-aaea-9ff096fa48e3'
+  },
+  city: {
+    interactionId: '1504906871815-98355b2a39832f45634e58e8004815e636ed7c8-4ff9',
+    applicationKey: '23782191-9d8d-474b-9e7f-b1157ce0fc74'
+  }
+}
+
 export default {
   props: {
     'model': {
@@ -257,6 +288,13 @@ export default {
   },
 
   methods: {
+    changeJacadaVertical (event) {
+      // set jacada interaction ID and application key when friendly vertical
+      // name is selected from option menu
+      const vertical = jacadaVerticals[event.target.value]
+      this.model.cvp.jacadaMenu.interactionId = vertical.interactionId
+      this.model.cvp.jacadaMenu.applicationKey = vertical.applicationKey
+    },
     changeFavicon (event) {
       if (!event) return
       console.log('favicon website URL changed', event)
