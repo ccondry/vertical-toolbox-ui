@@ -18,17 +18,15 @@
             </p>
           </div>
 
-          <brand-config
-          v-if="model.brand"
-          :model.sync="model.brand"
-          :vertical-id="vertical.id"
+          <mobile-config
+          :model.sync="model"
           @save="clickSave"
           @upload="upload"
           :working="working"
           :loading="loading"
           :defaults="defaults.verticals"
           :user="user"
-          ></brand-config>
+          ></mobile-config>
 
         </article>
       </div>
@@ -46,7 +44,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import BrandConfig from '../../components/brand-config.vue'
+import MobileConfig from '../../components/mobile-config.vue'
 import SaveTemplateModal from '../../components/modals/save-template.vue'
 import moment from 'moment'
 import Vue from 'vue'
@@ -82,7 +80,7 @@ const Datepick = Vue.component('Datepick', {
 
 export default {
   components: {
-    BrandConfig,
+    MobileConfig,
     SaveTemplateModal,
     Datepick
   },
@@ -194,8 +192,6 @@ export default {
     updateCache (data) {
       // copy state data to local data
       this.model = JSON.parse(JSON.stringify(data))
-      // make sure model.brand is an object
-      if (!this.model.brand) this.$set(this.model, 'brand', {})
     },
     async clickSaveVertical ({id, name}) {
       console.log('saving vertical as', id, '-', name)

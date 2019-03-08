@@ -76,11 +76,11 @@
       </div>
     </div>
 
-    <div class="tile is-ancestor" v-if="selectedTemplate">
+    <div class="tile is-ancestor" v-if="vertical">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
-            Vertical {{ selectedTemplate }}
+            Vertical {{ vertical.id }}
             <!-- 'updated' tag -->
             <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
@@ -141,7 +141,7 @@
     </div>
 
 
-    <div class="tile is-ancestor">
+    <div class="tile is-ancestor" v-if="vertical">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">Configure {{ vertical.id }}</h1>

@@ -3,35 +3,10 @@
     <!-- Hidden File Uploader -->
     <input type="file" style="display:none" ref="file" accept="image/*;text/html" v-uploader />
 
-    <!-- Basic Information -->
+    <!-- Branded Website Customization -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">Basic Information</p>
-        <a class="card-header-icon">
-          <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-        </a>
-      </div>
-      <div class="card-content">
-        <b-field label="ID">
-          <b-input v-model="model.id" placeholder="" disabled="true" />
-        </b-field>
-        <b-field label="Name">
-          <b-input v-model="model.name" placeholder="My Brand" />
-        </b-field>
-
-        <!-- Save button -->
-        <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
-        </b-field>
-      </div>
-    </b-collapse>
-    <!-- /Basic Information -->
-
-    <!-- Website Customization -->
-    <b-collapse class="content card">
-      <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">Website Customization</p>
+        <p class="card-header-title">Branded Website Customization</p>
         <a class="card-header-icon">
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
@@ -75,20 +50,20 @@
         <!-- mobile color picker view - arrange vertically -->
         <div class="is-hidden-tablet">
           <b-field label="Primary Color">
-            <chrome :value="model.color1" @input="model.color1 = $event.hex" />
+            <chrome v-if="model.color1" :value="model.color1" @input="model.color1 = $event.hex" />
           </b-field>
           <b-field label="Secondary Color">
-            <chrome :value="model.color2" @input="model.color2 = $event.hex" />
+            <chrome v-if="model.color2" :value="model.color2" @input="model.color2 = $event.hex" />
           </b-field>
         </div>
         <!-- desktop color picker view - arrange horizontally -->
         <div class="is-hidden-mobile">
           <b-field grouped>
             <b-field label="Primary Color">
-              <chrome :value="model.color1" @input="model.color1 = $event.hex" />
+              <chrome v-if="model.color1" :value="model.color1" @input="model.color1 = $event.hex" />
             </b-field>
             <b-field label="Secondary Color">
-              <chrome :value="model.color2" @input="model.color2 = $event.hex" />
+              <chrome v-if="model.color2" :value="model.color2" @input="model.color2 = $event.hex" />
             </b-field>
           </b-field>
         </div>
@@ -150,7 +125,7 @@
         </b-field>
       </div>
     </b-collapse>
-    <!-- /Website Customization -->
+    <!-- /Branded Website Customization -->
 
     <!-- Advanced Website Customization -->
     <b-collapse class="content card" :open="false">
@@ -821,6 +796,9 @@ export default {
     'defaults': {
       type: Object,
       default () { return {} }
+    },
+    'verticalId': {
+      type: String
     }
   },
 
@@ -839,6 +817,22 @@ export default {
           // vnode.context.chosenFiles = e.target.files
         })
       }
+    }
+  },
+
+  mounted () {
+    // make sure color1 and color2 are set to valid values for the color picker
+    if (!this.model.color1) {
+      this.$set(this.model, 'color1', '#0b63ac')
+    }
+    if (!this.model.color2) {
+      this.$set(this.model, 'color2', '#2b83cc')
+    }
+    // make sure the advisor image is set to a value with Vue.set so that
+    // v-model works on the selection
+    if (!this.model.advisorImage) {
+      // set to Sandra Jefferson photo by default
+      this.$set(this.model, 'advisorImage', 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png')
     }
   },
 
@@ -948,7 +942,7 @@ export default {
         }
         // actually upload the file now. set brand ID in the 'vertical' property
         // to use the brand ID for the path
-        this.$emit('upload', {name, node: nodeName, vertical: this.model.id, data, callback})
+        this.$emit('upload', {name, node: nodeName, vertical: this.verticalId, data, callback})
         // reset the file input
         this.$refs.file.value = ''
       }
