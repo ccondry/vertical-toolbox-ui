@@ -2,7 +2,6 @@ import lazyLoading from './lazyLoading'
 
 export default {
   name: 'Main',
-  // path: '/demos',
   meta: {
     icon: 'folder',
     iconExpanded: 'folder-open',
