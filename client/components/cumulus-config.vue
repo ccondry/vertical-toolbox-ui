@@ -11,7 +11,6 @@
       </div>
       <div class="card-content">
 
-
         <!-- Logo and Icon -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
@@ -62,6 +61,11 @@
               </b-field>
             </b-field>
 
+            <!-- Save Button -->
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
         </b-collapse>
         <!-- /Logo and Icon -->
@@ -131,8 +135,20 @@
                     <button class="button is-primary" type="button" @click="launchFilePicker('slider', i)">Browse...</button>
                   </b-field>
                 </b-field>
+
+                <!-- Save Button -->
+                <b-field>
+                  <button type="button" class="button is-success"
+                  @click.prevent="submit" :disabled="disableSave">Save</button>
+                </b-field>
               </div>
             </b-collapse>
+
+            <!-- Save Button -->
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
 
             <!-- <button v-if="user.admin || model.sliders.length < 3" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button> -->
           </div>
@@ -187,8 +203,20 @@
                   <button class="button is-primary" type="button" @click="launchFilePicker('blogItem', i)">Browse...</button>
                 </b-field>
               </b-field>
+
+              <!-- Save Button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
             </div>
           </b-collapse>
+
+          <!-- Save Button -->
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
 
           <!-- <button v-if="user.admin || model.blogItems.length < 3" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button> -->
         </div>
@@ -279,6 +307,13 @@
             </div>
           </b-collapse>
           <!-- /Task Routing Request Options -->
+
+          <!-- Save Button -->
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+
         </div>
       </b-collapse>
       <!-- /Contact Us Page -->
@@ -347,8 +382,20 @@
                 <button class="button is-primary" type="button" @click="launchFilePicker('services', i)">Browse...</button>
               </b-field>
             </b-field>
+
+            <!-- Save Button -->
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
         </b-collapse>
+
+        <!-- Save Button -->
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+        </b-field>
 
         <!-- <button v-if="user.admin" class="button is-success" @click="model.services.push(JSON.parse(JSON.stringify(defaults.services[0])))">Add Option</button> -->
       </div>
@@ -403,8 +450,20 @@
                 <button class="button is-primary" type="button" @click="launchFilePicker('authors', i)">Browse...</button>
               </b-field>
             </b-field>
+            <!-- Save Button -->
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
+
           </div>
         </b-collapse>
+
+        <!-- Save Button -->
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+        </b-field>
 
         <!-- <button v-if="user.admin" class="button is-success" @click="model.authors.push(JSON.parse(JSON.stringify(defaults.authors[0])))">Add Option</button> -->
       </div>
@@ -460,9 +519,20 @@
               </b-field>
             </b-field>
 
+            <!-- Save Button -->
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
+
           </div>
         </b-collapse>
 
+        <!-- Save Button -->
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+        </b-field>
         <!-- <button v-if="user.admin" class="button is-success" @click="model.timelinePosts.push(JSON.parse(JSON.stringify(defaults.timelinePosts[0])))">Add Option</button> -->
       </div>
     </b-collapse>
@@ -501,14 +571,23 @@
           </div>
         </b-collapse>
 
+        <!-- Save Button -->
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+        </b-field>
+
         <!-- <button v-if="user.admin" class="button is-success" @click="model.testimonials.push(JSON.parse(JSON.stringify(defaults.testimonials[0])))">Add Option</button> -->
       </div>
     </b-collapse>
     <!-- /Testimonials -->
+
+    <!-- Save Button -->
     <b-field>
       <button type="button" class="button is-success"
-@click.prevent="submit" :disabled="disableSave">Save</button>
+      @click.prevent="submit" :disabled="disableSave">Save</button>
     </b-field>
+
   </div>
 </b-collapse>
 <!-- /Website Configuration -->
