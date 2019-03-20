@@ -222,8 +222,10 @@ export default {
       this.selectedTemplate = this.vertical.id
     } else if (this.$route.query.vertical) {
       console.log('mounted - vertical does not exist, but $route.query.vertical exists. setting selected vertical ID to', this.$route.query.vertical)
-      // if vertical was set in query params, load it
-      this.setSelectedVertical(this.$route.query.vertical)
+      // if vertical was set in query params, set our selectedTemplate to that
+      // ID, which will cause the state to be updated and the vertical to load
+      this.selectedTemplate = this.vertical.id
+      // this.setSelectedVertical(this.$route.query.vertical)
     } else {
       // no vertical selected - allow user to select one now
     }
