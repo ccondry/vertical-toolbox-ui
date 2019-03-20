@@ -104,7 +104,7 @@
             @click.prevent="clickSaveAs" :disabled="disableSaveAs">Save As</button>
             <button type="button" class="button is-danger"
             @click.prevent="clickDeleteVertical(selectedTemplate)"
-            :disabled="disableDeleteVertical">Delete</button>
+            :disabled="disableDelete">Delete</button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
 
@@ -390,32 +390,35 @@ export default {
     },
     disableSave () {
       try {
-        // this user owns this template or is an admin
+        // allow save - this user owns this template or is an admin
         return !(this.vertical.owner === this.user.username || this.user.admin)
       } catch (e) {
-        return true
+        // continue
       }
+      // default disable save
+      return true
     },
     disableSaveAs () {
       return !Object.keys(this.model).length
     },
-    disableDeleteVertical () {
-      if (this.vertical) {
-        // any template has been selected
-        if (this.vertical.owner === this.user.username ||
-          (this.user.admin &&
-            this.vertical.owner !== 'system' &&
-            this.vertical.owner !== null)
-          ) {
-          // this user owns this template, or the user is an admin and the selected template's owner is not system
-          return false
-        } else {
-          // this user doesn't have access to delete this template,
-          // so disable the button
-          return true
-        }
+    disableDelete () {
+      if (!this.vertical) {
+        // no vertical loaded/selected - disable delete for everyone
+        return true
+      } else if (this.vertical.owner === 'system')
+        // vertical is owned by the system - disable delete for everyone
+        return true
+      } else if (this.vertical.owner === null)
+        // vertical has no owner (is owned by the system) - disable delete for everyone
+        return true
+      } else if (this.user.admin) {
+        // allow admins to delete any non-system vertical
+        return false
+      } else if (this.vertical.owner === this.user.username) {
+        // allow users to delete their own verticals
+        return false
       } else {
-        // template selection still on placeholder option
+        // disable delete in all other cases
         return true
       }
     }

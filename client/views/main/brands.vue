@@ -282,43 +282,14 @@ export default {
       return this.sortedVerticals.filter(v => v.owner === this.ownerFilter)
     },
     disableSave () {
-      if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
-        // any template has been selected
-        if (this.selectedTemplateObject.owner === this.user.username || this.user.admin) {
-          // this user owns this template or is an admin
-          return false
-        } else {
-          // this user doesn't have access to save over this template,
-          // so disable the button
-          return true
-        }
-      } else {
-        // template selection still on placeholder option
-        return true
+      try {
+        // allow save - this user owns this template or is an admin
+        return !(this.vertical.owner === this.user.username || this.user.admin)
+      } catch (e) {
+        // continue
       }
-    },
-    disableSaveAs () {
-      return !Object.keys(this.model).length
-    },
-    disableDeleteVertical () {
-      if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
-        // any template has been selected
-        if (this.selectedTemplateObject.owner === this.user.username ||
-          (this.user.admin &&
-            this.selectedTemplateObject.owner !== 'system' &&
-            this.selectedTemplateObject.owner !== null)
-          ) {
-          // this user owns this template, or the user is an admin and the selected template's owner is not system
-          return false
-        } else {
-          // this user doesn't have access to delete this template,
-          // so disable the button
-          return true
-        }
-      } else {
-        // template selection still on placeholder option
-        return true
-      }
+      // default disable save
+      return true
     },
     selectedTemplateObject () {
       if (this.verticals && this.verticals.length && this.selectedTemplate.length) {
