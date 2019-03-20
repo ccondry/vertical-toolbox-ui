@@ -391,7 +391,7 @@ export default {
     disableSave () {
       try {
         // this user owns this template or is an admin
-        return this.vertical.owner === this.user.username || this.user.admin
+        return !(this.vertical.owner === this.user.username || this.user.admin)
       } catch (e) {
         return true
       }
