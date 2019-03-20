@@ -27,6 +27,7 @@
           :working="working"
           :loading="loading"
           :defaults="defaults.verticals"
+          :disable-save="disableSave"
           :user="user"
           ></brand-config>
 

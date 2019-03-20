@@ -799,7 +799,8 @@ export default {
     },
     'verticalId': {
       type: String
-    }
+    },
+    'disableSave': {}
   },
 
   directives: {
@@ -852,20 +853,6 @@ export default {
       faviconWebsite: '',
       color1: '#0b63ac',
       color2: '#2b83cc'
-    }
-  },
-
-  computed: {
-    disableSave () {
-      // any template has been selected
-      if (this.model.owner === this.user.username || this.user.admin) {
-        // this user owns this template or is an admin
-        return false
-      } else {
-        // this user doesn't have access to save over this template,
-        // so disable the button
-        return true
-      }
     }
   },
 
