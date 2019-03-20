@@ -207,19 +207,21 @@ export default {
   },
   async mounted () {
     if (this.selectedVerticalId) {
+      console.log('mounted - selectedVerticalId exists, setting selectedTemplate to', this.selectedVerticalId)
       this.selectedTemplate = this.selectedVerticalId
     }
     if (!this.verticals.length) {
+      console.log('mounted - verticals.length is 0, loading verticals now...')
       // load verticals
       this.loadVerticals(false)
     }
     if (this.vertical) {
-      console.log('this.vertical exists')
+      console.log('mounted - vertical exists. updating cache with vertical ID', this.vertical.id)
       // update cache if state data already exists
       this.updateCache(this.vertical)
       this.selectedTemplate = this.vertical.id
     } else if (this.$route.query.vertical) {
-      console.log('this.$route.query.vertical exist')
+      console.log('mounted - vertical does not exist, but $route.query.vertical exists. setting selected vertical ID to', this.$route.query.vertical)
       // if vertical was set in query params, load it
       this.setSelectedVertical(this.$route.query.vertical)
     } else {
