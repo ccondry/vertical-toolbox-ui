@@ -406,10 +406,10 @@ export default {
       if (!this.vertical) {
         // no vertical loaded/selected - disable delete for everyone
         return true
-      } else if (this.vertical.owner === 'system')
+      } else if (this.vertical.owner === 'system') {
         // vertical is owned by the system - disable delete for everyone
         return true
-      } else if (this.vertical.owner === null)
+      } else if (this.vertical.owner === null) {
         // vertical has no owner (is owned by the system) - disable delete for everyone
         return true
       } else if (this.user.admin) {
