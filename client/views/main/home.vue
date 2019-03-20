@@ -341,7 +341,8 @@ export default {
       'loading',
       'working',
       'defaults',
-      'vertical'
+      'vertical',
+      'selectedVerticalId'
     ]),
     autocompleteOwners () {
       const allOwners = this.verticals.map(v => v.owner)
