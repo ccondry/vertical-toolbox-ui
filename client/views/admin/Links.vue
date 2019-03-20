@@ -4,7 +4,7 @@
       <div class="tile is-parent is-12 is-vertical">
         <article class="tile is-child box">
           <h1 class="title">Links</h1>
-          <div class="wysiwyg">
+          <div class="content">
             <ul>
               <li v-for="link in links">{{ link.name }}: <a :href="link.url" target="_blank">{{ link.url }}</a></li>
             </ul>
