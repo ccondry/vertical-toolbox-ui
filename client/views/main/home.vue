@@ -212,15 +212,12 @@
                       <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
                     </a>
                   </div>
-                  <div class="card-content" v-else>
-                    <div class="block">
-                      <b-field label="SMS Deflection Message">
-                          <b-input
-                          :value="decodeURIComponent(model.smsDeflectionMessage)"
-                          @change="model.smsDeflectionMessage = encodeURIComponent($event.target.value)"
-                          />
-                        </b-field>
-                    </div>
+                  <div class="block">
+                    <b-field label="SMS Deflection Message">
+                        <b-input
+                        :value="decodeURIComponent(model.smsDeflectionMessage)"
+                        @change="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
+                    </b-field>
                   </div>
                 </b-collapse>
                 <!-- /SMS Deflection Configuration -->
