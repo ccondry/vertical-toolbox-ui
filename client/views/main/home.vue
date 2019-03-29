@@ -426,8 +426,8 @@ export default {
       for (const v of values) {
         console.log('checking for value', v)
         if (!this.model[v]) {
-          console.log(v, 'is not set. Setting it to default value', this.defaults[v])
-          this.model[v] = this.defaults[v]
+          console.log(v, 'is not set. Setting it to default value', this.defaults.verticals[v])
+          this.model[v] = this.defaults.verticals[v]
         } else {
           console.log(v, 'is already set to', this.model[v])
         }
