@@ -212,20 +212,19 @@
                 </b-field>
                 <!-- /SMS Deflection Configuration -->
 
-                <b-field>
-                  <button
-                  class="button is-success"
-                  @click.prevent="submit"
-                  :disabled="disableSave">Save</button>
-                </b-field>
-
               </div>
               <!-- /admin test section -->
 
             </div>
           </b-collapse>
           <!-- /Basic Information -->
-
+          <b-field>&nbsp;</b-field>
+          <b-field>
+            <button
+            class="button is-success"
+            @click.prevent="submit"
+            :disabled="disableSave">Save</button>
+          </b-field>
         </article>
       </div>
     </div>
