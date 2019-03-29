@@ -14,7 +14,7 @@
 
       <div class="card-content">
         <!-- Website Title -->
-        <b-field label="HTML Title">
+        <b-field label="HTML Title" :message="getTooltip('htmlTitle')">
           <b-input v-model="model.title" placeholder="Company" />
         </b-field>
         <!-- iframe -->
@@ -766,7 +766,9 @@ const tooltips = {
   smsText: `You can use {0} to fill in the SMS number associated with your
     dCloud datacenter.`,
   callText: `You can use {0} to fill in the main phone number associated with
-    your dCloud demo session.`
+    your dCloud demo session.`,
+  htmlTitle: `This is the tab title you would see in your browser, above the
+    content of the demo page.`
 }
 
 export default {
