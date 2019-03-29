@@ -126,6 +126,108 @@
               <b-field label="Name">
                 <b-input v-model="model.name" :placeholder="defaults.name" />
               </b-field>
+              <div v-if="user.admin">
+                <!-- Language -->
+                <b-field label="Language">
+                  <b-select v-model="model.languageCode" @change="changeLanguageCode($event)">
+                    <option value="ar-SA">Arabic (Saudi Arabia)</option>
+                    <option value="ar-AE">Arabic (U.A.E.)</option>
+                    <option value="zh-CN">Chinese Simplified (China)</option>
+                    <option value="zh-TW">Chinese Traditional (Taiwan)</option>
+                    <option value="da-DK">Danish (Denmark)</option>
+                    <option value="nl-NL">Dutch (Netherlands)</option>
+                    <option value="en-UK">English (UK)</option>
+                    <option value="en-US">English (US)</option>
+                    <option value="fr-CA">French (Canada)</option>
+                    <option value="fr-FR">French (France)</option>
+                    <option value="de-DE">German (Germany)</option>
+                    <option value="el-GR">Greek (Greece)</option>
+                    <option value="hi-IN">Hindi (India)</option>
+                    <option value="it-IT">Italian (Italy)</option>
+                    <option value="ja-JP">Japanese (Japan)</option>
+                    <option value="ko-KR">Korean (Korea)</option>
+                    <option value="nb-NO">Nowegian (Norway)</option>
+                    <option value="pl-Pl">Polish (Poland)</option>
+                    <option value="pt-BR">Portuguese (Brazil)</option>
+                    <option value="ru-RU">Russian (Russian Federation)</option>
+                    <option value="es-MX">Spanish (Mexico)</option>
+                    <option value="es-ES">Spanish (Spain)</option>
+                    <option value="sv-SE">Swedish (Sweden)</option>
+                    <option value="tr-TR">Turkish (Turkey)</option>
+                  </b-select>
+                </b-field>
+                <!-- /Language -->
+
+                <!-- Bot Enabled -->
+                <b-field label="Bot Enabled">
+                  <b-select v-model="model.chatBotEnabled">
+                    <option :value="true">Enabled</option>
+                    <option :value="false">Disabled</option>
+                  </b-select>
+                </b-field>
+                <!-- /Bot Enabled -->
+
+                <!-- Chat Bot Token -->
+                <p>
+                  You can customize the AI bot script with your own text
+                  and intents by using your own DialgFlow Client Access API Token
+                  here. Download the
+                  <a :href="intentsZipUrl">
+                    <strong>dCloud DialogFlow intents</strong>
+                  </a>
+                  zip file and import it into your DialogFlow to use as a base
+                  for customizing your demo AI bots.
+                </p>
+                <b-field label="DialogFlow Client Access API Token">
+                  <b-autocomplete
+                  v-model="model.chatBotToken"
+                  :data="[defaults.chatBotToken]"
+                  :placeholder="defaults.chatBotToken" />
+                </b-field>
+                <!-- /Chat Bot Token -->
+
+                <!-- Post Chat Survey -->
+                <b-field label="Post-Chat-Bot Survey">
+                  <b-select v-model="model.chatBotSurveyEnabled">
+                    <option :value="true">Enabled</option>
+                    <option :value="false">Disabled</option>
+                  </b-select>
+                </b-field>
+                <!-- /Post Chat Survey -->
+
+                <!-- /TTS engine -->
+                <b-field label="Conversational IVR TTS Engine">
+                  <b-select v-model="model.ttsEngine">
+                    <option value="nuance">Nuance</option>
+                    <option value="google">Google</option>
+                  </b-select>
+                </b-field>
+                <!-- /TTS engine -->
+
+                <!-- SMS Deflection Configuration -->
+                <b-collapse class="content card">
+                  <div slot="trigger" slot-scope="props" class="card-header">
+                    <p class="card-header-title">SMS Deflection Message</p>
+                    <a class="card-header-icon">
+                      <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                    </a>
+                  </div>
+                  <div class="card-content" v-else>
+                    <div class="block">
+                      <b-field label="SMS Deflection Message">
+                          <b-input
+                          :value="decodeURIComponent(model.smsDeflectionMessage)"
+                          @change="model.smsDeflectionMessage = encodeURIComponent($event.target.value)"
+                          />
+                        </b-field>
+                    </div>
+                  </div>
+                </b-collapse>
+                <!-- /SMS Deflection Configuration -->
+
+              </div>
+              <!-- /admin test section -->
+
               <b-field>
                 <button type="button"
                 class="button is-success"
@@ -229,6 +331,12 @@ export default {
     } else {
       // no vertical selected - allow user to select one now
     }
+    // if languageCode is not set, set it from lanaguage and region (or defaults)
+    if (!this.model.languageCode) {
+      let language = this.model.language || 'en'
+      let region = this.model.region || 'US'
+      this.model.languageCode = language + '-' + region
+    }
   },
   methods: {
     ...mapActions([
@@ -239,6 +347,12 @@ export default {
       'deleteVertical',
       'setSelectedVertical'
     ]),
+    changeLanguageCode (event) {
+      // legacy - when changing the languageCode, also set language and region
+      // code separately into the model
+      this.model.language = $event.target.value.split('-').shift()
+      this.model.region = $event.target.value.split('-').pop()
+    },
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
       // pop confirmation dialog
