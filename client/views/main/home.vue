@@ -117,14 +117,14 @@
               </a>
             </div>
             <div class="card-content" v-if="!model.id || !model.name">
-              <button class="button is-primary" @click="$set(model, 'id', defaults.id); $set(model, 'name', defaults.name);">Configure</button>
+              <button class="button is-primary" @click="$set(model, 'id', defaults.verticals.id); $set(model, 'name', defaults.verticals.name);">Configure</button>
             </div>
             <div class="card-content" v-else>
               <b-field label="ID">
-                <b-input v-model="model.id" :placeholder="defaults.id" disabled="true" />
+                <b-input v-model="model.id" :placeholder="defaults.verticals.id" disabled="true" />
               </b-field>
               <b-field label="Name">
-                <b-input v-model="model.name" :placeholder="defaults.name" />
+                <b-input v-model="model.name" :placeholder="defaults.verticals.name" />
               </b-field>
               <div v-if="user.admin">
                 <!-- Language -->
@@ -181,8 +181,8 @@
                 <b-field label="DialogFlow Client Access API Token">
                   <b-autocomplete
                   v-model="model.chatBotToken"
-                  :data="[defaults.chatBotToken]"
-                  :placeholder="defaults.chatBotToken" />
+                  :data="[defaults.verticals.chatBotToken]"
+                  :placeholder="defaults.verticals.chatBotToken" />
                 </b-field>
                 <!-- /Chat Bot Token -->
 
