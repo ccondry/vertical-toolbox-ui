@@ -291,7 +291,8 @@ export default {
       model: {},
       ownerFilter: '',
       // selectedOwner: null,
-      verticalFilter: 'mine'
+      verticalFilter: 'mine',
+      intentsZipUrl: 'https://mm-static.cxdemo.net/intents.zip'
     }
   },
   async mounted () {
