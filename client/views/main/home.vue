@@ -425,7 +425,12 @@ export default {
       ]
       // fill in each model value with default value, if not set
       for (const v of values) {
-        this.model[v] = this.model[v] || this.defaults[v]
+        if (!this.model[v]) {
+          console.log(v, 'is not set. Setting it to default value', this.defaults[v])
+          this.model[v] = this.defaults[v]
+        } else {
+          console.log(v, 'is already set to', this.model[v])
+        }
       }
     },
     async clickSaveVertical ({id, name}) {
