@@ -204,7 +204,7 @@
                 </b-field>
                 <!-- /TTS engine -->
 
-                <!-- SMS Deflection Configuration -->
+                <!-- <ection Configuration -->
                 <b-field label="SMS Deflection Message">
                   <b-input
                   :value="decodeURIComponent(model.smsDeflectionMessage)"
@@ -212,15 +212,16 @@
                 </b-field>
                 <!-- /SMS Deflection Configuration -->
 
+                <b-field>
+                  <button type="button"
+                  class="is-success"
+                  @click.prevent="submit"
+                  :disabled="disableSave">Save</button>
+                </b-field>
+                
               </div>
               <!-- /admin test section -->
 
-              <b-field>
-                <button type="button"
-                class="button is-success"
-                @click.prevent="submit"
-                :disabled="disableSave">Save</button>
-              </b-field>
             </div>
           </b-collapse>
           <!-- /Basic Information -->
