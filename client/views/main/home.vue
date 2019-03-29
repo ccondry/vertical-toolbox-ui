@@ -318,12 +318,6 @@ export default {
     } else {
       // no vertical selected - allow user to select one now
     }
-    // if languageCode is not set, set it from lanaguage and region (or defaults)
-    if (!this.model.languageCode) {
-      let language = this.model.language || 'en'
-      let region = this.model.region || 'US'
-      this.model.languageCode = language + '-' + region
-    }
   },
   methods: {
     ...mapActions([
@@ -408,6 +402,30 @@ export default {
     updateCache (data) {
       // copy state data to local data
       this.model = JSON.parse(JSON.stringify(data))
+      // if languageCode is not set, set it from lanaguage and region (or defaults)
+      if (!this.model.languageCode) {
+        let language = this.model.language || 'en'
+        let region = this.model.region || 'US'
+        this.model.languageCode = language + '-' + region
+      }
+
+      // set more defaults
+      const values = [
+        'smsDeflectionMessage',
+        'chatBotToken',
+        'chatBotEnabled',
+        'chatBotSurveyEnabled',
+        'language',
+        'region',
+        'smsDeflectionMessage',
+        'duoWelcomeMessage',
+        'duoFraudSmsMessage',
+        'ttsEngine'
+      ]
+      // fill in each model value with default value, if not set
+      for (const v of values) {
+        this.model[v] = this.model[v] || this.defaults[v]
+      }
     },
     async clickSaveVertical ({id, name}) {
       console.log('saving vertical as', id, '-', name)
