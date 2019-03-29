@@ -218,7 +218,7 @@
                   @click.prevent="submit"
                   :disabled="disableSave">Save</button>
                 </b-field>
-                
+
               </div>
               <!-- /admin test section -->
 
@@ -563,6 +563,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

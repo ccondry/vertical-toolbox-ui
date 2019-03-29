@@ -122,4 +122,10 @@ html {
     }
   }
 }
+.content .card-header .card-header-title {
+  margin-bottom: 0;
+}
+.card-header-title, .card-header-icon {
+  background-color: #f3f3f3;
+}
 </style>
