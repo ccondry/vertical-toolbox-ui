@@ -213,8 +213,8 @@
                 <!-- /SMS Deflection Configuration -->
 
                 <b-field>
-                  <button type="button"
-                  class="is-success"
+                  <button
+                  class="button is-success"
                   @click.prevent="submit"
                   :disabled="disableSave">Save</button>
                 </b-field>
