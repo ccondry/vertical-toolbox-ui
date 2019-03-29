@@ -218,7 +218,7 @@
             </div>
           </b-collapse>
           <!-- /Basic Information -->
-          <b-field>&nbsp;</b-field>
+          <!-- <b-field>&nbsp;</b-field> -->
           <b-field>
             <button
             class="button is-success"
