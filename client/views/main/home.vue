@@ -204,7 +204,7 @@
                 </b-field>
                 <!-- /TTS engine -->
 
-                <!-- <ection Configuration -->
+                <!-- SMS Deflection Configuration -->
                 <b-field label="SMS Deflection Message">
                   <b-input
                   :value="decodeURIComponent(model.smsDeflectionMessage)"
