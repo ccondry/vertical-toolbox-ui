@@ -158,14 +158,14 @@
                 </b-field>
                 <!-- /Language -->
 
-                <!-- Bot Enabled -->
-                <b-field label="Bot Enabled">
+                <!-- Chat Bot Enabled -->
+                <b-field label="Chat Bot Enabled">
                   <b-select v-model="model.chatBotEnabled">
                     <option :value="true">Enabled</option>
                     <option :value="false">Disabled</option>
                   </b-select>
                 </b-field>
-                <!-- /Bot Enabled -->
+                <!-- /Chat Bot Enabled -->
 
                 <!-- Chat Bot Token -->
                 <p>
