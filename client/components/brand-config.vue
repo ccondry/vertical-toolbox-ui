@@ -907,7 +907,11 @@ export default {
       reader.onload = (e) => {
         const data = e.currentTarget.result
         // get file name
-        const name = file.name.substring(0, file.name.lastIndexOf('.')) + '_' + Date.now()
+        let name = file.name.substring(0, file.name.lastIndexOf('.'))
+        if (node !== 'iframe') {
+          // append timestamp to images, not iframes
+          name += '_' + Date.now()
+        }
         // set up callback for when the file is done uploading
         const callback = (url) => {
           // map out the node names to model data references
