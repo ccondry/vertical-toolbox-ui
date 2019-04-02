@@ -824,19 +824,7 @@ export default {
   },
 
   mounted () {
-    // make sure color1 and color2 are set to valid values for the color picker
-    if (!this.model.color1) {
-      this.$set(this.model, 'color1', '#0b63ac')
-    }
-    if (!this.model.color2) {
-      this.$set(this.model, 'color2', '#2b83cc')
-    }
-    // make sure the advisor image is set to a value with Vue.set so that
-    // v-model works on the selection
-    if (!this.model.advisorImage) {
-      // set to Sandra Jefferson photo by default
-      this.$set(this.model, 'advisorImage', 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png')
-    }
+    this.initView()
   },
 
   data () {
@@ -859,6 +847,22 @@ export default {
   },
 
   methods: {
+    initView () {
+      // init the view so that all UI elements are populated properly
+      // make sure color1 and color2 are set to valid values for the color picker
+      if (!this.model.color1) {
+        this.$set(this.model, 'color1', '#0b63ac')
+      }
+      if (!this.model.color2) {
+        this.$set(this.model, 'color2', '#2b83cc')
+      }
+      // make sure the advisor image is set to a value with Vue.set so that
+      // v-model works on the selection
+      if (!this.model.advisorImage) {
+        // set to Sandra Jefferson photo by default
+        this.$set(this.model, 'advisorImage', 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png')
+      }
+    },
     changeAdvisorImage (event) {
       // advsior image b-select changed. update model.
       console.log('changeAdvisorImage', event.target.value)
@@ -986,6 +990,8 @@ export default {
 
   watch: {
     model (val, oldVal) {
+      // make sure the UI is updated properly
+      this.initView()
       // console.log('branding config form model changed', val)
       // model changed - format and push those changes back to the parent
       this.pushChanges(val)
