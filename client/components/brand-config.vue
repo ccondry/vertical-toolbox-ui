@@ -390,15 +390,15 @@
                 <b-input type="textarea" v-model="model.callModalMainLabel" placeholder="Main" />
               </b-field>
 
-              <b-field label="Gold Phone Number Label">
+              <b-field label="Gold Phone Number Label (PCCE only)">
                 <b-input type="textarea" v-model="model.callModalGoldLabel" placeholder="Gold" />
               </b-field>
 
-              <b-field label="VIVR Phone Number Label">
+              <b-field label="VIVR Phone Number Label (PCCE only)">
                 <b-input type="textarea" v-model="model.callModalVivrLabel" placeholder="VIVR" />
               </b-field>
 
-              <b-field label="AI Phone Number Label">
+              <b-field label="AI Phone Number Label (Instant Demo only, for now)">
                 <b-input type="textarea" v-model="model.callModalAiLabel" placeholder="AI" />
               </b-field>
 
