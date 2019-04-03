@@ -383,7 +383,23 @@
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.callModalText" placeholder="You can reach one of our experts by phone at <strong>{0}</strong>" />
+                <b-input type="textarea" v-model="model.callModalText" :placeholder="placeholders.callModalText" />
+              </b-field>
+
+              <b-field label="Main Phone Number Label">
+                <b-input type="textarea" v-model="model.callModalMainLabel" placeholder="Main" />
+              </b-field>
+
+              <b-field label="Gold Phone Number Label">
+                <b-input type="textarea" v-model="model.callModalGoldLabel" placeholder="Gold" />
+              </b-field>
+
+              <b-field label="VIVR Phone Number Label">
+                <b-input type="textarea" v-model="model.callModalVivrLabel" placeholder="VIVR" />
+              </b-field>
+
+              <b-field label="AI Phone Number Label">
+                <b-input type="textarea" v-model="model.callModalAiLabel" placeholder="AI" />
               </b-field>
 
               <!-- Save button -->
@@ -676,6 +692,9 @@
 
 <script>
 import { Chrome } from 'vue-color'
+const placeholders = {
+  callModalText: `You can reach one of our experts by phone:`
+}
 
 const ttsTypes = [
   {
