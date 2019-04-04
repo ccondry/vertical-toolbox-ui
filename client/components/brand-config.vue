@@ -118,25 +118,6 @@
         </b-field>
         <!-- /Expert Advisor Image -->
 
-        <!-- Bubble Chat -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Bubble Chat (UCCX Only)</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-          <div class="card-content">
-            <b-field label="Enable Bubble Chat (UCCX Only)">
-              <b-select v-model="model.uccxBubbleChat">
-                <option :value="true">Enabled</option>
-                <option :value="false">Disabled</option>
-              </b-select>
-            </b-field>
-          </div>
-        </b-collapse>
-        <!-- /Bubble Chat -->
-
         <!-- Save button -->
         <b-field>
           <button type="button" class="button is-success"
@@ -145,6 +126,25 @@
       </div>
     </b-collapse>
     <!-- /Branded Website Customization -->
+
+    <!-- Bubble Chat -->
+    <b-collapse class="content card">
+      <div slot="trigger" slot-scope="props" class="card-header">
+        <p class="card-header-title">Bubble Chat (UCCX Only)</p>
+        <a class="card-header-icon">
+          <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+        </a>
+      </div>
+      <div class="card-content">
+        <b-field label="Enable Bubble Chat (UCCX Only)">
+          <b-select v-model="model.uccxBubbleChat">
+            <option :value="true">Enabled</option>
+            <option :value="false">Disabled</option>
+          </b-select>
+        </b-field>
+      </div>
+    </b-collapse>
+    <!-- /Bubble Chat -->
 
     <!-- Advanced Website Customization -->
     <b-collapse class="content card" :open="false">
