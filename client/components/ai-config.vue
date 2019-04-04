@@ -44,8 +44,8 @@
         <b-field label="DialogFlow Client Access API Token">
           <b-autocomplete
           v-model="model.chatBotToken"
-          :data="[defaults.verticals.chatBotToken]"
-          :placeholder="defaults.verticals.chatBotToken" />
+          :data="[defaults.chatBotToken]"
+          :placeholder="defaults.chatBotToken" />
         </b-field>
         <!-- /Chat Bot Token -->
 
