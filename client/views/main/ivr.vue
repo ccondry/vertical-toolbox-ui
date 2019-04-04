@@ -8,8 +8,6 @@
         <article class="tile is-child box">
           <h1 class="title">
             Vertical {{ vertical.id }}
-            <!-- 'updated' tag -->
-            <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
           <div class="block wysiwyg">
             <p>
@@ -32,38 +30,25 @@
       </div>
     </div>
 
-    <save-template-modal
-    ref="modal"
-    :visible="showModal"
-    title="Save Vertical As..."
-    @close="showModal = false"
-    @submit="clickSaveVertical"></save-template-modal>
-
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import IvrConfig from '../../components/ivr-config.vue'
-import SaveTemplateModal from '../../components/modals/save-template.vue'
-import moment from 'moment'
 
 export default {
   components: {
-    IvrConfig,
-    SaveTemplateModal
+    IvrConfig
   },
 
   data () {
     return {
       activeTab: 0,
       verticalDataString: '',
-      // selectedTemplate: '',
-      showModal: false,
       filterTemplates: false,
       model: {},
       ownerFilter: '',
-      // selectedOwner: null,
       verticalFilter: 'mine'
     }
   },
@@ -130,15 +115,6 @@ export default {
       console.log('Home.vue - upload vertical image', data)
       this.uploadImage({data})
     },
-    isRecent (date) {
-      try {
-        // items are updated if updated property is less than 14 days old
-        return moment().diff(moment(date), 'days') < 14
-      } catch (e) {
-        // if anything fails, use false
-        return false
-      }
-    },
     async clickSave () {
       const id = this.selectedVerticalId
       console.log('click save vertical', id)
@@ -154,40 +130,9 @@ export default {
         this.errorNotification(`Failed to save vertical. Check JSON syntax.`)
       }
     },
-    clickSaveAs () {
-      console.log('saving vertical as...')
-      this.showModal = true
-    },
     updateCache (data) {
       // copy state data to local data
       this.model = JSON.parse(JSON.stringify(data))
-    },
-    async clickSaveVertical ({id, name}) {
-      console.log('saving vertical as', id, '-', name)
-      this.showModal = false
-      try {
-        let data
-        if (this.activeTab === 0) {
-          // use Form model
-          data = JSON.parse(JSON.stringify(this.model))
-        } else if (this.activeTab === 1) {
-          // use Raw JSON string
-          data = JSON.parse(this.verticalDataString)
-        }
-        // set id and name in the request data
-        data.id = id
-        data.name = name
-        // confirm with user and save the data to the server
-        await this.confirmSaveVertical({id, data})
-      } catch (e) {
-        console.log('failed to save vertical', id, e)
-        this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
-      }
-    },
-    clickDeleteVertical (id) {
-      console.log('deleting vertical', id)
-      // confirm with user and save the data to the server
-      this.confirmDeleteVertical(id)
     }
   },
   computed: {
