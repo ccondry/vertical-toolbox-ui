@@ -321,7 +321,6 @@ export default {
       }
       // set more defaults
       const values = [
-        'smsDeflectionMessage',
         'chatBotToken',
         'chatBotEnabled',
         'chatBotSurveyEnabled',
