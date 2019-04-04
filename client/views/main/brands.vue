@@ -161,7 +161,7 @@ export default {
       })
     },
     upload (data) {
-      console.log('Home.vue - upload vertical image', data)
+      console.log('brands.vue - upload vertical image', data)
       this.uploadImage({data})
     },
     isRecent (date) {
