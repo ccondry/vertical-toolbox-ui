@@ -308,6 +308,9 @@ export default {
   },
 
   methods: {
+    configureDuo () {
+      this.$set(this.model, 'duoFraudSmsMessage', this.defaults.duoFraudSmsMessage)
+    },
     changeJacadaVertical (event) {
       // set jacada interaction ID and application key when friendly vertical
       // name is selected from option menu
@@ -510,6 +513,22 @@ export default {
       }
     } catch (e) {
       // url was probably undefined - do nothing
+    }
+    // make sure model values are set
+    const values = [
+      'smsDeflectionMessage',
+      'duoWelcomeMessage',
+      'duoFraudSmsMessage'
+    ]
+    // fill in each model value with default value, if not set
+    for (const v of values) {
+      console.log('checking for value', v)
+      if (!this.model[v]) {
+        console.log(v, 'is not set. Setting it to default value', this.defaults[v])
+        this.model[v] = this.defaults[v]
+      } else {
+        console.log(v, 'is already set to', this.model[v])
+      }
     }
   }
 }
