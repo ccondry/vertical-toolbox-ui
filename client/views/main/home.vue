@@ -326,9 +326,9 @@ export default {
         'chatBotSurveyEnabled',
         'language',
         'region',
-        'smsDeflectionMessage',
-        'duoWelcomeMessage',
-        'duoFraudSmsMessage',
+        // 'smsDeflectionMessage',
+        // 'duoWelcomeMessage',
+        // 'duoFraudSmsMessage',
         'ttsEngine'
       ]
       // fill in each model value with default value, if not set
