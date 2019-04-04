@@ -16,7 +16,7 @@
         <!-- Language -->
         <b-field label="Language">
           <b-select v-model="model.languageCode" @change="changeLanguageCode($event)">
-            <option v-for="langugage of languages" :value="language.value">{{ language.name }}</option>
+            <option v-for="language of languages" :value="language.value">{{ language.name }}</option>
           </b-select>
         </b-field>
         <!-- /Language -->
