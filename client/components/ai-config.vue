@@ -23,8 +23,7 @@
         <!-- /TTS voice -->
         <b-field label="Conversational IVR TTS Voice">
           <b-select v-model="model.ttsVoice">
-            <option value="female">Female</option>
-            <option value="male">Male</option>
+            <option v-for="voice of voices" :value="voice.value">{{ voice.name }}</option>
           </b-select>
         </b-field>
         <!-- /TTS voice -->
@@ -87,6 +86,11 @@
 </template>
 
 <script>
+const allVoices = [
+  { value: 'female', name: 'Female' },
+  { value: 'male', name: 'Male' }
+]
+
 const allLanguages = [
   { value: 'ar-SA', name: 'Arabic (Saudi Arabia)' },
   { value: 'ar-AE', name: 'Arabic (U.A.E.)' },
@@ -148,6 +152,7 @@ export default {
   data () {
     return {
       allLanguages,
+      allVoices,
       intentsZipUrl: 'https://mm-static.cxdemo.net/intents.zip'
     }
   },
@@ -159,6 +164,14 @@ export default {
       } else {
         const nuanceLanguages = ['en-US']
         return this.allLanguages.filter(v => nuanceLanguages.includes(v.value))
+      }
+    },
+    voices () {
+      if (this.model.ttsEngine === 'google') {
+        return this.allVoices
+      } else {
+        const nuanceVoices = ['female']
+        return this.allVoices.filter(v => nuanceVoices.includes(v.value))
       }
     }
   },
