@@ -207,8 +207,7 @@ export default {
       model: {},
       ownerFilter: '',
       // selectedOwner: null,
-      verticalFilter: 'mine',
-      intentsZipUrl: 'https://mm-static.cxdemo.net/intents.zip'
+      verticalFilter: 'mine'
     }
   },
   async mounted () {
