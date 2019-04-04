@@ -203,15 +203,6 @@
                   </b-select>
                 </b-field>
                 <!-- /TTS engine -->
-
-                <!-- SMS Deflection Configuration -->
-                <b-field label="SMS Deflection Message">
-                  <b-input
-                  :value="decodeURIComponent(model.smsDeflectionMessage)"
-                  @change="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
-                </b-field>
-                <!-- /SMS Deflection Configuration -->
-
               </div>
               <!-- /admin test section -->
 

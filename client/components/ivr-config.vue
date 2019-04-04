@@ -90,17 +90,37 @@
           </div>
         </b-collapse>
         <!-- /Jacada -->
+
+        <!-- SMS Deflection Configuration -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">SMS Deflection Message</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content">
+
+            <b-field label="SMS Deflection Message">
+              <b-input
+              :value="decodeURIComponent(model.smsDeflectionMessage)"
+              :placeholder="decodeURIComponent(defaults.smsDeflectionMessage)"
+              @change="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
+            </b-field>
+
+          </div>
+        </b-collapse>
+        <!-- /SMS Deflection Configuration -->
+
         <b-field>
           <button type="button" class="button is-success"
-@click.prevent="submit" :disabled="disableSave">Save</button>
+          @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
       </div>
     </b-collapse>
     <!-- /IVR Menu -->
 
-<input type="file" style="display:none" ref="file" accept="image/*" v-uploader />
-
-</div>
+  </div>
 </template>
 
 <script>
