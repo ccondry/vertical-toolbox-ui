@@ -54,6 +54,15 @@ export default {
         description: 'Mobile app customization'
       },
       component: lazyLoading('main/mobile')
+    },
+    {
+      name: 'AI',
+      path: '/branding/ai',
+      meta: {
+        icon: 'robot',
+        description: 'AI Bot customization'
+      },
+      component: lazyLoading('main/ai')
     }
     // {
     //   name: 'Verticals',
