@@ -156,6 +156,16 @@ export default {
   },
 
   methods: {
+    changeLanguageCode (event) {
+      // legacy - when changing the languageCode, also set language and region
+      // code separately into the model
+      try {
+        this.model.language = event.target.value.split('-').shift()
+        this.model.region = event.target.value.split('-').pop()
+      } catch (e) {
+        console.log('failed during changeLanguageCode:', e)
+      }
+    },
     pushChanges (data) {
       this.$emit('update:data', JSON.stringify(data, null, 2))
     },

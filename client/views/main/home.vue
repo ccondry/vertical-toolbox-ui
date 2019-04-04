@@ -240,12 +240,6 @@ export default {
       'deleteVertical',
       'setSelectedVertical'
     ]),
-    changeLanguageCode (event) {
-      // legacy - when changing the languageCode, also set language and region
-      // code separately into the model
-      this.model.language = $event.target.value.split('-').shift()
-      this.model.region = $event.target.value.split('-').pop()
-    },
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
       // pop confirmation dialog
@@ -320,7 +314,6 @@ export default {
         let region = this.model.region || 'US'
         this.model.languageCode = language + '-' + region
       }
-
       // set more defaults
       const values = [
         'smsDeflectionMessage',
