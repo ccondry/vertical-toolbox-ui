@@ -103,7 +103,7 @@
 
             <b-field label="SMS Deflection Message">
               <b-input
-              :value="decodeURIComponent(model.smsDeflectionMessage)"
+              :value="decodeURIComponent(model.smsDeflectionMessage || defaults.smsDeflectionMessage)"
               :placeholder="decodeURIComponent(defaults.smsDeflectionMessage)"
               @change="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
             </b-field>
