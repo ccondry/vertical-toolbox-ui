@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- Hidden File Uploader -->
-    <input type="file" style="display:none" ref="file" accept="image/*;text/html" v-uploader />
-
     <!-- AI Customization -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -13,6 +10,16 @@
       </div>
 
       <div class="card-content">
+
+        <!-- /TTS engine -->
+        <b-field label="Conversational IVR TTS Engine">
+          <b-select v-model="model.ttsEngine">
+            <option value="nuance">Nuance</option>
+            <option value="google">Google</option>
+          </b-select>
+        </b-field>
+        <!-- /TTS engine -->
+
         <!-- Language -->
         <b-field label="Language">
           <b-select v-model="model.languageCode" @change="changeLanguageCode($event)">
@@ -32,7 +39,7 @@
 
         <!-- Chat Bot Token -->
         <p>
-          You can customize the AI bot script with your own text
+          You can customize the AI bot script with your own messages
           and intents by using your own DialgFlow Client Access API Token
           here. Download the
           <a :href="intentsZipUrl">
@@ -57,15 +64,6 @@
           </b-select>
         </b-field>
         <!-- /Post Chat Survey -->
-
-        <!-- /TTS engine -->
-        <b-field label="Conversational IVR TTS Engine">
-          <b-select v-model="model.ttsEngine">
-            <option value="nuance">Nuance</option>
-            <option value="google">Google</option>
-          </b-select>
-        </b-field>
-        <!-- /TTS engine -->
 
         <!-- Save button -->
         <b-field>
@@ -140,7 +138,8 @@ export default {
 
   data () {
     return {
-      allLanguages
+      allLanguages,
+      intentsZipUrl: 'https://mm-static.cxdemo.net/intents.zip'
     }
   },
 

@@ -103,14 +103,54 @@
 
             <b-field label="SMS Deflection Message">
               <b-input
-              :value="decodeURIComponent(model.smsDeflectionMessage || defaults.smsDeflectionMessage)"
+              type="textarea"
+              rows="3"
+              :value="decodeURIComponent(model.smsDeflectionMessage)"
               :placeholder="decodeURIComponent(defaults.smsDeflectionMessage)"
-              @change="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
+              @change.native="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
             </b-field>
 
           </div>
         </b-collapse>
         <!-- /SMS Deflection Configuration -->
+
+        <!-- Duo Demo Configuration -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Duo Security Demo Configuration</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="block">
+              <!-- <b-field>
+                <button class="button is-success" @click="clickSave">Save Demo Configuration</button>
+              </b-field> -->
+              <b-field label="Duo IVR Welcome Message">
+                <b-input
+                type="textarea"
+                rows="3"
+                v-model="model.duoWelcomeMessage"
+                :placeholder="defaults.duoWelcomeMessage"
+                />
+              </b-field>
+              <!-- <b-field label="Duo Fraud SMS Number">
+                <b-input v-model="model.duoFraudSmsNumber" placeholder="Your SMS number" />
+              </b-field> -->
+              <b-field label="Duo Fraud SMS Message">
+                <b-input
+                type="textarea"
+                rows="10"
+                :value="decodeURIComponent(model.duoFraudSmsMessage)"
+                :placeholder="decodeURIComponent(model.duoFraudSmsMessage)"
+                @change.native="model.duoFraudSmsMessage = encodeURIComponent($event.target.value)"
+                />
+              </b-field>
+            </div>
+          </div>
+        </b-collapse>
+        <!-- /Duo Demo Configuration -->
 
         <b-field>
           <button type="button" class="button is-success"
