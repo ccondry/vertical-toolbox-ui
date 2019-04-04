@@ -157,7 +157,7 @@ export default {
       if (this.model.ttsEngine === 'google') {
         return this.allLanguages
       } else {
-        const nuanceLanguages = ['en-US', 'es-MX', 'fr-FR', 'de-DE']
+        const nuanceLanguages = ['en-US']
         return this.allLanguages.filter(v => nuanceLanguages.includes(v.value))
       }
     }
