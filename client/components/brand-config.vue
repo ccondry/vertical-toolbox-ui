@@ -15,7 +15,7 @@
       <div class="card-content">
         <!-- Website Title -->
         <b-field label="HTML Title" :message="getTooltip('htmlTitle')">
-          <b-input v-model="model.title" placeholder="Company" />
+          <b-input v-model="model.brand.title" placeholder="Company" />
         </b-field>
         <!-- iframe -->
         <b-field grouped>
@@ -30,13 +30,13 @@
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field expanded label="Background iframe or image URL">
-            <b-input v-model="model.iframe" placeholder="" :disabled="working.images.iframe" />
+            <b-input v-model="model.brand.iframe" placeholder="" :disabled="working.images.iframe" />
           </b-field>
         </b-field>
         <!-- google favicon url -->
         <b-field grouped>
           <b-field label="Favicon Image">
-            <img :src="model.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
+            <img :src="model.brand.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
           </b-field>
           &nbsp;&nbsp;
           <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
@@ -50,27 +50,27 @@
         <!-- mobile color picker view - arrange vertically -->
         <div class="is-hidden-tablet">
           <b-field label="Primary Color">
-            <chrome v-if="model.color1" :value="model.color1" @input="model.color1 = $event.hex" />
+            <chrome v-if="model.brand.color1" :value="model.brand.color1" @input="model.brand.color1 = $event.hex" />
           </b-field>
           <b-field label="Secondary Color">
-            <chrome v-if="model.color2" :value="model.color2" @input="model.color2 = $event.hex" />
+            <chrome v-if="model.brand.color2" :value="model.brand.color2" @input="model.brand.color2 = $event.hex" />
           </b-field>
         </div>
         <!-- desktop color picker view - arrange horizontally -->
         <div class="is-hidden-mobile">
           <b-field grouped>
             <b-field label="Primary Color">
-              <chrome v-if="model.color1" :value="model.color1" @input="model.color1 = $event.hex" />
+              <chrome v-if="model.brand.color1" :value="model.brand.color1" @input="model.brand.color1 = $event.hex" />
             </b-field>
             <b-field label="Secondary Color">
-              <chrome v-if="model.color2" :value="model.color2" @input="model.color2 = $event.hex" />
+              <chrome v-if="model.brand.color2" :value="model.brand.color2" @input="model.brand.color2 = $event.hex" />
             </b-field>
           </b-field>
         </div>
 
         <!-- Expert Advisor Enable -->
         <b-field label="Show Expert Advisor Header">
-          <b-select v-model="model.advisorEnabled">
+          <b-select v-model="model.brand.advisorEnabled">
             <option :value="true">
               Shown
             </option>
@@ -82,12 +82,12 @@
         <!-- /Expert Advisor Enable -->
 
         <!-- Expert Advisor Image -->
-        <b-field grouped v-show="model.advisorEnabled">
+        <b-field grouped v-show="model.brand.advisorEnabled">
           <b-field label="Expert Advisor Image">
-            <img :src="model.advisorImage" style="max-width: 112px; max-height: 112px;"/>
+            <img :src="model.brand.advisorImage" style="max-width: 112px; max-height: 112px;"/>
           </b-field>
           <b-field label="Select Existing Image">
-            <b-select :value="model.advisorImage" @change.native="changeAdvisorImage($event)">
+            <b-select :value="model.brand.advisorImage" @change.native="changeAdvisorImage($event)">
               <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
                 Sandra Jefferson
               </option>
@@ -149,60 +149,60 @@
           <div class="card-content">
 
             <!-- Expert Heading -->
-            <b-field expanded label="Advisor Heading Text Line 1" v-show="model.advisorEnabled">
-              <b-input v-model="model.advisorHeading" placeholder="Expert Advisor" />
+            <b-field expanded label="Advisor Heading Text Line 1" v-show="model.brand.advisorEnabled">
+              <b-input v-model="model.brand.advisorHeading" placeholder="Expert Advisor" />
             </b-field>
 
-            <b-field expanded label="Advisor Heading Text Line 2" v-show="model.advisorEnabled">
-              <b-input v-model="model.advisorText" placeholder="We're here to help" />
+            <b-field expanded label="Advisor Heading Text Line 2" v-show="model.brand.advisorEnabled">
+              <b-input v-model="model.brand.advisorText" placeholder="We're here to help" />
             </b-field>
             <!-- /Expert Heading -->
 
             <!-- Contact Button -->
             <b-field expanded label="Contact Button Text (the button to open contact panel)">
-              <b-input v-model="model.contactButtonText" placeholder="Talk to an Expert" />
+              <b-input v-model="model.brand.contactButtonText" placeholder="Talk to an Expert" />
             </b-field>
             <!-- /Contact Button -->
 
             <!-- Contact Menu Title -->
             <b-field expanded label="Contact Menu Title (normal)">
-              <b-input v-model="model.menuTitle" placeholder="Need Help?" />
+              <b-input v-model="model.brand.menuTitle" placeholder="Need Help?" />
             </b-field>
             <!-- /Contact Menu Title -->
 
             <!-- Chat Menu Title -->
             <b-field expanded label="Contact Menu Title (while chatting)">
-              <b-input v-model="model.chatMenuTitle" placeholder="Now Chatting" />
+              <b-input v-model="model.brand.chatMenuTitle" placeholder="Now Chatting" />
             </b-field>
             <!-- /Chat Menu Title -->
 
             <!-- Form Input Labels -->
             <b-field label="Name Input Label">
-              <b-input v-model="model.nameLabel" placeholder="Your Name" />
+              <b-input v-model="model.brand.nameLabel" placeholder="Your Name" />
             </b-field>
             <b-field label="Phone Input Label">
-              <b-input v-model="model.phoneLabel" placeholder="Your Phone Number" />
+              <b-input v-model="model.brand.phoneLabel" placeholder="Your Phone Number" />
             </b-field>
             <b-field label="Email Input Label">
-              <b-input v-model="model.emailLabel" placeholder="Your Email Address" />
+              <b-input v-model="model.brand.emailLabel" placeholder="Your Email Address" />
             </b-field>
             <b-field label="Subject Input Label">
-              <b-input v-model="model.subjectLabel" placeholder="Subject" />
+              <b-input v-model="model.brand.subjectLabel" placeholder="Subject" />
             </b-field>
             <b-field label="Message Input Label">
-              <b-input v-model="model.messageLabel" placeholder="Message" />
+              <b-input v-model="model.brand.messageLabel" placeholder="Message" />
             </b-field>
             <b-field label="Request Type Input Label">
-              <b-input v-model="model.requestTypeLabel" placeholder="Request Type" />
+              <b-input v-model="model.brand.requestTypeLabel" placeholder="Request Type" />
             </b-field>
             <b-field label="OK Button Text">
-              <b-input v-model="model.okButton" placeholder="OK" />
+              <b-input v-model="model.brand.okButton" placeholder="OK" />
             </b-field>
             <b-field label="Send Button Text">
-              <b-input v-model="model.sendButton" placeholder="Send" />
+              <b-input v-model="model.brand.sendButton" placeholder="Send" />
             </b-field>
             <b-field label="Cancel Button Text">
-              <b-input v-model="model.cancelButton" placeholder="Cancel" />
+              <b-input v-model="model.brand.cancelButton" placeholder="Cancel" />
             </b-field>
             <!-- Form Input Labels -->
 
@@ -227,7 +227,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.chatEnabled">
+              <b-select v-model="model.brand.chatEnabled">
                 <option :value="true">
                   Enabled
                 </option>
@@ -237,13 +237,13 @@
               </b-select>
             </b-field>
 
-            <div v-show="model.chatEnabled">
+            <div v-show="model.brand.chatEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.chatIcon" placeholder="message-processing" />
+                  <b-input v-model="model.brand.chatIcon" placeholder="message-processing" />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.chatIcon" size="is-large" />
+                  <b-icon pack="mdi" :icon="model.brand.chatIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
@@ -251,15 +251,15 @@
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.chatHeading" placeholder="Chat Now" />
+                <b-input v-model="model.brand.chatHeading" placeholder="Chat Now" />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.chatText" placeholder="An expert will chat with you live" />
+                <b-input v-model="model.brand.chatText" placeholder="An expert will chat with you live" />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.chatWaitTime" placeholder="1 min wait time" />
+                <b-input v-model="model.brand.chatWaitTime" placeholder="1 min wait time" />
               </b-field>
 
               <!-- Save button -->
@@ -285,7 +285,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.smsEnabled">
+              <b-select v-model="model.brand.smsEnabled">
                 <option :value="true">
                   Enabled
                 </option>
@@ -295,13 +295,13 @@
               </b-select>
             </b-field>
 
-            <div v-show="model.smsEnabled">
+            <div v-show="model.brand.smsEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.smsIcon" placeholder="message-processing" />
+                  <b-input v-model="model.brand.smsIcon" placeholder="message-processing" />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.smsIcon" size="is-large" />
+                  <b-icon pack="mdi" :icon="model.brand.smsIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
@@ -309,19 +309,19 @@
               </b-field>
 
               <b-field label="Heading">
-                <b-input v-model="model.smsHeading" placeholder="Text Us" />
+                <b-input v-model="model.brand.smsHeading" placeholder="Text Us" />
               </b-field>
 
               <b-field label="Text" :message="getTooltip('smsText')" >
-                <b-input v-model="model.smsText" placeholder="{0}" />
+                <b-input v-model="model.brand.smsText" placeholder="{0}" />
               </b-field>
 
               <b-field label="Wait Time">
-                <b-input v-model="model.smsWaitTime" placeholder="1 min wait time" />
+                <b-input v-model="model.brand.smsWaitTime" placeholder="1 min wait time" />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.smsModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting with one of our experts." />
+                <b-input v-model="model.brand.smsModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting with one of our experts." />
               </b-field>
 
               <!-- Save button -->
@@ -347,7 +347,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.callEnabled">
+              <b-select v-model="model.brand.callEnabled">
                 <option :value="true">
                   Enabled
                 </option>
@@ -357,13 +357,13 @@
               </b-select>
             </b-field>
 
-            <div v-show="model.callEnabled">
+            <div v-show="model.brand.callEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.callIcon" placeholder="phone" />
+                  <b-input v-model="model.brand.callIcon" placeholder="phone" />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.callIcon" size="is-large" />
+                  <b-icon pack="mdi" :icon="model.brand.callIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
@@ -371,35 +371,35 @@
               </b-field>
 
               <b-field label="Heading">
-                <b-input v-model="model.callHeading" placeholder="Call Us" />
+                <b-input v-model="model.brand.callHeading" placeholder="Call Us" />
               </b-field>
 
               <b-field label="Text" :message="getTooltip('callText')">
-                <b-input v-model="model.callText" placeholder="{0}" />
+                <b-input v-model="model.brand.callText" placeholder="{0}" />
               </b-field>
 
               <b-field label="Wait Time">
-                <b-input v-model="model.callWaitTime" placeholder="8 min wait time" />
+                <b-input v-model="model.brand.callWaitTime" placeholder="8 min wait time" />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input type="textarea" v-model="model.callModalText" :placeholder="placeholders.callModalText" />
+                <b-input type="textarea" v-model="model.brand.callModalText" :placeholder="placeholders.callModalText" />
               </b-field>
 
               <b-field label="Main Phone Number Label">
-                <b-input type="textarea" v-model="model.callModalMainLabel" placeholder="Main" />
+                <b-input type="textarea" v-model="model.brand.callModalMainLabel" placeholder="Main" />
               </b-field>
 
               <b-field label="Gold Phone Number Label (PCCE only)">
-                <b-input type="textarea" v-model="model.callModalGoldLabel" placeholder="Gold" />
+                <b-input type="textarea" v-model="model.brand.callModalGoldLabel" placeholder="Gold" />
               </b-field>
 
               <b-field label="VIVR Phone Number Label (PCCE only)">
-                <b-input type="textarea" v-model="model.callModalVivrLabel" placeholder="VIVR" />
+                <b-input type="textarea" v-model="model.brand.callModalVivrLabel" placeholder="VIVR" />
               </b-field>
 
               <b-field label="AI Phone Number Label (Instant Demo only, for now)">
-                <b-input type="textarea" v-model="model.callModalAiLabel" placeholder="AI" />
+                <b-input type="textarea" v-model="model.brand.callModalAiLabel" placeholder="AI" />
               </b-field>
 
               <!-- Save button -->
@@ -425,7 +425,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.callbackEnabled">
+              <b-select v-model="model.brand.callbackEnabled">
                 <option :value="true">
                   Enabled
                 </option>
@@ -435,13 +435,13 @@
               </b-select>
             </b-field>
 
-            <div v-show="model.callbackEnabled">
+            <div v-show="model.brand.callbackEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.callbackIcon" placeholder="phone-forward" />
+                  <b-input v-model="model.brand.callbackIcon" placeholder="phone-forward" />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.callbackIcon" size="is-large" />
+                  <b-icon pack="mdi" :icon="model.brand.callbackIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
@@ -449,19 +449,19 @@
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.callbackHeading" placeholder="We'll Call You" />
+                <b-input v-model="model.brand.callbackHeading" placeholder="We'll Call You" />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.callbackText" placeholder="Receive a call back from an expert" />
+                <b-input v-model="model.brand.callbackText" placeholder="Receive a call back from an expert" />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.callbackWaitTime" placeholder="8 min wait time" />
+                <b-input v-model="model.brand.callbackWaitTime" placeholder="8 min wait time" />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.callbackModalText" placeholder="Enter your name and phone number and one of our experts will call you." />
+                <b-input v-model="model.brand.callbackModalText" placeholder="Enter your name and phone number and one of our experts will call you." />
               </b-field>
 
               <!-- Save button -->
@@ -487,7 +487,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.emailEnabled">
+              <b-select v-model="model.brand.emailEnabled">
                 <option :value="true">
                   Enabled
                 </option>
@@ -497,13 +497,13 @@
               </b-select>
             </b-field>
 
-            <div v-show="model.emailEnabled">
+            <div v-show="model.brand.emailEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.emailIcon" placeholder="email" />
+                  <b-input v-model="model.brand.emailIcon" placeholder="email" />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.emailIcon" size="is-large" />
+                  <b-icon pack="mdi" :icon="model.brand.emailIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
@@ -511,19 +511,19 @@
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.emailHeading" placeholder="Email an Expert" />
+                <b-input v-model="model.brand.emailHeading" placeholder="Email an Expert" />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.emailText" placeholder="An expert will respond to your email" />
+                <b-input v-model="model.brand.emailText" placeholder="An expert will respond to your email" />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.emailWaitTime" placeholder="12-24 hour wait time" />
+                <b-input v-model="model.brand.emailWaitTime" placeholder="12-24 hour wait time" />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.emailModalText" placeholder="Enter your information and question and one of our experts will email you back." />
+                <b-input v-model="model.brand.emailModalText" placeholder="Enter your information and question and one of our experts will email you back." />
               </b-field>
 
               <!-- Save button -->
@@ -549,7 +549,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.taskEnabled">
+              <b-select v-model="model.brand.taskEnabled">
                 <option :value="true">
                   Enabled
                 </option>
@@ -559,13 +559,13 @@
               </b-select>
             </b-field>
 
-            <div v-show="model.taskEnabled">
+            <div v-show="model.brand.taskEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.taskIcon" placeholder="clipboard-check" />
+                  <b-input v-model="model.brand.taskIcon" placeholder="clipboard-check" />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.taskIcon" size="is-large" />
+                  <b-icon pack="mdi" :icon="model.brand.taskIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
@@ -573,19 +573,19 @@
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.taskHeading" placeholder="Request" />
+                <b-input v-model="model.brand.taskHeading" placeholder="Request" />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.taskText" placeholder="An expert will handle your task" />
+                <b-input v-model="model.brand.taskText" placeholder="An expert will handle your task" />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.taskWaitTime" placeholder="" />
+                <b-input v-model="model.brand.taskWaitTime" placeholder="" />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.taskModalText" placeholder="Enter your information and choose the task you would like to submit to our experts." />
+                <b-input v-model="model.brand.taskModalText" placeholder="Enter your information and choose the task you would like to submit to our experts." />
               </b-field>
 
               <!-- Task Request Options -->
@@ -597,19 +597,19 @@
                   </a>
                 </div>
                 <div class="card-content">
-                  <ol v-if="Array.isArray(model.taskOptions)">
-                    <li v-for="(task, i) of model.taskOptions" :key="i">
+                  <ol v-if="Array.isArray(model.brand.taskOptions)">
+                    <li v-for="(task, i) of model.brand.taskOptions" :key="i">
                       <b-field grouped>
                         <b-field expanded>
                           <b-input v-model="task.text" placeholder="Report a Problem" />
                         </b-field>
                         <b-field>
-                          <button class="button is-danger" @click="model.taskOptions.splice(i, 1)">Remove Type</button>
+                          <button class="button is-danger" @click="model.brand.taskOptions.splice(i, 1)">Remove Type</button>
                         </b-field>
                       </b-field>
                     </li>
                   </ol>
-                  <button class="button is-success" @click="model.taskOptions.push({text:''})">Add Type</button>
+                  <button class="button is-success" @click="model.brand.taskOptions.push({text:''})">Add Type</button>
                 </div>
               </b-collapse>
               <!-- /Task Request Options -->
@@ -637,7 +637,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.cobrowseEnabled">
+              <b-select v-model="model.brand.cobrowseEnabled">
                 <option :value="true">
                   Enabled
                 </option>
@@ -647,13 +647,13 @@
               </b-select>
             </b-field>
 
-            <div v-show="model.cobrowseEnabled">
+            <div v-show="model.brand.cobrowseEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.cobrowseIcon" placeholder="lan-connect" />
+                  <b-input v-model="model.brand.cobrowseIcon" placeholder="lan-connect" />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.cobrowseIcon" size="is-large" />
+                  <b-icon pack="mdi" :icon="model.brand.cobrowseIcon" size="is-large" />
                 </b-field>
                 <b-field label="Search Icons">
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
@@ -661,15 +661,15 @@
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.cobrowseHeading" placeholder="Cobrowse" />
+                <b-input v-model="model.brand.cobrowseHeading" placeholder="Cobrowse" />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.cobrowseText" placeholder="An expert will cobrowse with you live" />
+                <b-input v-model="model.brand.cobrowseText" placeholder="An expert will cobrowse with you live" />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.cobrowseWaitTime" placeholder="8 min wait time" />
+                <b-input v-model="model.brand.cobrowseWaitTime" placeholder="8 min wait time" />
               </b-field>
 
               <!-- Save button -->
@@ -870,23 +870,23 @@ export default {
     initView () {
       // init the view so that all UI elements are populated properly
       // make sure color1 and color2 are set to valid values for the color picker
-      if (!this.model.color1) {
+      if (!this.model.brand.color1) {
         this.$set(this.model, 'color1', '#0b63ac')
       }
-      if (!this.model.color2) {
+      if (!this.model.brand.color2) {
         this.$set(this.model, 'color2', '#2b83cc')
       }
       // make sure the advisor image is set to a value with Vue.set so that
       // v-model works on the selection
-      if (!this.model.advisorImage) {
+      if (!this.model.brand.advisorImage) {
         // set to Sandra Jefferson photo by default
         this.$set(this.model, 'advisorImage', 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png')
       }
     },
     changeAdvisorImage (event) {
-      // advsior image b-select changed. update model.
+      // advsior image b-select changed. update model.brand.
       console.log('changeAdvisorImage', event.target.value)
-      this.model.advisorImage = event.target.value
+      this.model.brand.advisorImage = event.target.value
     },
     changeFavicon (event) {
       if (!event) return
@@ -908,8 +908,8 @@ export default {
       }
 
       // update model favicon to prefix it with the google favicons getter url
-      this.model.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
-      console.log('set this.model.favicon. it is now', this.model.favicon)
+      this.model.brand.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
+      console.log('set this.model.brand.favicon. it is now', this.model.brand.favicon)
     },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
@@ -938,11 +938,11 @@ export default {
           const map = {
             'iframe': (url) => {
               // set iframe url
-              this.model.iframe = url
+              this.model.brand.iframe = url
             },
             'advisor': (url) => {
               // set iframe url
-              this.model.advisor = url
+              this.model.brand.advisor = url
             }
           }
           // update our model with the new file URL
@@ -1008,7 +1008,7 @@ export default {
       }
     },
     modelFavicon () {
-      return this.model.favicon
+      return this.model.brand.favicon
     }
   },
 

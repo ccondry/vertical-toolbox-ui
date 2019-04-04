@@ -20,7 +20,7 @@
 
           <brand-config
           v-if="model.brand"
-          :model.sync="model.brand"
+          :model.sync="model"
           :vertical-id="vertical.id"
           @save="clickSave"
           @upload="upload"
