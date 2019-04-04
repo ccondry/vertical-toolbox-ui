@@ -112,7 +112,7 @@ export default {
       })
     },
     upload (data) {
-      console.log('Home.vue - upload vertical image', data)
+      console.log('ivr.vue - upload vertical image', data)
       this.uploadImage({data})
     },
     async clickSave () {
