@@ -60,6 +60,7 @@ export default {
       path: '/branding/ai',
       meta: {
         icon: 'robot',
+        label: 'AI/Bot',
         description: 'AI Bot customization'
       },
       component: lazyLoading('main/ai')
