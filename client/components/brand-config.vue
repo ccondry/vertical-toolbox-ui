@@ -800,6 +800,7 @@ export default {
       type: Object,
       default () {
         return {
+          placeholders
           // color1: '#0b63ac',
           // color2: '#2b83cc'
         }
