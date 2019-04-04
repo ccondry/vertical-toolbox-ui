@@ -167,6 +167,11 @@
                   Mobile App
                 </router-link>
               </li>
+              <li>
+                <router-link :to="{ name: 'AI' }">
+                  AI/Bot
+                </router-link>
+              </li>
             </ul>
           </div>
         </article>
