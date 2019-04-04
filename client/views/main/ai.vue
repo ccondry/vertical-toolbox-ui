@@ -36,13 +36,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import AiConfig from '../../components/ai-config.vue'
-import SaveTemplateModal from '../../components/modals/save-template.vue'
-import moment from 'moment'
 
 export default {
   components: {
-    IvrConfig,
-    SaveTemplateModal
+    AiConfig
   },
 
   data () {
