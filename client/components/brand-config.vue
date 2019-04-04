@@ -800,7 +800,6 @@ export default {
       type: Object,
       default () {
         return {
-          placeholders
           // color1: '#0b63ac',
           // color2: '#2b83cc'
         }
@@ -856,6 +855,7 @@ export default {
       active: {},
       ttsTypes,
       tooltips,
+      placeholders,
       files: [],
       images: [],
       uploadRef: null,
