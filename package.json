@@ -51,7 +51,7 @@
     "vue-lory": "0.0.4",
     "vue-moment": "^3.2.0",
     "vue-nprogress": "0.1.5",
-    "vue-router": "^2.3.0",
+    "vue-router": "^3.0.2",
     "vuedraggable": "^2.16.0",
     "vuex": "^2.2.1",
     "vuex-router-sync": "^4.1.2"
