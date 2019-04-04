@@ -20,6 +20,15 @@
         </b-field>
         <!-- /TTS engine -->
 
+        <!-- /TTS voice -->
+        <b-field label="Conversational IVR TTS Voice">
+          <b-select v-model="model.ttsVoice">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </b-select>
+        </b-field>
+        <!-- /TTS voice -->
+
         <!-- Language -->
         <b-field label="Language">
           <b-select v-model="model.languageCode" @change="changeLanguageCode($event)">
