@@ -63,6 +63,7 @@
           <button type="button" class="button is-success"
           @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
+        
       </div>
     </b-collapse>
     <!-- /Cumulus IVR Menu -->
@@ -75,7 +76,7 @@
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
       </div>
-      <div class="card-content" v-if="!model.cvp.jacadaMenu || !model.cvp.jacadaMenu.interactionId || !model.cvp.jacadaMenu.applicationKey">
+      <div class="card-content" v-if="!model.cvp || !model.cvp.jacadaMenu || !model.cvp.jacadaMenu.interactionId || !model.cvp.jacadaMenu.applicationKey">
         <button class="button is-primary" @click="$set(model.cvp, 'jacadaMenu', defaults.cvp.jacadaMenu)">Configure</button>
       </div>
       <div class="card-content" v-else>
@@ -93,6 +94,11 @@
         </b-field>
         <b-field label="applicationKey" expanded>
           <b-input v-model="model.cvp.jacadaMenu.applicationKey" :placeholder="defaults.cvp.jacadaMenu.applicationKey" />
+        </b-field>
+
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
 
       </div>
@@ -113,9 +119,14 @@
           <b-input
           type="textarea"
           rows="3"
-          :value="model.smsDeflectionMessage"
+          v-model="model.smsDeflectionMessage"
           :placeholder="defaults.smsDeflectionMessage"
           />
+        </b-field>
+
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
 
       </div>
@@ -150,11 +161,17 @@
             <b-input
             type="textarea"
             rows="10"
-            :value="model.duoFraudSmsMessage"
+            v-model="model.duoFraudSmsMessage"
             :placeholder="defaults.duoFraudSmsMessage"
             />
           </b-field>
         </div>
+
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+        </b-field>
+
       </div>
     </b-collapse>
     <!-- /Duo Demo Configuration -->
@@ -299,24 +316,6 @@ export default {
     }
   },
 
-  directives: {
-    uploader: {
-      bind (el, binding, vnode) {
-        el.addEventListener('change', e => {
-          // validate that a file was selected
-          if (!e.target.files || !e.target.files[0]) {
-            return
-          }
-          // console.log('change uploader with ref', vnode.data.ref, e.target.files)
-          console.log('change uploader with ref', vnode.context.uploadRef, vnode.context.uploadIndex, e.target.files)
-          // vnode.context.uploadFile(vnode.data.ref, e.target.files[0])
-          vnode.context.uploadFile(vnode.context.uploadRef, vnode.context.uploadIndex, e.target.files[0])
-          // vnode.context.chosenFiles = e.target.files
-        })
-      }
-    }
-  },
-
   data () {
     return {
       showIconModal: false,
@@ -327,8 +326,7 @@ export default {
       files: [],
       images: [],
       uploadRef: null,
-      uploadIndex: null,
-      faviconWebsite: ''
+      uploadIndex: null
     }
   },
 
@@ -347,150 +345,12 @@ export default {
   },
 
   methods: {
-    configureDuo () {
-      this.$set(this.model, 'duoFraudSmsMessage', this.defaults.duoFraudSmsMessage)
-    },
     changeJacadaVertical (event) {
       // set jacada interaction ID and application key when friendly vertical
       // name is selected from option menu
       const vertical = jacadaVerticals[event.target.value]
       this.model.cvp.jacadaMenu.interactionId = vertical.interactionId
       this.model.cvp.jacadaMenu.applicationKey = vertical.applicationKey
-    },
-    changeFavicon (event) {
-      if (!event) return
-      console.log('favicon website URL changed', event)
-      // get input value
-      // const url = event.target.value
-      const url = event
-      console.log('favicon website URL =', url)
-      let trimDomain = url
-      try {
-        // remove https:// from it
-        const arr = url.match(/http[s?]:\/\/(.*)/m)
-        console.log('favicon website regex matches =', arr)
-        // if no value, use the url as-is
-        trimDomain = arr[1]
-        console.log('favicon website without http:// or https:// =', trimDomain)
-      } catch (e) {
-        console.log('couldn\'t find http:// or http:// in URL. URL =', url)
-      }
-
-      // update model favicon to prefix it with the google favicons getter url
-      this.model.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
-      console.log('set this.model.favicon. it is now', this.model.favicon)
-    },
-    launchFilePicker (ref, index) {
-      console.log('launching file picker for', ref, index)
-      // set ref
-      this.uploadRef = ref
-      // set index
-      this.uploadIndex = index
-      // launch native file picker
-      this.$refs.file.click()
-    },
-    uploadFile (node, index, file) {
-      console.log('vertical-config.vue - uploading file', node, index, file)
-      // init file reader
-      const reader = new window.FileReader()
-      reader.onload = (e) => {
-        const data = e.currentTarget.result
-        // get file name
-        const name = file.name.substring(0, file.name.lastIndexOf('.')) + '_' + Date.now()
-        // set up callback for when the file is done uploading
-        const callback = (url) => {
-          // map out the node names to model data references
-          const map = {
-            // mobile app logo
-            'logoFile': (url) => {
-              // reset img
-              this.model.logo.rasterised = ''
-              // set img url
-              this.model.logo.rasterised = url + '?nocache=' + Date.now()
-            },
-            'websiteLogoFile': (url) => {
-              // reset img
-              this.model.logo.website = ''
-              // set img url
-              this.model.logo.website = url + '?nocache=' + Date.now()
-            },
-            'mobileWallpaper': (url) => {
-              // reset img
-              this.model.mobileWallpaper = ''
-              // set img url
-              this.model.mobileWallpaper = url + '?nocache=' + Date.now()
-            },
-            // homepage banner images
-            'slider': (url, index) => {
-              // reset img
-              this.model.sliders[index].image = ''
-              // set img url
-              this.model.sliders[index].image = url + '?nocache=' + Date.now()
-            },
-            'blogItem': (url, index) => {
-              // reset img
-              this.model.blogItems[index].image = ''
-              // set img url
-              this.model.blogItems[index].image = url + '?nocache=' + Date.now()
-            },
-            'authors': (url, index) => {
-              // reset img
-              this.model.authors[index].image = ''
-              // set img url
-              this.model.authors[index].image = url + '?nocache=' + Date.now()
-            },
-            'services': (url, index) => {
-              // reset img
-              this.model.services[index].image = ''
-              // set img url
-              this.model.services[index].image = url + '?nocache=' + Date.now()
-            },
-            'servicesThumbnail': (url, index) => {
-              // reset img
-              this.model.services[index].thumbnail = ''
-              // set img url
-              this.model.services[index].thumbnail = url + '?nocache=' + Date.now()
-            },
-            'timelinePosts': (url, index) => {
-              // reset img
-              this.model.timelinePosts[index].image = ''
-              // set img url
-              this.model.timelinePosts[index].image = url + '?nocache=' + Date.now()
-            }
-          }
-          // update our model with the new file URL
-          try {
-            map[node](url, index)
-          } catch (e) {
-            // continue
-          }
-        }
-        // determine node name - if node has index, suffix node name with it
-        let nodeName = node
-        if (index) {
-          nodeName += index
-        }
-        // actually upload the file now
-        this.$emit('upload', {name, node: nodeName, vertical: this.model.id, data, callback})
-        // reset the file input
-        this.$refs.file.value = ''
-      }
-      // read the file data
-      reader.readAsDataURL(file)
-    },
-    getTooltip (type) {
-      try {
-        return this.tooltips[type]
-      } catch (e) {
-        return ''
-      }
-    },
-    getTtsTooltip (type) {
-      try {
-        return this.ttsTypes.find(v => v.value === type).tooltip
-      } catch (e) {
-        return ''
-      }
     },
     selectIcon ({icon, context}) {
       console.log('selectIcon', icon)
@@ -533,41 +393,6 @@ export default {
       // console.log('branding config form model changed', val)
       // model changed - format and push those changes back to the parent
       this.pushChanges(val)
-    },
-    faviconWebsite (val) {
-      this.changeFavicon(val)
-    }
-  },
-
-  mounted () {
-    // when this.model.favicon changes, extract the domain of the google favicon
-    // tool url and set the v-model value for the "Favicon Website URL" of the favicon
-    try {
-      const url = this.model.favicon
-      const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
-      try {
-        this.faviconWebsite = arr[1] || ''
-      } catch (e) {
-        this.faviconWebsite = ''
-      }
-    } catch (e) {
-      // url was probably undefined - do nothing
-    }
-    // make sure model values are set
-    const values = [
-      'smsDeflectionMessage',
-      'duoWelcomeMessage',
-      'duoFraudSmsMessage'
-    ]
-    // fill in each model value with default value, if not set
-    for (const v of values) {
-      console.log('checking for value', v)
-      if (!this.model[v]) {
-        console.log(v, 'is not set. Setting it to default value', this.defaults[v])
-        this.model[v] = this.defaults[v]
-      } else {
-        console.log(v, 'is already set to', this.model[v])
-      }
     }
   }
 }
