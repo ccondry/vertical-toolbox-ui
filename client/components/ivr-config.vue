@@ -113,7 +113,7 @@
           <b-input
           type="textarea"
           rows="3"
-          :value="decodeURIComponent(model.smsDeflectionMessage)"
+          :value="smsDeflectionMessage"
           :placeholder="decodeURIComponent(defaults.smsDeflectionMessage)"
           @change.native="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
         </b-field>
@@ -150,8 +150,8 @@
             <b-input
             type="textarea"
             rows="10"
-            :value="decodeURIComponent(model.duoFraudSmsMessage)"
-            :placeholder="decodeURIComponent(model.duoFraudSmsMessage)"
+            :value="duoFraudSmsMessage)"
+            :placeholder="decodeURIComponent(defaults.duoFraudSmsMessage)"
             @change.native="model.duoFraudSmsMessage = encodeURIComponent($event.target.value)"
             />
           </b-field>
@@ -329,9 +329,17 @@ export default {
       images: [],
       uploadRef: null,
       uploadIndex: null,
-      faviconWebsite: ''
+      faviconWebsite: '',
+      smsDeflectionMessage: '',
+      duoFraudSmsMessage: ''
     }
   },
+
+  activated () {
+    // decode model SMS strings and update the form values
+    this.smsDeflectionMessage = decodeURIComponent(model.smsDeflectionMessage)
+    this.duoFraudSmsMessage = decodeURIComponent(model.duoFraudSmsMessage)
+  }
 
   computed: {
     disableSave () {
