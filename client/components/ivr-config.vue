@@ -113,9 +113,9 @@
           <b-input
           type="textarea"
           rows="3"
-          :value="smsDeflectionMessage"
-          :placeholder="decodeURIComponent(defaults.smsDeflectionMessage)"
-          @change.native="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
+          :value="model.smsDeflectionMessage"
+          :placeholder="defaults.smsDeflectionMessage"
+          />
         </b-field>
 
       </div>
@@ -150,9 +150,8 @@
             <b-input
             type="textarea"
             rows="10"
-            :value="duoFraudSmsMessage)"
-            :placeholder="decodeURIComponent(defaults.duoFraudSmsMessage)"
-            @change.native="model.duoFraudSmsMessage = encodeURIComponent($event.target.value)"
+            :value="model.duoFraudSmsMessage"
+            :placeholder="defaults.duoFraudSmsMessage"
             />
           </b-field>
         </div>
@@ -329,23 +328,7 @@ export default {
       images: [],
       uploadRef: null,
       uploadIndex: null,
-      faviconWebsite: '',
-      smsDeflectionMessage: '',
-      duoFraudSmsMessage: ''
-    }
-  },
-
-  activated () {
-    // update the form values with decoded values from model or defaults
-    if (this.model.smsDeflectionMessage) {
-      this.smsDeflectionMessage = decodeURIComponent(this.model.smsDeflectionMessage)
-    } else {
-      this.smsDeflectionMessage = decodeURIComponent(this.defaults.smsDeflectionMessage)
-    }
-    if (this.model.duoFraudSmsMessage) {
-      this.duoFraudSmsMessage = decodeURIComponent(this.model.duoFraudSmsMessage)
-    } else {
-      this.duoFraudSmsMessage = decodeURIComponent(this.defaults.duoFraudSmsMessage)
+      faviconWebsite: ''
     }
   },
 
