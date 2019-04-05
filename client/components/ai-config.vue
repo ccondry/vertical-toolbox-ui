@@ -45,7 +45,7 @@
         </b-field>
         <!-- /Chat Bot Enabled -->
 
-        <!-- Chat Bot Token -->
+        <!-- DialogFlow Token -->
         <p>
           You can customize the AI bot script with your own messages
           and intents by using your own DialgFlow Client Access API Token
@@ -62,7 +62,7 @@
           :data="[defaults.chatBotToken]"
           :placeholder="defaults.chatBotToken" />
         </b-field>
-        <!-- /Chat Bot Token -->
+        <!-- /DialogFlow Token -->
 
         <!-- Post Chat Survey -->
         <b-field label="Post-Chat-Bot Survey">
