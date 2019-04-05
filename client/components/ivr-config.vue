@@ -1,10 +1,10 @@
 <template>
   <div>
 
-    <!-- IVR Menu -->
+    <!-- Cumulus IVR Menu -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">IVR Menu</p>
+        <p class="card-header-title">Cumulus IVR Menu</p>
         <a class="card-header-icon">
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
@@ -59,106 +59,106 @@
         </b-collapse>
         <!-- /Main and SecondMenu -->
 
-        <!-- Jacada -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Jacada VIVR</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-          <div class="card-content" v-if="!model.cvp.jacadaMenu || !model.cvp.jacadaMenu.interactionId || !model.cvp.jacadaMenu.applicationKey">
-            <button class="button is-primary" @click="$set(model.cvp, 'jacadaMenu', defaults.cvp.jacadaMenu)">Configure</button>
-          </div>
-          <div class="card-content" v-else>
-
-            <b-select placeholder="Select a preconfigured VIVR vertical" @change.native="changeJacadaVertical($event)">
-              <option value="travel">Travel</option>
-              <option value="finance">Finance</option>
-              <option value="healthcare">Healthcare</option>
-              <option value="city">City</option>
-              <option value="utility">Utility</option>
-            </b-select>
-
-            <b-field label="interactionId">
-              <b-input v-model="model.cvp.jacadaMenu.interactionId" :placeholder="defaults.cvp.jacadaMenu.interactionId" />
-            </b-field>
-            <b-field label="applicationKey" expanded>
-              <b-input v-model="model.cvp.jacadaMenu.applicationKey" :placeholder="defaults.cvp.jacadaMenu.applicationKey" />
-            </b-field>
-
-          </div>
-        </b-collapse>
-        <!-- /Jacada -->
-
-        <!-- SMS Deflection Configuration -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">SMS Deflection Message</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-          <div class="card-content">
-
-            <b-field label="SMS Deflection Message">
-              <b-input
-              type="textarea"
-              rows="3"
-              :value="decodeURIComponent(model.smsDeflectionMessage)"
-              :placeholder="decodeURIComponent(defaults.smsDeflectionMessage)"
-              @change.native="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
-            </b-field>
-
-          </div>
-        </b-collapse>
-        <!-- /SMS Deflection Configuration -->
-
-        <!-- Duo Demo Configuration -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Duo Security Demo Configuration</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-          <div class="card-content">
-            <div class="block">
-              <!-- <b-field>
-                <button class="button is-success" @click="clickSave">Save Demo Configuration</button>
-              </b-field> -->
-              <b-field label="Duo IVR Welcome Message">
-                <b-input
-                type="textarea"
-                rows="3"
-                v-model="model.duoWelcomeMessage"
-                :placeholder="defaults.duoWelcomeMessage"
-                />
-              </b-field>
-              <!-- <b-field label="Duo Fraud SMS Number">
-                <b-input v-model="model.duoFraudSmsNumber" placeholder="Your SMS number" />
-              </b-field> -->
-              <b-field label="Duo Fraud SMS Message">
-                <b-input
-                type="textarea"
-                rows="10"
-                :value="decodeURIComponent(model.duoFraudSmsMessage)"
-                :placeholder="decodeURIComponent(model.duoFraudSmsMessage)"
-                @change.native="model.duoFraudSmsMessage = encodeURIComponent($event.target.value)"
-                />
-              </b-field>
-            </div>
-          </div>
-        </b-collapse>
-        <!-- /Duo Demo Configuration -->
-
         <b-field>
           <button type="button" class="button is-success"
           @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
       </div>
     </b-collapse>
-    <!-- /IVR Menu -->
+    <!-- /Cumulus IVR Menu -->
+
+    <!-- Jacada -->
+    <b-collapse class="content card">
+      <div slot="trigger" slot-scope="props" class="card-header">
+        <p class="card-header-title">Jacada VIVR</p>
+        <a class="card-header-icon">
+          <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+        </a>
+      </div>
+      <div class="card-content" v-if="!model.cvp.jacadaMenu || !model.cvp.jacadaMenu.interactionId || !model.cvp.jacadaMenu.applicationKey">
+        <button class="button is-primary" @click="$set(model.cvp, 'jacadaMenu', defaults.cvp.jacadaMenu)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <b-select placeholder="Select a preconfigured VIVR vertical" @change.native="changeJacadaVertical($event)">
+          <option value="travel">Travel</option>
+          <option value="finance">Finance</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="city">City</option>
+          <option value="utility">Utility</option>
+        </b-select>
+
+        <b-field label="interactionId">
+          <b-input v-model="model.cvp.jacadaMenu.interactionId" :placeholder="defaults.cvp.jacadaMenu.interactionId" />
+        </b-field>
+        <b-field label="applicationKey" expanded>
+          <b-input v-model="model.cvp.jacadaMenu.applicationKey" :placeholder="defaults.cvp.jacadaMenu.applicationKey" />
+        </b-field>
+
+      </div>
+    </b-collapse>
+    <!-- /Jacada -->
+
+    <!-- SMS Deflection Configuration -->
+    <b-collapse class="content card">
+      <div slot="trigger" slot-scope="props" class="card-header">
+        <p class="card-header-title">Courtesy Callback SMS Deflection Message</p>
+        <a class="card-header-icon">
+          <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+        </a>
+      </div>
+      <div class="card-content">
+
+        <b-field label="SMS Deflection Message">
+          <b-input
+          type="textarea"
+          rows="3"
+          :value="decodeURIComponent(model.smsDeflectionMessage)"
+          :placeholder="decodeURIComponent(defaults.smsDeflectionMessage)"
+          @change.native="model.smsDeflectionMessage = encodeURIComponent($event.target.value)" />
+        </b-field>
+
+      </div>
+    </b-collapse>
+    <!-- /SMS Deflection Configuration -->
+
+    <!-- Duo Demo Configuration -->
+    <b-collapse class="content card">
+      <div slot="trigger" slot-scope="props" class="card-header">
+        <p class="card-header-title">Duo Security Demo Configuration</p>
+        <a class="card-header-icon">
+          <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+        </a>
+      </div>
+      <div class="card-content">
+        <div class="block">
+          <!-- <b-field>
+            <button class="button is-success" @click="clickSave">Save Demo Configuration</button>
+          </b-field> -->
+          <b-field label="Duo IVR Welcome Message">
+            <b-input
+            type="textarea"
+            rows="3"
+            v-model="model.duoWelcomeMessage"
+            :placeholder="defaults.duoWelcomeMessage"
+            />
+          </b-field>
+          <!-- <b-field label="Duo Fraud SMS Number">
+            <b-input v-model="model.duoFraudSmsNumber" placeholder="Your SMS number" />
+          </b-field> -->
+          <b-field label="Duo Fraud SMS Message">
+            <b-input
+            type="textarea"
+            rows="10"
+            :value="decodeURIComponent(model.duoFraudSmsMessage)"
+            :placeholder="decodeURIComponent(model.duoFraudSmsMessage)"
+            @change.native="model.duoFraudSmsMessage = encodeURIComponent($event.target.value)"
+            />
+          </b-field>
+        </div>
+      </div>
+    </b-collapse>
+    <!-- /Duo Demo Configuration -->
 
   </div>
 </template>
