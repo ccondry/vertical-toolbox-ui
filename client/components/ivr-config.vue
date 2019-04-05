@@ -336,9 +336,17 @@ export default {
   },
 
   activated () {
-    // decode model SMS strings and update the form values
-    this.smsDeflectionMessage = decodeURIComponent(model.smsDeflectionMessage)
-    this.duoFraudSmsMessage = decodeURIComponent(model.duoFraudSmsMessage)
+    // update the form values with decoded values from model or defaults
+    if (this.model.smsDeflectionMessage) {
+      this.smsDeflectionMessage = decodeURIComponent(this.model.smsDeflectionMessage)
+    } else {
+      this.smsDeflectionMessage = decodeURIComponent(this.defaults.smsDeflectionMessage)
+    }
+    if (this.model.duoFraudSmsMessage) {
+      this.duoFraudSmsMessage = decodeURIComponent(this.model.duoFraudSmsMessage)
+    } else {
+      this.duoFraudSmsMessage = decodeURIComponent(this.defaults.duoFraudSmsMessage)
+    }
   }
 
   computed: {
