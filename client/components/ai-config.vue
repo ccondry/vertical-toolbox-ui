@@ -37,7 +37,7 @@
         <!-- /Language -->
 
         <!-- Chat Bot Enabled -->
-        <b-field label="Chat Bot Enabled">
+        <b-field label="Chat Bot">
           <b-select v-model="model.chatBotEnabled">
             <option :value="true">Enabled</option>
             <option :value="false">Disabled</option>
