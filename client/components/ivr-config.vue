@@ -347,7 +347,7 @@ export default {
     } else {
       this.duoFraudSmsMessage = decodeURIComponent(this.defaults.duoFraudSmsMessage)
     }
-  }
+  },
 
   computed: {
     disableSave () {
