@@ -24,7 +24,8 @@ export default {
       path: '/branding/ivr',
       meta: {
         icon: 'phone',
-        description: 'IVR prompt customization'
+        label: 'IVR',
+        description: 'IVR customization'
       },
       component: lazyLoading('main/ivr')
     },
