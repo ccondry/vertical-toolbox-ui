@@ -31,6 +31,7 @@
             <div class="field">
               <div v-if="user.admin" class="field">
                 <b-radio v-model="verticalFilter"
+                v-if="user.admin"
                 native-value="all">Show all verticals</b-radio>
               </div>
               <div class="field">
