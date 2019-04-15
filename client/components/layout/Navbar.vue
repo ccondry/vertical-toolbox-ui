@@ -6,8 +6,7 @@
         </div>
         <div class="column is-4">
           <p class="level-item has-text-centered">
-            <a href="/">dCloud Toolbox</a>
-            &nbsp;
+            <a href="/">dCloud Toolbox</a>&nbsp;
             -
             Demo Branding Editor
           </p>
