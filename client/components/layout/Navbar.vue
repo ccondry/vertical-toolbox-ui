@@ -6,11 +6,9 @@
         </div>
         <div class="column is-4">
           <p class="level-item has-text-centered">
-            <strong>
-              <a href="/">dCloud Toolbox</a>
-              -
-              Demo Branding Editor
-            </strong>
+            <a href="/">dCloud Toolbox</a>
+            -
+            Demo Branding Editor
           </p>
         </div>
         <div class="column is-4">
@@ -90,8 +88,9 @@ export default {
 .app-navbar {
   color: #28374B;
   background-color: white;
+  font-weight: bold;
   a {
-    color: #28374B;
+    color: #7957d5;
   }
   position: fixed;
   min-width: 100%;
