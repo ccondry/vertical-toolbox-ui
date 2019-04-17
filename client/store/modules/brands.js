@@ -17,45 +17,45 @@ const mutations = {
 }
 
 const actions = {
-  saveBrand ({getters, commit, dispatch}, {id, data, showNotification = true}) {
+  async saveBrand ({getters, commit, dispatch}, {id, data, showNotification = true}) {
     dispatch('setWorking', {group: 'app', type: 'brands', value: true})
     // remove database ID, if any
     delete data._id
-    return dispatch('putData', {
+    const response = await dispatch('putData', {
       name: 'brand',
       endpoint: getters.endpoints.brands + '/' + id,
       data,
       showNotification,
       success: 'Successfully saved brand ' + id,
       fail: 'Failed to save brand ' + id
-    }).finally(() => {
-      dispatch('setWorking', {group: 'app', type: 'brands', value: false})
     })
+    dispatch('setWorking', {group: 'app', type: 'brands', value: false})
+    return response
   },
-  deleteBrand ({getters, commit, dispatch}, {id, showNotification = true}) {
+  async deleteBrand ({getters, commit, dispatch}, {id, showNotification = true}) {
     dispatch('setWorking', {group: 'app', type: 'brands', value: true})
-    return dispatch('deleteData', {
+    const response = await dispatch('deleteData', {
       name: 'brand',
       endpoint: getters.endpoints.brands + '/' + id,
       showNotification,
       success: 'Successfully deleted brand ' + id,
       fail: 'Failed to delete brand ' + id
-    }).finally(() => {
-      dispatch('setWorking', {group: 'app', type: 'brands', value: false})
     })
+    dispatch('setWorking', {group: 'app', type: 'brands', value: false})
+    return response
   },
-  loadBrands ({getters, commit, dispatch}, showNotification = true) {
+  async loadBrands ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'brands', value: true})
-    return dispatch('loadToState', {
+    const response = await dispatch('loadToState', {
       name: 'brands',
       endpoint: getters.endpoints.brands,
       mutation: types.SET_BRANDS,
       showNotification,
       success: 'Successfully loaded brands',
       fail: 'Failed to load brands'
-    }).finally(() => {
-      dispatch('setLoading', {group: 'app', type: 'brands', value: false})
     })
+    dispatch('setLoading', {group: 'app', type: 'brands', value: false})
+    return response
   }
 }
 

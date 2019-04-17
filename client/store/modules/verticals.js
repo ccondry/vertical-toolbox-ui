@@ -31,56 +31,55 @@ const actions = {
     console.log('setSelectedVertical action', data)
     commit(types.SET_SELECTED_VERTICAL, data)
   },
-  uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
+  async uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
     dispatch('setWorking', {group: 'images', type: data.node, value: true})
     console.log(`uploading file`, data)
-    return dispatch('postData', {
+    const response = await dispatch('postData', {
       endpoint: getters.endpoints.images,
       data
-    }).then(response => {
-      console.log('upload file successful. path = ', response.data)
-      // callback to the emitter
-      data.callback(response.data)
-    }).finally(() => {
-      dispatch('setWorking', {group: 'images', type: data.node, value: false})
     })
+    console.log('upload file successful. path = ', response.data)
+    // callback to the emitter
+    data.callback(response.data)
+    // stop working indicator
+    dispatch('setWorking', {group: 'images', type: data.node, value: false})
   },
-  saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
+  async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
     dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
     delete data._id
-    return dispatch('putData', {
+    const response = await dispatch('putData', {
       name: 'vertical',
       endpoint: getters.endpoints.verticals + '/' + id,
       data,
       showNotification,
       success: 'Successfully saved vertical',
       fail: 'Failed to save vertical'
-    }).finally(() => {
-      dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
     })
+    dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
+    return response
   },
-  deleteVertical ({getters, commit, dispatch}, {id, showNotification}) {
+  async deleteVertical ({getters, commit, dispatch}, {id, showNotification}) {
     dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
-    return dispatch('deleteData', {
+    const response = await dispatch('deleteData', {
       name: 'vertical',
       endpoint: getters.endpoints.verticals + '/' + id,
       showNotification,
       success: 'Successfully deleted vertical ' + id,
       fail: 'Failed to delete vertical ' + id
-    }).finally(() => {
-      dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
     })
+    dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
+    return response
   },
-  loadVerticals ({getters, commit, dispatch}, showNotification = true) {
+  async loadVerticals ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
-    return dispatch('loadToState', {
+    const response = await dispatch('loadToState', {
       name: 'verticals',
       endpoint: getters.endpoints.verticals,
       mutation: types.SET_VERTICALS,
       showNotification
-    }).finally(() => {
-      dispatch('setLoading', {group: 'app', type: 'verticals', value: false})
     })
+    dispatch('setLoading', {group: 'app', type: 'verticals', value: false})
+    return response
   }
 }
 
