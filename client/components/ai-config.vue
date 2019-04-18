@@ -152,12 +152,14 @@ export default {
   data () {
     return {
       allLanguages,
-      allVoices,
-      intentsZipUrl: 'https://mm-static.cxdemo.net/intents.zip'
+      allVoices
     }
   },
 
   computed: {
+    intentsZipUrl () {
+      return 'https://mm-static.cxdemo.net/intents.zip?nocache=' + Date.now()
+    },
     languages () {
       if (this.model.ttsEngine === 'google') {
         return this.allLanguages
