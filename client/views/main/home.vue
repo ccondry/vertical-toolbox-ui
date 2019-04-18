@@ -1,9 +1,18 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="loading.app.user || working.app.user || loading.app.verticals" :can-cancel="false"></b-loading>
+    <div class="tile is-ancestor" v-if="loading.app.user || working.app.user || loading.app.verticals">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child box">
+          <div class="content">
+            &nbsp;
+            <b-loading :is-full-page="false" :active="true" :can-cancel="false"></b-loading>
+          </div>
+        </article>
+      </div>
+    </div>
 
-    <div class="tile is-ancestor">
+    <!-- <div class="tile is-ancestor">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">Information</h1>
@@ -14,70 +23,9 @@
           </p>
         </article>
       </div>
-    </div>
+    </div> -->
 
-    <div class="tile is-ancestor">
-      <div class="tile is-parent is-vertical">
-        <article class="tile is-child box">
-          <h1 class="title">Load a Vertical</h1>
-          <div class="block">
-            <div class="content">
-              <p>
-                Use this form to load an existing vertical config.
-              </p>
-            </div>
-          </div>
-          <div class="block">
-            <div class="field">
-              <div v-if="user.admin" class="field">
-                <b-radio v-model="verticalFilter"
-                v-if="user.admin"
-                native-value="all">Show all verticals</b-radio>
-              </div>
-              <div class="field">
-                <b-radio v-model="verticalFilter"
-                native-value="mine">Show my verticals</b-radio>
-              </div>
-              <div class="field">
-                <b-radio v-model="verticalFilter"
-                native-value="other">
-                Show this user's verticals:
-                <b-autocomplete
-                  v-model="ownerFilter"
-                  :data="autocompleteOwners"
-                  :placeholder="user.username">
-                  <template slot="empty">No results found</template>
-                </b-autocomplete>
-              </b-radio>
-              </div>
-              <!-- <b-field>
-                <b-checkbox v-model="showOnlyMyVerticals">Show only my verticals</b-checkbox>
-              </b-field> -->
-              <!-- <b-checkbox v-model="filterTemplates">Show only this user's verticals:</b-checkbox> -->
-              <b-field grouped>
-                <!-- <b-input v-model="ownerFilter" /> -->
-
-              </b-field>
-              Choose your desired vertical here:
-            </div>
-            <div class="select">
-              <select class="input" v-model="selectedTemplate">
-                <option value="" disabled selected>Choose a vertical to load</option>
-                <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
-                <option disabled>-----------------------------------------</option>
-                <option v-for="vertical in userVerticals" :value="vertical.id" v-if="verticalFilter === 'all'">{{ `${vertical.name} (${vertical.id})` }}</option>
-                <option v-for="vertical in myVerticals" :value="vertical.id" v-if="verticalFilter === 'mine'">{{ `${vertical.name} (${vertical.id})` }}</option>
-                <option v-for="vertical in filteredSortedVerticals" :value="vertical.id" v-if="verticalFilter === 'other'">{{ `${vertical.name} (${vertical.id})` }}</option>
-              </select>
-            </div>
-          </div>
-          <div class="block">
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="tile is-ancestor" v-if="vertical">
+    <div class="tile is-ancestor" v-if="vertical.id">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
@@ -91,9 +39,8 @@
               on this panel. You will only be able to save verticals that you own.
             </p>
             <p>
-              You can create new verticals by loading an existing vertical and
-              then using the 'Save As' button. Choose a new unique vertical ID to
-              save a new vertical. If you click Save As and specify a vertical
+              You can create new verticals by using the 'Save As' button.
+              If you use Save As and specify a vertical
               ID that already exists, it will overwrite the existing vertical
               configuration.
             </p>
@@ -102,7 +49,7 @@
             <button type="button" class="button is-success"
             @click.prevent="clickSave" :disabled="disableSave">Save</button>
             <button type="button" class="button is-success"
-            @click.prevent="clickSaveAs" :disabled="disableSaveAs">Save As</button>
+            @click.prevent="clickSaveAs">Save As</button>
             <button type="button" class="button is-danger"
             @click.prevent="clickDeleteVertical(selectedTemplate)"
             :disabled="disableDelete">Delete</button>
@@ -117,10 +64,7 @@
                 <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
               </a>
             </div>
-            <div class="card-content" v-if="!model.id || !model.name">
-              <button class="button is-primary" @click="$set(model, 'id', defaults.verticals.id); $set(model, 'name', defaults.verticals.name);">Configure</button>
-            </div>
-            <div class="card-content" v-else>
+            <div class="card-content">
               <b-field label="ID">
                 <b-input v-model="model.id" :placeholder="defaults.verticals.id" disabled="true" />
               </b-field>
@@ -142,12 +86,17 @@
     </div>
 
 
-    <div class="tile is-ancestor" v-if="vertical">
+    <div class="tile is-ancestor" v-if="vertical.id">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">Configure {{ vertical.id }}</h1>
           <div class="content">
             <ul>
+              <li>
+                <router-link :to="{ name: 'IVR Prompts' }">
+                  IVR Prompts
+                </router-link>
+              </li>
               <li>
                 <router-link :to="{ name: 'Branded Website' }">
                   Branded Website
@@ -156,11 +105,6 @@
               <li>
                 <router-link :to="{ name: 'Cumulus Website' }">
                   Cumulus Website
-                </router-link>
-              </li>
-              <li>
-                <router-link :to="{ name: 'IVR Prompts' }">
-                  IVR Prompts
                 </router-link>
               </li>
               <li>
@@ -199,51 +143,52 @@ export default {
   components: {
     SaveTemplateModal
   },
-  data () {
-    return {
-      activeTab: 0,
-      verticalDataString: '',
-      selectedTemplate: '',
-      showModal: false,
-      model: {},
-      ownerFilter: '',
-      // selectedOwner: null,
-      verticalFilter: 'mine'
-    }
+
+  created () {
+    // store query parameters in state
+    this.setQuery(this.$route.query)
   },
-  async mounted () {
-    if (this.selectedVerticalId) {
-      console.log('mounted - selectedVerticalId exists, setting selectedTemplate to', this.selectedVerticalId)
-      this.selectedTemplate = this.selectedVerticalId
-    }
+
+  activated () {
     if (!this.verticals.length) {
-      console.log('mounted - verticals.length is 0, loading verticals now...')
+      console.log('home.vue - !this.verticals.length so loading verticals')
       // load verticals
       this.loadVerticals(false)
     }
     if (this.vertical) {
-      console.log('mounted - vertical exists. updating cache with vertical ID', this.vertical.id)
+      console.log('home.vue - this.vertical exists')
       // update cache if state data already exists
       this.updateCache(this.vertical)
-      this.selectedTemplate = this.vertical.id
     } else if (this.$route.query.vertical) {
-      console.log('mounted - vertical does not exist, but $route.query.vertical exists. setting selected vertical ID to', this.$route.query.vertical)
-      // if vertical was set in query params, set our selectedTemplate to that
-      // ID, which will cause the state to be updated and the vertical to load
-      this.selectedTemplate = this.$route.query.vertical
-      // this.setSelectedVertical(this.$route.query.vertical)
+      console.log('home.vue - this.$route.query.vertical exist')
+      // if vertical was set in query params, load it
+      this.setSelectedVertical(this.$route.query.vertical)
     } else {
-      // no vertical selected - allow user to select one now
+      console.log('home.vue - forwarding to Home')
+      // forward to home page for vertical selection
+      this.$router.push({ name: 'Home' })
     }
   },
+
+  data () {
+    return {
+      activeTab: 0,
+      verticalDataString: '',
+      showModal: false,
+      model: {}
+    }
+  },
+
   methods: {
     ...mapActions([
       'loadVerticals',
+      'loadVertical',
       'errorNotification',
       'saveVertical',
       'uploadImage',
       'deleteVertical',
-      'setSelectedVertical'
+      'setSelectedVertical',
+      'setQuery'
     ]),
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
@@ -252,13 +197,14 @@ export default {
         message: `Are you sure you want to save vertical ${data.name} (${id})?`,
         onConfirm: async () => {
           this.$toast.open('Save vertical confirmed')
+          // save the data on the server
           await this.saveVertical({id, data})
-          // update verticals data in state with current server data
-          await this.loadVerticals(false)
           // make sure the the new vertical is the selected one
           this.setSelectedVertical(id)
           // load the selected vertical - so that after Save As, the vertical ID
           // will be correctly displayed
+          // load new data for this vertical from the server
+          await this.loadVertical()
         }
       })
     },
@@ -346,14 +292,7 @@ export default {
       console.log('saving vertical as', id, '-', name)
       this.showModal = false
       try {
-        let data
-        if (this.activeTab === 0) {
-          // use Form model
-          data = JSON.parse(JSON.stringify(this.model))
-        } else if (this.activeTab === 1) {
-          // use Raw JSON string
-          data = JSON.parse(this.verticalDataString)
-        }
+        let data = JSON.parse(JSON.stringify(this.model))
         // set id and name in the request data
         data.id = id
         data.name = name
@@ -380,50 +319,8 @@ export default {
       'vertical',
       'selectedVerticalId'
     ]),
-    autocompleteOwners () {
-      const allOwners = this.verticals.map(v => v.owner)
-      const uniqueOwners = Array.from(new Set(allOwners))
-      return uniqueOwners.filter((option) => {
-        return option
-        .toString()
-        .toLowerCase()
-        .indexOf(this.ownerFilter.toLowerCase()) >= 0
-      })
-    },
-    sortedVerticals () {
-      // make a mutable copy of the store data
-      try {
-        const copy = JSON.parse(JSON.stringify(this.verticals))
-        // case-insensitive sort by name
-        copy.sort((a, b) => {
-          var nameA = a.name.toUpperCase() // ignore upper and lowercase
-          var nameB = b.name.toUpperCase() // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1
-          }
-          if (nameA > nameB) {
-            return 1
-          }
-          // names must be equal
-          return 0
-        })
-        return copy
-      } catch (e) {
-        console.log(`couldn't get sorted verticals`, e)
-      }
-    },
-    systemVerticals () {
-      return this.sortedVerticals.filter(v => !v.owner || v.owner === 'system' || v.owner === null)
-    },
-    userVerticals () {
-      return this.sortedVerticals.filter(v => v.owner && v.owner !== 'system' && v.owner !== null)
-    },
-    myVerticals () {
-      return this.sortedVerticals.filter(v => v.owner === this.user.username)
-    },
-    filteredSortedVerticals () {
-      // filter to only show the verticals owned by specified user
-      return this.sortedVerticals.filter(v => v.owner === this.ownerFilter)
+    query () {
+      return this.$route.query
     },
     disableSave () {
       try {
@@ -462,12 +359,10 @@ export default {
   },
 
   watch: {
-    selectedTemplate (val) {
-      // user chose vertical in selection box
-      // update the vertical ID in state
-      this.setSelectedVertical(val)
-      // and also set the URL query parameter for it
-      this.$router.push({query: {vertical: val}})
+    query (val) {
+      // URL query params changed
+      // store in state
+      this.setQuery(val)
     },
     vertical (val) {
       // selected vertical object in state has changed

@@ -42,7 +42,7 @@ export const loadToState = async function ({getters, commit, dispatch}, options)
     commit(options.mutation, data)
     if (options.showNotification) {
       Toast.open({
-        duration: 5000,
+        duration: 3000,
         message: options.success,
         type: 'is-success'
       })
@@ -64,7 +64,7 @@ export const loadToState = async function ({getters, commit, dispatch}, options)
       // continue with default error
     }
     Toast.open({
-      duration: 15000,
+      duration: 12000,
       message: options.fail + ': ' + e.message,
       type: 'is-danger'
     })

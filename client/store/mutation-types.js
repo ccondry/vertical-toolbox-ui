@@ -16,6 +16,7 @@ export const SET_ENDPOINTS = 'SET_ENDPOINTS'
 // dCloud Cumulus
 export const SET_SELECTED_VERTICAL = 'SET_SELECTED_VERTICAL'
 export const SET_VERTICALS = 'SET_VERTICALS'
+export const SET_VERTICAL = 'SET_VERTICAL'
 export const SET_BRANDS = 'SET_BRANDS'
 export const SET_IMAGE = 'SET_IMAGE'
 export const SET_USAGE = 'SET_USAGE'
@@ -29,3 +30,5 @@ export const SET_USERS = 'SET_USERS'
 
 // defaults
 export const SET_DEFAULTS = 'SET_DEFAULTS'
+
+export const SET_QUERY_PARAMETERS = 'SET_QUERY_PARAMETERS'

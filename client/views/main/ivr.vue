@@ -1,9 +1,18 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="loading.app.user || working.app.user || loading.app.verticals" :can-cancel="false"></b-loading>
+    <div class="tile is-ancestor" v-if="loading.app.user || working.app.user || loading.app.verticals">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child box">
+          <div class="content">
+            &nbsp;
+            <b-loading :is-full-page="false" :active="true" :can-cancel="false"></b-loading>
+          </div>
+        </article>
+      </div>
+    </div>
 
-    <div class="tile is-ancestor" v-if="vertical">
+    <div class="tile is-ancestor" v-if="vertical.id">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
@@ -40,6 +49,11 @@ import IvrConfig from '../../components/ivr-config.vue'
 export default {
   components: {
     IvrConfig
+  },
+
+  created () {
+    // store query parameters in state
+    this.setQuery(this.$route.query)
   },
 
   data () {
@@ -79,7 +93,8 @@ export default {
       'saveVertical',
       'uploadImage',
       'setSelectedVertical',
-      'loadVerticals'
+      'loadVerticals',
+      'setQuery'
     ]),
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)

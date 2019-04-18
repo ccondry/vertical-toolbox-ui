@@ -12,7 +12,12 @@ const state = {
   },
   effect: {
     translate3d: true
-  }
+  },
+  query: null
+}
+
+const getters = {
+  query: state => state.query
 }
 
 const mutations = {
@@ -42,6 +47,11 @@ const mutations = {
   [types.SET_SESSION] (state, data) {
     state.sessionId = data.sessionId
     state.datacenter = data.datacenter
+  },
+
+  [types.SET_QUERY_PARAMETERS] (state, data) {
+    console.log('SET_QUERY_PARAMETERS - set query to', data)
+    state.query = data
   }
 }
 
@@ -60,11 +70,15 @@ const actions = {
     } finally {
       dispatch('setLoading', {group: 'app', type: 'endpoints', value: false})
     }
+  },
+  setQuery ({commit}, data) {
+    commit(types.SET_QUERY_PARAMETERS, data)
   }
 }
 
 export default {
   state,
   actions,
-  mutations
+  mutations,
+  getters
 }

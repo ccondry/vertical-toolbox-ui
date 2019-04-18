@@ -1,28 +1,30 @@
 <template>
   <section class="hero is-bold app-navbar animated" :class="{ slideInDown: show, slideOutDown: !show }">
     <div class="hero-head">
-      <div class="columns">
-        <div class="column is-4">
-        </div>
-        <div class="column is-4">
-          <p class="level-item has-text-centered">
-            <a href="/">dCloud Toolbox</a>&nbsp;-
-            Demo Branding Editor
-          </p>
-        </div>
-        <div class="column is-4">
-          <div v-if="authenticated" class="level-right">
+      <nav class="level">
+        <span class="level-item" />
+        <span class="level-item" />
+        <span class="level-item level-center has-text-centered">
+          <a href="/">dCloud Toolbox</a>&nbsp;-
+          Demo Branding Editor -&nbsp;
+          <a @click="changeVertical">{{ vertical.name }} ({{ selectedVerticalId }})</a>
+        </span>
+        <span class="level-item level-right">
+          <span v-if="authenticated">
+            <!-- show username, user ID and logout button if authenticated -->
             {{ user.username }}
-            &nbsp;
+            ({{ user.id }})
+            -&nbsp;
             <a @click="clickLogout">Logout</a>
             &nbsp;&nbsp;
-          </div>
-          <div v-if="!authenticated && !production" class="level-right">
+          </span>
+          <span v-else>
+            <!-- show login button in development and not authenticated -->
             <a @click="clickLogin">Login</a>
             &nbsp;&nbsp;
-          </div>
-        </div>
-      </div>
+          </span>
+        </span>
+      </nav>
     </div>
   </section>
 </template>
@@ -52,7 +54,9 @@ export default {
       sidebar: 'sidebar',
       authenticated: 'authenticated',
       user: 'user',
-      production: 'production'
+      production: 'production',
+      'selectedVerticalId': 'selectedVerticalId',
+      'vertical': 'vertical'
     })
   },
 
@@ -75,6 +79,10 @@ export default {
           this.setJwt(value)
         }
       })
+    },
+    changeVertical () {
+      // pop the vertical modal
+      this.$emit('change-vertical')
     }
   },
 

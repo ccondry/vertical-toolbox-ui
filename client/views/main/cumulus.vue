@@ -1,9 +1,18 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="loading.app.user || working.app.user || loading.app.verticals" :can-cancel="false"></b-loading>
+    <div class="tile is-ancestor" v-if="loading.app.user || working.app.user || loading.app.verticals">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child box">
+          <div class="content">
+            &nbsp;
+            <b-loading :is-full-page="false" :active="true" :can-cancel="false"></b-loading>
+          </div>
+        </article>
+      </div>
+    </div>
 
-    <div class="tile is-ancestor" v-if="vertical">
+    <div class="tile is-ancestor" v-if="vertical.id">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
@@ -68,21 +77,27 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
+    // store query parameters in state
+    this.setQuery(this.$route.query)
+  },
+
+  activated () {
     if (!this.verticals.length) {
+      console.log('cumulus.vue - !this.verticals.length so loading verticals')
       // load verticals
       this.loadVerticals(false)
     }
     if (this.vertical) {
-      console.log('this.vertical exists')
+      console.log('cumulus.vue - this.vertical exists')
       // update cache if state data already exists
       this.updateCache(this.vertical)
     } else if (this.$route.query.vertical) {
-      console.log('this.$route.query.vertical exist')
+      console.log('cumulus.vue - this.$route.query.vertical exist')
       // if vertical was set in query params, load it
       this.setSelectedVertical(this.$route.query.vertical)
     } else {
-      console.log('forwarding to Home')
+      console.log('cumulus.vue - forwarding to Home')
       // forward to home page for vertical selection
       this.$router.push({ name: 'Home' })
     }
@@ -94,7 +109,8 @@ export default {
       'saveVertical',
       'uploadImage',
       'setSelectedVertical',
-      'loadVerticals'
+      'loadVerticals',
+      'setQuery'
     ]),
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
