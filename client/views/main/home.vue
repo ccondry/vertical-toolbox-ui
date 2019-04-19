@@ -218,9 +218,8 @@ export default {
           await this.deleteVertical({id})
           // update verticals data in state with current server data
           await this.loadVerticals(false)
-          // make sure the the new vertical is the selected one
-          this.setSelectedVertical(this.verticals[0].id)
-          // load the selected vertical - so that after delete, the vertical ID
+          // prompt user to choose a vertical again
+          this.setSelectedVertical(null)
         }
       })
     },

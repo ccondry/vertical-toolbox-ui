@@ -28,8 +28,11 @@ const actions = {
   setSelectedVertical ({commit, dispatch}, data) {
     console.log('setSelectedVertical action', data)
     commit(types.SET_SELECTED_VERTICAL, data)
-    // set loading now, because setting the vertical will trigger loading
-    dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
+    // if selected vertical was set to a value...
+    if (data) {
+      // set loading now, because setting the vertical will trigger loading
+      dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
+    }
   },
   async uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
     dispatch('setWorking', {group: 'images', type: data.node, value: true})

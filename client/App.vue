@@ -169,7 +169,10 @@ export default {
       }
     },
     selectedVerticalId (val, oldVal) {
-      if (val !== oldVal) {
+      if (!val) {
+        // vertical ID was unset - prompt user to select a vertical
+        this.showModal = true
+      } else if (val !== oldVal) {
         // selected vertical changed
         // remove the modal
         this.showModal = false
