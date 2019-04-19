@@ -75,6 +75,9 @@
               <b-field label="ID">
                 <b-input v-model="model.id" :placeholder="defaults.verticals.id" disabled="true" />
               </b-field>
+              <b-field label="Owner">
+                <b-input v-model="model.owner" disabled="true" />
+              </b-field>
               <b-field label="Name">
                 <b-input v-model="model.name" :placeholder="defaults.verticals.name" />
               </b-field>
