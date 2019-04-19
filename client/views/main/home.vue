@@ -51,7 +51,7 @@
             <button type="button" class="button is-success"
             @click.prevent="clickSaveAs">Save As</button>
             <button type="button" class="button is-danger"
-            @click.prevent="clickDeleteVertical(selectedTemplate)"
+            @click.prevent="clickDeleteVertical(selectedVerticalId)"
             :disabled="disableDelete">Delete</button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
