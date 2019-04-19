@@ -55,6 +55,8 @@
             @click.prevent="clickSave" :disabled="disableSave">Save</button>
             <button type="button" class="button is-success"
             @click.prevent="clickSaveAs">Save As</button>
+            <button type="button" class="button is-primary"
+            @click.prevent="setSelectedVertical(null)">Load</button>
             <button type="button" class="button is-danger"
             @click.prevent="clickDeleteVertical(selectedVerticalId)"
             :disabled="disableDelete">Delete</button>
