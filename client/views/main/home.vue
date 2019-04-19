@@ -82,12 +82,12 @@
           </b-collapse>
           <!-- /Basic Information -->
           <!-- <b-field>&nbsp;</b-field> -->
-          <b-field>
+          <!-- <b-field>
             <button
             class="button is-success"
             @click.prevent="submit"
             :disabled="disableSave">Save</button>
-          </b-field>
+          </b-field> -->
         </article>
       </div>
     </div>
