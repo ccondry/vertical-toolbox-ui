@@ -104,34 +104,6 @@ export default {
   line-height: 2.35em;
   z-index: 4;
   box-shadow: 0 2px 3px rgba(17, 17, 17, 0.1), 0 0 0 1px rgba(17, 17, 17, 0.1);
-
-  .nav {
-    min-height: 0em;
-  }
-
-  .container {
-    // margin: auto 10px;
-  }
-
-  .nav-right {
-    align-items: stretch;
-    align-items: stretch;
-    flex: 1;
-    justify-content: flex-end;
-    overflow: hidden;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
 }
 
-.hero-head {
-
-  // .vue {
-  //   margin-left: 10px;
-  //   color: #36AC70;
-  // }
-  // .admin {
-  // }
-}
 </style>
