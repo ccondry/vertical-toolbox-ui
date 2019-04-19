@@ -36,8 +36,13 @@
           <div class="block content">
             <p>
               You can update your verticals by using any of the save buttons
-              on this panel. You will only be able to save verticals that you own.
+              on this website. You will only be able to delete or save over
+              verticals that you own.
             </p>
+            <p>
+              Click Load or the vertical name in the title bar to edit a
+              different vertical. Any unsaved changes on the current vertical
+              will be lost.
             <p>
               You can create new verticals by using the 'Save As' button.
               If you use Save As and specify a vertical
