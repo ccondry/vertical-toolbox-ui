@@ -29,7 +29,7 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
-            Vertical {{ vertical.id }}
+            {{ vertical.name }} ({{ vertical.id }})
             <!-- 'updated' tag -->
             <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
