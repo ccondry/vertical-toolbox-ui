@@ -99,6 +99,11 @@ const actions = {
       fail: 'Failed to load vertical ' + getters.selectedVerticalId,
       showNotification
     })
+    if (!response) {
+      // probably a 404 - set vertical ID to null so user can try again
+      dispatch('setSelectedVertical', null)
+    }
+    // console.log('loadVertical response:', response)
     dispatch('setLoading', {group: 'app', type: 'verticals', value: false})
     return response
   }
