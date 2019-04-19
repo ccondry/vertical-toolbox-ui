@@ -40,7 +40,7 @@
               verticals that you own.
             </p>
             <p>
-              Click Load or the vertical name in the title bar to edit a
+              Click Load or click the vertical name in the title bar to edit a
               different vertical. Any unsaved changes on the current vertical
               will be lost.
             <p>
