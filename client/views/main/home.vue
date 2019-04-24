@@ -30,8 +30,6 @@
         <article class="tile is-child box">
           <h1 class="title">
             {{ vertical.name }} ({{ vertical.id }})
-            <!-- 'updated' tag -->
-            <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
           <div class="block content">
             <p>
@@ -236,15 +234,6 @@ export default {
     upload (data) {
       console.log('Home.vue - upload vertical image', data)
       this.uploadImage({data})
-    },
-    isRecent (date) {
-      try {
-        // items are updated if updated property is less than 14 days old
-        return moment().diff(moment(date), 'days') < 14
-      } catch (e) {
-        // if anything fails, use false
-        return false
-      }
     },
     async clickSave () {
       const id = this.vertical.id
