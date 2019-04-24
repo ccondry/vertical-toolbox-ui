@@ -53,7 +53,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import CumulusConfig from '../../components/cumulus-config.vue'
 import SaveTemplateModal from '../../components/modals/save-template.vue'
-import moment from 'moment'
 
 export default {
   components: {
