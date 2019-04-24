@@ -16,7 +16,7 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
-            Vertical {{ vertical.id }}
+            {{ vertical.name }} ({{ vertical.id }}) Mobile App
           </h1>
           <div class="block wysiwyg">
             <p>

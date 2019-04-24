@@ -29,7 +29,7 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
-            {{ vertical.name }} ({{ vertical.id }})
+            {{ vertical.name }} ({{ vertical.id }}) Basic Information
           </h1>
           <div class="block content">
             <p>
