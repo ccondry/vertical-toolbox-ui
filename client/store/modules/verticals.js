@@ -106,6 +106,11 @@ const actions = {
     // console.log('loadVertical response:', response)
     dispatch('setLoading', {group: 'app', type: 'verticals', value: false})
     return response
+  },
+  setVertical ({commit}, data) {
+    console.log('setVertical')
+    // update vertical data in state
+    commit(types.SET_VERTICAL, data)
   }
 }
 

@@ -97,7 +97,8 @@ export default {
       'uploadImage',
       'setSelectedVertical',
       'loadVerticals',
-      'setQuery'
+      'setQuery',
+      'setVertical'
     ]),
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
@@ -208,6 +209,12 @@ export default {
       // update mutable cache of the state object
       this.updateCache(val)
     }
+  },
+
+  beforeRouteLeave (to, from, next) {
+    // when navigating away from this component, update the state with model
+    this.setVertical(this.model)
+    next()
   }
 }
 </script>
