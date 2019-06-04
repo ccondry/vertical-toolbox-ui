@@ -64,7 +64,10 @@ export default {
 
   methods: {
     ok () {
-      this.$emit('submit', {id: this.templateId, name: this.templateName})
+      this.$emit('submit', {
+        id: this.templateId,
+        name: this.templateName
+      })
     },
     close () {
       this.$emit('close')
