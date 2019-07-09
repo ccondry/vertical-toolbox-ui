@@ -32,6 +32,7 @@
           :working="working"
           :loading="loading"
           :defaults="defaults.verticals"
+          :disable-save="disableSave"
           :user="user"
           ></ai-config>
 
