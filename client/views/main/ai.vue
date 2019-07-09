@@ -150,6 +150,16 @@ export default {
       'selectedVerticalId',
       'vertical'
     ]),
+    disableSave () {
+      try {
+        // allow save - this user owns this template or is an admin
+        return !(this.vertical.owner === this.user.username || this.user.admin)
+      } catch (e) {
+        // continue
+      }
+      // default disable save
+      return true
+    },
     autocompleteOwners () {
       const allOwners = this.verticals.map(v => v.owner)
       const uniqueOwners = Array.from(new Set(allOwners))
