@@ -63,13 +63,13 @@
           <button type="button" class="button is-success"
           @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
-        
+
       </div>
     </b-collapse>
     <!-- /Cumulus IVR Menu -->
 
     <!-- Jacada -->
-    <b-collapse class="content card">
+    <b-collapse class="content card" :open="false">
       <div slot="trigger" slot-scope="props" class="card-header">
         <p class="card-header-title">Jacada VIVR</p>
         <a class="card-header-icon">
@@ -106,7 +106,7 @@
     <!-- /Jacada -->
 
     <!-- SMS Deflection Configuration -->
-    <b-collapse class="content card">
+    <b-collapse class="content card" :open="false">
       <div slot="trigger" slot-scope="props" class="card-header">
         <p class="card-header-title">Courtesy Callback SMS Deflection Message</p>
         <a class="card-header-icon">
@@ -134,7 +134,7 @@
     <!-- /SMS Deflection Configuration -->
 
     <!-- Duo Demo Configuration -->
-    <b-collapse class="content card">
+    <b-collapse class="content card" :open="false">
       <div slot="trigger" slot-scope="props" class="card-header">
         <p class="card-header-title">Duo Security Demo Configuration</p>
         <a class="card-header-icon">
