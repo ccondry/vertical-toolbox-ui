@@ -39,15 +39,6 @@ export default {
       component: lazyLoading('main/brands')
     },
     {
-      name: 'Cumulus Website',
-      path: '/branding/cumulus',
-      meta: {
-        icon: 'cloud',
-        description: 'Cumulus website customization'
-      },
-      component: lazyLoading('main/cumulus')
-    },
-    {
       name: 'Mobile App',
       path: '/branding/mobile',
       meta: {

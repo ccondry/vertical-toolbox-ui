@@ -16,6 +16,15 @@ export default {
       meta: {
         icon: 'finance'
       }
+    },
+    {
+      name: 'Cumulus Website',
+      path: '/branding/cumulus',
+      meta: {
+        icon: 'cloud',
+        description: 'Cumulus website customization'
+      },
+      component: lazyLoading('main/cumulus')
     }
   ]
 }
