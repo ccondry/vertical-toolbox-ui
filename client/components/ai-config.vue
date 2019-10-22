@@ -30,7 +30,7 @@
 
         <!-- Language -->
         <b-field label="Language">
-          <b-select v-model="model.languageCode" @change="changeLanguageCode($event)">
+          <b-select v-model="model.languageCode" @change.native="changeLanguageCode($event)">
             <option v-for="language of languages" :value="language.value">{{ language.name }}</option>
           </b-select>
         </b-field>
@@ -38,7 +38,7 @@
 
         <!-- Chat Bot Enabled -->
         <b-field label="Chat Bot">
-          <b-select v-model="model.chatBotEnabled">
+          <b-select v-model="model.chatBotEnabled" @change.native="changeChatBotEnabled($event)">
             <option :value="true">Enabled</option>
             <option :value="false">Disabled</option>
           </b-select>
@@ -67,7 +67,7 @@
           zip file and import it into your DialogFlow to use as a base
           for customizing your demo AI bots.
         </p>
-        <b-field label="DialogFlow Client Access API Token">
+        <b-field label="DialogFlow Client Access API Token (for Chat Bot and Conversational IVR)">
           <b-autocomplete
           v-model="model.chatBotToken"
           :data="[defaults.chatBotToken]"
@@ -77,10 +77,12 @@
 
         <!-- Post Chat Survey -->
         <b-field label="Post-Chat-Bot Survey">
-          <b-select v-model="model.chatBotSurveyEnabled">
-            <option :value="true">Enabled</option>
-            <option :value="false">Disabled</option>
-          </b-select>
+          <b-tooltip label="Enable Chat Bot if you want to have a Post-Chat Survey" position="is-right" :active="!model.chatBotEnabled">
+            <b-select v-model="model.chatBotSurveyEnabled" :disabled="!model.chatBotEnabled">
+              <option :value="true">Enabled</option>
+              <option :value="false">Disabled</option>
+            </b-select>
+          </b-tooltip>
         </b-field>
         <!-- /Post Chat Survey -->
 
@@ -190,7 +192,15 @@ export default {
   },
 
   methods: {
+    changeChatBotEnabled (event) {
+      console.log('changeChatBotEnabled', event)
+      if (event.target.value === 'true') {
+        // disable bubble chat if enabling chat bot
+        this.model.uccxBubbleChat = false
+      }
+    },
     changeLanguageCode (event) {
+      console.log('changeLanguageCode', event)
       // legacy - when changing the languageCode, also set language and region
       // code separately into the model
       try {
