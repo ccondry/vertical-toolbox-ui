@@ -45,6 +45,17 @@
         </b-field>
         <!-- /Chat Bot Enabled -->
 
+        <!-- Bubble Chat -->
+        <b-field label="Enable Bubble Chat (UCCX Only) (Disable Chat Bot if you want to use Bubble Chat)">
+          <b-tooltip label="Disable Chat Bot if you want to use Bubble Chat" position="is-right" :active="model.chatBotEnabled">
+            <b-select v-model="model.uccxBubbleChat" :disabled="model.chatBotEnabled">
+              <option :value="true">Enabled</option>
+              <option :value="false">Disabled</option>
+            </b-select>
+          </b-tooltip>
+        </b-field>
+        <!-- /Bubble Chat -->
+
         <!-- DialogFlow Token -->
         <p>
           You can customize the AI bot script with your own messages
