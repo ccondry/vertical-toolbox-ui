@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import { Toast } from 'buefy/dist/components/toast'
 
 const state = {
   verticals: [],
@@ -43,10 +44,20 @@ const actions = {
         data
       })
       console.log('upload file successful. path = ', response.data)
+      if (showNotification) {
+        Toast.open({
+          message: 'Successfully uploaded file.',
+          type: 'is-success'
+        })
+      }
       // callback to the emitter
       data.callback(response.data)
     } catch (e) {
       console.log(e)
+      Toast.open({
+        message: 'Failed to upload file: ' + e.message,
+        type: 'is-success'
+      })
     } finally {
       // stop working indicator
       dispatch('setWorking', {group: 'images', type: data.node, value: false})
