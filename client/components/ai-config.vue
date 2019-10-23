@@ -84,9 +84,9 @@
         <b-field grouped>
           <b-field label="Upload Credentials JSON">
             <button class="button is-primary"
-            :disabled="working.images.iframe"
+            :disabled="working.images.credentials"
             @click="launchFilePicker('credentials')">
-              {{ working.images.iframe ? 'Working...' : 'Browse...' }}
+              {{ working.images.credentials ? 'Working...' : 'Browse...' }}
             </button>
           </b-field>
           <!-- <b-tooltip label="this is a tooltip" multilined position="is-top">
