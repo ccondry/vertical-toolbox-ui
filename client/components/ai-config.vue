@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- Hidden File Uploader -->
+    <input type="file" style="display:none" ref="file" accept="application/json/;text/json" v-uploader />
+
     <!-- AI Customization -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -73,6 +76,26 @@
           :data="[defaults.gcpProjectId]"
           :placeholder="defaults.gcpProjectId" />
         </b-field>
+        <p>
+          The DialogFlow Project ID you specify must have a corresponding
+          credentials JSON file uploaded in order for it to work. Upload your
+          credentials JSON file here:
+        </p>
+        <b-field grouped>
+          <b-field label="Upload Credentials JSON">
+            <button class="button is-primary"
+            :disabled="working.images.iframe"
+            @click="launchFilePicker('credentials')">
+              {{ working.images.iframe ? 'Working...' : 'Browse...' }}
+            </button>
+          </b-field>
+          <!-- <b-tooltip label="this is a tooltip" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip> -->
+          <!-- <b-field expanded label="Background iframe or image URL">
+            <b-input v-model="model.brand.iframe" placeholder="" :disabled="working.images.iframe" />
+          </b-field> -->
+        </b-field>
         <!-- /DialogFlow Token -->
 
         <!-- Post Chat Survey -->
@@ -132,6 +155,23 @@ const allLanguages = [
 ]
 
 export default {
+  directives: {
+    uploader: {
+      bind (el, binding, vnode) {
+        el.addEventListener('change', e => {
+          // validate that a file was selected
+          if (!e.target.files || !e.target.files[0]) {
+            return
+          }
+          // console.log('change uploader with ref', vnode.data.ref, e.target.files)
+          console.log('change uploader with ref', vnode.context.uploadRef, vnode.context.uploadIndex, e.target.files)
+          // vnode.context.uploadFile(vnode.data.ref, e.target.files[0])
+          vnode.context.uploadFile(vnode.context.uploadRef, vnode.context.uploadIndex, e.target.files[0])
+          // vnode.context.chosenFiles = e.target.files
+        })
+      }
+    }
+  },
   props: {
     'model': {
       type: Object,
@@ -192,6 +232,41 @@ export default {
   },
 
   methods: {
+    launchFilePicker (ref, index) {
+      console.log('launching file picker for', ref, index)
+      // set ref
+      this.uploadRef = ref
+      // set index
+      this.uploadIndex = index
+      // launch native file picker
+      this.$refs.file.click()
+    },
+    uploadFile (node, index, file) {
+      console.log('brand-config.vue - uploading file', node, index, file)
+      // init file reader
+      const reader = new window.FileReader()
+      reader.onload = (e) => {
+        const data = e.currentTarget.result
+        // get file name
+        let name = file.name.substring(0, file.name.lastIndexOf('.'))
+        // set up callback for when the file is done uploading
+        const callback = (url) => {
+          // do nothing
+        }
+        // determine node name - if node has index, suffix node name with it
+        let nodeName = node
+        if (index) {
+          nodeName += index
+        }
+        // actually upload the file now. set brand ID in the 'vertical' property
+        // to use the brand ID for the path
+        this.$emit('upload', {name, node: nodeName, vertical: this.verticalId, data, callback})
+        // reset the file input
+        this.$refs.file.value = ''
+      }
+      // read the file data
+      reader.readAsDataURL(file)
+    },
     changeChatBotEnabled (event) {
       console.log('changeChatBotEnabled', event)
       if (event.target.value === 'true') {

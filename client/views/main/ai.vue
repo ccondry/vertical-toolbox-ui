@@ -117,7 +117,7 @@ export default {
       })
     },
     upload (data) {
-      console.log('ai.vue - upload vertical image', data)
+      console.log('ai.vue - uploading GCP credentials JSON file...')
       this.uploadImage({data})
     },
     async clickSave () {
