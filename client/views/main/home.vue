@@ -265,7 +265,7 @@ export default {
       }
       // set more defaults
       const values = [
-        'chatBotToken',
+        'gcpProjectId',
         'chatBotEnabled',
         'chatBotSurveyEnabled',
         'language',

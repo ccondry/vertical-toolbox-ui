@@ -1,7 +1,7 @@
 {
   "id": "travel",
   "name": "Cumulus Travel",
-  "chatBotToken": "5dc044d7822d43a5839627427ed28935",
+  "gcpProjectId": "cumulus-v2-hotikl",
   "chatBotEnabled": true,
   "chatBotSurveyEnabled": true,
   "language": "en",

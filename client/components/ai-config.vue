@@ -67,11 +67,11 @@
           zip file and import it into your DialogFlow to use as a base
           for customizing your demo AI bots.
         </p>
-        <b-field label="DialogFlow Client Access API Token (for Chat Bot and Conversational IVR)">
+        <b-field label="DialogFlow Project ID (for Chat Bot and Conversational IVR)">
           <b-autocomplete
-          v-model="model.chatBotToken"
-          :data="[defaults.chatBotToken]"
-          :placeholder="defaults.chatBotToken" />
+          v-model="model.gcpProjectId"
+          :data="[defaults.gcpProjectId]"
+          :placeholder="defaults.gcpProjectId" />
         </b-field>
         <!-- /DialogFlow Token -->
 
