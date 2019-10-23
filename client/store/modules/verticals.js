@@ -37,15 +37,20 @@ const actions = {
   async uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
     dispatch('setWorking', {group: 'images', type: data.node, value: true})
     console.log(`uploading file`, data)
-    const response = await dispatch('postData', {
-      endpoint: getters.endpoints.images,
-      data
-    })
-    console.log('upload file successful. path = ', response.data)
-    // callback to the emitter
-    data.callback(response.data)
-    // stop working indicator
-    dispatch('setWorking', {group: 'images', type: data.node, value: false})
+    try {
+      const response = await dispatch('postData', {
+        endpoint: getters.endpoints.images,
+        data
+      })
+      console.log('upload file successful. path = ', response.data)
+      // callback to the emitter
+      data.callback(response.data)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      // stop working indicator
+      dispatch('setWorking', {group: 'images', type: data.node, value: false})
+    }
   },
   async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
     dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
