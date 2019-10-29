@@ -334,7 +334,7 @@
         <!-- SMS -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">SMS Option</p>
+            <p class="card-header-title">SMS Live Option</p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
@@ -379,7 +379,7 @@
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.brand.smsModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting with one of our experts." />
+                <b-input v-model="model.brand.smsModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting live with one of our experts." />
               </b-field>
 
               <!-- Save button -->
@@ -392,6 +392,69 @@
           </div>
         </b-collapse>
         <!-- /SMS -->
+
+        <!-- SMS with Bot -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">SMS with Bot Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select v-model="model.brand.smsBotEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <div v-show="model.brand.smsBotEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.brand.smsBotIcon" placeholder="message-processing" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.brand.smsBotIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                </b-field>
+              </b-field>
+
+              <b-field label="Heading">
+                <b-input v-model="model.brand.smsBotHeading" placeholder="Text with Bot" />
+              </b-field>
+
+              <b-field label="Text" :message="getTooltip('smsText')" >
+                <b-input v-model="model.brand.smsBotText" placeholder="{0}" />
+              </b-field>
+
+              <b-field label="Wait Time">
+                <b-input v-model="model.brand.smsBotWaitTime" placeholder="No wait time" />
+              </b-field>
+
+              <b-field label="Popup Window Text">
+                <b-input v-model="model.brand.smsBotModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting with an AI-driven chat bot." />
+              </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
+            </div>
+
+          </div>
+        </b-collapse>
+        <!-- /SMS -->
+
 
         <!-- Call -->
         <b-collapse class="content card">
