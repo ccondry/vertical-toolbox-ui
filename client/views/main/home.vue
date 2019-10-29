@@ -12,19 +12,6 @@
       </div>
     </div>
 
-    <!-- <div class="tile is-ancestor">
-      <div class="tile is-parent is-vertical">
-        <article class="tile is-child box">
-          <h1 class="title">Information</h1>
-          <p>
-            View and edit your demo verticals for the Cumulus mobile
-            app, Cumulus website, branded website, AI chat bot, IVR prompts
-            configuration.
-          </p>
-        </article>
-      </div>
-    </div> -->
-
     <div class="tile is-ancestor" v-if="vertical.id">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
@@ -108,11 +95,6 @@
               <li>
                 <router-link :to="{ name: 'Branded Website' }">
                   Branded Website
-                </router-link>
-              </li>
-              <li>
-                <router-link :to="{ name: 'Cumulus Website' }">
-                  Cumulus Website
                 </router-link>
               </li>
               <li>
