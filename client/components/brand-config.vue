@@ -769,6 +769,17 @@
             </b-field>
 
             <div v-show="model.brand.cobrowseEnabled">
+              <b-field label="Surfly Cobrowse Enabled">
+                <b-select v-model="model.brand.surflyEnabled">
+                  <option :value="true">
+                    Enabled
+                  </option>
+                  <option :value="false">
+                    Disabled
+                  </option>
+                </b-select>
+              </b-field>
+
               <b-field grouped>
                 <b-field label="Icon Name">
                   <b-input v-model="model.brand.cobrowseIcon" placeholder="lan-connect" />
