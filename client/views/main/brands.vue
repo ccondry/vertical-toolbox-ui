@@ -160,21 +160,6 @@ export default {
         }
       })
     },
-    confirmDeleteVertical (id) {
-      console.log('confirmDeleteVertical', id)
-      // pop confirmation dialog
-      this.$dialog.confirm({
-        message: `Are you sure you want to delete vertical ${id}?`,
-        onConfirm: async () => {
-          this.$toast.open('Delete vertical confirmed')
-          await this.deleteVertical({id})
-          // update verticals data in state with current server data
-          await this.loadVerticals(false)
-          // make sure the the new vertical is the selected one
-          this.setSelectedVertical(this.verticals[0].id)
-        }
-      })
-    },
     upload (data) {
       console.log('brands.vue - upload vertical image', data)
       this.uploadImage({data})
@@ -193,10 +178,6 @@ export default {
         console.log('failed to save vertical', e.message)
         this.errorNotification(`Failed to save vertical. Check JSON syntax.`)
       }
-    },
-    clickSaveAs () {
-      console.log('saving vertical as...')
-      this.showModal = true
     },
     updateCache (data) {
       // copy state data to local data
@@ -225,11 +206,6 @@ export default {
         console.log('failed to save vertical', id, e)
         this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
       }
-    },
-    clickDeleteVertical (id) {
-      console.log('deleting vertical', id)
-      // confirm with user and save the data to the server
-      this.confirmDeleteVertical(id)
     }
   },
   computed: {
