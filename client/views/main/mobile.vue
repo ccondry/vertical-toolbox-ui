@@ -63,10 +63,6 @@ const Datepick = Vue.component('Datepick', {
       model: this.getDateValue()
     }
   },
-  created () {
-    // store query parameters in state
-    this.setQuery(this.$route.query)
-  },
   methods: {
     input (data) {
       // date picker chose a date, so update the field
@@ -94,6 +90,11 @@ export default {
     MobileConfig,
     SaveTemplateModal,
     Datepick
+  },
+
+  created () {
+    // store query parameters in state
+    this.setQuery(this.$route.query)
   },
 
   data () {

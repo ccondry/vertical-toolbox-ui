@@ -61,10 +61,6 @@ import Vue from 'vue'
 
 const Datepick = Vue.component('Datepick', {
   props: ['field'],
-  created () {
-    // store query parameters in state
-    this.setQuery(this.$route.query)
-  },
   data () {
     return {
       model: this.getDateValue()
@@ -97,6 +93,12 @@ export default {
     BrandConfig,
     SaveTemplateModal,
     Datepick
+  },
+
+  created () {
+    console.log('brands.vue created - setQuery to this.$route.query')
+    // store query parameters in state
+    this.setQuery(this.$route.query)
   },
 
   data () {
