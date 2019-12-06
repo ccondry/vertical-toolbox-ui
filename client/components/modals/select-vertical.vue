@@ -28,18 +28,18 @@
             </b-autocomplete>
           </b-radio>
         </div>
-        <!-- <b-field>
-        <b-checkbox v-model="showOnlyMyVerticals">Show only my verticals</b-checkbox>
-      </b-field> -->
-      <!-- <b-checkbox v-model="filterTemplates">Show only this user's verticals:</b-checkbox> -->
-      <b-field grouped>
-        <!-- <b-input v-model="ownerFilter" /> -->
+          <!-- <b-field>
+          <b-checkbox v-model="showOnlyMyVerticals">Show only my verticals</b-checkbox>
+        </b-field> -->
+        <!-- <b-checkbox v-model="filterTemplates">Show only this user's verticals:</b-checkbox> -->
+        <b-field grouped>
+          <!-- <b-input v-model="ownerFilter" /> -->
 
-      </b-field>
-      Choose your desired vertical here:
-    </div>
-    <b-loading :is-full-page="false" :active="loading" :can-cancel="false"></b-loading>
-    <div v-if="loading">Loading...</div>
+        </b-field>
+        Choose your desired vertical here:
+      </div>
+      <b-loading :is-full-page="false" :active="loading" :can-cancel="false"></b-loading>
+      <div v-if="loading">Loading...</div>
       <b-select v-model="selectedTemplate" v-if="!loading">
         <option value="" disabled selected>Choose a vertical to load</option>
         <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
