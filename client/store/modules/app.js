@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import {load} from '../../utils'
+import {version} from '../../../package'
 
 const state = {
   device: {
@@ -20,7 +20,7 @@ const state = {
 
 const getters = {
   query: state => state.query,
-  uiVersion: () => pkg.version,
+  uiVersion: () => version,
   apiVersion: state => state.apiVersion,
   authApiVersion: state => state.authApiVersion
 }
@@ -57,6 +57,14 @@ const mutations = {
   [types.SET_QUERY_PARAMETERS] (state, data) {
     console.log('SET_QUERY_PARAMETERS - set query to', data)
     state.query = data
+  },
+
+  [types.SET_API_VERSION] (state, data) {
+    state.apiVersion = data.version
+  },
+
+  [types.SET_AUTH_API_VERSION] (state, data) {
+    state.authApiVersion = data.version
   }
 }
 
