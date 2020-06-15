@@ -7,6 +7,7 @@ import user from './user'
 import usage from './usage'
 import defaults from './defaults'
 import brands from './brands'
+import endpoints from './endpoints'
 
 export default {
   app,
