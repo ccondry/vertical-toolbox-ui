@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-12 is-vertical">
+      <div class="tile is-parent is-12">
         <article class="tile is-child box">
           <h1 class="title">
             Usage Statistics

@@ -2,7 +2,7 @@
   <div>
     <!-- Loading Indicator -->
     <div class="tile is-ancestor" v-if="loading.app.user || working.app.user || loading.app.verticals">
-      <div class="tile is-parent is-vertical">
+      <div class="tile is-parent">
         <article class="tile is-child box">
           <div class="content">
             &nbsp;
@@ -13,7 +13,7 @@
     </div>
 
     <div class="tile is-ancestor" v-if="vertical.id">
-      <div class="tile is-parent is-vertical">
+      <div class="tile is-parent">
         <article class="tile is-child box">
           <h1 class="title">
             {{ vertical.name }} ({{ vertical.id }}) AI/Bot
