@@ -7,7 +7,19 @@
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
       <app-main></app-main>
     </div>
-    <!-- <footer-bar></footer-bar> -->
+    <footer class="footer" style="margin-left: 220px; height: 1.6em; padding: 0; background-color: #ebebeb">
+      <div class="content">
+        <small style="padding-right: 2em; padding-left: 1em;">
+          UI version {{ uiVersion }}
+        </small>
+        <small style="padding-right: 2em; padding-left: 1em;">
+          API version {{ apiVersion }}
+        </small>
+        <small style="padding-right: 2em; padding-left: 1em;">
+          Auth API version {{ authApiVersion }}
+        </small>
+      </div>
+    </footer>
     <!-- Select Vertical modal -->
     <b-modal :active.sync="showModal" :can-cancel="false" has-modal-card width="960">
       <select-vertical
@@ -69,6 +81,10 @@ export default {
   },
 
   async mounted () {
+    // load API server version info
+    this.getApiVersion()
+    // load auth API server version info
+    this.getAuthApiVersion()
     console.log('App.vue - mounted() starting')
     // check the JWT in localstorage to see if the user is already logged in
     console.log('App.vue - checking login...')
@@ -119,7 +135,10 @@ export default {
       'selectedVerticalId',
       'vertical',
       'verticals',
-      'query'
+      'query',
+      'uiVersion',
+      'apiVersion',
+      'authApiVersion'
     ])
   },
 
@@ -130,7 +149,9 @@ export default {
       'checkLogin',
       'loadVerticals',
       'setSelectedVertical',
-      'loadVertical'
+      'loadVertical',
+      'getApiVersion',
+      'getAuthApiVersion'
     ]),
     clickSetSelectedVertical (vertical) {
       this.setSelectedVertical(vertical)

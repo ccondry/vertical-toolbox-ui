@@ -13,11 +13,16 @@ const state = {
   effect: {
     translate3d: true
   },
-  query: null
+  query: null,
+  apiVersion: 'Loading...',
+  authApiVersion: 'Loading...'
 }
 
 const getters = {
-  query: state => state.query
+  query: state => state.query,
+  uiVersion: () => pkg.version,
+  apiVersion: state => state.apiVersion,
+  authApiVersion: state => state.authApiVersion
 }
 
 const mutations = {
@@ -56,6 +61,47 @@ const mutations = {
 }
 
 const actions = {
+  async getApiVersion ({getters, dispatch}) {
+    dispatch('setLoading', {group: 'app', type: 'apiVersion', value: true})
+    console.log('get API server info...')
+    try {
+      const endpoint = getters.endpoints.version
+      console.log('getting API server info endpoint', endpoint, '...')
+      const response = await dispatch('loadToState', {
+        name: 'get API server version',
+        endpoint,
+        mutation: types.SET_API_VERSION,
+        showNotification: false
+      })
+      console.log('get API server info - response:', response)
+    } catch (e) {
+      console.log('error loading API server info', e)
+      // dispatch('errorNotification', {title: 'Failed to load API server info', error: e})
+    } finally {
+      dispatch('setLoading', {group: 'app', type: 'apiVersion', value: false})
+    }
+  },
+  async getAuthApiVersion ({getters, dispatch}) {
+    dispatch('setLoading', {group: 'app', type: 'authApiVersion', value: true})
+    const operation = 'auth API server version'
+    console.log('getting', operation, '...')
+    try {
+      const endpoint = getters.endpoints.authApiVersion
+      console.log('getting', operation, 'endpoint', endpoint, '...')
+      const response = await dispatch('loadToState', {
+        name: 'get' + operation,
+        endpoint,
+        mutation: types.SET_AUTH_API_VERSION,
+        showNotification: false
+      })
+      console.log('get', operation, '- response:', response)
+    } catch (e) {
+      console.log('error getting', operation, e)
+      // dispatch('errorNotification', {title: 'Failed to get ' + operation, error: e})
+    } finally {
+      dispatch('setLoading', {group: 'app', type: 'authApiVersion', value: false})
+    }
+  },
   setQuery ({commit}, data) {
     commit(types.SET_QUERY_PARAMETERS, data)
   }

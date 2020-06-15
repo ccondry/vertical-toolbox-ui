@@ -12,10 +12,12 @@ const state = {
   endpoints: {
     login: authUrlPrefix + 'login',
     logout: authUrlPrefix + 'logout',
+    authApiVersion: authUrlPrefix + 'version',
     verticals: urlPrefix + 'verticals',
     endpoints: urlPrefix + 'endpoints',
     images: urlPrefix + 'images',
-    usage: urlPrefix + 'usage'
+    usage: urlPrefix + 'usage',
+    version: urlPrefix + 'version'
   }
 }
 
