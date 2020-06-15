@@ -8,5 +8,4 @@ export const authEnabled = () => true
 export const instance = state => state.app.instance
 export const loading = state => state.loading
 export const working = state => state.working
-export const endpoints = state => state.endpoints
 export const production = () => process.env.NODE_ENV === 'production'

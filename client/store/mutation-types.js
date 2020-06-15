@@ -10,9 +10,6 @@ export const SET_SESSION = 'SET_SESSION'
 export const SET_WORKING = 'SET_WORKING'
 export const SET_LOADING = 'SET_LOADING'
 
-// app
-export const SET_ENDPOINTS = 'SET_ENDPOINTS'
-
 // dCloud Cumulus
 export const SET_SELECTED_VERTICAL = 'SET_SELECTED_VERTICAL'
 export const SET_VERTICALS = 'SET_VERTICALS'

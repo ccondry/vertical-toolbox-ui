@@ -55,22 +55,7 @@ const mutations = {
   }
 }
 
-const endpoint = process.env.NODE_ENV === 'production' ? '/api/v1/verticals/endpoints' : 'http://localhost:3033/api/v1/verticals/endpoints'
-
 const actions = {
-  async getEndpoints ({getters, commit, dispatch}, showNotification = true) {
-    dispatch('setLoading', {group: 'app', type: 'endpoints', value: true})
-    try {
-      const response = await load(getters.jwt, endpoint)
-      commit(types.SET_ENDPOINTS, response.data)
-      // dispatch('successNotification', `Successfully loaded endpoints`)
-    } catch (e) {
-      console.error(`error during GET endpoints`, e)
-      dispatch('errorNotification', {title: `Failed to GET endpoints`, error: e})
-    } finally {
-      dispatch('setLoading', {group: 'app', type: 'endpoints', value: false})
-    }
-  },
   setQuery ({commit}, data) {
     commit(types.SET_QUERY_PARAMETERS, data)
   }

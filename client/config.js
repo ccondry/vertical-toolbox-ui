@@ -1,7 +1,4 @@
 export default {
-  app: {
-    endpoints: null
-  },
   ece: {
     defaultChatEntryPointId: '1005'
   },

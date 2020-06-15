@@ -15,7 +15,6 @@ const store = new Vuex.Store({
   getters,
   modules,
   state: {
-    endpoints: config.app.endpoints,
     pkg,
     working: {
       app: {},

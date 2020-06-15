@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <nprogress-container></nprogress-container>
-    <b-loading :is-full-page="true" :active="loading.app.endpoints" :can-cancel="false"></b-loading>
+    <!-- <b-loading :is-full-page="true" :active="loading.app.endpoints" :can-cancel="false"></b-loading> -->
     <navbar :show="true" :menu-filter.sync="menuFilter" @change-vertical="showModal = true"></navbar>
-    <div v-if="authenticated && endpoints">
+    <div v-if="authenticated">
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
       <app-main></app-main>
     </div>
@@ -74,9 +74,6 @@ export default {
     console.log('App.vue - checking login...')
     await this.checkLogin()
     console.log('App.vue - checking login done.')
-    console.log('App.vue - getting endpoints...')
-    await this.getEndpoints()
-    console.log('App.vue - getting endpoints done.')
     console.log('App.vue mounted() - this.query', this.query)
     if (this.selectedVerticalId) {
       console.log('mounted - selectedVerticalId exists, setting selectedTemplate to', this.selectedVerticalId)
@@ -118,7 +115,6 @@ export default {
       'sidebar',
       'authenticated',
       'loading',
-      'endpoints',
       'user',
       'selectedVerticalId',
       'vertical',
@@ -132,7 +128,6 @@ export default {
       'toggleDevice',
       'toggleSidebar',
       'checkLogin',
-      'getEndpoints',
       'loadVerticals',
       'setSelectedVertical',
       'loadVertical'

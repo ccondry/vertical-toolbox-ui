@@ -17,5 +17,6 @@ export default {
   user,
   usage,
   defaults,
-  brands
+  brands,
+  endpoints
 }
