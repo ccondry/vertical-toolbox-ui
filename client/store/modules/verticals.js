@@ -43,15 +43,17 @@ const actions = {
         endpoint: getters.endpoints.images,
         data
       })
-      console.log('upload file successful. path = ', response.data)
+      console.log('upload file successful. path = ', response.data.url)
       if (showNotification) {
         Toast.open({
           message: 'Successfully uploaded file.',
           type: 'is-success'
         })
       }
-      // callback to the emitter
-      data.callback(response.data)
+      // run emitter callback
+      if (typeof data.callback === 'function') {
+        data.callback(response.data)
+      } 
     } catch (e) {
       console.log(e)
       Toast.open({
