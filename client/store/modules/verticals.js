@@ -53,7 +53,7 @@ const actions = {
       // run emitter callback
       if (typeof data.callback === 'function') {
         data.callback(response.data)
-      } 
+      }
     } catch (e) {
       console.log(e)
       Toast.open({
