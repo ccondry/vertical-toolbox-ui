@@ -1054,8 +1054,7 @@ export default {
           name += '_' + Date.now()
         }
         // set up callback for when the file is done uploading
-        const callback = (response) => {
-          const url = response.url
+        const callback = ({url}) => {
           // map out the node names to model data references
           const map = {
             'iframe': (url) => {

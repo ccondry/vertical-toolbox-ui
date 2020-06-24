@@ -250,7 +250,7 @@ export default {
         // get file name
         let name = file.name.substring(0, file.name.lastIndexOf('.'))
         // set up callback for when the file is done uploading
-        const callback = (url) => {
+        const callback = ({url}) => {
           // do nothing
         }
         // determine node name - if node has index, suffix node name with it
