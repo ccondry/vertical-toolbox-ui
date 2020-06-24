@@ -819,7 +819,7 @@ export default {
         // get file name
         const name = file.name.substring(0, file.name.lastIndexOf('.')) + '_' + Date.now()
         // set up callback for when the file is done uploading
-        const callback = (url) => {
+        const callback = ({url}) => {
           // map out the node names to model data references
           const map = {
             // mobile app logo
