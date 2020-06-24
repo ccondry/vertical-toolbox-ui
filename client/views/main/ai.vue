@@ -160,16 +160,6 @@ export default {
       // default disable save
       return true
     },
-    autocompleteOwners () {
-      const allOwners = this.verticals.map(v => v.owner)
-      const uniqueOwners = Array.from(new Set(allOwners))
-      return uniqueOwners.filter((option) => {
-        return option
-        .toString()
-        .toLowerCase()
-        .indexOf(this.ownerFilter.toLowerCase()) >= 0
-      })
-    },
     sortedVerticals () {
       // make a mutable copy of the store data
       try {
