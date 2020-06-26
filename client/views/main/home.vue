@@ -260,7 +260,7 @@ export default {
       // fill in each model value with default value, if not set
       for (const v of values) {
         console.log('checking for value', v)
-        if (!this.model[v]) {
+        if (typeof this.model[v] === 'undefined') {
           console.log(v, 'is not set. Setting it to default value', this.defaults.verticals[v])
           this.model[v] = this.defaults.verticals[v]
         } else {
