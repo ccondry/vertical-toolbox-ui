@@ -32,6 +32,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      environment: 'development',
       title: 'dCloud Demo Branding',
       template: 'index.html',
       inject: true,
