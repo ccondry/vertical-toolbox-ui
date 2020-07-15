@@ -88,23 +88,17 @@
           </b-field>
           <b-field label="Select Existing Image">
             <b-select :value="model.brand.advisorImage" @change.native="changeAdvisorImage($event)">
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author1.png">
-                Sandra Jefferson
+              <!-- list of advisor images -->
+              <option
+              v-for="(advisor, index) of defaultAdvisors"
+              :key="index"
+              :value="advisor.image"
+              >
+                {{ advisor.name }}
               </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author2.png">
-                Josh Peterson
-              </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author3.png">
-                Rick Barrows
-              </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author4.png">
-                Jamie Bracksted
-              </option>
-              <option value="https://mm.cxdemo.net/static/images/cumulus/common/author5.png">
-                Helen Liang
-              </option>
-              <option v-if="customAdvisorImageUrl" :value="customAdvisorImageUrl">
-                {{ customAdvisorImageName }}
+              <!-- custom advisor image, if not using default -->
+              <option default v-if="customAdvisorImageUrl" :value="customAdvisorImageUrl">
+                Custom
               </option>
             </b-select>
           </b-field>
@@ -816,6 +810,24 @@
 
 <script>
 import { Chrome } from 'vue-color'
+
+const defaultAdvisors = [{
+  image: 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png',
+  name: 'Sandra Jefferson'
+}, {
+  image: 'https://mm.cxdemo.net/static/images/cumulus/common/author2.png',
+  name: 'Josh Peterson'
+}, {
+  image: 'https://mm.cxdemo.net/static/images/cumulus/common/author3.png',
+  name: 'Rick Barrows'
+}, {
+  image: 'https://mm.cxdemo.net/static/images/cumulus/common/author4.png',
+  name: 'Trudy Vere-Jones'
+}, {
+  image: 'https://mm.cxdemo.net/static/images/cumulus/common/author5.png',
+  name: 'Helen Liang'
+}]
+
 const placeholders = {
   callModalText: `You can reach one of our experts by phone:`
 }
@@ -972,6 +984,7 @@ export default {
 
   data () {
     return {
+      defaultAdvisors,
       materialDesignIconsUrl: 'https://materialdesignicons.com/cdn/2.5.94/',
       materialDesignIconsVersion: '2.5.94',
       showIconModal: false,
@@ -992,12 +1005,20 @@ export default {
   },
 
   computed: {
+    isCustomAdvisor () {
+      // true if the advisor image in the vertical is not one of the default advisors
+      return !this.defaultAdvisorImages.includes(this.model.brand.advisorImage)
+    },
     customAdvisorImageName () {
       try {
         return this.customAdvisorImageUrl.split('/').pop()
       } catch (e) {
         return ''
       }
+    },
+    defaultAdvisorImages () {
+      // returns an array of just the default advisor image URLs
+      return this.defaultAdvisors.map(v => v.image)
     }
   },
 
@@ -1016,6 +1037,10 @@ export default {
       if (!this.model.brand.advisorImage) {
         // set to Sandra Jefferson photo by default
         this.$set(this.model, 'advisorImage', 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png')
+      } else if (!this.defaultAdvisorImages.includes(this.model.brand.advisorImage)) {
+        // advisor image is not a built-in value. copy the URL to cache so
+        // the UI knows it is a custom value
+        this.customAdvisorImageUrl = this.model.brand.advisorImage
       }
     },
     changeAdvisorImage (event) {
