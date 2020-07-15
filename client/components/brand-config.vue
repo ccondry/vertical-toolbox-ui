@@ -103,6 +103,9 @@
               <option value="https://mm.cxdemo.net/static/images/cumulus/common/author5.png">
                 Helen Liang
               </option>
+              <option v-if="customAdvisorImageUrl" :value="customAdvisorImageUrl">
+                {{ customAdvisorImageName }}
+              </option>
             </b-select>
           </b-field>
           <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
@@ -983,7 +986,18 @@ export default {
       uploadIndex: null,
       faviconWebsite: '',
       color1: '#0b63ac',
-      color2: '#2b83cc'
+      color2: '#2b83cc',
+      customAdvisorImageUrl: ''
+    }
+  },
+
+  computed: {
+    customAdvisorImageName () {
+      try {
+        return this.customAdvisorImageUrl.split('/').pop()
+      } catch (e) {
+        return ''
+      }
     }
   },
 
@@ -1062,8 +1076,12 @@ export default {
               this.model.brand.iframe = url
             },
             'advisor': (url) => {
-              // set iframe url
+              // set advisor url
               this.model.brand.advisor = url
+              // change advisor image in the UI
+              this.customAdvisorImageUrl = url
+              // select custom entry in the option list
+              this.model.brand.advisorImage = url
             }
           }
           // update our model with the new file URL
