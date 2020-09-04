@@ -50,7 +50,7 @@
     "vue-cleave": "1.1.1",
     "vue-color": "^2.4.6",
     "vue-lory": "0.0.4",
-    "vue-moment": "^3.2.0",
+    "vue-moment": "^4.1.0",
     "vue-nprogress": "0.1.5",
     "vue-router": "^3.0.2",
     "vuedraggable": "^2.16.0",
