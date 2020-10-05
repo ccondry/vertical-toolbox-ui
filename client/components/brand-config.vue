@@ -532,7 +532,7 @@
                 <b-input type="textarea" v-model="model.brand.callModalCustomAiLabel" placeholder="Custom AI" />
               </b-field>
 
-              <b-field label="2RING Phone Number Label (UCCX only">
+              <b-field label="2Ring Phone Number Label (UCCX only)">
                 <b-input type="textarea" v-model="model.brand.callModal2RingLabel" placeholder="2Ring" />
               </b-field>
 
