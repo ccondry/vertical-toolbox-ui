@@ -1,7 +1,7 @@
 {
   "name": "vertical-toolbox-ui",
-  "version": "1.7.2",
-  "description": "dCloud Toolbox UI for Cumulus demo",
+  "version": "1.7.3",
+  "description": "dCloud Toolbox UI for configuring dCloud Contact Center demo branding",
   "repository": "dcloud-collab/cumulus-toolbox-ui",
   "license": "UNLICENSED",
   "author": {
