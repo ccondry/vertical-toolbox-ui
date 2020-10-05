@@ -18,7 +18,7 @@
           <h1 class="title">
             {{ vertical.name }} ({{ vertical.id }}) Mobile App
           </h1>
-          <div class="block wysiwyg">
+          <div class="block">
             <p>
               You can update your vertical by using any of the save buttons
               on this panel. You will only be able to save verticals that you own.
