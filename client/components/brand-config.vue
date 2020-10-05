@@ -508,6 +508,10 @@
                 <b-input type="textarea" v-model="model.brand.callModalMainLabel" placeholder="Main" />
               </b-field>
 
+              <b-field label="CRM Number Label (PCCE only)">
+                <b-input type="textarea" v-model="model.brand.callModalCrmLabel" placeholder="CRM" />
+              </b-field>
+
               <b-field label="Gold Phone Number Label (PCCE only)">
                 <b-input type="textarea" v-model="model.brand.callModalGoldLabel" placeholder="Gold" />
               </b-field>
@@ -516,8 +520,20 @@
                 <b-input type="textarea" v-model="model.brand.callModalVivrLabel" placeholder="VIVR" />
               </b-field>
 
-              <b-field label="AI Phone Number Label (Instant Demo only, for now)">
+              <b-field label="AI Phone Number Label">
                 <b-input type="textarea" v-model="model.brand.callModalAiLabel" placeholder="AI" />
+              </b-field>
+
+              <b-field label="CVA AI Phone Number Label">
+                <b-input type="textarea" v-model="model.brand.callModalCvaAiLabel" placeholder="CVA AI" />
+              </b-field>
+
+              <b-field label="Custom AI Phone Number Label">
+                <b-input type="textarea" v-model="model.brand.callModalCustomAiLabel" placeholder="Custom AI" />
+              </b-field>
+
+              <b-field label="2RING Phone Number Label (UCCX only">
+                <b-input type="textarea" v-model="model.brand.callModal2RingLabel" placeholder="2Ring" />
               </b-field>
 
               <!-- Save button -->
