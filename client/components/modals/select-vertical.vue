@@ -97,10 +97,15 @@ export default {
       const allOwners = this.verticals.map(v => v.owner)
       const uniqueOwners = Array.from(new Set(allOwners))
       return uniqueOwners.filter((option) => {
-        return option
-        .toString()
-        .toLowerCase()
-        .indexOf(this.ownerFilter.toLowerCase()) >= 0
+        try {
+          return option
+          .toString()
+          .toLowerCase()
+          .indexOf(this.ownerFilter.toLowerCase()) >= 0
+        } catch (e) {
+          // console.log('autocompleteOwners error:', e)
+          return false
+        }
       })
     },
     sortedVerticals () {
