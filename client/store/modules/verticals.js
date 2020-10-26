@@ -65,6 +65,27 @@ const actions = {
       dispatch('setWorking', {group: 'images', type: data.node, value: false})
     }
   },
+  async createVertical ({getters, dispatch}, {data, showNotification}) {
+    dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
+    const response = await dispatch('postData', {
+      name: 'vertical',
+      endpoint: getters.endpoints.verticals,
+      data,
+      showNotification,
+      success: 'Successfully created vertical',
+      fail: 'Failed to create vertical'
+    })
+    console.log('successfully created vertical:', response)
+    dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
+    // make sure the the new vertical is the selected one
+    dispatch('setSelectedVertical', response.data.id)
+    // load the selected vertical - so that after Save As, the vertical ID
+    // will be correctly displayed
+    // load new data for this vertical from the server
+    dispatch('loadVertical')
+
+    return response
+  },
   async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
     dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
     delete data._id

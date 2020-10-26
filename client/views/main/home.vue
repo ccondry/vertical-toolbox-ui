@@ -174,6 +174,7 @@ export default {
       'loadVertical',
       'errorNotification',
       'saveVertical',
+      'createVertical',
       'uploadImage',
       'deleteVertical',
       'setSelectedVertical',
@@ -234,7 +235,17 @@ export default {
     },
     clickSaveAs () {
       console.log('saving vertical as...')
-      this.showModal = true
+      // this.showModal = true
+      this.$dialog.prompt({
+        message: `What would you like to name your new vertical?`,
+        onConfirm: (name) => {
+          const data = JSON.parse(JSON.stringify(this.model))
+          // set name in the request data
+          data.name = name
+          // create the vertical on the server
+          this.createVertical({data})
+        }
+      })
     },
     updateCache (data) {
       // copy state data to local data
