@@ -151,7 +151,7 @@ export default {
       // update the vertical ID in state
       this.setSelectedVertical()
       // and also set the URL query parameter for it
-      this.$router.push({query: {vertical: val}})
+      this.$router.push({query: {vertical: val}}).catch(e => {})
       // the modal should close now when the selected template is set in state
     }
   }
