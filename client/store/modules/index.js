@@ -6,7 +6,6 @@ import verticals from './verticals'
 import user from './user'
 import usage from './usage'
 import defaults from './defaults'
-import brands from './brands'
 import endpoints from './endpoints'
 
 export default {
@@ -18,6 +17,5 @@ export default {
   user,
   usage,
   defaults,
-  brands,
   endpoints
 }
