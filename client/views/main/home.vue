@@ -16,7 +16,7 @@
       <div class="tile is-parent">
         <article class="tile is-child box">
           <h1 class="title">
-            {{ vertical.name }} ({{ vertical.id }}) Basic Information
+            {{ vertical.name }} Basic Information
           </h1>
           <div class="block content">
             <p>
@@ -184,7 +184,7 @@ export default {
       console.log('confirmSaveVertical', id, data)
       // pop confirmation dialog
       this.$dialog.confirm({
-        message: `Are you sure you want to save vertical ${data.name} (${id})?`,
+        message: `Are you sure you want to save vertical ${data.name}?`,
         onConfirm: async () => {
           this.$toast.open('Save vertical confirmed')
           // save the data on the server
