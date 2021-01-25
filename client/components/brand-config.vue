@@ -536,6 +536,18 @@
                 <b-input type="textarea" v-model="model.brand.callModal2RingLabel" placeholder="2Ring" />
               </b-field>
 
+              <b-field label="WXM Phone Number Label">
+                <b-input type="textarea" v-model="model.brand.callModalWxmLabel" placeholder="2Ring" />
+              </b-field>
+
+              <b-field label="WXM (Email) Phone Number Label">
+                <b-input type="textarea" v-model="model.brand.callModalWxmEmailLabel" placeholder="2Ring" />
+              </b-field>
+
+              <b-field label="WXM (SMS) Phone Number Label">
+                <b-input type="textarea" v-model="model.brand.callModalWxmSmsLabel" placeholder="2Ring" />
+              </b-field>
+
               <!-- Save button -->
               <b-field>
                 <button type="button" class="button is-success"
