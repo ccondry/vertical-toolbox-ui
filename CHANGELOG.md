@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.2.1
+
+### Features
+
+* **Brand Config:** Add call labels for WXM and CCAI
+
+
 # 2020.10.26
 
 ### Features
