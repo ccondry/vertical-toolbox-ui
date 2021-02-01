@@ -536,6 +536,10 @@
                 <b-input type="textarea" v-model="model.brand.callModal2RingLabel" placeholder="2Ring" />
               </b-field>
 
+              <b-field label="CCAI Phone Number Label">
+                <b-input type="textarea" v-model="model.brand.callModalCcaiLabel" placeholder="CCAI" />
+              </b-field>
+
               <b-field label="WXM Phone Number Label">
                 <b-input type="textarea" v-model="model.brand.callModalWxmLabel" placeholder="2Ring" />
               </b-field>
