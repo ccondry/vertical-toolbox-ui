@@ -541,15 +541,15 @@
               </b-field>
 
               <b-field label="WXM Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalWxmLabel" placeholder="2Ring" />
+                <b-input type="textarea" v-model="model.brand.callModalWxmLabel" placeholder="WXM" />
               </b-field>
 
               <b-field label="WXM (Email) Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalWxmEmailLabel" placeholder="2Ring" />
+                <b-input type="textarea" v-model="model.brand.callModalWxmEmailLabel" placeholder="WXM (Email)" />
               </b-field>
 
               <b-field label="WXM (SMS) Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalWxmSmsLabel" placeholder="2Ring" />
+                <b-input type="textarea" v-model="model.brand.callModalWxmSmsLabel" placeholder="WXM (SMS)" />
               </b-field>
 
               <!-- Save button -->
