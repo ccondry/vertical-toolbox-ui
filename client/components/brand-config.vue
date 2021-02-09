@@ -361,13 +361,11 @@
                   <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
                 </b-field>
               </b-field>
-
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.chatTranslationHeading" placeholder="Chat with Translation" />
+                <b-input v-model="model.brand.chatTranslationHeading" placeholder="Chat Translation" />
               </b-field>
-
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.chatTranslationText" placeholder="An AI-driven chat bot will assist you and translate for you" />
+                <b-input v-model="model.brand.chatTranslationText" placeholder="Live chat with automatic translation" />
               </b-field>
 
               <b-field expanded label="Wait Time">
