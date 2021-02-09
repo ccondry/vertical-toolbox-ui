@@ -328,6 +328,63 @@
         </b-collapse>
         <!-- /Chat Bot -->
 
+        <!-- Chat Translation -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Chat Translation Option (PCCE 12.6 EFT only)</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <b-field label="Option Enabled">
+              <b-select v-model="model.brand.chatTranslationEnabled">
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <div v-show="model.brand.chatTranslationEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.brand.chatTranslationIcon" placeholder="message-processing" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.brand.chatTranslationIcon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                </b-field>
+              </b-field>
+
+              <b-field expanded label="Heading">
+                <b-input v-model="model.brand.chatTranslationHeading" placeholder="Chat with Translation" />
+              </b-field>
+
+              <b-field expanded label="Text">
+                <b-input v-model="model.brand.chatTranslationText" placeholder="An AI-driven chat bot will assist you and translate for you" />
+              </b-field>
+
+              <b-field expanded label="Wait Time">
+                <b-input v-model="model.brand.chatTranslationWaitTime" placeholder="No wait time" />
+              </b-field>
+              
+              <!-- Save button -->
+              <b-field>
+                <button type="button" class="button is-success"
+                @click.prevent="submit" :disabled="disableSave">Save</button>
+              </b-field>
+            </div>
+
+          </div>
+        </b-collapse>
+        <!-- /Chat Bot -->
+
         <!-- SMS -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
