@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.2.9-1
+
+### Features
+
+* **Brand Config:** Update chat translation option text defaults
+
+
 # 2021.2.9
 
 ### Features
