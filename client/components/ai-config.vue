@@ -72,9 +72,10 @@
         </p>
         <b-field label="DialogFlow Project ID (for Chat Bot and Conversational IVR)">
           <b-autocomplete
-          v-model="model.gcpProjectId"
+          v-model="gcpProjectIdModel"
           :data="[defaults.gcpProjectId]"
-          :placeholder="defaults.gcpProjectId" />
+          :placeholder="defaults.gcpProjectId"
+          />
         </b-field>
         <p>
           The DialogFlow Project ID you specify must have a corresponding
@@ -210,6 +211,15 @@ export default {
   },
 
   computed: {
+    gcpProjectIdModel: {
+      get () {
+        return this.model.gcpProjectId
+      },
+      set (value) {
+        // trim whitespace from the project ID
+        this.model.gcpProjectId = String(value).trim()
+      }
+    },
     intentsZipUrl () {
       return 'https://mm-static.cxdemo.net/intents.zip?nocache=' + Date.now()
     },
