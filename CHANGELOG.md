@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.3.29
+
+### Bug Fixes
+* **AI/Bot Config:** Trim whitespace from the DialogFlow project ID field
+
+
 # 2021.2.9-1
 
 ### Features
