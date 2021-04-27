@@ -599,6 +599,10 @@
                 <b-input type="textarea" v-model="model.brand.callModalWxmLabel" placeholder="WXM" />
               </b-field>
 
+              <b-field label="WXM (Voice) Phone Number Label">
+                <b-input type="textarea" v-model="model.brand.callModalWxmVoiceLabel" placeholder="WXM (Voice)" />
+              </b-field>
+
               <b-field label="WXM (Email) Phone Number Label">
                 <b-input type="textarea" v-model="model.brand.callModalWxmEmailLabel" placeholder="WXM (Email)" />
               </b-field>
