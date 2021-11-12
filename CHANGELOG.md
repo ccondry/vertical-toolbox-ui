@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.11.12
+
+### Features
+* **Chat/AI/Bot:** Update AI/Bot to be Chat/AI/Bot. Add configuration sections
+for Webex CC chat template settings.
+
+
 # 2021.11.5
 
 ### Features
