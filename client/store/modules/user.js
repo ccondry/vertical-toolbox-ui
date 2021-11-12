@@ -87,7 +87,6 @@ const actions = {
     try {
       dispatch('setLoading', {group: 'app', type: 'user', value: true})
       const response = await load(getters, 'user')
-      dispatch('setLoading', {group: 'app', type: 'user', value: false})
       console.log('load user details:', response)
       commit(types.SET_USER, response.data)
       if (showNotification) {
@@ -96,6 +95,8 @@ const actions = {
     } catch (e) {
       console.log('error loading defaults', e)
       dispatch('errorNotification', {title: 'Failed to load user details', error: e})
+    } finally {
+      dispatch('setLoading', {group: 'app', type: 'user', value: false})
     }
   },
   addUserData ({getters, dispatch}, params) {

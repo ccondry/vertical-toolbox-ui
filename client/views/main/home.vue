@@ -1,17 +1,5 @@
 <template>
   <div>
-    <!-- Loading Indicator -->
-    <div class="tile is-ancestor" v-if="loading.app.user || working.app.user || loading.app.verticals">
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-          <div class="content">
-            &nbsp;
-            <b-loading :is-full-page="false" :active="true" :can-cancel="false"></b-loading>
-          </div>
-        </article>
-      </div>
-    </div>
-
     <div class="tile is-ancestor" v-if="vertical.id">
       <div class="tile is-parent">
         <article class="tile is-child box">
@@ -184,10 +172,10 @@ export default {
     confirmSaveVertical ({id, data}) {
       console.log('confirmSaveVertical', id, data)
       // pop confirmation dialog
-      this.$dialog.confirm({
+      this.$buefy.dialog.confirm({
         message: `Are you sure you want to save vertical ${data.name}?`,
         onConfirm: async () => {
-          this.$toast.open('Save vertical confirmed')
+          this.$buefy.toast.open('Save vertical confirmed')
           // save the data on the server
           await this.saveVertical({id, data})
           // make sure the the new vertical is the selected one
@@ -202,10 +190,10 @@ export default {
     confirmDeleteVertical (id) {
       console.log('confirmDeleteVertical', id)
       // pop confirmation dialog
-      this.$dialog.confirm({
+      this.$buefy.dialog.confirm({
         message: `Are you sure you want to delete vertical ${id}?`,
         onConfirm: async () => {
-          this.$toast.open('Delete vertical confirmed')
+          this.$buefy.toast.open('Delete vertical confirmed')
           await this.deleteVertical({id})
           // update verticals data in state with current server data
           await this.loadVerticals(false)
@@ -236,7 +224,7 @@ export default {
     clickSaveAs () {
       console.log('saving vertical as...')
       // this.showModal = true
-      this.$dialog.prompt({
+      this.$buefy.dialog.prompt({
         message: `What would you like to name your new vertical?`,
         onConfirm: (name) => {
           const data = JSON.parse(JSON.stringify(this.model))
@@ -350,22 +338,22 @@ export default {
   },
 
   watch: {
+    vertical (val, oldVal) {
+      if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
+        // selected vertical object in state has changed
+        // update mutable cache of the state object
+        this.updateCache(val)
+      }
+    },
     query (val) {
       // URL query params changed
       // store in state
       this.setQuery(val)
     },
-    vertical (val) {
-      // selected vertical object in state has changed
-      // update mutable cache of the state object
-      this.updateCache(val)
+    model () {
+      // update the state with model when the model changes
+      this.setVertical(this.model)
     }
-  },
-
-  beforeRouteLeave (to, from, next) {
-    // when navigating away from this component, update the state with model
-    this.setVertical(this.model)
-    next()
   }
 }
 </script>

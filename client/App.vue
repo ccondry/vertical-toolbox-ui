@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <nprogress-container></nprogress-container>
     <!-- <b-loading :is-full-page="true" :active="loading.app.endpoints" :can-cancel="false"></b-loading> -->
+    <!-- Loading Indicator -->
+    <b-loading :is-full-page="true" :active="isLoading || isWorking" />
     <navbar :show="true" :menu-filter.sync="menuFilter" @change-vertical="showModal = true"></navbar>
     <div v-if="authenticated">
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
@@ -33,7 +34,6 @@
 </template>
 
 <script>
-import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
 import SelectVertical from 'components/modals/select-vertical'
 import { Navbar, Sidebar, AppMain } from 'components/layout/'
 import { mapGetters, mapActions } from 'vuex'
@@ -50,7 +50,6 @@ export default {
     Navbar,
     Sidebar,
     AppMain,
-    NprogressContainer,
     SelectVertical
   },
 
@@ -138,8 +137,15 @@ export default {
       'query',
       'uiVersion',
       'apiVersion',
-      'authApiVersion'
-    ])
+      'authApiVersion',
+      'working'
+    ]),
+    isLoading () {
+      return this.loading.app.user || this.loading.app.verticals
+    },
+    isWorking () {
+      return this.working.app.user
+    }
   },
 
   methods: {
@@ -205,29 +211,6 @@ html {
   background-color: whitesmoke;
 }
 
-.nprogress-container {
-  position: fixed !important;
-  width: 100%;
-  height: 50px;
-  z-index: 2048;
-  pointer-events: none;
-
-  #nprogress {
-    $color: #48e79a;
-
-    .bar {
-      background: $color;
-    }
-    .peg {
-      box-shadow: 0 0 10px $color, 0 0 5px $color;
-    }
-
-    .spinner-icon {
-      border-top-color: $color;
-      border-left-color: $color;
-    }
-  }
-}
 .content .card-header .card-header-title {
   margin-bottom: 0;
 }

@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import { Toast } from 'buefy/dist/components/toast'
+import { ToastProgrammatic as Toast } from 'buefy'
 
 const state = {
   verticals: [],
@@ -32,7 +32,7 @@ const actions = {
     // if selected vertical was set to a value...
     if (data) {
       // set loading now, because setting the vertical will trigger loading
-      dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
+      // dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
     }
   },
   async uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
