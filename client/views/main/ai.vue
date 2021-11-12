@@ -4,7 +4,7 @@
       <div class="tile is-parent">
         <article class="tile is-child box">
           <h1 class="title">
-            {{ vertical.name }} AI/Bot
+            {{ vertical.name }} Chat and AI/Bot
           </h1>
           <div class="block content">
             <p>
@@ -12,6 +12,12 @@
               on this panel. You will only be able to save verticals that you own.
             </p>
           </div>
+
+          <!-- Save button -->
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="clickSave" :disabled="disableSave">Save</button>
+          </b-field>
 
           <ai-config
           :model.sync="model"
@@ -24,6 +30,20 @@
           :user="user"
           ></ai-config>
 
+          <br />
+          
+          <wxcc-chat-config
+          v-model="model"
+          @save="clickSave"
+          :disable-save="disableSave"
+          />
+
+          <!-- Save button -->
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="clickSave" :disabled="disableSave">Save</button>
+          </b-field>
+
         </article>
       </div>
     </div>
@@ -34,10 +54,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import AiConfig from '../../components/ai-config.vue'
+import WxccChatConfig from '../../components/wxcc-chat-config'
 
 export default {
   components: {
-    AiConfig
+    AiConfig,
+    WxccChatConfig
   },
 
   created () {

@@ -52,8 +52,8 @@ export default {
       path: '/branding/ai',
       meta: {
         icon: 'robot',
-        label: 'AI/Bot',
-        description: 'AI Bot customization'
+        label: 'Chat/AI/Bot',
+        description: 'Chat and AI/Bot customization'
       },
       component: lazyLoading('main/ai')
     }

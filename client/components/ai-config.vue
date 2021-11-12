@@ -109,12 +109,6 @@
           </b-tooltip>
         </b-field>
         <!-- /Post Chat Survey -->
-
-        <!-- Save button -->
-        <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
-        </b-field>
       </div>
     </b-collapse>
     <!-- /AI Customization -->
