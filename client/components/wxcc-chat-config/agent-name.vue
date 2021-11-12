@@ -4,47 +4,22 @@
       <button class="button is-primary" @click="configure">Configure</button>
     </div>
     <div class="card-content" v-if="isConfigured">
-      <!-- Chatting Message -->
-      <b-field label="Chatting Message">
-        <b-input
-        v-model="model.messages.chattingMessage.displayText"
-        :placeholder="myDefaults.messages.chattingMessage.displayText"
+      <!-- Use Agent Real Name -->
+      <b-field label="Display Agent Name">
+        <b-switch
+        v-model="model.useAgentRealName"
         @input="updateParent"
-        />
+        >
+          {{ model.useAgentRealName ? 'Use agent name' : 'Anonymous agents' }}
+        </b-switch>
       </b-field>
 
-      <!-- Connecting Message -->
-      <b-field label="Connecting Message">
+      <!-- Display Text -->
+      <b-field label="Anonymous Agent Display Name">
         <b-input
-        v-model="model.messages.connectingMessage.displayText"
-        :placeholder="myDefaults.messages.connectingMessage.displayText"
-        @input="updateParent"
-        />
-      </b-field>
-
-      <!-- Enter Room Message -->
-      <b-field label="Enter Room Message">
-        <b-input
-        v-model="model.messages.enterRoomMessage.displayText"
-        :placeholder="myDefaults.messages.enterRoomMessage.displayText"
-        @input="updateParent"
-        />
-      </b-field>
-
-      <!-- Leave Room Message -->
-      <b-field label="Leave Room Message">
-        <b-input
-        v-model="model.messages.leaveRoomMessage.displayText"
-        :placeholder="myDefaults.messages.leaveRoomMessage.displayText"
-        @input="updateParent"
-        />
-      </b-field>
-
-      <!-- Waiting Message -->
-      <b-field label="Waiting Message">
-        <b-input
-        v-model="model.messages.waitingMessage.displayText"
-        :placeholder="myDefaults.messages.waitingMessage.displayText"
+        v-model="model.displayText"
+        :placeholder="myDefaults.displayText"
+        :disabled="model.useAgentRealName"
         @input="updateParent"
         />
       </b-field>
@@ -61,8 +36,8 @@
 </template>
 
 <script>
-const title = 'Chat Status Messages'
-const modelKey = 'chatStatusMessages'
+const title = 'Agent Name'
+const modelKey = 'mediaSpecificConfiguration'
 
 export default {
   props: {

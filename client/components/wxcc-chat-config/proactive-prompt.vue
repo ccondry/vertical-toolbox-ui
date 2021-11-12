@@ -56,6 +56,9 @@
 </template>
 
 <script>
+const title = 'Proactive Prompt'
+const modelKey = 'proactivePrompt'
+
 export default {
   props: {
     value: {
@@ -65,14 +68,6 @@ export default {
     defaults: {
       type: Object,
       required: true
-    },
-    modelKey: {
-      type: String,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
     }
   },
 
@@ -81,13 +76,15 @@ export default {
     const copy = JSON.parse(JSON.stringify(this.value))
     let model
     try {
-      model = copy[this.modelKey]
+      model = copy[modelKey]
     } catch (e) {
       // continue
     }
 
     return {
-      model
+      model,
+      title,
+      modelKey
     }
   },
 

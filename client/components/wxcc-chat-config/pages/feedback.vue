@@ -4,48 +4,31 @@
       <button class="button is-primary" @click="configure">Configure</button>
     </div>
     <div class="card-content" v-if="isConfigured">
-      <!-- Chatting Message -->
-      <b-field label="Chatting Message">
-        <b-input
-        v-model="model.messages.chattingMessage.displayText"
-        :placeholder="myDefaults.messages.chattingMessage.displayText"
+      <!-- Enabled -->
+      <b-field label="Enable Feedback">
+        <b-switch
+        v-model="model.enabled"
         @input="updateParent"
         />
       </b-field>
 
-      <!-- Connecting Message -->
-      <b-field label="Connecting Message">
+      <!-- Comment -->
+      <b-field label="Comment">
         <b-input
-        v-model="model.messages.connectingMessage.displayText"
-        :placeholder="myDefaults.messages.connectingMessage.displayText"
+        v-model="model.fields.comment.displayText"
+        :placeholder="myDefaults.fields.comment.displayText"
         @input="updateParent"
+        :disabled="!model.enabled"
         />
       </b-field>
 
-      <!-- Enter Room Message -->
-      <b-field label="Enter Room Message">
+      <!-- Query -->
+      <b-field label="Query">
         <b-input
-        v-model="model.messages.enterRoomMessage.displayText"
-        :placeholder="myDefaults.messages.enterRoomMessage.displayText"
+        v-model="model.fields.feedbackQuery.displayText"
+        :placeholder="myDefaults.fields.feedbackQuery.displayText"
         @input="updateParent"
-        />
-      </b-field>
-
-      <!-- Leave Room Message -->
-      <b-field label="Leave Room Message">
-        <b-input
-        v-model="model.messages.leaveRoomMessage.displayText"
-        :placeholder="myDefaults.messages.leaveRoomMessage.displayText"
-        @input="updateParent"
-        />
-      </b-field>
-
-      <!-- Waiting Message -->
-      <b-field label="Waiting Message">
-        <b-input
-        v-model="model.messages.waitingMessage.displayText"
-        :placeholder="myDefaults.messages.waitingMessage.displayText"
-        @input="updateParent"
+        :disabled="!model.enabled"
         />
       </b-field>
 
@@ -61,8 +44,8 @@
 </template>
 
 <script>
-const title = 'Chat Status Messages'
-const modelKey = 'chatStatusMessages'
+const title = 'Feedback'
+const modelKey = 'feedback'
 
 export default {
   props: {

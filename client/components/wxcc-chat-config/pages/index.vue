@@ -1,28 +1,27 @@
 <template>
-  <!-- Webex CC Chat Template Customization -->
-  <collapse-card title="Webex CC Chat Template Customization">
+  <!-- Webex CC Chat Template Customization - Pages -->
+  <collapse-card title="Pages">
     <div class="card-content">
-      <agent-name
+      <!-- Off Hours -->
+      <off-hours
       v-model="model"
       :defaults="myDefaults"
       />
-
-      <virtual-assistant
+      
+      <!-- Feedback -->
+      <feedback
       v-model="model"
       :defaults="myDefaults"
       />
-
-      <proactive-prompt
+      
+      <!-- Agent Unavailable -->
+      <agent-unavailable
       v-model="model"
       :defaults="myDefaults"
       />
-
-      <chat-status-messages
-      v-model="model"
-      :defaults="myDefaults"
-      />
-
-      <pages
+      
+      <!-- Customer Information -->
+      <customer-information
       v-model="model"
       :defaults="myDefaults"
       />
@@ -31,20 +30,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import AgentName from './agent-name'
-import ChatStatusMessages from './chat-status-messages'
-import Pages from './pages'
-import ProactivePrompt from './proactive-prompt'
-import VirtualAssistant from './virtual-assistant'
+import AgentUnavailable from './agent-unavailable'
+import CustomerInformation from './customer-information'
+import Feedback from './feedback'
+import OffHours from './off-hours'
 
 export default {
   components: {
-    AgentName,
-    ChatStatusMessages,
-    Pages,
-    ProactivePrompt,
-    VirtualAssistant
+    AgentUnavailable,
+    CustomerInformation,
+    Feedback,
+    OffHours
   },
 
   props: {
@@ -52,27 +48,24 @@ export default {
       type: Object,
       required: true
     },
-    disableSave: {
-      type: Boolean,
-      default: false
+    defaults: {
+      type: Object,
+      required: true
     }
   },
 
   data () {
     // copy value to model
     const copy = JSON.parse(JSON.stringify(this.value))
-    const model = copy.wxccChatTemplate || {}
+    const model = copy.pages || {}
     return {
       model
     }
   },
 
   computed: {
-    ...mapGetters([
-      'defaults'
-    ]),
     myDefaults () {
-      return this.defaults.verticals.wxccChatTemplate
+      return this.defaults.pages
     }
   },
 
@@ -80,7 +73,7 @@ export default {
     updateCache () {
       // copy value to model
       const copy = JSON.parse(JSON.stringify(this.value))
-      this.model = copy.wxccChatTemplate || {}
+      this.model = copy.pages || {}
     },
     submit () {
       // save the whole vertical
@@ -97,11 +90,12 @@ export default {
     },
     model () {
       // model changed
+      console.log('wxcc chat config/pages changed')
       // copy the original parent value
       const valueCopy = JSON.parse(JSON.stringify(this.value))
-      // update the wxccChatTemplate part of the parent
+      // update the pages part of the parent
       const modelCopy = JSON.parse(JSON.stringify(this.model))
-      valueCopy.wxccChatTemplate = modelCopy
+      valueCopy.pages = modelCopy
       // emit the changes to parent
       this.$emit('input', valueCopy)
     }
