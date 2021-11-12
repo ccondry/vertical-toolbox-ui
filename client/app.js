@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import * as filters from './filters'
 import * as types from 'vuex-store/mutation-types'
+import CollapseCard from './components/collapse-card.vue'
 
 import 'buefy/dist/buefy.css'
 // import 'vue-material-design-icons/styles.css'
@@ -18,6 +19,8 @@ Vue.use(require('vue-moment'))
 // Enable devtools
 Vue.config.devtools = true
 
+// add global components
+Vue.component('CollapseCard', CollapseCard)
 
 sync(store, router)
 
