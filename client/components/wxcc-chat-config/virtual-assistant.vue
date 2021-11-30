@@ -12,6 +12,15 @@
         />
       </b-field>
 
+      <!-- Bot Name -->
+      <b-field label="Bot Name">
+        <b-input
+        v-model="model.botName"
+        :placeholder="model.gcpProjectId"
+        @input="updateParent"
+        />
+      </b-field>
+
       <!-- Welcome Message -->
       <b-field label="Welcome Message">
         <b-input
