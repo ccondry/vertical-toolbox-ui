@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.11.30
+
+### Features
+* **Chat/AI/Bot:** Add bot name to virtual assistant config (Webex CC only).
+
+
 # 2021.11.12
 
 ### Features
