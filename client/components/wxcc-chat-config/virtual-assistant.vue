@@ -17,6 +17,7 @@
         <b-input
         v-model="model.botName"
         :placeholder="model.gcpProjectId"
+        :disabled="!model.enabled"
         @input="updateParent"
         />
       </b-field>
