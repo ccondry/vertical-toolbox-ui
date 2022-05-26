@@ -4,6 +4,14 @@
       <button class="button is-primary" @click="configure">Configure</button>
     </div>
     <div class="card-content" v-if="isConfigured">
+      <!-- Use Org Profile -->
+      <b-field label="Use Org Profile">
+        <b-switch
+        v-model="model.useOrgProfile"
+        @input="updateParent"
+        />
+      </b-field>
+
       <!-- Use Agent Real Name -->
       <b-field label="Display Agent Name">
         <b-switch
