@@ -1193,7 +1193,7 @@ export default {
           const map = {
             'iframe': (url) => {
               // set iframe url
-              this.model.brand.iframe = url
+              this.model.brand.iframe = url.url
             },
             'advisor': (url) => {
               // set advisor url
