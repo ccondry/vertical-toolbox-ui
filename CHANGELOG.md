@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2022.5.26
+
+### Fixes
+* **Brand Website:** Fix the URL setting when uploading a brand website HTML
+file.
+
+
 # 2021.11.30
 
 ### Features
