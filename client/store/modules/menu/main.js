@@ -56,6 +56,15 @@ export default {
         description: 'Chat and AI/Bot customization'
       },
       component: lazyLoading('main/ai')
+    },
+    {
+      name: 'Webex Connect',
+      path: '/branding/connect',
+      meta: {
+        icon: 'cellphone',
+        description: 'Webex Connect customization'
+      },
+      component: lazyLoading('main/connect')
     }
     // {
     //   name: 'Verticals',
