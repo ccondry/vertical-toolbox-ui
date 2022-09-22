@@ -58,7 +58,7 @@ export default {
       component: lazyLoading('main/ai')
     },
     {
-      name: 'Webex Connect',
+      name: 'Admin',
       path: '/branding/connect',
       meta: {
         icon: 'cellphone',
