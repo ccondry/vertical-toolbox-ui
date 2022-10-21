@@ -242,6 +242,15 @@
                 style="position: relative;"
                 class="box panel"
                 >
+                  <b-button
+                  rounded
+                  type="is-danger"
+                  size="is-small"
+                  @click="deleteJdsButton(i)"
+                  icon-left="delete"
+                  style="position: absolute; top: 8px; right: 8px;"
+                  />
+                  
                   <b-field grouped>
                     <b-field label="Icon Name">
                       <b-input v-model="model.brand.jdsButtons[i].icon" placeholder="message-processing" />
@@ -254,14 +263,6 @@
                     </b-field>
                   </b-field>
                   
-                  <b-button
-                  rounded
-                  type="is-danger"
-                  size="is-small"
-                  @click="deleteJdsButton(i)"
-                  icon-left="delete"
-                  style="position: absolute; top: 0px; right: 0px;"
-                  />
                   <b-field expanded label="Heading">
                     <b-input v-model="model.brand.jdsButtons[i].heading" placeholder="JDS Button 1" />
                   </b-field>
@@ -293,23 +294,28 @@
                       />
                     </b-field>
                   </div>
+                  
+                  <div class="buttons">
+                    <b-button
+                    rounded
+                    type="is-success"
+                    @click="addJdsData(i)"
+                    >
+                      Add JDS Data
+                    </b-button>
+                  </div>
                 </div>
+              </div>
+
+              <div class="buttons">
                 <b-button
                 rounded
                 type="is-success"
-                @click="addJdsData(i)"
+                @click="addJdsButton"
                 >
-                  Add JDS Data
+                  Add JDS Button
                 </b-button>
               </div>
-
-              <b-button
-              rounded
-              type="is-success"
-              @click="addJdsButton"
-              >
-                Add JDS Button
-              </b-button>
             </div>
           </div>
         </b-collapse>
@@ -1226,20 +1232,27 @@ export default {
   methods: {
     addJdsData (i) {
       if (!Array.isArray(this.model.brand.jdsButtons[i].data)) {
-        this.$set(this.model.brand.jdsButtons[i], 'data', {key: '', value: ''})
+        this.$set(this.model.brand.jdsButtons[i], 'data', [])
       }
+      this.model.brand.jdsButtons[i].data.push({key: '', value: ''})
     },
     addJdsButton () {
       if (!Array.isArray(this.model.brand.jdsButtons)) {
         this.$set(this.model.brand, 'jdsButtons', [])
       }
-      this.model.brand.jdsButtons.push({key: '', value: ''})
+      this.model.brand.jdsButtons.push({
+        heading: '',
+        subtext: '',
+        icon: '',
+        waitTime: '',
+        data: []
+      })
     },
     deleteJdsButton (i) {
       this.model.brand.jdsButtons.splice(i, 1)
     },
     deleteJdsData (i, j) {
-      this.model.brand.jdsButtons[i].splice(j, 1)
+      this.model.brand.jdsButtons[i].data.splice(j, 1)
     },
     initView () {
       // init the view so that all UI elements are populated properly
