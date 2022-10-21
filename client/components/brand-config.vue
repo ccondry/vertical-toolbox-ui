@@ -264,13 +264,35 @@
                   </b-field>
                   
                   <b-field expanded label="Heading">
-                    <b-input v-model="model.brand.jdsButtons[i].heading" placeholder="JDS Button 1" />
+                    <b-input
+                    v-model="model.brand.jdsButtons[i].heading"
+                    placeholder="JDS Button 1"
+                    />
                   </b-field>
                   <b-field expanded label="Subtext">
-                    <b-input v-model="model.brand.jdsButtons[i].subtext" placeholder="Click Here" />
+                    <b-input
+                    v-model="model.brand.jdsButtons[i].subtext"
+                    placeholder="Click Here"
+                    />
                   </b-field>
                   <b-field expanded label="Wait Time">
-                    <b-input v-model="model.brand.jdsButtons[i].waitTime" placeholder="No wait time" />
+                    <b-input
+                    v-model="model.brand.jdsButtons[i].waitTime"
+                    placeholder="No wait time"
+                    />
+                  </b-field>
+
+                  <b-field expanded label="Success Message">
+                    <b-input
+                    v-model="model.brand.jdsButtons[i].successMessage"
+                    placeholder="Message sent!"
+                    />
+                  </b-field>
+                  <b-field expanded label="Fail Message">
+                    <b-input
+                    v-model="model.brand.jdsButtons[i].failMessage"
+                    placeholder="Failed to send message! Please try again later. Error was:"
+                    />
                   </b-field>
                   
                   <div
