@@ -236,7 +236,12 @@
 
             <div v-show="model.brand.jdsEnabled">
               <div v-if="Array.isArray(model.brand.jdsButtons)">
-                <div v-for="(button, i) of model.brand.jdsButtons" :key="i" style="position: relative;">
+                <div
+                v-for="(button, i) of model.brand.jdsButtons"
+                :key="i"
+                style="position: relative;"
+                class="box panel"
+                >
                   <b-field grouped>
                     <b-field label="Icon Name">
                       <b-input v-model="model.brand.jdsButtons[i].icon" placeholder="message-processing" />
@@ -251,11 +256,11 @@
                   
                   <b-button
                   rounded
-                  type="is-success"
+                  type="is-danger"
                   size="is-small"
                   @click="deleteJdsButton(i)"
                   icon-left="delete"
-                  style="position: absolute; top: 0; right: 10;"
+                  style="position: absolute; top: 0px; right: 0px;"
                   />
                   <b-field expanded label="Heading">
                     <b-input v-model="model.brand.jdsButtons[i].heading" placeholder="JDS Button 1" />
@@ -267,7 +272,11 @@
                     <b-input v-model="model.brand.jdsButtons[i].waitTime" placeholder="No wait time" />
                   </b-field>
                   
-                  <div v-for="(data, j) of model.brand.jdsButtons[i].data" :key="j">
+                  <div
+                  v-for="(data, j) of model.brand.jdsButtons[i].data"
+                  :key="j"
+                  class="box panel"
+                  >
                     <b-field grouped>
                       <b-field label="Data Key">
                         <b-input v-model="model.brand.jdsButtons[i].data[j].key" placeholder="click" />
@@ -277,7 +286,7 @@
                       </b-field>
                       <b-button
                       rounded
-                      type="is-success"
+                      type="is-danger"
                       size="is-small"
                       @click="deleteJdsData(i, j)"
                       icon-left="delete"
