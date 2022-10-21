@@ -212,6 +212,97 @@
         </b-collapse>
         <!-- /Button and Menu Heading -->
 
+        <!-- JDS -->
+        <b-collapse class="content card" v-if="isAdmin">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">JDS</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- enable JDS -->
+            <b-field label="Enable JDS Buttons">
+              <b-select v-model="model.brand.jdsEnabled">
+                <option :value="true">
+                  JDS Buttons Enabled
+                </option>
+                <option :value="false">
+                  JDS Buttons Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <div v-show="model.brand.jdsEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input v-model="model.brand.jdsButtons[i].icon" placeholder="message-processing" />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon pack="mdi" :icon="model.brand.jdsButtons[i].icon" size="is-large" />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                </b-field>
+              </b-field>
+              
+              <div v-for="(button, i) of model.brand.jdsButtons" :key="i" style="position: relative;">
+                <b-button
+                rounded
+                type="is-success"
+                size="is-small"
+                @click="deleteJdsButton(i)"
+                icon-left="delete"
+                style="position: absolute; top: 0; right: 10;"
+                />
+                <b-field expanded label="Heading">
+                  <b-input v-model="model.brand.jdsButtons[i].heading" placeholder="JDS Button 1" />
+                </b-field>
+                <b-field expanded label="Subtext">
+                  <b-input v-model="model.brand.jdsButtons[i].subtext" placeholder="Click Here" />
+                </b-field>
+                <b-field expanded label="Wait Time">
+                  <b-input v-model="model.brand.jdsButtons[i].waitTime" placeholder="No wait time" />
+                </b-field>
+                
+                <div v-for="(data, j) of model.brand.jdsButtons[i].data" :key="j">
+                  <b-field grouped>
+                    <b-field label="Data Key">
+                      <b-input v-model="model.brand.jdsButtons[i].data[j].key" placeholder="click" />
+                    </b-field>
+                    <b-field expanded label="Data Value">
+                      <b-input v-model="model.brand.jdsButtons[i].data[j].value" placeholder="loans" />
+                    </b-field>
+                    <b-button
+                    rounded
+                    type="is-success"
+                    size="is-small"
+                    @click="deleteJdsData(i, j)"
+                    icon-left="delete"
+                    />
+                  </b-field>
+                </div>
+                <b-button
+                rounded
+                type="is-success"
+                @click="addJdsData(i)"
+                >
+                  Add JDS Data
+                </b-button>
+              </div>
+
+              <b-button
+              rounded
+              type="is-success"
+              @click="addJdsButton"
+              >
+                Add JDS Button
+              </b-button>
+            </div>
+          </div>
+        </b-collapse>
+
         <!-- Chat -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
@@ -905,6 +996,7 @@
 
 <script>
 import { Chrome } from 'vue-color'
+import { mapGetters } from 'vuex'
 
 const defaultAdvisors = [{
   image: 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png',
@@ -1100,6 +1192,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'isAdmin'
+    ]),
     isCustomAdvisor () {
       // true if the advisor image in the vertical is not one of the default advisors
       return !this.defaultAdvisorImages.includes(this.model.brand.advisorImage)
@@ -1118,6 +1213,23 @@ export default {
   },
 
   methods: {
+    addJdsData (i) {
+      if (!Array.isArray(this.model.brand.jdsButtons[i].data)) {
+        this.$set(this.model.brand.jdsButtons[i], 'data', {key: '', value: ''})
+      }
+    },
+    addJdsButton () {
+      if (!Array.isArray(this.model.brand.jdsButtons)) {
+        this.$set(this.model.brand, 'jdsButtons', [])
+      }
+      this.model.brand.jdsButtons.push({key: '', value: ''})
+    },
+    deleteJdsButton (i) {
+      this.model.brand.jdsButtons.splice(i, 1)
+    },
+    deleteJdsData (i, j) {
+      this.model.brand.jdsButtons[i].splice(j, 1)
+    },
     initView () {
       // init the view so that all UI elements are populated properly
       // make sure color1 and color2 are set to valid values for the color picker
