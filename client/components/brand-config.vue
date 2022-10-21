@@ -235,53 +235,55 @@
             </b-field>
 
             <div v-show="model.brand.jdsEnabled">
-              <b-field grouped>
-                <b-field label="Icon Name">
-                  <b-input v-model="model.brand.jdsButtons[i].icon" placeholder="message-processing" />
-                </b-field>
-                <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.jdsButtons[i].icon" size="is-large" />
-                </b-field>
-                <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
-                </b-field>
-              </b-field>
-              
-              <div v-for="(button, i) of model.brand.jdsButtons" :key="i" style="position: relative;">
-                <b-button
-                rounded
-                type="is-success"
-                size="is-small"
-                @click="deleteJdsButton(i)"
-                icon-left="delete"
-                style="position: absolute; top: 0; right: 10;"
-                />
-                <b-field expanded label="Heading">
-                  <b-input v-model="model.brand.jdsButtons[i].heading" placeholder="JDS Button 1" />
-                </b-field>
-                <b-field expanded label="Subtext">
-                  <b-input v-model="model.brand.jdsButtons[i].subtext" placeholder="Click Here" />
-                </b-field>
-                <b-field expanded label="Wait Time">
-                  <b-input v-model="model.brand.jdsButtons[i].waitTime" placeholder="No wait time" />
-                </b-field>
-                
-                <div v-for="(data, j) of model.brand.jdsButtons[i].data" :key="j">
+              <div v-if="Array.isArray(model.brand.jdsButtons)">
+                <div v-for="(button, i) of model.brand.jdsButtons" :key="i" style="position: relative;">
                   <b-field grouped>
-                    <b-field label="Data Key">
-                      <b-input v-model="model.brand.jdsButtons[i].data[j].key" placeholder="click" />
+                    <b-field label="Icon Name">
+                      <b-input v-model="model.brand.jdsButtons[i].icon" placeholder="message-processing" />
                     </b-field>
-                    <b-field expanded label="Data Value">
-                      <b-input v-model="model.brand.jdsButtons[i].data[j].value" placeholder="loans" />
+                    <b-field label="Icon">
+                      <b-icon pack="mdi" :icon="model.brand.jdsButtons[i].icon" size="is-large" />
                     </b-field>
-                    <b-button
-                    rounded
-                    type="is-success"
-                    size="is-small"
-                    @click="deleteJdsData(i, j)"
-                    icon-left="delete"
-                    />
+                    <b-field label="Search Icons">
+                      <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                    </b-field>
                   </b-field>
+                  
+                  <b-button
+                  rounded
+                  type="is-success"
+                  size="is-small"
+                  @click="deleteJdsButton(i)"
+                  icon-left="delete"
+                  style="position: absolute; top: 0; right: 10;"
+                  />
+                  <b-field expanded label="Heading">
+                    <b-input v-model="model.brand.jdsButtons[i].heading" placeholder="JDS Button 1" />
+                  </b-field>
+                  <b-field expanded label="Subtext">
+                    <b-input v-model="model.brand.jdsButtons[i].subtext" placeholder="Click Here" />
+                  </b-field>
+                  <b-field expanded label="Wait Time">
+                    <b-input v-model="model.brand.jdsButtons[i].waitTime" placeholder="No wait time" />
+                  </b-field>
+                  
+                  <div v-for="(data, j) of model.brand.jdsButtons[i].data" :key="j">
+                    <b-field grouped>
+                      <b-field label="Data Key">
+                        <b-input v-model="model.brand.jdsButtons[i].data[j].key" placeholder="click" />
+                      </b-field>
+                      <b-field expanded label="Data Value">
+                        <b-input v-model="model.brand.jdsButtons[i].data[j].value" placeholder="loans" />
+                      </b-field>
+                      <b-button
+                      rounded
+                      type="is-success"
+                      size="is-small"
+                      @click="deleteJdsData(i, j)"
+                      icon-left="delete"
+                      />
+                    </b-field>
+                  </div>
                 </div>
                 <b-button
                 rounded
