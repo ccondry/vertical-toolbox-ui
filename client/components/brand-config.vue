@@ -307,7 +307,7 @@
                 </div>
               </div>
 
-              <div class="buttons">
+              <div class="buttons" style="padding-top: 1rem;">
                 <b-button
                 rounded
                 type="is-success"
