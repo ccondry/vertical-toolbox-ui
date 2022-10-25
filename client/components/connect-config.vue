@@ -1,55 +1,19 @@
 <template>
   <div>
-    <!-- Mobile App -->
+    <!-- Webex Connect -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">Mobile App</p>
+        <p class="card-header-title">Webex Connect</p>
         <a class="card-header-icon">
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
       </div>
-      <div class="card-content" v-if="!model.mobileWallpaper || !model.mobileTitle || !model.mobileOptions">
+
+    <!-- Check if any field is empty -->
+    <div class="card-content" v-if="!model.mobileWallpaper || !model.mobileTitle || !model.mobileOptions">
         <button class="button is-primary" @click="$set(model, 'mobileWallpaper', defaults.mobileWallpaper); $set(model, 'mobileTitle', defaults.mobileTitle); $set(model, 'mobileOptions', JSON.parse(JSON.stringify(defaults.mobileOptions)))">Configure</button>
       </div>
       <div class="card-content" v-else>
-
-        <b-field label="Homepage Title">
-          <b-input v-model="model.mobileTitle" :placeholder="defaults.mobileTitle" />
-        </b-field>
-        <!-- logo URL manual edit, for admins only -->
-        <b-field label="Logo URL" v-if="user.admin">
-          <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" />
-        </b-field>
-        <!-- logo image editor for users -->
-        <b-field grouped>
-          <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
-          <!-- Mobile App Logo -->
-          <b-field label="Logo Image">
-            <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
-          </b-field>
-          <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field label="Upload">
-            <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
-          </b-field>
-        </b-field>
-        <!-- Mobile App Wallpaper -->
-        <b-field label="Wallpaper URL" v-if="user.admin">
-          <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" />
-        </b-field>
-        <b-field grouped>
-          <b-loading :is-full-page="false" :active="working.images.mobileWallpaper" :can-cancel="false"></b-loading>
-          <b-field label="Wallpaper">
-            <img :src="model.mobileWallpaper" style="max-height: 256px;"/>
-          </b-field>
-          <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip>
-          <b-field label="Upload">
-            <button class="button is-primary" type="button" @click="launchFilePicker('mobileWallpaper')">Browse...</button>
-          </b-field>
-        </b-field>
 
         <!-- Mobile Menu Options -->
         <b-collapse class="content card">
@@ -119,7 +83,8 @@
                       <b-field label="TTS Type">
                         <b-tooltip :label="getTtsTooltip(field.ttstype)" multilined>
                           <b-select :placeholder="defaults.mobileOptions[i].fields[j].ttstype" v-model="field.ttstype">
-                            <option v-for="type of ttsTypes" :value="type.value">{{ type.name }}</option>
+                            <!-- <option v-for="type of ttsTypes" :value="type.value">{{ type.name }}</option> -->
+                            <option v-for="type of ttsTypes" :value="type.value" :key="type.value">{{ type.name }}</option>
                           </b-select>
                         </b-tooltip>
                       </b-field>
@@ -149,6 +114,46 @@
           </div>
         </b-collapse>
         <!-- /Mobile Menu Options -->
+
+        <!-- Mobile App Branding -->
+        <b-field label="Homepage Title">
+          <b-input v-model="model.mobileTitle" :placeholder="defaults.mobileTitle" />
+        </b-field>
+        <!-- logo URL manual edit, for admins only -->
+        <b-field label="Logo URL" v-if="user.admin">
+          <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" />
+        </b-field>
+        <!-- logo image editor for users -->
+        <b-field grouped>
+          <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+          <!-- Mobile App Logo -->
+          <b-field label="Logo Image">
+            <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
+          </b-field>
+          <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
+          <b-field label="Upload">
+            <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
+          </b-field>
+        </b-field>
+        <!-- Mobile App Wallpaper -->
+        <b-field label="Wallpaper URL" v-if="user.admin">
+          <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" />
+        </b-field>
+        <b-field grouped>
+          <b-loading :is-full-page="false" :active="working.images.mobileWallpaper" :can-cancel="false"></b-loading>
+          <b-field label="Wallpaper">
+            <img :src="model.mobileWallpaper" style="max-height: 256px;"/>
+          </b-field>
+          <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
+            <b-icon type="is-primary" icon="information" />
+          </b-tooltip>
+          <b-field label="Upload">
+            <button class="button is-primary" type="button" @click="launchFilePicker('mobileWallpaper')">Browse...</button>
+          </b-field>
+        </b-field>
+
         <b-field>
           <button type="button" class="button is-success"
     @click.prevent="submit" :disabled="disableSave">Save</button>
