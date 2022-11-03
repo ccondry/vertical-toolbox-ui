@@ -21,8 +21,9 @@
         </b-select>
       </b-field>
 
-      <div v-show="model.jdsEnabled" @input="updateParent">
+      <div v-show="model.jdsEnabled">
         <div v-if="Array.isArray(model.jdsButtons)">
+          <pre>{{ model.jdsButtons }}</pre>
           <jds-button
           v-for="(button, i) of model.jdsButtons"
           :key="i"
