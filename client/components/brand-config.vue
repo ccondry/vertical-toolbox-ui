@@ -1307,7 +1307,7 @@ export default {
 
   methods: {
     setType (i, j, type) {
-      console.log('setType', index, type)
+      console.log('setType', i, j, type)
       this.model.brand.jdsButtons[i].data[j].type = type
       this.model.brand.jdsButtons[i].data[j].value = this.cast(i, j, type)
     },
