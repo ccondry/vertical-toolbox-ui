@@ -213,188 +213,7 @@
         <!-- /Button and Menu Heading -->
 
         <!-- JDS -->
-        <b-collapse class="content card" v-if="isAdmin">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">JDS</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- enable JDS -->
-            <b-field label="Enable JDS Buttons">
-              <b-select v-model="model.brand.jdsEnabled">
-                <option :value="true">
-                  JDS Buttons Enabled
-                </option>
-                <option :value="false">
-                  JDS Buttons Disabled
-                </option>
-              </b-select>
-            </b-field>
-
-            <div v-show="model.brand.jdsEnabled">
-              <div v-if="Array.isArray(model.brand.jdsButtons)">
-                <div
-                v-for="(button, i) of model.brand.jdsButtons"
-                :key="i"
-                style="position: relative;"
-                class="box panel"
-                >
-                  <b-button
-                  rounded
-                  type="is-danger"
-                  size="is-small"
-                  @click="deleteJdsButton(i)"
-                  icon-left="delete"
-                  style="position: absolute; top: 8px; right: 8px;"
-                  />
-                  
-                  <b-field grouped>
-                    <b-field label="Icon Name">
-                      <b-input v-model="model.brand.jdsButtons[i].icon" placeholder="message-processing" />
-                    </b-field>
-                    <b-field label="Icon">
-                      <b-icon pack="mdi" :icon="model.brand.jdsButtons[i].icon" size="is-large" />
-                    </b-field>
-                    <b-field label="Search Icons">
-                      <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
-                    </b-field>
-                  </b-field>
-                  
-                  <b-field expanded label="Heading">
-                    <b-input
-                    v-model="model.brand.jdsButtons[i].heading"
-                    placeholder="JDS Button 1"
-                    />
-                  </b-field>
-                  <b-field expanded label="Subtext">
-                    <b-input
-                    v-model="model.brand.jdsButtons[i].subtext"
-                    placeholder="Click Here"
-                    />
-                  </b-field>
-                  <b-field expanded label="Wait Time">
-                    <b-input
-                    v-model="model.brand.jdsButtons[i].waitTime"
-                    placeholder="No wait time"
-                    />
-                  </b-field>
-
-                  <b-field expanded label="Success Message">
-                    <b-input
-                    v-model="model.brand.jdsButtons[i].successMessage"
-                    placeholder="Message sent!"
-                    />
-                  </b-field>
-                  <b-field expanded label="Fail Message">
-                    <b-input
-                    v-model="model.brand.jdsButtons[i].failMessage"
-                    placeholder="Failed to send message! Please try again later. Error was:"
-                    />
-                  </b-field>
-                  
-                  <div
-                  v-for="(data, j) of model.brand.jdsButtons[i].data"
-                  :key="j"
-                  class="box panel"
-                  >
-                    <b-field grouped>
-                      <!-- key -->
-                      <b-field label="Data Key">
-                        <b-input v-model="model.brand.jdsButtons[i].data[j].key" placeholder="click" />
-                      </b-field>
-
-                      <!-- type -->
-                      <b-field label="Data Type">
-                        <b-select
-                        :value="model.brand.jdsButtons[i].data[j].type"
-                        @input="setType(i, j, $event)"
-                        >
-                          <option value="" disabled>
-                            Choose One
-                          </option>
-                          <option value="string">
-                            String
-                          </option>
-                          <option value="boolean">
-                            Boolean
-                          </option>
-                          <option value="number">
-                            Number
-                          </option>
-                          <!-- <option value="datetime">
-                            Datetime
-                          </option> -->
-                        </b-select>
-                      </b-field>
-
-                      <!-- value -->
-                      <b-field expanded label="Data Value">
-                        <!-- boolean -->
-                        <b-checkbox
-                        v-if="model.brand.jdsButtons[i].data[j].type === 'boolean'"
-                        v-model="model.brand.jdsButtons[i].data[j].value"
-                        >
-                          {{ model.brand.jdsButtons[i].data[j].value }}
-                        </b-checkbox>
-                        <!-- string -->
-                        <b-input
-                        v-if="model.brand.jdsButtons[i].data[j].type === 'string'"
-                        v-model="model.brand.jdsButtons[i].data[j].value"
-                        />
-                        <!-- number -->
-                        <b-numberinput
-                        v-if="model.brand.jdsButtons[i].data[j].type === 'number'"
-                        v-model="model.brand.jdsButtons[i].data[j].value"
-                        />
-                        <!-- datetime -->
-                        <!-- <b-datetimepicker
-                        v-if="model.brand.jdsButtons[i].data[j].type === 'datetime'"
-                        v-model="model.brand.jdsButtons[i].data[j].value"
-                        icon="calendar-today"
-                        horizontal-time-picker
-                        editable
-                        append-to-body
-                        /> -->
-                      </b-field>  
-
-
-                      <b-button
-                      rounded
-                      type="is-danger"
-                      size="is-small"
-                      @click="deleteJdsData(i, j)"
-                      icon-left="delete"
-                      />
-                    </b-field>
-                  </div>
-                  
-                  <div class="buttons">
-                    <b-button
-                    rounded
-                    type="is-success"
-                    @click="addJdsData(i)"
-                    >
-                      Add JDS Data
-                    </b-button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="buttons" style="padding-top: 1rem;">
-                <b-button
-                rounded
-                type="is-success"
-                @click="addJdsButton"
-                >
-                  Add JDS Button
-                </b-button>
-              </div>
-            </div>
-          </div>
-        </b-collapse>
+        <jds v-if="isAdmin" v-model="model.brand" />
 
         <!-- Chat -->
         <b-collapse class="content card">
@@ -1090,6 +909,7 @@
 <script>
 import { Chrome } from 'vue-color'
 import { mapGetters } from 'vuex'
+import Jds from './brand/jds'
 
 const defaultAdvisors = [{
   image: 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png',
@@ -1208,7 +1028,8 @@ const tooltips = {
 
 export default {
   components: {
-    Chrome
+    Chrome,
+    Jds
   },
 
   props: {
@@ -1306,52 +1127,6 @@ export default {
   },
 
   methods: {
-    setType (i, j, type) {
-      console.log('setType', i, j, type)
-      const o = this.model.brand.jdsButtons[i].data[j]
-      o.type = type
-      o.value = this.cast(o.value, type)
-      console.log('value', o.value)
-    },
-    cast (value, type) {
-      console.log('cast', value, type)
-      if (type === 'string') {
-        return value.toString()
-      }
-      if (type === 'boolean') {
-        return value === 'true'
-      }
-      if (type === 'number') {
-        return Number.parseInt(value, 10) || 0
-      }
-      if (type === 'datetime') {
-        return new Date()
-      }
-    },
-    addJdsData (i) {
-      if (!Array.isArray(this.model.brand.jdsButtons[i].data)) {
-        this.$set(this.model.brand.jdsButtons[i], 'data', [])
-      }
-      this.model.brand.jdsButtons[i].data.push({key: '', value: ''})
-    },
-    addJdsButton () {
-      if (!Array.isArray(this.model.brand.jdsButtons)) {
-        this.$set(this.model.brand, 'jdsButtons', [])
-      }
-      this.model.brand.jdsButtons.push({
-        heading: '',
-        subtext: '',
-        icon: '',
-        waitTime: '',
-        data: []
-      })
-    },
-    deleteJdsButton (i) {
-      this.model.brand.jdsButtons.splice(i, 1)
-    },
-    deleteJdsData (i, j) {
-      this.model.brand.jdsButtons[i].data.splice(j, 1)
-    },
     initView () {
       // init the view so that all UI elements are populated properly
       // make sure color1 and color2 are set to valid values for the color picker
