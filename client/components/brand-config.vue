@@ -1308,11 +1308,13 @@ export default {
   methods: {
     setType (i, j, type) {
       console.log('setType', i, j, type)
-      this.model.brand.jdsButtons[i].data[j].type = type
-      this.model.brand.jdsButtons[i].data[j].value = this.cast(i, j, type)
+      const o = this.model.brand.jdsButtons[i].data[j]
+      o.type = type
+      o.value = this.cast(o.value, type)
+      console.log('value', o.value)
     },
-    cast (i, j, type) {
-      const value = this.model.brand.jdsButtons[i].data[j].value
+    cast (value, type) {
+      console.log('cast', value, type)
       if (type === 'string') {
         return value.toString()
       }
