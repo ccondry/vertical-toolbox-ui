@@ -114,16 +114,20 @@ export default {
         const copy = JSON.parse(JSON.stringify(this.verticals))
         // case-insensitive sort by name
         copy.sort((a, b) => {
-          var nameA = a.name.toUpperCase() // ignore upper and lowercase
-          var nameB = b.name.toUpperCase() // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1
+          try {
+            var nameA = a.name.toUpperCase() // ignore upper and lowercase
+            var nameB = b.name.toUpperCase() // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1
+            }
+            if (nameA > nameB) {
+              return 1
+            }
+            // names must be equal
+            return 0
+          } catch (e) {
+            return 0
           }
-          if (nameA > nameB) {
-            return 1
-          }
-          // names must be equal
-          return 0
         })
         return copy
       } catch (e) {
