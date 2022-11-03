@@ -301,12 +301,66 @@
                   class="box panel"
                   >
                     <b-field grouped>
+                      <!-- key -->
                       <b-field label="Data Key">
                         <b-input v-model="model.brand.jdsButtons[i].data[j].key" placeholder="click" />
                       </b-field>
-                      <b-field expanded label="Data Value">
-                        <b-input v-model="model.brand.jdsButtons[i].data[j].value" placeholder="loans" />
+
+                      <!-- type -->
+                      <b-field label="Data Type">
+                        <b-select
+                        :value="model.brand.jdsButtons[i].data[j].type"
+                        @input="setType(i, j, $event)"
+                        >
+                          <option value="" disabled>
+                            Choose One
+                          </option>
+                          <option value="string">
+                            String
+                          </option>
+                          <option value="boolean">
+                            Boolean
+                          </option>
+                          <option value="number">
+                            Number
+                          </option>
+                          <!-- <option value="datetime">
+                            Datetime
+                          </option> -->
+                        </b-select>
                       </b-field>
+
+                      <!-- value -->
+                      <b-field expanded label="Data Value">
+                        <!-- boolean -->
+                        <b-checkbox
+                        v-if="model.brand.jdsButtons[i].data[j].type === 'boolean'"
+                        v-model="model.brand.jdsButtons[i].data[j].value"
+                        >
+                          {{ model.brand.jdsButtons[i].data[j].value }}
+                        </b-checkbox>
+                        <!-- string -->
+                        <b-input
+                        v-if="model.brand.jdsButtons[i].data[j].type === 'string'"
+                        v-model="model.brand.jdsButtons[i].data[j].value"
+                        />
+                        <!-- number -->
+                        <b-numberinput
+                        v-if="model.brand.jdsButtons[i].data[j].type === 'number'"
+                        v-model="model.brand.jdsButtons[i].data[j].value"
+                        />
+                        <!-- datetime -->
+                        <!-- <b-datetimepicker
+                        v-if="model.brand.jdsButtons[i].data[j].type === 'datetime'"
+                        v-model="model.brand.jdsButtons[i].data[j].value"
+                        icon="calendar-today"
+                        horizontal-time-picker
+                        editable
+                        append-to-body
+                        /> -->
+                      </b-field>  
+
+
                       <b-button
                       rounded
                       type="is-danger"
@@ -1252,6 +1306,26 @@ export default {
   },
 
   methods: {
+    setType (i, j, type) {
+      console.log('setType', index, type)
+      this.model.brand.jdsButtons[i].data[j].type = type
+      this.model.brand.jdsButtons[i].data[j].value = this.cast(i, j, type)
+    },
+    cast (i, j, type) {
+      const value = this.model.brand.jdsButtons[i].data[j].value
+      if (type === 'string') {
+        return value.toString()
+      }
+      if (type === 'boolean') {
+        return value === 'true'
+      }
+      if (type === 'number') {
+        return Number.parseInt(value, 10) || 0
+      }
+      if (type === 'datetime') {
+        return new Date()
+      }
+    },
     addJdsData (i) {
       if (!Array.isArray(this.model.brand.jdsButtons[i].data)) {
         this.$set(this.model.brand.jdsButtons[i], 'data', [])
