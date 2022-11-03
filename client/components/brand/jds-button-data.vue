@@ -1,5 +1,8 @@
 <template>
-  <div class="box panel">
+  <div
+  v-if="model"
+  class="box panel"
+  >
     <b-field grouped>
       <!-- key -->
       <b-field label="Data Key">
@@ -85,6 +88,12 @@ export default {
     value: {
       type: Object,
       required: true
+    }
+  },
+
+  data () {
+    return {
+      model: null
     }
   },
 

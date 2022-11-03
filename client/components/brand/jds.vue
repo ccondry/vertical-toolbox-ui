@@ -1,6 +1,6 @@
 <template>
   <!-- JDS -->
-  <b-collapse class="content card">
+  <b-collapse class="content card" v-if="model">
     <div slot="trigger" slot-scope="props" class="card-header">
       <p class="card-header-title">JDS</p>
       <a class="card-header-icon">
@@ -52,6 +52,12 @@ export default {
     value: {
       type: Object,
       required: true
+    }
+  },
+
+  data () {
+    return {
+      model: null
     }
   },
 

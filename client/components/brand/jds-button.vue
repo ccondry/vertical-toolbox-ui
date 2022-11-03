@@ -1,5 +1,6 @@
 <template>
   <div
+  v-if="model"
   style="position: relative;"
   class="box panel"
   >
@@ -107,6 +108,12 @@ export default {
     }
   },
 
+  data () {
+    return {
+      model: null
+    }
+  },
+  
   mounted () {
     this.updateCache()
   },
