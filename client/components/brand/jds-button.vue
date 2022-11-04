@@ -4,8 +4,6 @@
   style="position: relative;"
   class="box panel"
   >
-    JDS Button!
-    <pre>{{ model }}</pre>
     <b-button
     rounded
     type="is-danger"
