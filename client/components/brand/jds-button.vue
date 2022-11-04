@@ -4,6 +4,8 @@
   style="position: relative;"
   class="box panel"
   >
+    JDS Button!
+    <pre>{{ model }}</pre>
     <b-button
     rounded
     type="is-danger"
@@ -113,7 +115,7 @@ export default {
       model: null
     }
   },
-  
+
   mounted () {
     this.updateCache()
   },
