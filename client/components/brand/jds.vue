@@ -23,7 +23,7 @@
 
       <div v-show="model.jdsEnabled">
         <div v-if="Array.isArray(model.jdsButtons)">
-          <pre>{{ model.jdsButtons }}</pre>
+          <!-- <pre>{{ model.jdsButtons }}</pre> -->
           <jds-button
           v-for="(button, i) of model.jdsButtons"
           :key="i"
@@ -48,7 +48,13 @@
 </template>
 
 <script>
+import JdsButton from './jds-button'
+
 export default {
+  components: {
+    JdsButton
+  },
+
   props: {
     value: {
       type: Object,
