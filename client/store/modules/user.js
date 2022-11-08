@@ -8,7 +8,14 @@ const state = {
 
 const getters = {
   user: state => state.user,
-  isAdmin: state => state.user.admin
+  isAdmin: state => state.user.admin,
+  isQa: state => {
+    try {
+      return state.user.groups.includes('QA')
+    } catch {
+      return false
+    }
+  }
 }
 
 const mutations = {

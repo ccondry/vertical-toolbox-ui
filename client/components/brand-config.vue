@@ -213,7 +213,7 @@
         <!-- /Button and Menu Heading -->
 
         <!-- JDS -->
-        <jds v-if="isAdmin" v-model="model.brand" />
+        <jds v-if="isAdmin || isQa" v-model="model.brand" />
 
         <!-- Chat -->
         <b-collapse class="content card">
@@ -1107,7 +1107,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'isAdmin'
+      'isAdmin',
+      'isQa'
     ]),
     isCustomAdvisor () {
       // true if the advisor image in the vertical is not one of the default advisors
