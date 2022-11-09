@@ -12,7 +12,7 @@ const getters = {
   isQa: state => {
     try {
       return state.user.groups.includes('QA')
-    } catch {
+    } catch (e) {
       return false
     }
   }
