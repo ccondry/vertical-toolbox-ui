@@ -10,12 +10,10 @@
       </div>
 
       <!-- Check if any Global field is empty -->
-      <!--
-      <div class="card-content" v-if="!model.webexconnect.global.brandName || !model.webexconnect.global.brandLogo || !model.webexconnect.global.mobileHomeWallpaper">
+      <div class="card-content" v-if="!model.mobileWallpaper || !model.mobileTitle || !model.mobileOptions">
         <button class="button is-primary" @click="$set(model, 'mobileWallpaper', defaults.mobileWallpaper); $set(model, 'mobileTitle', defaults.mobileTitle); $set(model, 'mobileOptions', JSON.parse(JSON.stringify(defaults.mobileOptions)))">Configure</button>
       </div>
       <div class="card-content" v-else>
-      -->
 
         <!-- Global Branding -->
         <b-collapse class="content card">
@@ -41,9 +39,7 @@
           @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
         
-      <!--
       </div>
-      -->
       <!-- /Check if any Global field is empty -->
 
     </b-collapse>
