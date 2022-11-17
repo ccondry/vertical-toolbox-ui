@@ -25,47 +25,48 @@
             </a>
           </div>
 
-          <!-- Brand Name -->
-          <b-field label="Brand Name">
-            <b-input v-model="model.webexconnect.global.brandName" :placeholder="defaults.webexconnect.global.brandName" />
-          </b-field>
-          <!-- Brand Logo -->
-          <!-- Image URL manual edit, for admins only -->
-          <b-field label="Logo URL" v-if="user.admin">
-            <b-input v-model.lazy="model.webexconnect.global.brandLogo" :placeholder="defaults.webexconnect.global.brandLogo" />
-          </b-field>
-          <!-- Image image editor for users -->
-          <b-field grouped>
-            <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
-            <b-field label="Brand Logo Image">
-              <img :src="model.webexconnect.global.brandLogo" style="max-width: 256px; max-height: 64px;"/>
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.global.brandName" :placeholder="defaults.webexconnect.global.brandName" />
             </b-field>
-            <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
-              <b-icon type="is-primary" icon="information" />
-            </b-tooltip>
-            <b-field label="Upload">
-              <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
+            <!-- Brand Logo -->
+            <!-- Image URL manual edit, for admins only -->
+            <b-field label="Logo URL" v-if="user.admin">
+              <b-input v-model.lazy="model.webexconnect.global.brandLogo" :placeholder="defaults.webexconnect.global.brandLogo" />
             </b-field>
-          </b-field>
-          <!-- Mobile App Home Wallpaper -->
-          <!-- Image URL manual edit, for admins only -->
-          <b-field label="Mobile App Home Wallpaper URL" v-if="user.admin">
-            <b-input v-if="user.admin" v-model="model.webexconnect.global.mobileHomeWallpaper" :placeholder="defaults.webexconnect.global.mobileHomeWallpaper" />
-          </b-field>
-          <!-- Image image editor for users -->
-          <b-field grouped>
-            <b-loading :is-full-page="false" :active="working.images.mobileHomeWallpaper" :can-cancel="false"></b-loading>
-            <b-field label="Wallpaper">
-              <img :src="model.webexconnect.global.mobileHomeWallpaper" style="max-height: 256px;"/>
+            <!-- Image image editor for users -->
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+              <b-field label="Brand Logo Image">
+                <img :src="model.webexconnect.global.brandLogo" style="max-width: 256px; max-height: 64px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
+              </b-field>
             </b-field>
-            <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
-              <b-icon type="is-primary" icon="information" />
-            </b-tooltip>
-            <b-field label="Upload">
-              <button class="button is-primary" type="button" @click="launchFilePicker('mobileHomeWallpaper')">Browse...</button>
+            <!-- Mobile App Home Wallpaper -->
+            <!-- Image URL manual edit, for admins only -->
+            <b-field label="Mobile App Home Wallpaper URL" v-if="user.admin">
+              <b-input v-if="user.admin" v-model="model.webexconnect.global.mobileHomeWallpaper" :placeholder="defaults.webexconnect.global.mobileHomeWallpaper" />
             </b-field>
-          </b-field>
-
+            <!-- Image image editor for users -->
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images.mobileHomeWallpaper" :can-cancel="false"></b-loading>
+              <b-field label="Wallpaper">
+                <img :src="model.webexconnect.global.mobileHomeWallpaper" style="max-height: 256px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('mobileHomeWallpaper')">Browse...</button>
+              </b-field>
+            </b-field>
+          </div>
         </b-collapse>
         <!-- /Global Branding -->
 
@@ -159,7 +160,6 @@ export default {
       showIconModal: false,
       iconModalContext: {},
       active: {},
-      ttsTypes,
       tooltips,
       files: [],
       images: [],
