@@ -10,13 +10,16 @@
       </div>
 
       <!-- Check if any Global field is empty -->
+      <!--
       <div class="card-content" v-if="!model.webexconnect.global.brandName || !model.webexconnect.global.brandLogo || !model.webexconnect.global.mobileHomeWallpaper">
         <button class="button is-primary" @click="$set(model, 'mobileWallpaper', defaults.mobileWallpaper); $set(model, 'mobileTitle', defaults.mobileTitle); $set(model, 'mobileOptions', JSON.parse(JSON.stringify(defaults.mobileOptions)))">Configure</button>
       </div>
       <div class="card-content" v-else>
+      -->
 
         <!-- Global Branding -->
         <b-collapse class="content card">
+
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Global Branding</p>
             <a class="card-header-icon">
@@ -28,6 +31,7 @@
           <b-field label="Brand Name">
             <b-input v-model="model.webexconnect.global.brandName" :placeholder="defaults.webexconnect.global.brandName" />
           </b-field>
+
           <!-- Brand Logo -->
           <!-- Image URL manual edit, for admins only -->
           <b-field label="Logo URL" v-if="user.admin">
@@ -46,6 +50,7 @@
               <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
             </b-field>
           </b-field>
+
           <!-- Mobile App Home Wallpaper -->
           <!-- Image URL manual edit, for admins only -->
           <b-field label="Mobile App Home Wallpaper URL" v-if="user.admin">
@@ -73,7 +78,9 @@
           @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
         
+      <!--
       </div>
+      -->
       <!-- /Check if any Global field is empty -->
 
     </b-collapse>
