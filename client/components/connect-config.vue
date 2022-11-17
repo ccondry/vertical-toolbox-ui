@@ -10,14 +10,14 @@
       </div>
 
       <!-- Check if any Global field is empty -->
-      <div class="card-content" v-if="!model.mobileWallpaper || !model.mobileTitle || !model.mobileOptions">
-        <button class="button is-primary" @click="$set(model, 'mobileWallpaper', defaults.mobileWallpaper); $set(model, 'mobileTitle', defaults.mobileTitle); $set(model, 'mobileOptions', JSON.parse(JSON.stringify(defaults.mobileOptions)))">Configure</button>
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.global">
+      <!-- <div class="card-content" v-if="!model.webexconnect.global.brandName || !model.webexconnect.global.brandLogo || !model.webexconnect.global.mobileHomeWallpaper"> -->
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
       </div>
       <div class="card-content" v-else>
 
         <!-- Global Branding -->
         <b-collapse class="content card">
-
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Global Branding</p>
             <a class="card-header-icon">
@@ -29,7 +29,42 @@
           <b-field label="Brand Name">
             <b-input v-model="model.webexconnect.global.brandName" :placeholder="defaults.webexconnect.global.brandName" />
           </b-field>
-
+          <!-- Brand Logo -->
+          <!-- Image URL manual edit, for admins only -->
+          <b-field label="Logo URL" v-if="user.admin">
+            <b-input v-model.lazy="model.webexconnect.global.brandLogo" :placeholder="defaults.webexconnect.global.brandLogo" />
+          </b-field>
+          <!-- Image image editor for users -->
+          <b-field grouped>
+            <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+            <b-field label="Brand Logo Image">
+              <img :src="model.webexconnect.global.brandLogo" style="max-width: 256px; max-height: 64px;"/>
+            </b-field>
+            <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
+              <b-icon type="is-primary" icon="information" />
+            </b-tooltip>
+            <b-field label="Upload">
+              <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
+            </b-field>
+          </b-field>
+          <!-- Mobile App Home Wallpaper -->
+          <!-- Image URL manual edit, for admins only -->
+          <b-field label="Mobile App Home Wallpaper URL" v-if="user.admin">
+            <b-input v-if="user.admin" v-model="model.webexconnect.global.mobileHomeWallpaper" :placeholder="defaults.webexconnect.global.mobileHomeWallpaper" />
+          </b-field>
+          <!-- Image image editor for users -->
+          <b-field grouped>
+            <b-loading :is-full-page="false" :active="working.images.mobileHomeWallpaper" :can-cancel="false"></b-loading>
+            <b-field label="Wallpaper">
+              <img :src="model.webexconnect.global.mobileHomeWallpaper" style="max-height: 256px;"/>
+            </b-field>
+            <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
+              <b-icon type="is-primary" icon="information" />
+            </b-tooltip>
+            <b-field label="Upload">
+              <button class="button is-primary" type="button" @click="launchFilePicker('mobileHomeWallpaper')">Browse...</button>
+            </b-field>
+          </b-field>
 
         </b-collapse>
         <!-- /Global Branding -->
@@ -61,84 +96,6 @@
 
 <script>
 import SelectIconModal from './modals/select-icon'
-
-const ttsTypes = [
-  {
-    value: 'address',
-    name: 'Address',
-    tooltip: 'Interpret a value as part of street address.'
-  },
-  {
-    value: 'characters',
-    name: 'Characters',
-    tooltip: 'Spell out each letter.'
-  },
-  {
-    value: 'creditcard',
-    name: 'Credit Card',
-    tooltip: 'Interpret a value as a credit card number.'
-  },
-  {
-    value: 'currency',
-    name: 'Currency ($)',
-    tooltip: 'Interpret a value as an amount of currency.'
-  },
-  {
-    value: 'date',
-    name: 'Date',
-    tooltip: 'Interpret the value as a date. Specify the format with the format attribute.'
-  },
-  {
-    value: 'digits',
-    name: 'Digits',
-    tooltip: 'Spell each digit separately.'
-  },
-  {
-    value: 'number',
-    name: 'Number',
-    tooltip: 'Interpret the value as a cardinal number (1, 37, 2000, etc.).'
-  },
-  {
-    value: 'ordinal',
-    name: 'Ordinal',
-    tooltip: 'Interpret the value as an ordinal number (1st, 2nd, 3rd, etc.).'
-  },
-  {
-    value: 'telephone',
-    name: 'Telephone',
-    tooltip: 'Interpret a value as a 7-digit or 10-digit telephone number. This can also handle extensions (for example, 2025551212x345).'
-  },
-  {
-    value: 'text',
-    name: 'Text',
-    tooltip: 'Interpret as normal text (attempt to pronounce all words).'
-  },
-  {
-    value: 'time',
-    name: 'Time',
-    tooltip: `Interpret a value such as 1'21" as duration in minutes and seconds.`
-  },
-  // {
-  //   value: 'fraction',
-  //   name: 'Fraction',
-  //   tooltip: 'Interpret the value as a fraction. This works for both common fractions (such as 3/20) and mixed fractions (such as 1+1/2).'
-  // },
-  {
-    value: 'unit',
-    name: 'Unit',
-    tooltip: 'Interpret a value as a measurement. The value should be either a number or fraction followed by a unit (with no space in between) or just a unit.'
-  }
-  // {
-  //   value: 'interjection',
-  //   name: 'Interjection',
-  //   tooltip: 'Interpret the value as an interjection. Alexa speaks the text in a more expressive voice. For optimal results, only use the supported interjections and surround each speechcon with a pause. For example: <say-as interpret-as="interjection">Wow.</say-as>. Speechcons are supported for the languages listed below.'
-  // },
-  // {
-  //   value: 'expletive',
-  //   name: 'Expletive',
-  //   tooltip: '"Bleep" out the content inside the tag.'
-  // }
-]
 
 const tooltips = {
   logoUpload: 'This image will be proportionally scaled down to 50px height.',
@@ -227,29 +184,6 @@ export default {
   },
 
   methods: {
-    changeFavicon (event) {
-      if (!event) return
-      console.log('favicon website URL changed', event)
-      // get input value
-      // const url = event.target.value
-      const url = event
-      console.log('favicon website URL =', url)
-      let trimDomain = url
-      try {
-        // remove https:// from it
-        const arr = url.match(/http[s?]:\/\/(.*)/m)
-        console.log('favicon website regex matches =', arr)
-        // if no value, use the url as-is
-        trimDomain = arr[1]
-        console.log('favicon website without http:// or https:// =', trimDomain)
-      } catch (e) {
-        console.log('couldn\'t find http:// or http:// in URL. URL =', url)
-      }
-
-      // update model favicon to prefix it with the google favicons getter url
-      this.model.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
-      console.log('set this.model.favicon. it is now', this.model.favicon)
-    },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
       // set ref
@@ -274,58 +208,21 @@ export default {
             // mobile app logo
             'logoFile': (url) => {
               // reset img
-              this.model.logo.rasterised = ''
+              this.model.webexconnect.global.brandLogo = ''
               // set img url
-              this.model.logo.rasterised = url + '?nocache=' + Date.now()
+              this.model.webexconnect.global.brandLogo = url + '?nocache=' + Date.now()
             },
-            'websiteLogoFile': (url) => {
+            'mobileHomeWallpaper': (url) => {
               // reset img
-              this.model.logo.website = ''
+              this.model.webexconnect.global.mobileHomeWallpaper = ''
               // set img url
-              this.model.logo.website = url + '?nocache=' + Date.now()
+              this.model.webexconnect.global.mobileHomeWallpaper = url + '?nocache=' + Date.now()
             },
-            'mobileWallpaper': (url) => {
+            'mobileFraudWallpaper': (url) => {
               // reset img
-              this.model.mobileWallpaper = ''
+              this.model.webexconnect.global.mobileFraudWallpaper = ''
               // set img url
-              this.model.mobileWallpaper = url + '?nocache=' + Date.now()
-            },
-            // homepage banner images
-            'slider': (url, index) => {
-              // reset img
-              this.model.sliders[index].image = ''
-              // set img url
-              this.model.sliders[index].image = url + '?nocache=' + Date.now()
-            },
-            'blogItem': (url, index) => {
-              // reset img
-              this.model.blogItems[index].image = ''
-              // set img url
-              this.model.blogItems[index].image = url + '?nocache=' + Date.now()
-            },
-            'authors': (url, index) => {
-              // reset img
-              this.model.authors[index].image = ''
-              // set img url
-              this.model.authors[index].image = url + '?nocache=' + Date.now()
-            },
-            'services': (url, index) => {
-              // reset img
-              this.model.services[index].image = ''
-              // set img url
-              this.model.services[index].image = url + '?nocache=' + Date.now()
-            },
-            'servicesThumbnail': (url, index) => {
-              // reset img
-              this.model.services[index].thumbnail = ''
-              // set img url
-              this.model.services[index].thumbnail = url + '?nocache=' + Date.now()
-            },
-            'timelinePosts': (url, index) => {
-              // reset img
-              this.model.timelinePosts[index].image = ''
-              // set img url
-              this.model.timelinePosts[index].image = url + '?nocache=' + Date.now()
+              this.model.webexconnect.global.mobileFraudWallpaper = url + '?nocache=' + Date.now()
             }
           }
           // update our model with the new file URL
@@ -362,39 +259,12 @@ export default {
         return ''
       }
     },
-    selectIcon ({icon, context}) {
-      console.log('selectIcon', icon)
-      // close modal
-      this.showIconModal = false
-      // set value
-      context.mobileOption.icon = icon
-    },
     pushChanges (data) {
       this.$emit('update:data', JSON.stringify(data, null, 2))
     },
     submit () {
       console.log('vertical config form submitted')
       this.$emit('save', this.model)
-    },
-    changeDataType (field, event, i, j) {
-      // when choosing date type for mobile options, make sure the value is a valid date
-      console.log('date type changed', field, event)
-      // const a = event.target.value
-      if (event.target.value === 'date') {
-        field.value = new Date()
-      } else {
-        field.value = this.defaults.mobileOptions[i].fields[j].value
-      }
-    },
-    changeFinesseReasonCallVariable (option, event) {
-      // when typing the finesse reason call variable "description", replace
-      // characters that would cause an error in CVP subdialog return element
-      try {
-        // remove invalid characters (for CVP compatibility)
-        option.description = event.target.value.replace(/[\<\>\'\"]/g, '')
-      } catch (e) {
-        console.log('failed to changeFinesseReasonCallVariable', e)
-      }
     }
   },
 
@@ -403,9 +273,6 @@ export default {
       // console.log('branding config form model changed', val)
       // model changed - format and push those changes back to the parent
       this.pushChanges(val)
-    },
-    faviconWebsite (val) {
-      this.changeFavicon(val)
     }
   },
 
