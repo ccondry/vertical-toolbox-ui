@@ -84,14 +84,15 @@
               </b-field>
             </b-field>
           </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
         </b-collapse>
         <!-- /Global Branding -->
 
-        <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
-        </b-field>
-        
       </div>
       <!-- /Check if any Global field is empty -->
 
@@ -116,21 +117,222 @@
               <b-input v-model="model.webexconnect.appointments.brandName" placeholder="Cumulus Finance" />
             </b-field>
           </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
         </b-collapse>
         <!-- /Appointments Branding -->
 
+      </div>
+      <!-- /Check if any Appointments field is empty -->
+
+      <!-- Check if any Collections or Promise to Pay field is empty -->
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.collections">
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <!-- Collections or Promise to Pay Branding -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Collections or Promise to Pay Branding</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.collections.brandName" placeholder="Cumulus Finance" />
+            </b-field>
+          </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
+        </b-collapse>
+        <!-- /Collections or Promise to Pay Branding -->
+
+      </div>
+      <!-- /Check if any Collections or Promise to Pay field is empty -->
+
+      <!-- Check if any Call Deflection field is empty -->
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.callDeflection">
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <!-- Call Deflection Branding -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Call Deflection Branding</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.callDeflection.brandName" placeholder="Cumulus Finance" />
+            </b-field>
+          </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
+        </b-collapse>
+        <!-- /Call Deflection Branding -->
+
+      </div>
+      <!-- /Check if any Call Deflection field is empty -->
+
+      <!-- Check if any Automotive field is empty -->
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.automotive">
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <!-- Automotive Branding -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Automotive Branding</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.automotive.brandName" placeholder="Cumulus Finance" />
+            </b-field>
+          </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
+        </b-collapse>
+        <!-- /Automotive Branding -->
+
+      </div>
+      <!-- /Check if any Automotive field is empty -->
+
+      <!-- Check if any Product Activation Tariff Switch field is empty -->
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.productActivationTS">
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <!-- Product Activation Tariff Switch Branding -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Product Activation Tariff Switch Branding</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.productActivationTS.brandName" placeholder="Cumulus Finance" />
+            </b-field>
+          </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
+        </b-collapse>
+        <!-- /Product Activation Tariff Switch Branding -->
+
+      </div>
+      <!-- /Check if any Product Activation Tariff Switch field is empty -->
+
+      <!-- Check if any Product Activation Sim Offer field is empty -->
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.productActivationSO">
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <!-- Product Activation Sim Offer Branding -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Product Activation Sim Offer Branding</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.productActivationSO.brandName" placeholder="Cumulus Finance" />
+            </b-field>
+          </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
+        </b-collapse>
+        <!-- /Product Activation Sim Offer Branding -->
+
+      </div>
+      <!-- /Check if any Product Activation Sim Offer field is empty -->
+
+      <!-- Check if any Retail Journey field is empty -->
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.retail">
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <!-- Retail Journey Branding -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Retail Journey Branding</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.retail.brandName" placeholder="Cumulus Finance" />
+            </b-field>
+          </div>
+
+          <b-field>
+            <button type="button" class="button is-success"
+            @click.prevent="submit" :disabled="disableSave">Save</button>
+          </b-field>
+        
+        </b-collapse>
+        <!-- /Retail Journey Branding -->
+
+      </div>
+      <!-- /Check if any Retail Journey field is empty -->
+
+      <div class="card-content">
         <b-field>
           <button type="button" class="button is-success"
           @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
-        
       </div>
-      <!-- /Check if any Appointments field is empty -->
-
-      <b-field>
-        <button type="button" class="button is-success"
-        @click.prevent="submit" :disabled="disableSave">Save</button>
-      </b-field>
         
     </b-collapse>
     <!-- /Webex Connect -->
