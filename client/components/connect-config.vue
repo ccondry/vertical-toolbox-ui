@@ -27,7 +27,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.global.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.global.brandName" :placeholder="defaults.webexconnect.global.brandName" />
             </b-field>
             <!-- Brand Logo -->
             <!-- Image URL manual edit, for admins only -->
@@ -114,7 +114,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.appointments.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.appointments.brandName" :placeholder="defaults.webexconnect.appointments.brandName" />
             </b-field>
 
             <b-field>
@@ -147,7 +147,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.collections.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.collections.brandName" :placeholder="defaults.webexconnect.collections.brandName" />
             </b-field>
 
             <b-field>
@@ -180,7 +180,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.callDeflection.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.callDeflection.brandName" :placeholder="defaults.webexconnect.callDeflection.brandName" />
             </b-field>
 
             <b-field>
@@ -213,7 +213,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.automotive.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.automotive.brandName" :placeholder="defaults.webexconnect.automotive.brandName" />
             </b-field>
 
             <b-field>
@@ -246,7 +246,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.productActivationTS.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.productActivationTS.brandName" :placeholder="defaults.webexconnect.productActivationTS.brandName" />
             </b-field>
 
             <b-field>
@@ -279,7 +279,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.productActivationSO.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.productActivationSO.brandName" :placeholder="defaults.webexconnect.productActivationSO.brandName" />
             </b-field>
 
             <b-field>
@@ -312,7 +312,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.retail.brandName" placeholder="Cumulus Finance" />
+              <b-input v-model="model.webexconnect.retail.brandName" :placeholder="defaults.webexconnect.retail.brandName" />
             </b-field>
 
             <b-field>
