@@ -83,12 +83,12 @@
                 <button class="button is-primary" type="button" @click="launchFilePicker('mobilePromoWallpaper')">Browse...</button>
               </b-field>
             </b-field>
-          </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
+          </div>
         
         </b-collapse>
         <!-- /Global Branding -->
@@ -116,13 +116,13 @@
             <b-field label="Brand Name">
               <b-input v-model="model.webexconnect.appointments.brandName" placeholder="Cumulus Finance" />
             </b-field>
+
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
-        
         </b-collapse>
         <!-- /Appointments Branding -->
 
@@ -149,13 +149,13 @@
             <b-field label="Brand Name">
               <b-input v-model="model.webexconnect.collections.brandName" placeholder="Cumulus Finance" />
             </b-field>
+
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
-        
         </b-collapse>
         <!-- /Collections or Promise to Pay Branding -->
 
@@ -182,13 +182,13 @@
             <b-field label="Brand Name">
               <b-input v-model="model.webexconnect.callDeflection.brandName" placeholder="Cumulus Finance" />
             </b-field>
+
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
-        
         </b-collapse>
         <!-- /Call Deflection Branding -->
 
@@ -215,13 +215,13 @@
             <b-field label="Brand Name">
               <b-input v-model="model.webexconnect.automotive.brandName" placeholder="Cumulus Finance" />
             </b-field>
+
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
-        
         </b-collapse>
         <!-- /Automotive Branding -->
 
@@ -248,13 +248,13 @@
             <b-field label="Brand Name">
               <b-input v-model="model.webexconnect.productActivationTS.brandName" placeholder="Cumulus Finance" />
             </b-field>
+
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
-        
         </b-collapse>
         <!-- /Product Activation Tariff Switch Branding -->
 
@@ -281,13 +281,13 @@
             <b-field label="Brand Name">
               <b-input v-model="model.webexconnect.productActivationSO.brandName" placeholder="Cumulus Finance" />
             </b-field>
+
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
-        
         </b-collapse>
         <!-- /Product Activation Sim Offer Branding -->
 
@@ -314,13 +314,13 @@
             <b-field label="Brand Name">
               <b-input v-model="model.webexconnect.retail.brandName" placeholder="Cumulus Finance" />
             </b-field>
+
+            <b-field>
+              <button type="button" class="button is-success"
+              @click.prevent="submit" :disabled="disableSave">Save</button>
+            </b-field>
           </div>
 
-          <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
-          </b-field>
-        
         </b-collapse>
         <!-- /Retail Journey Branding -->
 
