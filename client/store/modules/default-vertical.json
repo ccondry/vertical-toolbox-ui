@@ -585,6 +585,13 @@
     }
   },
   "webexconnect": {
-    "global": {}
+    "global": {},
+    "appointments": {},
+    "collections": {},
+    "callDeflection": {},
+    "productActivationTS": {},
+    "productActivationSO": {},
+    "automotive": {},
+    "retail": {}
   }
 }

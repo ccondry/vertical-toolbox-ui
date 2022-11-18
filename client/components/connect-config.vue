@@ -11,7 +11,6 @@
 
       <!-- Check if any Global field is empty -->
       <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.global">
-      <!-- <div class="card-content" v-if="!model.webexconnect.global.brandName || !model.webexconnect.global.brandLogo || !model.webexconnect.global.mobileHomeWallpaper"> -->
         <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
       </div>
       <div class="card-content" v-else>
@@ -28,7 +27,7 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.global.brandName" :placeholder="defaults.webexconnect.global.brandName" />
+              <b-input v-model="model.webexconnect.global.brandName" placeholder="Cumulus Finance" />
             </b-field>
             <!-- Brand Logo -->
             <!-- Image URL manual edit, for admins only -->
@@ -37,7 +36,7 @@
             </b-field>
             <!-- Image image editor for users -->
             <b-field grouped>
-              <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+              <b-loading :is-full-page="false" :active="working.images.brandLogo" :can-cancel="false"></b-loading>
               <b-field label="Brand Logo Image">
                 <img :src="model.webexconnect.global.brandLogo" style="max-width: 256px; max-height: 64px;"/>
               </b-field>
@@ -45,7 +44,7 @@
                 <b-icon type="is-primary" icon="information" />
               </b-tooltip>
               <b-field label="Upload">
-                <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
+                <button class="button is-primary" type="button" @click="launchFilePicker('brandLogo')">Browse...</button>
               </b-field>
             </b-field>
             <!-- Mobile App Home Wallpaper -->
@@ -66,6 +65,24 @@
                 <button class="button is-primary" type="button" @click="launchFilePicker('mobileHomeWallpaper')">Browse...</button>
               </b-field>
             </b-field>
+            <!-- Mobile App Promo Wallpaper -->
+            <!-- Image URL manual edit, for admins only -->
+            <b-field label="Mobile App Promo Wallpaper URL" v-if="user.admin">
+              <b-input v-if="user.admin" v-model="model.webexconnect.global.mobilePromoWallpaper" :placeholder="defaults.webexconnect.global.mobilePromoWallpaper" />
+            </b-field>
+            <!-- Image image editor for users -->
+            <b-field grouped>
+              <b-loading :is-full-page="false" :active="working.images.mobilePromoWallpaper" :can-cancel="false"></b-loading>
+              <b-field label="Wallpaper">
+                <img :src="model.webexconnect.global.mobilePromoWallpaper" style="max-height: 256px;"/>
+              </b-field>
+              <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip>
+              <b-field label="Upload">
+                <button class="button is-primary" type="button" @click="launchFilePicker('mobilePromoWallpaper')">Browse...</button>
+              </b-field>
+            </b-field>
           </div>
         </b-collapse>
         <!-- /Global Branding -->
@@ -78,6 +95,43 @@
       </div>
       <!-- /Check if any Global field is empty -->
 
+      <!-- Check if any Appointments field is empty -->
+      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.appointments">
+        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+      </div>
+      <div class="card-content" v-else>
+
+        <!-- Appointments Branding -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Appointments Branding</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+            <!-- Brand Name -->
+            <b-field label="Brand Name">
+              <b-input v-model="model.webexconnect.appointments.brandName" placeholder="Cumulus Finance" />
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Appointments Branding -->
+
+        <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+        </b-field>
+        
+      </div>
+      <!-- /Check if any Appointments field is empty -->
+
+      <b-field>
+        <button type="button" class="button is-success"
+        @click.prevent="submit" :disabled="disableSave">Save</button>
+      </b-field>
+        
     </b-collapse>
     <!-- /Webex Connect -->
 
@@ -206,7 +260,7 @@ export default {
           // map out the node names to model data references
           const map = {
             // mobile app logo
-            'logoFile': (url) => {
+            'brandLogo': (url) => {
               // reset img
               this.model.webexconnect.global.brandLogo = ''
               // set img url
@@ -218,11 +272,11 @@ export default {
               // set img url
               this.model.webexconnect.global.mobileHomeWallpaper = url + '?nocache=' + Date.now()
             },
-            'mobileFraudWallpaper': (url) => {
+            'mobilePromoWallpaper': (url) => {
               // reset img
-              this.model.webexconnect.global.mobileFraudWallpaper = ''
+              this.model.webexconnect.global.mobilePromoWallpaper = ''
               // set img url
-              this.model.webexconnect.global.mobileFraudWallpaper = url + '?nocache=' + Date.now()
+              this.model.webexconnect.global.mobilePromoWallpaper = url + '?nocache=' + Date.now()
             }
           }
           // update our model with the new file URL
