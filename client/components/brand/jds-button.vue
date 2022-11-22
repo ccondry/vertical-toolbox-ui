@@ -95,7 +95,7 @@
 
 <script>
 import JdsButtonData from './jds-button-data'
-
+materialDesignIconsUrl: 'https://materialdesignicons.com/cdn/2.5.94/'
 export default {
   components: {
     JdsButtonData
