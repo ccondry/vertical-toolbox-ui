@@ -30,7 +30,6 @@
       <b-field label="Search Icons">
         <a
         class="button is-info"
-        
         :href="materialDesignIconsUrl"
         target="materialdesignicons">
           Material Design Icons {{ materialDesignIconsVersion }}
@@ -96,7 +95,7 @@
 
 <script>
 import JdsButtonData from './jds-button-data'
-materialDesignIconsUrl: 'https://materialdesignicons.com/cdn/2.5.94/'
+
 export default {
   components: {
     JdsButtonData
