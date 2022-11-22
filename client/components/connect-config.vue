@@ -117,6 +117,16 @@
               <b-input v-model="model.webexconnect.appointments.brandName" :placeholder="defaults.webexconnect.appointments.brandName" />
             </b-field>
 
+            <b-field message="Rep Title">
+              <p class="control">
+                  <span class="button is-static">The 45 minutes appointment with </span>
+              </p>
+              <b-input v-model="model.webexconnect.appointments.repTitle" :placeholder="defaults.webexconnect.appointments.repTitle" />
+              <p class="control">
+                  <span class="button is-static">, is confirmed for Tuesday, 27/9/2022, at 3pm.</span>
+              </p>
+            </b-field>
+
             <b-field>
               <button type="button" class="button is-success"
               @click.prevent="submit" :disabled="disableSave">Save</button>
