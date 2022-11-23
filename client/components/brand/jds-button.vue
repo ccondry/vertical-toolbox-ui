@@ -89,10 +89,13 @@
       >
         Add JDS Data
       </b-button>
-      <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
-      </b-field>
+      <b-button
+      rounded
+      type="is-success"
+      @click="disableSave"
+      >
+        Save
+      </b-button>
     </div>
   </div>
 </template>
