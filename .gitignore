@@ -10,3 +10,5 @@ test/e2e/reports
 
 yarn.lock
 package-lock.json
+app.js
+stats.html
