@@ -17,10 +17,8 @@
         :working="working"
         :loading="loading"
         :defaults="defaults.verticals"
-        :disable-save="disableSave"
         :user="user"
         @input="updateState"
-        @save="clickSave"
         @upload="upload"
         />
 
@@ -42,7 +40,6 @@ export default {
 
   computed: {
     ...mapGetters([
-      'disableSave',
       'user',
       'verticals',
       'loading',
@@ -54,17 +51,12 @@ export default {
 
   methods: {
     ...mapActions([
-      'confirmSaveVertical',
       'uploadImage',
       'setVertical'
     ]),
     upload (data) {
       console.log('brands.vue - upload vertical image', data)
       this.uploadImage({data})
-    },
-    clickSave () {
-      // confirm with user and save the data to the server
-      this.confirmSaveVertical()
     },
     updateCache (data) {
       // copy state data to local data

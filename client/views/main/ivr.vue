@@ -25,9 +25,7 @@
         :loading="loading"
         :defaults="defaults.verticals"
         :user="user"
-        :disable-save="disableSave"
         @input="updateState"
-        @save="clickSave"
         @upload="upload"
         />
 
@@ -53,7 +51,6 @@ export default {
 
   computed: {
     ...mapGetters([
-      'disableSave',
       'user',
       'verticals',
       'loading',
@@ -65,17 +62,12 @@ export default {
 
   methods: {
     ...mapActions([
-      'confirmSaveVertical',
       'uploadImage',
       'setVertical'
     ]),
     upload (data) {
       console.log('ivr.vue - upload vertical image', data)
       this.uploadImage({data})
-    },
-    clickSave () {
-      // confirm with user and save the data to the server
-      this.confirmSaveVertical()
     },
     updateState (value) {
       this.setVertical(JSON.parse(JSON.stringify(value)))
