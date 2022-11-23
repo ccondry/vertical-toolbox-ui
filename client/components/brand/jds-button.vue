@@ -89,6 +89,10 @@
       >
         Add JDS Data
       </b-button>
+      <b-field>
+          <button type="button" class="button is-success"
+          @click.prevent="submit" :disabled="disableSave">Save</button>
+      </b-field>
     </div>
   </div>
 </template>
@@ -125,6 +129,20 @@ export default {
     }
   },
 
+  // computed: {
+  //   disableSave () {
+  //     // any template has been selected
+  //     if (this.model.owner === this.user.username || this.user.admin) {
+  //       // this user owns this template or is an admin
+  //       return false
+  //     } else {
+  //       // this user doesn't have access to save over this template,
+  //       // so disable the button
+  //       return true
+  //     }
+  //   }
+  // },
+
   methods: {
     updateParent () {
       this.$emit('input', this.model)
@@ -142,6 +160,17 @@ export default {
     deleteJdsData (j) {
       this.model.data.splice(j, 1)
       this.updateParent()
+    },
+    disableSave () {
+      // any template has been selected
+      if (this.model.owner === this.user.username || this.user.admin) {
+        // this user owns this template or is an admin
+        return false
+      } else {
+        // this user doesn't have access to save over this template,
+        // so disable the button
+        return true
+      }
     }
   }
 }
