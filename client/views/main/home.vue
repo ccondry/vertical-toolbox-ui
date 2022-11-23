@@ -90,7 +90,6 @@
       </div>
     </div>
 
-
     <div class="tile is-ancestor" v-if="model.id">
       <div class="tile is-parent">
         <article class="tile is-child box">
@@ -129,6 +128,8 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'Home',
+
   data () {
     return {
       model: null

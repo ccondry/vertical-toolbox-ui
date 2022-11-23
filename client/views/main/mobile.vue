@@ -1,32 +1,40 @@
 <template>
-  <div>
-    <div class="tile is-ancestor" v-if="vertical.id">
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-          <h1 class="title">
-            {{ vertical.name }} Mobile App
-          </h1>
-          <div class="block">
-            <p>
-              You can update your vertical by using any of the save buttons
-              on this panel. You will only be able to save verticals that you own.
-            </p>
-          </div>
+  <div class="tile is-ancestor" v-if="vertical.id">
+    <div class="tile is-parent">
+      <article class="tile is-child box">
+        <h1 class="title">
+          {{ vertical.name }} Mobile App
+        </h1>
+        <div class="block">
+          <p>
+            You can update your vertical by using any of the save buttons
+            on this panel. You will only be able to save verticals that you own.
+          </p>
+        </div>
 
-          <mobile-config
-          :value="vertical"
-          :working="working"
-          :loading="loading"
-          :defaults="defaults.verticals"
-          :user="user"
-          :disable-save="disableSave"
-          @input="updateState"
-          @save="clickSave"
-          @upload="upload"
-          />
+        <!-- Save button -->
+        <b-field>
+          <save-button />
+        </b-field>
 
-        </article>
-      </div>
+        <mobile-config
+        :value="vertical"
+        :working="working"
+        :loading="loading"
+        :defaults="defaults.verticals"
+        :user="user"
+        :disable-save="disableSave"
+        @input="updateState"
+        @save="clickSave"
+        @upload="upload"
+        />
+
+        <!-- Save button -->
+        <b-field>
+          <save-button />
+        </b-field>
+
+      </article>
     </div>
   </div>
 </template>
