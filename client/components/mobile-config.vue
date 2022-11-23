@@ -271,13 +271,7 @@
         </b-collapse>
         <!-- /Mobile Menu Options -->
         <b-field>
-          <button
-          type="button"
-          class="button is-success"
-          @click.prevent="submit"
-          :disabled="disableSave">
-            Save
-          </button>
+          <save-button />
         </b-field>
       </div>
     </b-collapse>
@@ -418,10 +412,6 @@ export default {
     defaults: {
       type: Object,
       default () { return {} }
-    },
-    disableSave: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -638,10 +628,6 @@ export default {
       // set value
       context.mobileOption.icon = icon
       this.updateParent()
-    },
-    submit () {
-      // user pressed Enter key to save all data
-      this.$emit('save')
     },
     changeDataType (field, value, i, j) {
       // when choosing date type for mobile options, make sure the value is a valid date
