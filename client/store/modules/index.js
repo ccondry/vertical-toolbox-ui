@@ -1,21 +1,23 @@
 import app from './app'
-import menu from './menu'
-import notifications from './notifications'
 import auth from './auth'
-import verticals from './verticals'
-import user from './user'
-import usage from './usage'
 import defaults from './defaults'
 import endpoints from './endpoints'
+import fetch from './fetch'
+import menu from './menu'
+// import notifications from './notifications'
+import user from './user'
+import usage from './usage'
+import verticals from './verticals'
 
 export default {
   app,
-  menu,
-  notifications,
   auth,
-  verticals,
+  defaults,
+  endpoints,
+  fetch,
+  menu,
+  // notifications,
   user,
   usage,
-  defaults,
-  endpoints
+  verticals
 }

@@ -1,49 +1,23 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import menuModule from 'vuex-store/modules/menu'
-Vue.use(Router)
+import VueRouter from 'vue-router'
+import routes from './routes'
 
-/***
-Items in the menu module will be added using generateRoutesFromMenu
-Make sure you load all components here that are not listed in the menu module
-***/
-const router = new Router({
+const router = new VueRouter({
   mode: 'history',
   linkExactActiveClass: 'is-active',
-  scrollBehavior: () => ({ y: 0 }),
-  routes: [
-    ...generateRoutesFromMenu(menuModule.state.items),
-    {
-      path: '*',
-      redirect: '/branding/home'
+  scrollBehavior: (to, from, savedPosition) => {
+    // same page name?
+    if (to.name === from.name) {
+      // don't scroll when navigating same page (for example setting query only)
+      return
+    } else if (savedPosition) {
+      // is the browser going back/forward? use the saved scroll position
+      return savedPosition
+    } else {
+      // scroll to top-left when navigating to different page
+      return { x: 0, y: 0 }
     }
-  ]
-})
-
-router.beforeEach((to, from, next) => {
-  if (!hasQueryParams(to) && hasQueryParams(from)) {
-    next({name: to.name, query: from.query})
-  } else {
-    next()
-  }
+  },
+  routes
 })
 
 export default router
-
-// Menu should have 2 levels.
-function generateRoutesFromMenu (menu = [], routes = []) {
-  for (let i = 0, l = menu.length; i < l; i++) {
-    let item = menu[i]
-    if (item.path) {
-      routes.push(item)
-    }
-    if (!item.component) {
-      generateRoutesFromMenu(item.children, routes)
-    }
-  }
-  return routes
-}
-
-function hasQueryParams (route) {
-  return !!Object.keys(route.query).length
-}

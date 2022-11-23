@@ -1,22 +1,28 @@
 <template>
-  <card-modal :visible="visible" @close="close" :title="title"
-  transition="zoom" @ok="ok" @cancel="close"
-  ok-text="Save"
-  @keyup.native.esc="close">
-    <div class="content has-text-centered">
-      What ID and name (title) would you like to give to this new vertical?
-    </div>
-      <!-- <div class="block">
-        <div class="control is-horizontal">
-          <div class="control-label">
-            <label class="label">Template Name</label>
-          </div>
-          <div class="">
-            <input v-model="templateName">
-          </div>
-        </div>
-      </div> -->
+  <div class="modal-card" style="width: auto;">
+    <!-- loading/working -->
+    <b-loading :active="isLoading || isWorking" :is-full-page="false" />
 
+    <!-- header -->
+    <header class="modal-card-head">
+      <!-- title -->
+      <p class="modal-card-title">
+        Save Vertical
+      </p>
+      <div class="content has-text-centered">
+        What ID and name (title) would you like to give to this new vertical?
+      </div>
+      <!-- close button on top-right -->
+      <button
+      type="button"
+      class="delete"
+      style="margin-left: 0.5rem;"
+      @click="$emit('close')"
+      ></button>
+    </header>
+
+    <!-- body -->
+    <section class="modal-card-body" style="position: relative;">
       <div class="block">
         <div class="control is-horizontal">
           <div class="control-label">
@@ -39,17 +45,13 @@
           </div>
         </div>
       </div>
-  </card-modal>
+    </section>
+  </div>
 </template>
 
 <script>
-import { CardModal } from 'vue-bulma-modal'
 
 export default {
-  components: {
-    CardModal
-  },
-
   props: {
     visible: Boolean,
     title: String
@@ -59,6 +61,15 @@ export default {
     return {
       templateName: '',
       templateId: ''
+    }
+  },
+
+  computed: {
+    isLoading () {
+      return false
+    },
+    isWorking () {
+      return false
     }
   },
 

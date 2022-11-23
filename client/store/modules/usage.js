@@ -15,21 +15,15 @@ const mutations = {
 }
 
 const actions = {
-  async loadUsage ({getters, commit, dispatch}, showNotification = true) {
-    dispatch('setLoading', {group: 'app', type: 'usage', value: true})
-    try {
-      await dispatch('loadToState', {
-        name: 'usage',
-        endpoint: getters.endpoints.usage,
-        mutation: types.SET_USAGE,
-        showNotification
-      })
-    } catch (e) {
-      console.log('error loading usage', e)
-      dispatch('errorNotification', {title: 'Failed to load usage', error: e})
-    } finally {
-      dispatch('setLoading', {group: 'app', type: 'usage', value: false})
-    }
+  loadUsage ({getters, dispatch}, showNotification = true) {
+    return dispatch('fetch', {
+      group: 'app',
+      type: 'usage',
+      message: 'load usage statistics',
+      url: getters.endpoints.usage,
+      mutation: types.SET_USAGE,
+      showNotification
+    })
   }
 }
 

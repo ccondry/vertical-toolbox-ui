@@ -10,8 +10,8 @@
           <a @click="changeVertical">{{ vertical.name }} ({{ selectedVerticalId }})</a>
         </span>
         <span class="level-item level-right">
-          <span v-if="authenticated">
-            <!-- show username, user ID and logout button if authenticated -->
+          <span v-if="isLoggedIn">
+            <!-- show username, user ID and logout button if isLoggedIn -->
             {{ user.username }}
             ({{ user.id }})
             -&nbsp;
@@ -19,7 +19,7 @@
             &nbsp;&nbsp;
           </span>
           <span v-else>
-            <!-- show login button in development and not authenticated -->
+            <!-- show login button in development and not isLoggedIn -->
             <a @click="clickLogin">Login</a>
             &nbsp;&nbsp;
           </span>
@@ -33,6 +33,8 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'Navbar',
+  
   data () {
     return {
       filter: '',
@@ -49,15 +51,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      pkginfo: 'pkg',
-      sidebar: 'sidebar',
-      authenticated: 'authenticated',
-      user: 'user',
-      production: 'production',
-      'selectedVerticalId': 'selectedVerticalId',
-      'vertical': 'vertical'
-    })
+    ...mapGetters([
+      'sidebar',
+      'isLoggedIn',
+      'user',
+      'production',
+      'selectedVerticalId',
+      'vertical'
+    ])
   },
 
   methods: {
@@ -97,6 +98,7 @@ export default {
     color: #7957d5;
   }
   position: fixed;
+  top: 0;
   min-width: 100%;
   line-height: 2.35em;
   z-index: 4;

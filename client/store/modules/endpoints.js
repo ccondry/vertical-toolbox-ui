@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'development') {
   authUrlPrefix = 'http://localhost:3032/api/v1/auth/'
   urlPrefix = 'http://localhost:3033/api/v1/verticals/'
 
-  // authUrlPrefix = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth/'
+  authUrlPrefix = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth/'
   // urlPrefix = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/verticals/'
 }
 

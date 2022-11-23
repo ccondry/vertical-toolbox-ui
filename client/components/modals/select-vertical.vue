@@ -1,112 +1,114 @@
 <template>
-  <form @submit.prevent="$parent.close()">
-    <div class="modal-card" style="width: auto">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Select a Vertical</p>
-      </header>
-      <section class="modal-card-body">
-        <p class="content">
-          <div class="field">
-            <div v-if="user.admin" class="field">
-              <b-radio v-model="verticalFilter"
-              v-if="user.admin"
-              native-value="all">Show all verticals</b-radio>
-            </div>
-            <div class="field">
-              <b-radio v-model="verticalFilter"
-              native-value="mine">Show my verticals</b-radio>
-            </div>
-            <div class="field">
-              <b-radio v-model="verticalFilter"
-              native-value="other">
-              Show this user's verticals:
-              <b-autocomplete
-              v-model="ownerFilter"
-              :data="autocompleteOwners"
-              :placeholder="user.username">
-              <template slot="empty">No results found</template>
-            </b-autocomplete>
+  <div class="modal-card" style="width: auto">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Select a Vertical</p>
+    </header>
+    <section class="modal-card-body">
+      <p class="content">
+        <!-- my verticals -->
+        <b-field>
+          <b-radio
+          v-model="verticalFilter"
+          native-value="mine"
+          >
+            Show my verticals
           </b-radio>
-        </div>
-          <!-- <b-field>
-          <b-checkbox v-model="showOnlyMyVerticals">Show only my verticals</b-checkbox>
-        </b-field> -->
-        <!-- <b-checkbox v-model="filterTemplates">Show only this user's verticals:</b-checkbox> -->
-        <b-field grouped>
-          <!-- <b-input v-model="ownerFilter" /> -->
-
         </b-field>
-        Choose your desired vertical here:
-      </div>
-      <b-loading :is-full-page="false" :active="loading" :can-cancel="false"></b-loading>
-      <div v-if="loading">Loading...</div>
-      <b-select v-model="selectedTemplate" v-if="!loading">
-        <option value="" disabled selected>Choose a vertical to load</option>
-        <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
-        <option disabled>-----------------------------------------</option>
-        <option v-for="vertical in userVerticals" :value="vertical.id" v-if="verticalFilter === 'all'">{{ `${vertical.name} (${vertical.id})` }}</option>
-        <option v-for="vertical in myVerticals" :value="vertical.id" v-if="verticalFilter === 'mine'">{{ `${vertical.name} (${vertical.id})` }}</option>
-        <option v-for="vertical in filteredSortedVerticals" :value="vertical.id" v-if="verticalFilter === 'other'">{{ `${vertical.name} (${vertical.id})` }}</option>
-      </b-select>
-      </section>
-      <footer class="modal-card-foot">
-        <!-- <button class="button" type="button" @click="$parent.close()">}</button> -->
-        <!-- <button class="button is-success" @click="setSelectedVertical">Submit</button> -->
-      </footer>
-    </div>
-  </form>
+
+        <!-- another user's verticals -->
+        <b-field grouped>
+          <b-field>
+            <b-radio 
+            v-model="verticalFilter"
+            native-value="other"
+            >
+              Show another user's verticals:
+            </b-radio>
+          </b-field>
+          <b-field v-if="verticalFilter === 'other'">
+            <b-input
+            v-model="ownerFilter"
+            @keyup.enter.native="clickSearch"
+            />
+          </b-field>
+          <b-field v-if="verticalFilter === 'other'">
+            <b-button
+            @click="clickSearch"
+            type="is-primary"
+            >
+              Search
+            </b-button>
+          </b-field>
+        </b-field>
+        
+      </p>
+      <b-loading :is-full-page="false" :active="isLoading" :can-cancel="false"></b-loading>
+      <div v-if="isLoading">Loading...</div>
+      <b-field label="Choose the vertical to load">
+        <b-select v-model="selectedVertical" v-if="!isLoading">
+          <option value="" disabled selected>Choose a vertical to load</option>
+          <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
+          <option disabled>-----------------------------------------</option>
+          <option v-for="vertical in userVerticals" :value="vertical.id" v-if="verticalFilter === 'all'">{{ `${vertical.name} (${vertical.id})` }}</option>
+          <option v-for="vertical in myVerticals" :value="vertical.id" v-if="verticalFilter === 'mine'">{{ `${vertical.name} (${vertical.id})` }}</option>
+          <option v-for="vertical in filteredSortedVerticals" :value="vertical.id" v-if="verticalFilter === 'other'">{{ `${vertical.name} (${vertical.id})` }}</option>
+        </b-select>
+      </b-field>
+    </section>
+    <footer class="modal-card-foot">
+      <!-- <button class="button" type="button" @click="$parent.close()">}</button> -->
+      <button
+      class="button is-success"
+      @click="clickSubmit"
+      :disabled="!selectedVertical.length"
+      >
+        Load {{ selectedVerticalName }}
+      </button>
+    </footer>
+  </div>
 </template>
 
 <script>
-// import {formatUnicorn} from '../utils'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   mounted () {
-    console.log('select-vertical.vue - this.$route.query = ', this.$route.query)
     // make sure the selected vertical is displayed in the list
-    const vertical = this.verticals.find(v => v.id === this.selected)
+    const vertical = this.verticals.find(v => v.id === this.selectedVertical)
     if (vertical && vertical.owner !== this.user.username && vertical.owner !== 'system') {
       // set the owner to the selected value
-      this.ownerFilter = vertical.owner
       this.verticalFilter = 'other'
     }
+    if (this.isLoggedIn) {
+      this.listVerticals({})
+    }
   },
+
   data () {
     return {
-      selectedTemplate: this.selected,
+      selectedVertical: '',
       verticalFilter: 'mine',
       ownerFilter: ''
     }
   },
-  props: [
-    'user',
-    'verticals',
-    'loading',
-    'selected'
-  ],
-  methods: {
-    setSelectedVertical () {
-      this.$emit('submit', this.selectedTemplate)
-    }
-  },
+
   computed: {
-    autocompleteOwners () {
-      if (!this.verticals || !this.verticals.length) {
-        return []
+    ...mapGetters([
+      'user',
+      'verticals',
+      'loading',
+      'selectedVerticalId',
+      'isLoggedIn'
+    ]),
+    selectedVerticalName () {
+      try {
+        return this.verticals.find(v => v.id === this.selectedVertical).name
+      } catch (e) {
+        return 'Vertical'
       }
-      const allOwners = this.verticals.map(v => v.owner)
-      const uniqueOwners = Array.from(new Set(allOwners))
-      return uniqueOwners.filter((option) => {
-        try {
-          return option
-          .toString()
-          .toLowerCase()
-          .indexOf(this.ownerFilter.toLowerCase()) >= 0
-        } catch (e) {
-          // console.log('autocompleteOwners error:', e)
-          return false
-        }
-      })
+    },
+    isLoading () {
+      return this.loading.app.verticals
     },
     sortedVerticals () {
       // make a mutable copy of the store data
@@ -149,14 +151,38 @@ export default {
       return this.sortedVerticals.filter(v => v.owner === this.ownerFilter)
     }
   },
+  
   watch: {
-    selectedTemplate (val) {
-      // user chose vertical in selection box
-      // update the vertical ID in state
-      this.setSelectedVertical()
-      // and also set the URL query parameter for it
-      this.$router.push({query: {vertical: val}}).catch(e => {})
-      // the modal should close now when the selected template is set in state
+    verticalFilter (val) {
+      // load user's verticals when the select "mine" option
+      if (val === 'mine') {
+        this.listVerticals({})
+      }
+    },
+    selectedVerticalId (val) {
+      // close this modal when user selects a vertical and clicks submit
+      if (val) {
+        this.$emit('close')
+      }
+    },
+    isLoggedIn (val) {
+      // load verticals if user just logged in
+      if (val) {
+        this.listVerticals({})
+      }
+    }
+  },
+
+  methods: {
+    ...mapActions([
+      'listVerticals',
+      'setSelectedVerticalId'
+    ]),
+    clickSearch () {
+      this.listVerticals({owner: this.ownerFilter})
+    },
+    clickSubmit () {
+      this.setSelectedVerticalId(this.selectedVertical)
     }
   }
 }

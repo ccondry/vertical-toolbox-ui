@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="model">
     <!-- Mobile App -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -8,46 +8,99 @@
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
       </div>
-      <div class="card-content" v-if="!model.mobileWallpaper || !model.mobileTitle || !model.mobileOptions">
-        <button class="button is-primary" @click="$set(model, 'mobileWallpaper', defaults.mobileWallpaper); $set(model, 'mobileTitle', defaults.mobileTitle); $set(model, 'mobileOptions', JSON.parse(JSON.stringify(defaults.mobileOptions)))">Configure</button>
+      <div
+      v-if="!model.mobileWallpaper || !model.mobileTitle || !model.mobileOptions"
+      class="card-content"
+      >
+        <button
+        class="button is-primary"
+        @click="clickConfigureMobile"
+        >
+          Configure
+        </button>
       </div>
       <div class="card-content" v-else>
 
         <b-field label="Homepage Title">
-          <b-input v-model="model.mobileTitle" :placeholder="defaults.mobileTitle" />
+          <b-input
+          v-model="model.mobileTitle"
+          :placeholder="defaults.mobileTitle"
+          @input="updateParent"
+          />
         </b-field>
         <!-- logo URL manual edit, for admins only -->
         <b-field label="Logo URL" v-if="user.admin">
-          <b-input v-model.lazy="model.logo.rasterised" :placeholder="defaults.logo.rasterised" />
+          <b-input
+          v-model.lazy="model.logo.rasterised"
+          :placeholder="defaults.logo.rasterised"
+          @input="updateParent"
+          />
         </b-field>
         <!-- logo image editor for users -->
         <b-field grouped>
-          <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+          <b-loading
+          :is-full-page="false"
+          :active="working.images.logoFile"
+          :can-cancel="false"
+          />
           <!-- Mobile App Logo -->
           <b-field label="Logo Image">
-            <img :src="model.logo.rasterised" style="max-width: 256px; max-height: 64px;"/>
+            <img
+            :src="model.logo.rasterised"
+            style="max-width: 256px; max-height: 64px;"
+            />
           </b-field>
-          <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
+          <b-tooltip
+          :label="getTooltip('mobileLogoUpload')"
+          multilined
+          position="is-top"
+          >
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Upload">
-            <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
+            <button
+            class="button is-primary"
+            type="button"
+            @click="launchFilePicker('logoFile')"
+            >
+              Browse...
+            </button>
           </b-field>
         </b-field>
-        <!-- Mobile App Wallpaper -->
+
+        <!-- Mobile App Wallpaper - admin only -->
         <b-field label="Wallpaper URL" v-if="user.admin">
-          <b-input v-if="user.admin" v-model="model.mobileWallpaper" :placeholder="defaults.mobileWallpaper" />
+          <b-input
+          v-if="user.admin"
+          v-model="model.mobileWallpaper"
+          :placeholder="defaults.mobileWallpaper"
+          @input="updateParent"
+          />
         </b-field>
         <b-field grouped>
-          <b-loading :is-full-page="false" :active="working.images.mobileWallpaper" :can-cancel="false"></b-loading>
+          <b-loading
+          :is-full-page="false"
+          :active="working.images.mobileWallpaper"
+          :can-cancel="false"
+          />
           <b-field label="Wallpaper">
             <img :src="model.mobileWallpaper" style="max-height: 256px;"/>
           </b-field>
-          <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
+          <b-tooltip
+          :label="getTooltip('mobileWallpaperUpload')"
+          multilined
+          position="is-top"
+          >
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Upload">
-            <button class="button is-primary" type="button" @click="launchFilePicker('mobileWallpaper')">Browse...</button>
+            <button
+            class="button is-primary"
+            type="button"
+            @click="launchFilePicker('mobileWallpaper')"
+            >
+              Browse...
+            </button>
           </b-field>
         </b-field>
 
@@ -62,9 +115,15 @@
 
           <div class="card-content">
             <!-- Mobile Menu Option -->
-            <b-collapse class="content card" v-for="(mobileOption, i) of model.mobileOptions" :key="`mobileOption${i}`">
+            <b-collapse
+            class="content card"
+            v-for="(mobileOption, i) of model.mobileOptions"
+            :key="`mobileOption${i}`"
+            >
               <div slot="trigger" slot-scope="props" class="card-header">
-                <p class="card-header-title">Mobile App Menu Option {{ i + 1 }}</p>
+                <p class="card-header-title">
+                  Mobile App Menu Option {{ i + 1 }}
+                </p>
                 <a class="card-header-icon">
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
                 </a>
@@ -73,28 +132,57 @@
               <div class="card-content">
 
                 <b-field label="Option Title">
-                  <b-input v-model="mobileOption.caption" :placeholder="defaults.mobileOptions[i].caption" />
+                  <b-input
+                  v-model="mobileOption.caption"
+                  :placeholder="defaults.mobileOptions[i].caption"
+                  @input="updateParent"
+                  />
                 </b-field>
 
                 <b-field grouped>
                   <b-field label="Icon Name">
-                    <b-input v-model="mobileOption.icon" :placeholder="defaults.mobileOptions[i].icon" />
+                    <b-input
+                    v-model="mobileOption.icon"
+                    :placeholder="defaults.mobileOptions[i].icon"
+                    @input="updateParent"
+                    />
                   </b-field>
                   <b-field label="Icon">
-                    <a @click.prevent="iconModalContext = {mobileOption}; showIconModal = true">
-                      <b-icon pack="fa" :icon="mobileOption.icon" size="is-large" />
+                    <a
+                    @click.prevent="iconModalContext = {mobileOption}; showIconModal = true"
+                    >
+                      <b-icon
+                      pack="fa"
+                      :icon="mobileOption.icon"
+                      size="is-large"
+                      />
                     </a>
                   </b-field>
                   <b-field label="Choose Icon">
-                    <button class="button is-primary" @click.prevent="iconModalContext = {mobileOption}; showIconModal = true">Browse...</button>
+                    <button
+                    class="button is-primary"
+                    @click.prevent="iconModalContext = {mobileOption}; showIconModal = true"
+                    >
+                      Browse...
+                    </button>
                   </b-field>
                   <b-field label="Search Icons">
-                    <a class="button is-info" href="https://fontawesome.com/v4.7.0/icons/" target="fontawesome">Font Awesome 4.7.0 Icons</a>
+                    <a
+                    class="button is-info"
+                    href="https://fontawesome.com/v4.7.0/icons/"
+                    target="fontawesome"
+                    >
+                      Font Awesome 4.7.0 Icons
+                    </a>
                   </b-field>
                 </b-field>
 
                 <!-- Mobile Menu Option Field -->
-                <b-collapse class="content card" v-for="(field, j) of mobileOption.fields" :key="`mobileOption${i}Field${j}`">
+                <b-collapse
+                class="content card"
+                v-for="(field, j) of mobileOption.fields"
+                :key="`mobileOption${i}Field${j}`"
+                >
                   <div slot="trigger" slot-scope="props" class="card-header">
                     <p class="card-header-title">Field {{ j + 1 }}</p>
                     <!-- <p class="card-header-title">{{ field.name }}</p> -->
@@ -105,38 +193,71 @@
 
                   <div class="card-content">
                     <b-field grouped>
+                      <!-- title -->
                       <b-field label="Title" expanded>
-                        <b-input v-model="field.name" :placeholder="defaults.mobileOptions[i].fields[j].name" />
+                        <b-input
+                        v-model="field.name"
+                        :placeholder="defaults.mobileOptions[i].fields[j].name"
+                        @input="updateParent"
+                        />
                       </b-field>
+
+                      <!-- data type -->
                       <b-field label="Data Type">
-                        <b-select :placeholder="defaults.mobileOptions[i].fields[j].type"
+                        <b-select
+                        :placeholder="defaults.mobileOptions[i].fields[j].type"
                         v-model="field.type"
-                        @change.native="changeDataType(field, $event, i, j)">
+                        @input="changeDataType(field, $event, i, j)"
+                        >
                           <option value="date">Date</option>
                           <option value="text">Text</option>
                         </b-select>
                       </b-field>
+
+                      <!-- TTS type -->
                       <b-field label="TTS Type">
-                        <b-tooltip :label="getTtsTooltip(field.ttstype)" multilined>
-                          <b-select :placeholder="defaults.mobileOptions[i].fields[j].ttstype" v-model="field.ttstype">
-                            <option v-for="type of ttsTypes" :value="type.value">{{ type.name }}</option>
+                        <b-tooltip
+                        :label="getTtsTooltip(field.ttstype)"
+                        multilined
+                        >
+                          <b-select
+                          :placeholder="defaults.mobileOptions[i].fields[j].ttstype"
+                          v-model="field.ttstype"
+                          @input="updateParent"
+                          >
+                            <option
+                            v-for="ttsType of ttsTypes"
+                            :key="ttsType.value"
+                            :value="ttsType.value"
+                            >
+                              {{ ttsType.name }}
+                            </option>
                           </b-select>
                         </b-tooltip>
                       </b-field>
-                      <b-field label="Default Value" expanded v-if="field.type === 'text'">
-                        <b-input type="text" v-model="field.value" :placeholder="defaults.mobileOptions[i].fields[j].value" />
-                      </b-field>
-                      <b-field label="Default Value" expanded v-if="field.type === 'date'">
-                        <datepick inline-template :field="field">
-                          <b-datepicker
-                          placeholder="Click to select..."
-                          icon="calendar-today"
-                          v-model="model"
-                          @input="input"
-                          :date-parser="dateParser"
-                          :date-formatter="dateFormatter"></b-datepicker>
-                        </datepick>
 
+                      <!-- default value -->
+                      <b-field
+                      v-if="field.type === 'text'"
+                      label="Default Value"
+                      expanded
+                      >
+                        <b-input
+                        type="text"
+                        v-model="field.value"
+                        :placeholder="defaults.mobileOptions[i].fields[j].value"
+                        @input="updateParent"
+                        />
+                      </b-field>
+                      <b-field
+                      label="Default Value"
+                      expanded
+                      v-if="field.type === 'date'"
+                      >
+                        <datepick
+                        v-model="field.value"
+                        @input="updateParent"
+                        />
                       </b-field>
                     </b-field>
 
@@ -150,8 +271,13 @@
         </b-collapse>
         <!-- /Mobile Menu Options -->
         <b-field>
-          <button type="button" class="button is-success"
-    @click.prevent="submit" :disabled="disableSave">Save</button>
+          <button
+          type="button"
+          class="button is-success"
+          @click.prevent="submit"
+          :disabled="disableSave">
+            Save
+          </button>
         </b-field>
       </div>
     </b-collapse>
@@ -165,14 +291,15 @@ v-if="showIconModal"
 :context="iconModalContext"
 title="Select Icon"
 @close="showIconModal = false"
-@submit="selectIcon">
-</select-icon-modal>
+@submit="selectIcon"
+/>
 
 </div>
 </template>
 
 <script>
-import SelectIconModal from './modals/select-icon'
+import SelectIconModal from 'client/components/modals/select-icon.vue'
+import Datepick from 'client/components/datepick.vue'
 
 const ttsTypes = [
   {
@@ -267,27 +394,34 @@ const tooltips = {
 }
 
 export default {
+  name: 'Mobile-Config',
+
   components: {
+    Datepick,
     SelectIconModal
   },
 
   props: {
-    'model': {
+    value: {
+      type: Object,
+      required: true
+    },
+    working: {
+      type: Object
+    },
+    loading: {
+      type: Object
+    },
+    user: {
+      type: Object
+    },
+    defaults: {
       type: Object,
       default () { return {} }
     },
-    'working': {
-      type: Object
-    },
-    'loading': {
-      type: Object
-    },
-    'user': {
-      type: Object
-    },
-    'defaults': {
-      type: Object,
-      default () { return {} }
+    disableSave: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -320,25 +454,44 @@ export default {
       images: [],
       uploadRef: null,
       uploadIndex: null,
-      faviconWebsite: ''
+      faviconWebsite: '',
+      model: null
     }
   },
 
-  computed: {
-    disableSave () {
-      // any template has been selected
-      if (this.model.owner === this.user.username || this.user.admin) {
-        // this user owns this template or is an admin
-        return false
-      } else {
-        // this user doesn't have access to save over this template,
-        // so disable the button
-        return true
+  watch: {
+    value () {
+      this.updateCache()
+    },
+    faviconWebsite (val) {
+      this.changeFavicon(val)
+    }
+  },
+
+  mounted () {
+    this.updateCache()
+    // when this.model.favicon changes, extract the domain of the google favicon
+    // tool url and set the v-model value for the "Favicon Website URL" of the favicon
+    try {
+      const url = this.model.favicon
+      const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
+      try {
+        this.faviconWebsite = arr[1] || ''
+      } catch (e) {
+        this.faviconWebsite = ''
       }
+    } catch (e) {
+      // url was probably undefined - do nothing
     }
   },
 
   methods: {
+    clickConfigureMobile () {
+      this.$set(this.model, 'mobileWallpaper', this.defaults.mobileWallpaper)
+      this.$set(this.model, 'mobileTitle', this.defaults.mobileTitle)
+      this.$set(this.model, 'mobileOptions', JSON.parse(JSON.stringify(this.defaults.mobileOptions)))
+      this.updateParent()
+    },
     changeFavicon (event) {
       if (!event) return
       console.log('favicon website URL changed', event)
@@ -361,6 +514,8 @@ export default {
       // update model favicon to prefix it with the google favicons getter url
       this.model.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
       console.log('set this.model.favicon. it is now', this.model.favicon)
+      // update state with model changes
+      this.updateParent()
     },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
@@ -443,6 +598,8 @@ export default {
           // update our model with the new file URL
           try {
             map[node](url, index)
+            // update state with model changes
+            this.updateParent()
           } catch (e) {
             // continue
           }
@@ -480,23 +637,23 @@ export default {
       this.showIconModal = false
       // set value
       context.mobileOption.icon = icon
-    },
-    pushChanges (data) {
-      this.$emit('update:data', JSON.stringify(data, null, 2))
+      this.updateParent()
     },
     submit () {
-      console.log('vertical config form submitted')
-      this.$emit('save', this.model)
+      // user pressed Enter key to save all data
+      this.$emit('save')
     },
-    changeDataType (field, event, i, j) {
+    changeDataType (field, value, i, j) {
       // when choosing date type for mobile options, make sure the value is a valid date
-      console.log('date type changed', field, event)
+      console.log('date type changed', field, value)
       // const a = event.target.value
-      if (event.target.value === 'date') {
+      if (value === 'date') {
         field.value = new Date()
       } else {
         field.value = this.defaults.mobileOptions[i].fields[j].value
       }
+      // update state
+      this.updateParent()
     },
     changeFinesseReasonCallVariable (option, event) {
       // when typing the finesse reason call variable "description", replace
@@ -504,36 +661,18 @@ export default {
       try {
         // remove invalid characters (for CVP compatibility)
         option.description = event.target.value.replace(/[\<\>\'\"]/g, '')
+        this.updateParent()
       } catch (e) {
         console.log('failed to changeFinesseReasonCallVariable', e)
       }
-    }
-  },
-
-  watch: {
-    model (val, oldVal) {
-      // console.log('branding config form model changed', val)
-      // model changed - format and push those changes back to the parent
-      this.pushChanges(val)
     },
-    faviconWebsite (val) {
-      this.changeFavicon(val)
-    }
-  },
-
-  mounted () {
-    // when this.model.favicon changes, extract the domain of the google favicon
-    // tool url and set the v-model value for the "Favicon Website URL" of the favicon
-    try {
-      const url = this.model.favicon
-      const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
-      try {
-        this.faviconWebsite = arr[1] || ''
-      } catch (e) {
-        this.faviconWebsite = ''
-      }
-    } catch (e) {
-      // url was probably undefined - do nothing
+    updateCache () {
+      // copy value prop to model cache
+      this.model = JSON.parse(JSON.stringify(this.value))
+    },
+    updateParent () {
+      // update the parent that we have changed the model
+      this.$emit('input', this.model)
     }
   }
 }

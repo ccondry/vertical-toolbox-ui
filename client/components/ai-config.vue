@@ -190,8 +190,7 @@ export default {
     },
     'verticalId': {
       type: String
-    },
-    'disableSave': {}
+    }
   },
 
   mounted () {
@@ -289,19 +288,9 @@ export default {
         console.log('failed during changeLanguageCode:', e)
       }
     },
-    pushChanges (data) {
-      this.$emit('update:data', JSON.stringify(data, null, 2))
-    },
     submit () {
       console.log('AI config form submitted')
-      this.$emit('save', this.model)
-    }
-  },
-
-  watch: {
-    model (val, oldVal) {
-      // model changed - format and push those changes back to the parent
-      this.pushChanges(val)
+      this.$emit('save')
     }
   }
 }

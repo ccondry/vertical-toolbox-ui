@@ -1,5 +1,6 @@
-import * as types from '../mutation-types'
-import { ToastProgrammatic as Toast } from 'buefy'
+import * as types from 'client/store/mutation-types'
+import { DialogProgrammatic as Dialog } from 'buefy'
+import router from 'client/router'
 
 const state = {
   verticals: [],
@@ -10,146 +11,213 @@ const state = {
 const getters = {
   verticals: state => state.verticals,
   selectedVerticalId: state => state.selectedVerticalId,
-  vertical: state => state.vertical
-}
-
-const mutations = {
-  [types.SET_VERTICALS] (state, data) {
-    state.verticals = data
-  },
-  [types.SET_SELECTED_VERTICAL] (state, data) {
-    state.selectedVerticalId = data
-  },
-  [types.SET_VERTICAL] (state, data) {
-    state.vertical = data
+  vertical: state => state.vertical,
+  disableSave: (state, getters) => {
+    // any template has been selected
+    if (getters.vertical.owner === getters.user.username || getters.user.admin) {
+      // this user owns this template or is an admin
+      // save is not disabled
+      return false
+    } else {
+      // saving is disabled
+      return true
+    }
   }
 }
 
-const actions = {
-  setSelectedVertical ({commit, dispatch}, data) {
-    console.log('setSelectedVertical action', data)
-    commit(types.SET_SELECTED_VERTICAL, data)
-    // if selected vertical was set to a value...
-    if (data) {
-      // set loading now, because setting the vertical will trigger loading
-      // dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
+const mutations = {
+  [types.SET_SELECTED_VERTICAL] (state, data) {
+    state.selectedVerticalId = data
+  },
+  [types.SET_VERTICAL_DETAILS] (state, data) {
+    state.vertical = data
+  },
+  [types.SET_VERTICALS] (state, data) {
+    state.verticals = data
+  },
+  [types.SET_VERTICAL] (state, data) {
+    // find the matching vertical already in state
+    const index = state.verticals.findIndex(v => v._id === data.id)
+    if (index >= 0) {
+      // found - replace in state
+      state.verticals.splice(index, 1, data)
+    } else {
+      // not found - add to state
+      state.verticals.push(data)
     }
   },
-  async uploadImage ({dispatch, commit, getters}, {data, showNotification = true}) {
-    dispatch('setWorking', {group: 'images', type: data.node, value: true})
-    console.log(`uploading file`, data)
+  [types.UNSET_VERTICAL] (state, id) {
+    // find the matching vertical already in state
+    const index = state.verticals.findIndex(v => v._id === id)
+    if (index >= 0) {
+      // found - remove from state
+      state.verticals.splice(index, 1)
+    }
+  },
+}
+
+const actions = {
+  setSelectedVerticalId ({commit}, id) {
+    commit(types.SET_SELECTED_VERTICAL, id)
+    // if current URL query param for vertical
     try {
-      const response = await dispatch('postData', {
-        endpoint: getters.endpoints.images,
-        data
-      })
-      console.log('upload file successful. path = ', response.data.url)
-      if (showNotification) {
-        Toast.open({
-          message: 'Successfully uploaded file.',
-          type: 'is-success'
+      if (router.currentRoute.query.vertical !== id) {
+        // update browser URL with vertical ID in query
+        router.push({
+          query: {
+            vertical: id
+          }
         })
       }
-      // run emitter callback
-      if (typeof data.callback === 'function') {
-        data.callback(response.data)
-      }
     } catch (e) {
-      console.log(e)
-      Toast.open({
-        message: 'Failed to upload file: ' + e.message,
-        type: 'is-success'
-      })
-    } finally {
-      // stop working indicator
-      dispatch('setWorking', {group: 'images', type: data.node, value: false})
+      // continue
     }
   },
-  async createVertical ({getters, dispatch}, {data, showNotification}) {
-    dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
-    const response = await dispatch('postData', {
-      name: 'vertical',
-      endpoint: getters.endpoints.verticals,
-      data,
-      showNotification,
-      success: 'Successfully created vertical',
-      fail: 'Failed to create vertical'
+  async uploadImage ({dispatch, getters}, {data, showNotification = true}) {
+    const response = await dispatch('fetch', {
+      group: 'images',
+      type: data.node,
+      url: getters.endpoints.images,
+      message: 'uploaded file',
+      options: {
+        method: 'POST',
+        body: data
+      },
+      showNotification
     })
-    console.log('successfully created vertical:', response)
-    dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
+    // run emitter callback
+    if (typeof data.callback === 'function') {
+      data.callback(response)
+    }
+  },
+  async createVertical ({getters, dispatch}, data) {
+    const response = await dispatch('fetch', {
+      group: 'app',
+      type: 'verticals',
+      message: 'create vertical',
+      url: getters.endpoints.verticals,
+      options: {
+        method: 'POST',
+        body: data
+      },
+      showNotification: true
+    })
     // make sure the the new vertical is the selected one
-    dispatch('setSelectedVertical', response.data.id)
+    dispatch('setSelectedVerticalId', response.id)
     // load the selected vertical - so that after Save As, the vertical ID
     // will be correctly displayed
     // load new data for this vertical from the server
-    dispatch('loadVertical')
-
+    await dispatch('loadVertical')
+    // get user's new vertical into the list fo verticals 
+    await dispatch('listVerticals', {})
     return response
   },
-  async saveVertical ({getters, commit, dispatch}, {id, data, showNotification}) {
-    dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
-    delete data._id
-    const response = await dispatch('putData', {
-      name: 'vertical',
-      endpoint: getters.endpoints.verticals + '/' + id,
-      data,
-      showNotification,
-      success: 'Successfully saved vertical',
-      fail: 'Failed to save vertical'
+  async confirmSaveVertical ({dispatch, getters}) {
+    // confirm first
+    Dialog.confirm({
+      title: `Save Vertical?`,
+      message: `Are you sure you want to save your changes to vertical ${getters.vertical.name}?`,
+      confirmText: 'Save',
+      type: 'is-success',
+      rounded: true,
+      onConfirm: () => {
+        dispatch('saveVertical')
+      }
     })
-    dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
+  },
+  async saveVertical ({dispatch, getters}) {
+    const response = await dispatch('fetch', {
+      group: 'app',
+      type: 'verticals',
+      message: 'save vertical',
+      url: getters.endpoints.verticals + '/' + getters.vertical.id,
+      options: {
+        method: 'PUT',
+        body: getters.vertical
+      },
+      showNotification: true
+    })
+    // make sure the saved vertical is the selected one
+    // await dispatch('setSelectedVerticalId', response.id)
+    // load the selected vertical - so that after Save As, the vertical ID
+    // will be correctly displayed
+    // load new data for this vertical from the server
+    // await dispatch('loadVertical')
     return response
   },
-  async deleteVertical ({getters, commit, dispatch}, {id, showNotification}) {
-    dispatch('setWorking', {group: 'app', type: 'verticals', value: true})
-    const response = await dispatch('deleteData', {
-      name: 'vertical',
-      endpoint: getters.endpoints.verticals + '/' + id,
-      showNotification,
-      success: 'Successfully deleted vertical ' + id,
-      fail: 'Failed to delete vertical ' + id
+  async confirmDeleteVertical ({dispatch, getters}) {
+     Dialog.confirm({
+      title: `Delete Vertical?`,
+      message: `Are you sure you want to delete the vertical ${getters.vertical.name} (${getters.vertical.id})?`,
+      confirmText: 'Confirm Delete',
+      type: 'is-danger',
+      rounded: true,
+      onConfirm: () => {
+        dispatch('deleteVertical')
+      }
     })
-    dispatch('setWorking', {group: 'app', type: 'verticals', value: false})
+  },
+  async deleteVertical ({getters, commit, dispatch}) {
+    const response = await dispatch('fetch', {
+      group: 'app',
+      type: 'verticals',
+      message: 'delete vertical',
+      url: getters.endpoints.verticals + '/' + getters.vertical.id,
+      options: {
+        method: 'DELETE'
+      },
+      showNotification: true
+    })
+    // remove that vertical from state verticals list
+    commit(types.UNSET_VERTICAL, getters.vertical.id)
+    // unset full vertical data from state
+    commit(types.SET_VERTICAL_DETAILS, {})
+    // set vertical ID to null so modal will pop for user to select another
+    await dispatch('setSelectedVerticalId', null)
+    // return delete request response
     return response
   },
-  async loadVerticals ({getters, commit, dispatch}, showNotification = true) {
-    console.log('starting loadVerticals')
-    dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
-    const response = await dispatch('loadToState', {
-      name: 'verticals',
-      endpoint: getters.endpoints.verticals,
-      query: {all: true, summary: true},
-      mutation: types.SET_VERTICALS,
-      success: 'Successfully loaded verticals list',
-      fail: 'Failed to load verticals list',
-      showNotification
-    })
-    dispatch('setLoading', {group: 'app', type: 'verticals', value: false})
-    return response
-  },
-  async loadVertical ({getters, commit, dispatch}, showNotification = true) {
-    console.log('starting loadVertical')
-    dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
-    const response = await dispatch('loadToState', {
-      name: 'vertical',
-      endpoint: getters.endpoints.verticals + '/' + getters.selectedVerticalId,
-      mutation: types.SET_VERTICAL,
-      success: 'Successfully loaded vertical ' + getters.selectedVerticalId,
-      fail: 'Failed to load vertical ' + getters.selectedVerticalId,
-      showNotification
-    })
-    if (!response) {
-      // probably a 404 - set vertical ID to null so user can try again
-      dispatch('setSelectedVertical', null)
+  listVerticals ({getters, dispatch}, {owner, showNotification = false}) {
+    const options = {}
+    if (owner) {
+      options.query = {
+        owner
+      }
     }
-    // console.log('loadVertical response:', response)
-    dispatch('setLoading', {group: 'app', type: 'verticals', value: false})
-    return response
+    return dispatch('fetch', {
+      group: 'app',
+      type: 'verticals',
+      message: 'load verticals list',
+      url: getters.endpoints.verticals,
+      mutation: types.SET_VERTICALS,
+      showNotification,
+      options
+    })
+  },
+  async loadVertical ({commit, getters, dispatch}, showNotification = false) {
+    const response = await dispatch('fetch', {
+      group: 'app',
+      type: 'verticals',
+      message: 'get vertical details',
+      url: getters.endpoints.verticals + '/' + getters.selectedVerticalId,
+      mutation: types.SET_VERTICAL_DETAILS,
+      showNotification
+    })
+    if (response instanceof Error) {
+      // failed
+      if (response.status === 404) {
+        // set vertical ID to null so user can try again
+        dispatch('setSelectedVerticalId', null)
+      }
+    } else {
+      // successful
+      return response
+    }
   },
   setVertical ({commit}, data) {
     console.log('setVertical')
     // update vertical data in state
-    commit(types.SET_VERTICAL, data)
+    commit(types.SET_VERTICAL_DETAILS, data)
   }
 }
 

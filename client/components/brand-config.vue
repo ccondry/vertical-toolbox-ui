@@ -50,20 +50,32 @@
         <!-- mobile color picker view - arrange vertically -->
         <div class="is-hidden-tablet">
           <b-field label="Primary Color">
-            <chrome v-if="model.brand.color1" :value="model.brand.color1" @input="model.brand.color1 = $event.hex" />
+            <b-colorpicker
+            v-if="model.brand.color1"
+            v-model="model.brand.color1"
+            />
           </b-field>
           <b-field label="Secondary Color">
-            <chrome v-if="model.brand.color2" :value="model.brand.color2" @input="model.brand.color2 = $event.hex" />
+            <b-colorpicker
+            v-if="model.brand.color2"
+            v-model="model.brand.color2"
+            />
           </b-field>
         </div>
         <!-- desktop color picker view - arrange horizontally -->
         <div class="is-hidden-mobile">
           <b-field grouped>
             <b-field label="Primary Color">
-              <chrome v-if="model.brand.color1" :value="model.brand.color1" @input="model.brand.color1 = $event.hex" />
+              <b-colorpicker
+              v-if="model.brand.color1"
+              v-model="model.brand.color1"
+              />
             </b-field>
             <b-field label="Secondary Color">
-              <chrome v-if="model.brand.color2" :value="model.brand.color2" @input="model.brand.color2 = $event.hex" />
+              <b-colorpicker
+              v-if="model.brand.color2"
+              v-model="model.brand.color2"
+              />
             </b-field>
           </b-field>
         </div>
@@ -907,9 +919,8 @@
 </template>
 
 <script>
-import { Chrome } from 'vue-color'
 import { mapGetters } from 'vuex'
-import Jds from './brand/jds'
+import Jds from 'client/components/brand/jds.vue'
 
 const defaultAdvisors = [{
   image: 'https://mm.cxdemo.net/static/images/cumulus/common/author1.png',
@@ -1028,7 +1039,6 @@ const tooltips = {
 
 export default {
   components: {
-    Chrome,
     Jds
   },
 
@@ -1058,7 +1068,10 @@ export default {
     'verticalId': {
       type: String
     },
-    'disableSave': {}
+    disableSave: {
+      type: Boolean,
+      default: false
+    }
   },
 
   directives: {
@@ -1249,12 +1262,9 @@ export default {
         return ''
       }
     },
-    pushChanges (data) {
-      this.$emit('update:data', JSON.stringify(data, null, 2))
-    },
     submit () {
       console.log('brand config form submitted')
-      this.$emit('save', this.model)
+      this.$emit('save')
     },
     changeDataType (field, event, i, j) {
       // when choosing date type for mobile options, make sure the value is a valid date
@@ -1287,7 +1297,6 @@ export default {
       this.initView()
       // console.log('branding config form model changed', val)
       // model changed - format and push those changes back to the parent
-      this.pushChanges(val)
       // when this.model changes, extract the domain of the google favicon
       // tool url and set the v-model value for the "Favicon Website URL" of the favicon
       try {

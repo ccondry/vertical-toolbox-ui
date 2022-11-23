@@ -585,29 +585,6 @@
     }
   },
   "webexconnect": {
-    "global": {
-      "brandName": "Cumulus Finance"
-    },
-    "appointments": {
-      "brandName": "Cumulus Finance"
-    },
-    "collections": {
-      "brandName": "Cumulus Finance"
-    },
-    "callDeflection": {
-      "brandName": "Cumulus Healthcare"
-    },
-    "automotive": {
-      "brandName": "Cumulus Automotive"
-    },
-    "productActivationTS": {
-      "brandName": "Cumulus Utility"
-    },
-    "productActivationSO": {
-      "brandName": "Cumulus Mobile"
-    },
-    "retail": {
-      "brandName": "Cumulus Retail"
-    }
+    "global": {}
   }
 }

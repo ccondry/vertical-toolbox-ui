@@ -1,6 +1,5 @@
 <template>
-  <div>
-
+  <div v-if="model">
     <!-- Cumulus IVR Menu -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -10,17 +9,29 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.cvp">
-        <button class="button is-primary" @click="$set(model, 'cvp', JSON.parse(JSON.stringify(defaults.cvp)))">Configure</button>
+        <button class="button is-primary" @click="clickConfigureCvp">
+          Configure
+        </button>
       </div>
       <div class="card-content" v-else>
 
         <b-field label="Welcome Prompt">
-          <b-input v-model="model.cvp.welcomePrompt" :placeholder="defaults.cvp.welcomePrompt" />
+          <b-input
+          v-model="model.cvp.welcomePrompt"
+          :placeholder="defaults.cvp.welcomePrompt"
+          @input="updateParent"
+          />
         </b-field>
         <!-- Main and Second Menu -->
-        <b-collapse class="content card" v-for="(menu, i) of ['mainMenu', 'secondMenu']" :key="menu">
+        <b-collapse
+        class="content card"
+        v-for="(menu, i) of ['mainMenu', 'secondMenu']"
+        :key="menu"
+        >
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">{{ menu === 'mainMenu' ? 'Main Menu' : 'Second Menu' }}</p>
+            <p class="card-header-title">
+              {{ menu === 'mainMenu' ? 'Main Menu' : 'Second Menu' }}
+            </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
@@ -28,28 +39,42 @@
           <div class="card-content">
 
             <b-field label="Menu Prompt">
-              <b-input v-model="model.cvp[menu].tts" :placeholder="defaults.cvp[menu].tts" />
+              <b-input
+              v-model="model.cvp[menu].tts"
+              :placeholder="defaults.cvp[menu].tts"
+              @input="updateParent"
+              />
             </b-field>
 
-            <b-collapse class="content card" v-for="(option, j) of model.cvp[menu].options" :key="menu + j">
+            <!-- for each IVR menu option -->
+            <b-collapse
+            class="content card"
+            v-for="(option, j) of model.cvp[menu].options"
+            :key="menu + j"
+            >
               <div slot="trigger" slot-scope="props" class="card-header">
                 <p class="card-header-title">Option {{ j + 1 }}</p>
-                <!-- <p class="card-header-title">{{ option.name }}</p> -->
                 <a class="card-header-icon">
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
                 </a>
               </div>
               <div class="card-content">
-
                 <b-field grouped>
+                  <!-- ASR keyword -->
                   <b-field label="ASR Keyword">
-                    <b-input v-model="option.name" :placeholder="defaults.cvp[menu].options[j].name" />
+                    <b-input
+                    v-model="option.name"
+                    :placeholder="defaults.cvp[menu].options[j].name"
+                    @input="updateParent"
+                    />
                   </b-field>
+                  <!-- Call Var -->
                   <b-field label="Finesse Reason Call Variable" expanded>
-                    <b-input v-model="option.description"
+                    <b-input
+                    v-model="option.description"
                     :placeholder="defaults.cvp[menu].options[j].description"
-                    @change.native="changeFinesseReasonCallVariable(option, $event)"/>
-
+                    @input="changeFinesseReasonCallVariable(option, $event)"
+                    />
                   </b-field>
                 </b-field>
 
@@ -60,8 +85,14 @@
         <!-- /Main and SecondMenu -->
 
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <button
+          type="button"
+          class="button is-success"
+          @click.prevent="submit" 
+          :disabled="disableSave"
+          >
+            Save
+          </button>
         </b-field>
 
       </div>
@@ -76,11 +107,20 @@
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
       </div>
-      <div class="card-content" v-if="!model.cvp || !model.cvp.jacadaMenu || !model.cvp.jacadaMenu.interactionId || !model.cvp.jacadaMenu.applicationKey">
-        <button class="button is-primary" @click="$set(model.cvp, 'jacadaMenu', defaults.cvp.jacadaMenu)">Configure</button>
+      <!-- show configure button if Jacada is not configured -->
+      <div
+      class="card-content"
+      v-if="!model.cvp || !model.cvp.jacadaMenu || !model.cvp.jacadaMenu.interactionId || !model.cvp.jacadaMenu.applicationKey"
+      >
+        <button
+        class="button is-primary"
+        @click="clickConfigureJacada"
+        >
+          Configure
+        </button>
       </div>
+      <!-- show Jacada config when Jacada is configured -->
       <div class="card-content" v-else>
-
         <b-select placeholder="Select a preconfigured VIVR vertical" @change.native="changeJacadaVertical($event)">
           <option value="travel">Travel</option>
           <option value="finance">Finance</option>
@@ -90,15 +130,29 @@
         </b-select>
 
         <b-field label="interactionId">
-          <b-input v-model="model.cvp.jacadaMenu.interactionId" :placeholder="defaults.cvp.jacadaMenu.interactionId" />
+          <b-input
+          v-model="model.cvp.jacadaMenu.interactionId"
+          :placeholder="defaults.cvp.jacadaMenu.interactionId"
+          @input="updateParent"
+          />
         </b-field>
         <b-field label="applicationKey" expanded>
-          <b-input v-model="model.cvp.jacadaMenu.applicationKey" :placeholder="defaults.cvp.jacadaMenu.applicationKey" />
+          <b-input
+          v-model="model.cvp.jacadaMenu.applicationKey"
+          :placeholder="defaults.cvp.jacadaMenu.applicationKey"
+          @input="updateParent"
+          />
         </b-field>
 
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <button
+          type="button"
+          class="button is-success"
+          @click.prevent="submit"
+          :disabled="disableSave"
+          >
+            Save
+          </button>
         </b-field>
 
       </div>
@@ -108,7 +162,9 @@
     <!-- SMS Deflection Configuration -->
     <b-collapse class="content card" :open="false">
       <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">Courtesy Callback SMS Deflection Message</p>
+        <p class="card-header-title">
+          Courtesy Callback SMS Deflection Message
+        </p>
         <a class="card-header-icon">
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
@@ -121,12 +177,19 @@
           rows="3"
           v-model="model.smsDeflectionMessage"
           :placeholder="defaults.smsDeflectionMessage"
+          @input="updateParent"
           />
         </b-field>
 
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <button
+          type="button"
+          class="button is-success"
+          @click.prevent="submit"
+          :disabled="disableSave"
+          >
+            Save
+          </button>
         </b-field>
 
       </div>
@@ -296,23 +359,32 @@ const jacadaVerticals = {
 }
 
 export default {
+  name: 'IVR-Config',
+
   props: {
-    'model': {
+    value: {
+      type: Object,
+      required: true
+    },
+    working: {
+      type: Object,
+      required: true
+    },
+    loading: {
+      type: Object,
+      required: true
+    },
+    user: {
+      type: Object,
+      required: true
+    },
+    defaults: {
       type: Object,
       default () { return {} }
     },
-    'working': {
-      type: Object
-    },
-    'loading': {
-      type: Object
-    },
-    'user': {
-      type: Object
-    },
-    'defaults': {
-      type: Object,
-      default () { return {} }
+    disableSave: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -326,25 +398,32 @@ export default {
       files: [],
       images: [],
       uploadRef: null,
-      uploadIndex: null
+      uploadIndex: null,
+      model: null
     }
   },
 
-  computed: {
-    disableSave () {
-      // any template has been selected
-      if (this.model.owner === this.user.username || this.user.admin) {
-        // this user owns this template or is an admin
-        return false
-      } else {
-        // this user doesn't have access to save over this template,
-        // so disable the button
-        return true
-      }
+  mounted () {
+    this.updateCache()
+  },
+
+  watch: {
+    value () {
+      this.updateCache()
     }
   },
 
   methods: {
+    clickConfigureCvp () {
+      const defaults = JSON.parse(JSON.stringify(this.defaults.cvp))
+      this.$set(this.model, 'cvp', JSON.parse(JSON.stringify(defaults)))
+      this.updateParent()
+    },
+    clickConfigureJacada () {
+      const defaults = JSON.parse(JSON.stringify(this.defaults.cvp.jacadaMenu))
+      this.$set(this.model.cvp, 'jacadaMenu', defaults)
+      this.updateParent()
+    },
     changeJacadaVertical (event) {
       // set jacada interaction ID and application key when friendly vertical
       // name is selected from option menu
@@ -359,12 +438,9 @@ export default {
       // set value
       context.mobileOption.icon = icon
     },
-    pushChanges (data) {
-      this.$emit('update:data', JSON.stringify(data, null, 2))
-    },
     submit () {
       console.log('vertical config form submitted')
-      this.$emit('save', this.model)
+      this.$emit('save')
     },
     changeDataType (field, event, i, j) {
       // when choosing date type for mobile options, make sure the value is a valid date
@@ -376,23 +452,24 @@ export default {
         field.value = this.defaults.mobileOptions[i].fields[j].value
       }
     },
-    changeFinesseReasonCallVariable (option, event) {
+    changeFinesseReasonCallVariable (option, value) {
       // when typing the finesse reason call variable "description", replace
       // characters that would cause an error in CVP subdialog return element
       try {
         // remove invalid characters (for CVP compatibility)
-        option.description = event.target.value.replace(/[\<\>\'\"]/g, '')
+        option.description = value.replace(/[\<\>\'\"]/g, '')
+        this.updateParent()
       } catch (e) {
         console.log('failed to changeFinesseReasonCallVariable', e)
       }
-    }
-  },
-
-  watch: {
-    model (val, oldVal) {
-      // console.log('branding config form model changed', val)
-      // model changed - format and push those changes back to the parent
-      this.pushChanges(val)
+    },
+    updateCache () {
+      // copy value prop to model cache
+      this.model = JSON.parse(JSON.stringify(this.value))
+    },
+    updateParent () {
+      // update the parent that we have changed the model
+      this.$emit('input', this.model)
     }
   }
 }

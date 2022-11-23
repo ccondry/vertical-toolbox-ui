@@ -29,239 +29,57 @@
         </article>
       </div>
     </div>
-
-    <save-template-modal
-    ref="modal"
-    :visible="showModal"
-    title="Save Vertical As..."
-    @close="showModal = false"
-    @submit="clickSaveVertical"></save-template-modal>
-
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import BrandConfig from '../../components/brand-config.vue'
-import SaveTemplateModal from '../../components/modals/save-template.vue'
-import moment from 'moment'
-import Vue from 'vue'
-
-const Datepick = Vue.component('Datepick', {
-  props: ['field'],
-  data () {
-    return {
-      model: this.getDateValue()
-    }
-  },
-  methods: {
-    input (data) {
-      // date picker chose a date, so update the field
-      this.field.value = this.dateFormatter(data)
-    },
-    getDateValue () {
-      // get a Date object for the current field value
-      return new Date(moment(this.field.value).toDate())
-    },
-    dateParser (date) {
-      // return new Date(Date.parse(date))
-      const parsedDate = new Date(moment(date).format('MMM DD, YYYY HH:MM'))
-      console.log('parsedDate', parsedDate)
-      return parsedDate
-    },
-    dateFormatter (date) {
-      // return date.toLocaleDateString()
-      return moment(date).format('DD MMM YYYY')
-    }
-  }
-})
+import BrandConfig from 'client/components/brand-config.vue'
 
 export default {
   components: {
-    BrandConfig,
-    SaveTemplateModal,
-    Datepick
-  },
-
-  created () {
-    console.log('brands.vue created - setQuery to this.$route.query')
-    // store query parameters in state
-    this.setQuery(this.$route.query)
+    BrandConfig
   },
 
   data () {
     return {
-      activeTab: 0,
-      verticalDataString: '',
-      // selectedTemplate: '',
-      showModal: false,
-      filterTemplates: false,
-      model: {},
-      ownerFilter: '',
-      // selectedOwner: null,
-      verticalFilter: 'mine'
-    }
-  },
-
-  mounted () {
-    if (!this.verticals.length) {
-      // load verticals
-      this.loadVerticals(false)
-    }
-    if (this.vertical) {
-      console.log('this.vertical exists')
-      // update cache if state data already exists
-      this.updateCache(this.vertical)
-    } else if (this.$route.query.vertical) {
-      console.log('this.$route.query.vertical exist')
-      // if vertical was set in query params, load it
-      this.setSelectedVertical(this.$route.query.vertical)
-    } else {
-      console.log('forwarding to Home')
-      // forward to home page for vertical selection
-      this.$router.push({ name: 'Home' })
+      model: {}
     }
   },
 
   methods: {
     ...mapActions([
-      'errorNotification',
-      'saveVertical',
+      'confirmSaveVertical',
       'uploadImage',
-      'setSelectedVertical',
-      'loadVerticals',
-      'setQuery',
+      'setSelectedVerticalId',
       'setVertical'
     ]),
-    confirmSaveVertical ({id, data}) {
-      console.log('confirmSaveVertical', id, data)
-      // pop confirmation dialog
-      this.$buefy.dialog.confirm({
-        message: `Are you sure you want to save vertical ${data.name}?`,
-        onConfirm: async () => {
-          this.$buefy.toast.open('Save vertical confirmed')
-          await this.saveVertical({id, data})
-          // update verticals data in state with current server data
-          await this.loadVerticals(false)
-          // make sure the the new vertical is the selected one
-          this.setSelectedVertical(id)
-        }
-      })
-    },
     upload (data) {
       console.log('brands.vue - upload vertical image', data)
       this.uploadImage({data})
     },
-    async clickSave () {
-      const id = this.selectedVerticalId
-      console.log('click save vertical', id)
-      try {
-        let data
-        // use Form model
-        data = JSON.parse(JSON.stringify(this.model))
-        // confirm with user and save the data to the server
-        this.confirmSaveVertical({id, data})
-      } catch (e) {
-        // failed to save data
-        console.log('failed to save vertical', e.message)
-        this.errorNotification(`Failed to save vertical. Check JSON syntax.`)
-      }
+    clickSave () {
+      // confirm with user and save the data to the server
+      this.confirmSaveVertical()
     },
     updateCache (data) {
       // copy state data to local data
       this.model = JSON.parse(JSON.stringify(data))
       // make sure model.brand is an object
       if (!this.model.brand) this.$set(this.model, 'brand', {})
-    },
-    async clickSaveVertical ({id, name}) {
-      console.log('saving vertical as', id, '-', name)
-      this.showModal = false
-      try {
-        let data
-        if (this.activeTab === 0) {
-          // use Form model
-          data = JSON.parse(JSON.stringify(this.model))
-        } else if (this.activeTab === 1) {
-          // use Raw JSON string
-          data = JSON.parse(this.verticalDataString)
-        }
-        // set id and name in the request data
-        data.id = id
-        data.name = name
-        // confirm with user and save the data to the server
-        await this.confirmSaveVertical({id, data})
-      } catch (e) {
-        console.log('failed to save vertical', id, e)
-        this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
-      }
     }
   },
+  
   computed: {
     ...mapGetters([
+      'disableSave',
       'user',
       'verticals',
       'loading',
       'working',
       'defaults',
-      'selectedVerticalId',
       'vertical'
-    ]),
-    sortedVerticals () {
-      // make a mutable copy of the store data
-      try {
-        const copy = JSON.parse(JSON.stringify(this.verticals))
-        // case-insensitive sort by name
-        copy.sort((a, b) => {
-          try {
-            var nameA = a.name.toUpperCase() // ignore upper and lowercase
-            var nameB = b.name.toUpperCase() // ignore upper and lowercase
-            if (nameA < nameB) {
-              return -1
-            }
-            if (nameA > nameB) {
-              return 1
-            }
-            // names must be equal
-            return 0
-          } catch (e) {
-            return 0
-          }
-        })
-        return copy
-      } catch (e) {
-        console.log(`couldn't get sorted verticals`, e)
-      }
-    },
-    systemVerticals () {
-      return this.sortedVerticals.filter(v => !v.owner || v.owner === 'system' || v.owner === null)
-    },
-    userVerticals () {
-      return this.sortedVerticals.filter(v => v.owner && v.owner !== 'system' && v.owner !== null)
-    },
-    myVerticals () {
-      return this.sortedVerticals.filter(v => v.owner === this.user.username)
-    },
-    filteredSortedVerticals () {
-      // filter to only show the verticals owned by specified user
-      return this.sortedVerticals.filter(v => v.owner === this.ownerFilter)
-    },
-    disableSave () {
-      try {
-        // allow save - this user owns this template or is an admin
-        return !(this.vertical.owner === this.user.username || this.user.admin)
-      } catch (e) {
-        // continue
-      }
-      // default disable save
-      return true
-    },
-    selectedTemplateObject () {
-      if (this.verticals && this.verticals.length && this.selectedTemplate.length) {
-        return this.verticals.find(v => v.id === this.selectedTemplate)
-      } else {
-        return {}
-      }
-    }
+    ])
   },
 
   watch: {
@@ -274,11 +92,8 @@ export default {
     },
     model () {
       // update the state with model when the model changes
-      this.setVertical(this.model)
+      this.setVertical(JSON.parse(JSON.stringify(this.model)))
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

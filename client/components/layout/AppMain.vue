@@ -1,7 +1,8 @@
 <template>
   <div>
-    <section class="app-main" :style="[hiddenSidebarStyle]">
+    <section class="app-main">
       <div class="container is-fluid is-marginless app-content">
+        <b-loading :is-full-page="false" :active="isLoading || isWorking"></b-loading>
         <!-- <levelbar></levelbar> -->
         <transition
         mode="out-in"
@@ -22,33 +23,35 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'AppMain',
+  
   computed: {
-    ...mapGetters({
-      sidebar: 'sidebar'
-    }),
-    hiddenSidebarStyle () {
-      return this.sidebar.hidden ? { 'margin-left': 0 } : null
-    }
+    ...mapGetters([
+      'loading',
+      'working'
+    ]),
+    isLoading () {
+      return this.loading.app.verticals
+    },
+    isWorking () {
+      return this.working.app.verticals
+    },
   },
-
-  components: {
-    // Levelbar
-  }
 }
 </script>
 
 <style lang="scss">
 // @import '~bulma/sass/utilities/initial-variables';
 // @import '~bulma/sass/utilities/derived-variables';
-@import '~bulma';
+// @import '~bulma';
 .app-main {
   padding-top: 50px;
   margin-left: 220px;
   transform: translate3d(0, 0, 0);
 
-  @include mobile() {
-    margin-left: 0;
-  }
+  // @include mobile() {
+  //   margin-left: 0;
+  // }
 
 }
 

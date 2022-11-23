@@ -11,6 +11,7 @@
 
       <!-- Check if any Global field is empty -->
       <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.global">
+      <!-- <div class="card-content" v-if="!model.webexconnect.global.brandName || !model.webexconnect.global.brandLogo || !model.webexconnect.global.mobileHomeWallpaper"> -->
         <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
       </div>
       <div class="card-content" v-else>
@@ -36,7 +37,7 @@
             </b-field>
             <!-- Image image editor for users -->
             <b-field grouped>
-              <b-loading :is-full-page="false" :active="working.images.brandLogo" :can-cancel="false"></b-loading>
+              <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
               <b-field label="Brand Logo Image">
                 <img :src="model.webexconnect.global.brandLogo" style="max-width: 256px; max-height: 64px;"/>
               </b-field>
@@ -44,7 +45,7 @@
                 <b-icon type="is-primary" icon="information" />
               </b-tooltip>
               <b-field label="Upload">
-                <button class="button is-primary" type="button" @click="launchFilePicker('brandLogo')">Browse...</button>
+                <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
               </b-field>
             </b-field>
             <!-- Mobile App Home Wallpaper -->
@@ -65,285 +66,18 @@
                 <button class="button is-primary" type="button" @click="launchFilePicker('mobileHomeWallpaper')">Browse...</button>
               </b-field>
             </b-field>
-            <!-- Mobile App Promo Wallpaper -->
-            <!-- Image URL manual edit, for admins only -->
-            <b-field label="Mobile App Promo Wallpaper URL" v-if="user.admin">
-              <b-input v-if="user.admin" v-model="model.webexconnect.global.mobilePromoWallpaper" :placeholder="defaults.webexconnect.global.mobilePromoWallpaper" />
-            </b-field>
-            <!-- Image image editor for users -->
-            <b-field grouped>
-              <b-loading :is-full-page="false" :active="working.images.mobilePromoWallpaper" :can-cancel="false"></b-loading>
-              <b-field label="Wallpaper">
-                <img :src="model.webexconnect.global.mobilePromoWallpaper" style="max-height: 256px;"/>
-              </b-field>
-              <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
-                <b-icon type="is-primary" icon="information" />
-              </b-tooltip>
-              <b-field label="Upload">
-                <button class="button is-primary" type="button" @click="launchFilePicker('mobilePromoWallpaper')">Browse...</button>
-              </b-field>
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
           </div>
-        
         </b-collapse>
         <!-- /Global Branding -->
 
-      </div>
-      <!-- /Check if any Global field is empty -->
-
-      <!-- Check if any Appointments field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.appointments">
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
-      </div>
-      <div class="card-content" v-else>
-
-        <!-- Appointments Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Appointments Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.appointments.brandName" :placeholder="defaults.webexconnect.appointments.brandName" />
-            </b-field>
-
-            <b-field message="Rep Title">
-              <p class="control">
-                  <span class="button is-static">The 45 minutes appointment with </span>
-              </p>
-              <b-input v-model="model.webexconnect.appointments.repTitle" :placeholder="defaults.webexconnect.appointments.repTitle" />
-              <p class="control">
-                  <span class="button is-static">, is confirmed for Tuesday, 27/9/2022, at 3pm.</span>
-              </p>
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
-          </div>
-
-        </b-collapse>
-        <!-- /Appointments Branding -->
-
-      </div>
-      <!-- /Check if any Appointments field is empty -->
-
-      <!-- Check if any Collections or Promise to Pay field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.collections">
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
-      </div>
-      <div class="card-content" v-else>
-
-        <!-- Collections or Promise to Pay Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Collections or Promise to Pay Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.collections.brandName" :placeholder="defaults.webexconnect.collections.brandName" />
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
-          </div>
-
-        </b-collapse>
-        <!-- /Collections or Promise to Pay Branding -->
-
-      </div>
-      <!-- /Check if any Collections or Promise to Pay field is empty -->
-
-      <!-- Check if any Call Deflection field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.callDeflection">
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
-      </div>
-      <div class="card-content" v-else>
-
-        <!-- Call Deflection Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Call Deflection Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.callDeflection.brandName" :placeholder="defaults.webexconnect.callDeflection.brandName" />
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
-          </div>
-
-        </b-collapse>
-        <!-- /Call Deflection Branding -->
-
-      </div>
-      <!-- /Check if any Call Deflection field is empty -->
-
-      <!-- Check if any Automotive field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.automotive">
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
-      </div>
-      <div class="card-content" v-else>
-
-        <!-- Automotive Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Automotive Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.automotive.brandName" :placeholder="defaults.webexconnect.automotive.brandName" />
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
-          </div>
-
-        </b-collapse>
-        <!-- /Automotive Branding -->
-
-      </div>
-      <!-- /Check if any Automotive field is empty -->
-
-      <!-- Check if any Product Activation Tariff Switch field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.productActivationTS">
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
-      </div>
-      <div class="card-content" v-else>
-
-        <!-- Product Activation Tariff Switch Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Product Activation Tariff Switch Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.productActivationTS.brandName" :placeholder="defaults.webexconnect.productActivationTS.brandName" />
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
-          </div>
-
-        </b-collapse>
-        <!-- /Product Activation Tariff Switch Branding -->
-
-      </div>
-      <!-- /Check if any Product Activation Tariff Switch field is empty -->
-
-      <!-- Check if any Product Activation Sim Offer field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.productActivationSO">
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
-      </div>
-      <div class="card-content" v-else>
-
-        <!-- Product Activation Sim Offer Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Product Activation Sim Offer Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.productActivationSO.brandName" :placeholder="defaults.webexconnect.productActivationSO.brandName" />
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
-          </div>
-
-        </b-collapse>
-        <!-- /Product Activation Sim Offer Branding -->
-
-      </div>
-      <!-- /Check if any Product Activation Sim Offer field is empty -->
-
-      <!-- Check if any Retail Journey field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.retail">
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
-      </div>
-      <div class="card-content" v-else>
-
-        <!-- Retail Journey Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Retail Journey Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.retail.brandName" :placeholder="defaults.webexconnect.retail.brandName" />
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
-            </b-field>
-          </div>
-
-        </b-collapse>
-        <!-- /Retail Journey Branding -->
-
-      </div>
-      <!-- /Check if any Retail Journey field is empty -->
-
-      <div class="card-content">
         <b-field>
           <button type="button" class="button is-success"
           @click.prevent="submit" :disabled="disableSave">Save</button>
         </b-field>
-      </div>
         
+      </div>
+      <!-- /Check if any Global field is empty -->
+
     </b-collapse>
     <!-- /Webex Connect -->
 
@@ -362,7 +96,7 @@
 </template>
 
 <script>
-import SelectIconModal from './modals/select-icon'
+import SelectIconModal from 'client/components/modals/select-icon.vue'
 
 const tooltips = {
   logoUpload: 'This image will be proportionally scaled down to 50px height.',
@@ -400,6 +134,10 @@ export default {
     'defaults': {
       type: Object,
       default () { return {} }
+    },
+    disableSave: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -435,20 +173,6 @@ export default {
     }
   },
 
-  computed: {
-    disableSave () {
-      // any template has been selected
-      if (this.model.owner === this.user.username || this.user.admin) {
-        // this user owns this template or is an admin
-        return false
-      } else {
-        // this user doesn't have access to save over this template,
-        // so disable the button
-        return true
-      }
-    }
-  },
-
   methods: {
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
@@ -472,7 +196,7 @@ export default {
           // map out the node names to model data references
           const map = {
             // mobile app logo
-            'brandLogo': (url) => {
+            'logoFile': (url) => {
               // reset img
               this.model.webexconnect.global.brandLogo = ''
               // set img url
@@ -484,11 +208,11 @@ export default {
               // set img url
               this.model.webexconnect.global.mobileHomeWallpaper = url + '?nocache=' + Date.now()
             },
-            'mobilePromoWallpaper': (url) => {
+            'mobileFraudWallpaper': (url) => {
               // reset img
-              this.model.webexconnect.global.mobilePromoWallpaper = ''
+              this.model.webexconnect.global.mobileFraudWallpaper = ''
               // set img url
-              this.model.webexconnect.global.mobilePromoWallpaper = url + '?nocache=' + Date.now()
+              this.model.webexconnect.global.mobileFraudWallpaper = url + '?nocache=' + Date.now()
             }
           }
           // update our model with the new file URL
@@ -525,20 +249,9 @@ export default {
         return ''
       }
     },
-    pushChanges (data) {
-      this.$emit('update:data', JSON.stringify(data, null, 2))
-    },
     submit () {
       console.log('vertical config form submitted')
-      this.$emit('save', this.model)
-    }
-  },
-
-  watch: {
-    model (val, oldVal) {
-      // console.log('branding config form model changed', val)
-      // model changed - format and push those changes back to the parent
-      this.pushChanges(val)
+      this.$emit('save')
     }
   },
 

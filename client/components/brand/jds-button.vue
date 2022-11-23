@@ -89,19 +89,12 @@
       >
         Add JDS Data
       </b-button>
-      <b-button
-      rounded
-      type="is-success"
-      @click="disableSave"
-      >
-        Save
-      </b-button>
     </div>
   </div>
 </template>
 
 <script>
-import JdsButtonData from './jds-button-data'
+import JdsButtonData from './jds-button-data.vue'
 
 export default {
   components: {
@@ -112,14 +105,14 @@ export default {
     value: {
       type: Object,
       required: true
-    },
-    'disableSave': {}
+    }
   },
 
   data () {
     return {
       model: null,
-      materialDesignIconsUrl: 'https://materialdesignicons.com/cdn/2.5.94/'
+      materialDesignIconsUrl: 'https://materialdesignicons.com/cdn/2.5.94/',
+      materialDesignIconsVersion: '2.5.94',
     }
   },
 
@@ -132,20 +125,6 @@ export default {
       this.updateCache()
     }
   },
-
-  // computed: {
-  //   disableSave () {
-  //     // any template has been selected
-  //     if (this.model.owner === this.user.username || this.user.admin) {
-  //       // this user owns this template or is an admin
-  //       return false
-  //     } else {
-  //       // this user doesn't have access to save over this template,
-  //       // so disable the button
-  //       return true
-  //     }
-  //   }
-  // },
 
   methods: {
     updateParent () {
@@ -164,18 +143,7 @@ export default {
     deleteJdsData (j) {
       this.model.data.splice(j, 1)
       this.updateParent()
-    },
-    // disableSave () {
-    //   // any template has been selected
-    //   if (this.model.owner === this.user.username || this.user.admin) {
-    //     // this user owns this template or is an admin
-    //     return false
-    //   } else {
-    //     // this user doesn't have access to save over this template,
-    //     // so disable the button
-    //     return true
-    //   }
-    // }
+    }
   }
 }
 </script>

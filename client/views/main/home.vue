@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div class="tile is-ancestor" v-if="vertical.id">
+  <div v-if="model">
+    <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box">
           <h1 class="title">
-            {{ vertical.name }} Basic Information
+            {{ model.name }} Basic Information
           </h1>
           <div class="block content">
             <p>
@@ -16,6 +16,7 @@
               Click Load or click the vertical name in the title bar to edit a
               different vertical. Any unsaved changes on the current vertical
               will be lost.
+            </p>
             <p>
               You can create new verticals by using the 'Save As' button.
               If you use Save As and specify a vertical
@@ -23,16 +24,37 @@
               configuration.
             </p>
           </div>
-          <div class="block">
-            <button type="button" class="button is-success"
-            @click.prevent="clickSave" :disabled="disableSave">Save</button>
-            <button type="button" class="button is-success"
-            @click.prevent="clickSaveAs">Save As</button>
-            <button type="button" class="button is-primary"
-            @click.prevent="setSelectedVertical(null)">Load</button>
-            <button type="button" class="button is-danger"
-            @click.prevent="clickDeleteVertical(selectedVerticalId)"
-            :disabled="disableDelete">Delete</button>
+          <div class="buttons">
+            <button
+            type="button"
+            class="button is-success"
+            @click.prevent="clickSave"
+            :disabled="disableSave"
+            >
+              Save
+            </button>
+            <button
+            type="button"
+            class="button is-success"
+            @click.prevent="clickSaveAs"
+            >
+              Save As
+            </button>
+            <button
+            type="button"
+            class="button is-primary"
+            @click.prevent="setSelectedVerticalId(null)"
+            >
+              Load
+            </button>
+            <button
+            type="button"
+            class="button is-danger"
+            @click.prevent="clickDeleteVertical"
+            :disabled="disableDelete"
+            >
+              Delete
+            </button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
 
@@ -69,10 +91,10 @@
     </div>
 
 
-    <div class="tile is-ancestor" v-if="vertical.id">
+    <div class="tile is-ancestor" v-if="model.id">
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <h1 class="title">Configure {{ vertical.id }}</h1>
+          <h1 class="title">Configure {{ model.id }}</h1>
           <div class="content">
             <ul>
               <li>
@@ -100,140 +122,52 @@
         </article>
       </div>
     </div>
-
-
-    <save-template-modal
-    ref="modal"
-    :visible="showModal"
-    title="Save Vertical As..."
-    @close="showModal = false"
-    @submit="clickSaveVertical"></save-template-modal>
-
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import SaveTemplateModal from '../../components/modals/save-template.vue'
 
 export default {
-  components: {
-    SaveTemplateModal
-  },
-
-  created () {
-    // store query parameters in state
-    this.setQuery(this.$route.query)
-  },
-
-  activated () {
-    if (!this.verticals.length) {
-      console.log('home.vue - !this.verticals.length so loading verticals')
-      // load verticals
-      this.loadVerticals(false)
-    }
-    if (this.vertical) {
-      console.log('home.vue - this.vertical exists')
-      // update cache if state data already exists
-      this.updateCache(this.vertical)
-    } else if (this.$route.query.vertical) {
-      console.log('home.vue - this.$route.query.vertical exist')
-      // if vertical was set in query params, load it
-      this.setSelectedVertical(this.$route.query.vertical)
-    } else {
-      console.log('home.vue - forwarding to Home')
-      // forward to home page for vertical selection
-      this.$router.push({ name: 'Home' })
-    }
-  },
-
   data () {
     return {
-      activeTab: 0,
-      verticalDataString: '',
-      showModal: false,
-      model: {}
+      model: null
     }
   },
 
   methods: {
     ...mapActions([
-      'loadVerticals',
-      'loadVertical',
-      'errorNotification',
-      'saveVertical',
-      'createVertical',
-      'uploadImage',
-      'deleteVertical',
-      'setSelectedVertical',
-      'setQuery',
-      'setVertical'
+      'confirmSaveVertical',
+      'confirmDeleteVertical',
+      'setSelectedVerticalId',
+      'createVertical'
     ]),
-    confirmSaveVertical ({id, data}) {
-      console.log('confirmSaveVertical', id, data)
-      // pop confirmation dialog
-      this.$buefy.dialog.confirm({
-        message: `Are you sure you want to save vertical ${data.name}?`,
-        onConfirm: async () => {
-          this.$buefy.toast.open('Save vertical confirmed')
-          // save the data on the server
-          await this.saveVertical({id, data})
-          // make sure the the new vertical is the selected one
-          this.setSelectedVertical(id)
-          // load the selected vertical - so that after Save As, the vertical ID
-          // will be correctly displayed
-          // load new data for this vertical from the server
-          await this.loadVertical()
-        }
-      })
-    },
-    confirmDeleteVertical (id) {
-      console.log('confirmDeleteVertical', id)
-      // pop confirmation dialog
-      this.$buefy.dialog.confirm({
-        message: `Are you sure you want to delete vertical ${id}?`,
-        onConfirm: async () => {
-          this.$buefy.toast.open('Delete vertical confirmed')
-          await this.deleteVertical({id})
-          // update verticals data in state with current server data
-          await this.loadVerticals(false)
-          // prompt user to choose a vertical again
-          this.setSelectedVertical(null)
-        }
-      })
-    },
-    upload (data) {
-      console.log('Home.vue - upload vertical image', data)
-      this.uploadImage({data})
-    },
-    async clickSave () {
-      const id = this.vertical.id
-      console.log('click save vertical', id)
-      try {
-        // copy data by reparsing local cache
-        let data = JSON.parse(JSON.stringify(this.model))
-
-        // confirm with user and save the data to the server
-        this.confirmSaveVertical({id, data})
-      } catch (e) {
-        // failed to save data
-        console.log('failed to save vertical', e.message)
-        this.errorNotification(`Failed to save vertical. Check JSON syntax.`)
-      }
-    },
     clickSaveAs () {
-      console.log('saving vertical as...')
-      // this.showModal = true
       this.$buefy.dialog.prompt({
-        message: `What would you like to name your new vertical?`,
+        message: `What would you like the name of your new vertical to be?`,
+        inputAttrs: {
+          placeholder: ''
+        },
         onConfirm: (name) => {
-          const data = JSON.parse(JSON.stringify(this.model))
-          // set name in the request data
-          data.name = name
-          // create the vertical on the server
-          this.createVertical({data})
+          // copy current vertical data
+          const body = JSON.parse(JSON.stringify(this.model))
+          // remove id
+          delete body.id
+          // remove _id
+          delete body._id
+          // set name from input
+          body.name = name
+          // create the new vertical
+          this.createVertical(body)
         }
       })
+    },
+    clickDeleteVertical () {
+      this.confirmDeleteVertical()
+    },
+    clickSave () {
+      // confirm with user and save the data to the server
+      this.confirmSaveVertical()
     },
     updateCache (data) {
       // copy state data to local data
@@ -266,30 +200,12 @@ export default {
           console.log(v, 'is already set to', this.model[v])
         }
       }
-    },
-    async clickSaveVertical ({id, name}) {
-      console.log('saving vertical as', id, '-', name)
-      this.showModal = false
-      try {
-        let data = JSON.parse(JSON.stringify(this.model))
-        // set id and name in the request data
-        data.id = id
-        data.name = name
-        // confirm with user and save the data to the server
-        await this.confirmSaveVertical({id, data})
-      } catch (e) {
-        console.log('failed to save vertical', id, e)
-        this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
-      }
-    },
-    clickDeleteVertical (id) {
-      console.log('deleting vertical', id)
-      // confirm with user and save the data to the server
-      this.confirmDeleteVertical(id)
     }
   },
+
   computed: {
     ...mapGetters([
+      'disableSave',
       'user',
       'verticals',
       'loading',
@@ -298,36 +214,20 @@ export default {
       'vertical',
       'selectedVerticalId'
     ]),
-    query () {
-      return this.$route.query
-    },
-    disableSave () {
-      try {
-        // allow save - this user owns this template or is an admin
-        return !(this.vertical.owner === this.user.username || this.user.admin)
-      } catch (e) {
-        // continue
-      }
-      // default disable save
-      return true
-    },
-    disableSaveAs () {
-      return !Object.keys(this.model).length
-    },
     disableDelete () {
-      if (!this.vertical) {
+      if (!this.model) {
         // no vertical loaded/selected - disable delete for everyone
         return true
-      } else if (this.vertical.owner === 'system') {
+      } else if (this.model.owner === 'system') {
         // vertical is owned by the system - disable delete for everyone
         return true
-      } else if (this.vertical.owner === null) {
+      } else if (this.model.owner === null) {
         // vertical has no owner (is owned by the system) - disable delete for everyone
         return true
       } else if (this.user.admin) {
         // allow admins to delete any non-system vertical
         return false
-      } else if (this.vertical.owner === this.user.username) {
+      } else if (this.model.owner === this.user.username) {
         // allow users to delete their own verticals
         return false
       } else {
@@ -344,15 +244,6 @@ export default {
         // update mutable cache of the state object
         this.updateCache(val)
       }
-    },
-    query (val) {
-      // URL query params changed
-      // store in state
-      this.setQuery(val)
-    },
-    model () {
-      // update the state with model when the model changes
-      this.setVertical(this.model)
     }
   }
 }

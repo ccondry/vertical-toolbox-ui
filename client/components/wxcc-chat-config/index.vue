@@ -32,11 +32,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AgentName from './agent-name'
-import ChatStatusMessages from './chat-status-messages'
-import Pages from './pages'
-import ProactivePrompt from './proactive-prompt'
-import VirtualAssistant from './virtual-assistant'
+import AgentName from './agent-name.vue'
+import ChatStatusMessages from './chat-status-messages.vue'
+import Pages from './pages/index.vue'
+import ProactivePrompt from './proactive-prompt.vue'
+import VirtualAssistant from './virtual-assistant.vue'
 
 export default {
   components: {
@@ -51,10 +51,6 @@ export default {
     value: {
       type: Object,
       required: true
-    },
-    disableSave: {
-      type: Boolean,
-      default: false
     }
   },
 

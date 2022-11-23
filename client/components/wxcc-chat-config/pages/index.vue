@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import AgentUnavailable from './agent-unavailable'
-import CustomerInformation from './customer-information'
-import Feedback from './feedback'
-import OffHours from './off-hours'
+import AgentUnavailable from './agent-unavailable.vue'
+import CustomerInformation from './customer-information.vue'
+import Feedback from './feedback.vue'
+import OffHours from './off-hours.vue'
 
 export default {
   components: {

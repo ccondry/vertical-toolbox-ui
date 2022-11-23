@@ -727,6 +727,10 @@ export default {
     'defaults': {
       type: Object,
       default () { return {} }
+    },
+    disableSave: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -760,20 +764,6 @@ export default {
       uploadRef: null,
       uploadIndex: null,
       faviconWebsite: ''
-    }
-  },
-
-  computed: {
-    disableSave () {
-      // any template has been selected
-      if (this.model.owner === this.user.username || this.user.admin) {
-        // this user owns this template or is an admin
-        return false
-      } else {
-        // this user doesn't have access to save over this template,
-        // so disable the button
-        return true
-      }
     }
   },
 
@@ -920,12 +910,9 @@ export default {
       // set value
       context.mobileOption.icon = icon
     },
-    pushChanges (data) {
-      this.$emit('update:data', JSON.stringify(data, null, 2))
-    },
     submit () {
       console.log('vertical config form submitted')
-      this.$emit('save', this.model)
+      this.$emit('save')
     },
     changeDataType (field, event, i, j) {
       // when choosing date type for mobile options, make sure the value is a valid date
@@ -950,11 +937,6 @@ export default {
   },
 
   watch: {
-    model (val, oldVal) {
-      // console.log('branding config form model changed', val)
-      // model changed - format and push those changes back to the parent
-      this.pushChanges(val)
-    },
     faviconWebsite (val) {
       this.changeFavicon(val)
     }

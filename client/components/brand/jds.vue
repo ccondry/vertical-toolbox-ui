@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import JdsButton from './jds-button'
+import JdsButton from './jds-button.vue'
 
 export default {
   components: {

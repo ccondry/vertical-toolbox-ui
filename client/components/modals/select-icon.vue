@@ -1,30 +1,38 @@
 <template>
-  <card-modal :visible="visible" @close="close" :title="title"
-  transition="zoom" @ok="ok" @cancel="close"
-  ok-text="Ok">
-  <!-- <div class="content has-text-centered">
-    Please select the icon you wish to use
-  </div> -->
-    <a v-for="icon of iconList" @click.prevent="$emit('submit', {icon, context})" :title="icon">
-      <b-icon pack="fa" :icon="icon" size="is-large" style="margin-left: 8px;" />
-    </a>
-</card-modal>
+  <div class="modal-card" style="width: auto;">
+    <!-- header -->
+    <header class="modal-card-head">
+      <!-- title -->
+      <p class="modal-card-title">
+        Save Vertical
+      </p>
+    </header>
+
+    <!-- body -->
+    <section class="modal-card-body" style="position: relative;">
+      <div class="block">
+        <a
+        v-for="icon of iconList"
+        @click.prevent="$emit('submit', {icon, context})"
+        :title="icon"
+        >
+          <b-icon
+          pack="fa"
+          :icon="icon"
+          size="is-large"
+          style="margin-left: 8px;"
+          />
+        </a>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
 import iconList from './icon-list.json'
 import iconTranslations from './v4-icon-translations.json'
-import { CardModal } from 'vue-bulma-modal'
 
 export default {
-  components: {
-    CardModal
-  },
-
-  mounted () {
-    // this.$refs.email.focus()
-  },
-
   props: {
     visible: Boolean,
     title: String,
@@ -41,7 +49,10 @@ export default {
   methods: {
     ok () {
       // return original icon
-      this.$emit('submit', {icon: this.context.mobileOption.icon, context: this.context})
+      this.$emit('submit', {
+        icon: this.context.mobileOption.icon,
+        context: this.context
+      })
     },
     close () {
       this.$emit('close')

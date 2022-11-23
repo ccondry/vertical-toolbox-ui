@@ -4,9 +4,13 @@ import admin from './admin.js'
 
 const state = {
   items: [
-    main,
-    admin
+    ...main,
+    ...admin
   ]
+}
+
+const getters = {
+  menu: state => state.items
 }
 
 const mutations = {
@@ -22,6 +26,7 @@ const mutations = {
 }
 
 export default {
+  getters,
   state,
   mutations
 }

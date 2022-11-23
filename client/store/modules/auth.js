@@ -1,6 +1,4 @@
 import * as types from '../mutation-types'
-import axios from 'axios'
-import { post } from '../../utils'
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1]
@@ -15,7 +13,7 @@ const state = {
 
 const getters = {
   jwt: state => state.jwt,
-  authenticated: state => state.jwt !== null,
+  isLoggedIn: state => state.jwt !== null,
   forwardTo: state => state.forwardTo
 }
 
@@ -45,7 +43,7 @@ const actions = {
     // remove JWT from localStorage
     window.localStorage.removeItem('jwt')
     // unset user in state
-    commit(types.SET_USER, {})
+    commit(types.SET_USER, null)
   },
   async logout ({dispatch, commit, getters}) {
     console.log('logging out user')
@@ -58,7 +56,6 @@ const actions = {
           // store new auth token in localStorage
           dispatch('setJwt', response.data.jwt)
           // load user data using JWT
-          // dispatch('loadUser')
           dispatch('successNotification', `Successfully logged out of ${getters.user.username}`)
         } else {
           // remove JWT
@@ -66,7 +63,7 @@ const actions = {
           // remove JWT from localStorage
           window.localStorage.removeItem('jwt')
           // remove user from state
-          commit(types.SET_USER, {})
+          commit(types.SET_USER, null)
         }
       } else {
         dispatch('errorNotification', `Failed to log out of ${getters.user.username}`)
@@ -98,7 +95,6 @@ const actions = {
         })
 
         // load user data using JWT
-        // dispatch('loadUser')
         // load the session details - dCloud only
         // dispatch('getSession')
       } else {
@@ -118,7 +114,7 @@ const actions = {
       dispatch('setWorking', {group: 'app', type: 'login', value: false})
     }
   },
-  async checkLogin ({getters, dispatch, commit, rootState}) {
+  async checkLogin ({dispatch, getters}) {
     console.log('checking localstorage for JWT login token')
     // retrieve auth token from localStorage
     const jwt = window.localStorage.getItem('jwt')
@@ -126,57 +122,12 @@ const actions = {
     if (jwt !== null) {
       console.log('JWT login token found in localStorage')
       console.log('saving JWT in state')
-      dispatch('setJwt', jwt)
-      // console.log('getting user info from API')
-      // try {
-      //   dispatch('setLoading', {group: 'app', type: 'user', value: true})
-      //
-      //   const response = await axios.get(`${getters.apiBase}/user`, {
-      //     headers: {
-      //       Authorization: 'Bearer ' + jwt
-      //     }
-      //   })
-      //   dispatch('setLoading', {group: 'app', type: 'user', value: false})
-      //   // console.log(response)
-      //   if (response.status >= 200 && response.status < 300) {
-      //     console.log('server said JWT is valid.')
-      //     // commit user data to state
-      //     commit(types.SET_USER, response.data)
-      //     dispatch('successNotification', 'Successfully loaded user details')
-      //     // load lab dcloud session info - dCloud only
-      //     // dispatch('getSession', false)
-      //   } else if (response.status === 401) {
-      //     console.log('server said JWT is invalid. removing it from localStorage.')
-      //     // bad token - log out
-      //     dispatch('logout', null)
-      //     // throw response
-      //   } else {
-      //     console.log('server response could not be interpreted for login check. Just notify user.')
-      //     const title = 'Authentication Check Incomplete'
-      //     const message = 'Authentication check could not be completed at this time. Try refreshing the page?'
-      //     dispatch('warningNotification', {
-      //       title,
-      //       message
-      //     })
-      //   }
-      // } catch (error) {
-      //   if (error.response.status === 401) {
-      //     // not logged in
-      //     // don't show error - just invalidate cached jwt and user flag
-      //     // remove JWT
-      //     commit(types.SET_JWT, null)
-      //     // remove JWT from localStorage
-      //     window.localStorage.removeItem('jwt')
-      //     // remove user from state
-      //     commit(types.SET_USER, {})
-      //   } else {
-      //     // not 401 - display error
-      //     dispatch('errorNotification', {
-      //       title: 'Failed to load user details',
-      //       message: `${error.response.status} ${error.response.data.message}`
-      //     })
-      //   }
-      // }
+      await dispatch('setJwt', jwt)
+      console.log(getters.user.exp, (new Date().getTime() / 1000))
+      if (getters.user.exp <= (new Date().getTime() / 1000)) {
+        // JWT expired
+        dispatch('unsetJwt')
+      }
     } else {
       console.log('JWT not found in localstorage.')
       // forward user to login page, if in production

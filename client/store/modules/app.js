@@ -1,7 +1,28 @@
+import Vue from 'vue'
 import * as types from '../mutation-types'
-import {version} from '../../../package'
+import pkg from '../../../package.json'
 
 const state = {
+  pkg,
+  working: {
+    app: {},
+    images: {},
+    cvp: {},
+    admin: {},
+    facebook: {},
+    finesse: {},
+    templates: {}
+  },
+  loading: {
+    app: {},
+    images: {},
+    cvp: {},
+    admin: {},
+    facebook: {},
+    finesse: {},
+    templates: {}
+  },
+  defaultChatEntryPointId: '1005',
   device: {
     isMobile: false,
     isTablet: false
@@ -13,19 +34,55 @@ const state = {
   effect: {
     translate3d: true
   },
-  query: null,
   apiVersion: 'Loading...',
   authApiVersion: 'Loading...'
 }
 
 const getters = {
-  query: state => state.query,
-  uiVersion: () => version,
+  pkg: state => state.pkg,
+  app: state => state.app,
+  device: state => state.device,
+  sidebar: state => state.sidebar,
+  effect: state => state.effect,
+  instance: (state) => state.instance,
+  authEnabled: () => true,
+  loading: state => state.loading,
+  working: state => state.working,
+  production: () => process.env.NODE_ENV === 'production',
+  uiVersion: () => pkg.version,
   apiVersion: state => state.apiVersion,
   authApiVersion: state => state.authApiVersion
 }
 
 const mutations = {
+  [types.SET_WORKING] (state, data) {
+    // if state container for this group is not existing, create it
+    if (!state.working[data.group]) {
+      Vue.set(state.working, data.group, {})
+    }
+
+    // if state container for this type is not existing, create it
+    if (!state.working[data.group][data.type]) {
+      Vue.set(state.working[data.group], data.type, data.value)
+    } else {
+      state.working[data.group][data.type] = data.value
+    }
+  },
+
+  [types.SET_LOADING] (state, data) {
+    // if state container for this group is not existing, create it
+    if (!state.loading[data.group]) {
+      Vue.set(state.loading, data.group, {})
+    }
+
+    // if state container for this type is not existing, create it
+    if (!state.loading[data.group][data.type]) {
+      Vue.set(state.loading[data.group], data.type, data.value)
+    } else {
+      state.loading[data.group][data.type] = data.value
+    }
+  },
+
   [types.TOGGLE_DEVICE] (state, device) {
     state.device.isMobile = device === 'mobile'
     state.device.isTablet = device === 'tablet'
@@ -54,11 +111,6 @@ const mutations = {
     state.datacenter = data.datacenter
   },
 
-  [types.SET_QUERY_PARAMETERS] (state, data) {
-    console.log('SET_QUERY_PARAMETERS - set query to', data)
-    state.query = data
-  },
-
   [types.SET_API_VERSION] (state, data) {
     state.apiVersion = data.version
   },
@@ -69,49 +121,40 @@ const mutations = {
 }
 
 const actions = {
-  async getApiVersion ({getters, dispatch}) {
-    dispatch('setLoading', {group: 'app', type: 'apiVersion', value: true})
-    console.log('get API server info...')
-    try {
-      const endpoint = getters.endpoints.version
-      console.log('getting API server info endpoint', endpoint, '...')
-      const response = await dispatch('loadToState', {
-        name: 'get API server version',
-        endpoint,
-        mutation: types.SET_API_VERSION,
-        showNotification: false
-      })
-      console.log('get API server info - response:', response)
-    } catch (e) {
-      console.log('error loading API server info', e)
-      // dispatch('errorNotification', {title: 'Failed to load API server info', error: e})
-    } finally {
-      dispatch('setLoading', {group: 'app', type: 'apiVersion', value: false})
+  expandMenu ({ commit }, data) {
+    if (data) {
+      data.expanded = data.expanded || false
+      commit(types.EXPAND_MENU, data)
     }
   },
-  async getAuthApiVersion ({getters, dispatch}) {
-    dispatch('setLoading', {group: 'app', type: 'authApiVersion', value: true})
-    const operation = 'auth API server version'
-    console.log('getting', operation, '...')
-    try {
-      const endpoint = getters.endpoints.authApiVersion
-      console.log('getting', operation, 'endpoint', endpoint, '...')
-      const response = await dispatch('loadToState', {
-        name: 'get' + operation,
-        endpoint,
-        mutation: types.SET_AUTH_API_VERSION,
-        showNotification: false
-      })
-      console.log('get', operation, '- response:', response)
-    } catch (e) {
-      console.log('error getting', operation, e)
-      // dispatch('errorNotification', {title: 'Failed to get ' + operation, error: e})
-    } finally {
-      dispatch('setLoading', {group: 'app', type: 'authApiVersion', value: false})
-    }
+
+  setWorking ({commit}, {group, type, value = true}) {
+    commit(types.SET_WORKING, {group, type, value})
   },
-  setQuery ({commit}, data) {
-    commit(types.SET_QUERY_PARAMETERS, data)
+  
+  setLoading ({commit}, {group, type, value = true}) {
+    commit(types.SET_LOADING, {group, type, value})
+  },
+  
+  getApiVersion ({getters, dispatch}) {
+    return dispatch('fetch', {
+      group: 'app',
+      type: 'apiVersion',
+      message: 'get API server version',
+      url: getters.endpoints.version,
+      mutation: types.SET_API_VERSION,
+      showNotification: false
+    })
+  },
+  getAuthApiVersion ({getters, dispatch}) {
+    return dispatch('fetch', {
+      group: 'app',
+      type: 'authApiVersion',
+      message: 'get auth API server version',
+      url: getters.endpoints.authApiVersion,
+      mutation: types.SET_AUTH_API_VERSION,
+      showNotification: false
+    })
   }
 }
 
