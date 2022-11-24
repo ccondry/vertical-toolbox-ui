@@ -1,5 +1,5 @@
 <template>
-  <div v-if="model">
+  <div>
     <!-- Webex Connect -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -11,12 +11,12 @@
 
       <!-- Check if any the base object field is missing -->
       <div
-      v-if="!model.webexconnect"
+      v-if="!model"
       class="card-content"
       >
         <button
         class="button is-primary"
-        @click="clickConfigureWebexConnect"
+        @click="clickConfigure"
         >
           Configure
         </button>
@@ -25,50 +25,50 @@
       <!-- else base object exists -->
       <div class="card-content" v-else>
         <global
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         @upload="upload"
         />
 
         <appointments
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         />
 
         <collections
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         />
 
         <call-deflection
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         />
 
         <automotive
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         />
 
         <product-activation-ts
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         />
 
         <product-activation-so
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         />
 
         <retail
-        v-model="model.webexconnect"
+        v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         />
@@ -96,6 +96,8 @@ import ProductActivationSo from 'client/components/connect-config/product-activa
 import ProductActivationTs from 'client/components/connect-config/product-activation-ts.vue'
 import Retail from 'client/components/connect-config/retail.vue'
 import SelectIconModal from 'client/components/modals/select-icon.vue'
+
+const modelKey = 'webexconnect'
 
 export default {
   name: 'WebexConnectConfig',
@@ -137,7 +139,7 @@ export default {
 
   computed: {
     myDefaults () {
-      return this.defaults.webexconnect
+      return this.defaults[modelKey]
     }
   },
 
@@ -155,17 +157,30 @@ export default {
     ...mapActions([
       'uploadImage'
     ]),
+    clickConfigure () {
+      // copy defaults to model
+      this.model = JSON.parse(JSON.stringify(this.myDefaults))
+      // update parent/state
+      this.updateParent()
+    },
     upload (data) {
       console.log('connect-config/index.vue - upload image', data)
       this.uploadImage({data})
     },
     updateCache () {
       // copy value prop to model cache
-      this.model = JSON.parse(JSON.stringify(this.value))
+      try {
+        this.model = JSON.parse(JSON.stringify(this.value[modelKey]))
+      } catch (e) {
+        // continue
+      }
     },
     updateParent () {
       // update the parent that we have changed the model
-      this.$emit('input', this.model)
+      this.$emit('input', {
+        ...this.value,
+        [modelKey]: this.model
+      })
     }
   }
 }
