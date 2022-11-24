@@ -8,29 +8,31 @@
       @input="updateParent"
       />
 
-      <!-- <virtual-assistant
-      :value="model.virtualAssistant"
-      :defaults="defaults.virtualAssistant"
+      <virtual-assistant
+      :value="model"
+      :defaults="myDefaults"
       @input="updateParent"
       />
-
+      
+      <!-- 
       <proactive-prompt
-      :value="model.proactivePrompt"
-      :defaults="defaults.proactivePrompt"
+      :value="model"
+      :defaults="myDefaults"
       @input="updateParent"
       />
 
       <chat-status-messages
-      :value="model.chatStatusMessages"
-      :defaults="defaults.chatStatusMessages"
+      :value="model"
+      :defaults="myDefaults"
       @input="updateParent"
       />
 
       <pages
-      :value="model.pages"
-      :defaults="defaults.pages"
+      :value="model"
+      :defaults="myDefaults"
       @input="updateParent"
-      /> -->
+      />
+    -->
     </div>
   </collapse-card>
 </template>

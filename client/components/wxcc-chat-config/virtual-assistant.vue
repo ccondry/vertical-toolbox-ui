@@ -81,7 +81,7 @@ export default {
       return this.defaults[this.modelKey]
     },
     isConfigured () {
-      return typeof this.model === 'object'
+      return this.model ? true : false
     }
   },
 

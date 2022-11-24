@@ -44,6 +44,9 @@
 </template>
 
 <script>
+const title = 'Agent Name'
+const modelKey = 'mediaSpecificConfiguration'
+
 export default {
   name: 'Webex-CC-chat-agent-name',
 
@@ -59,15 +62,23 @@ export default {
   },
 
   data () {
+    // copy value to model
+    const copy = JSON.parse(JSON.stringify(this.value))
+    let model
+    try {
+      model = copy[modelKey]
+    } catch (e) {
+      // continue
+    }
     return {
-      model: null,
-      title: 'Agent Name',
+      model,
+      title
     }
   },
 
   computed: {
     myDefaults () {
-      return this.defaults.mediaSpecificConfiguration
+      return this.defaults[modelKey]
     },
     isConfigured () {
       return this.model ? true : false
@@ -105,19 +116,19 @@ export default {
       this.updateParent()
     },
     updateCache () {
-      if (typeof this.value.mediaSpecificConfiguration === 'object') {
+      if (typeof this.value[modelKey] === 'object') {
         // copy parent value to local cache
-        this.model = JSON.parse(JSON.stringify(this.value.mediaSpecificConfiguration))
+        this.model = JSON.parse(JSON.stringify(this.value[modelKey]))
       } else {
         // set null/undefined?
-        this.model = this.value.mediaSpecificConfiguration
+        this.model = this.value[modelKey]
       }
     },
     updateParent () {
       // emit changes to parent
       this.$emit('input', {
         ...this.value,
-        mediaSpecificConfiguration: this.model
+        [modelKey]: this.model
       })
     }
   }
