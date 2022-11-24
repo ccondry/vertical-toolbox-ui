@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="model">
     <!-- Webex Connect -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -71,8 +71,7 @@
         <!-- /Global Branding -->
 
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <save-button />
         </b-field>
         
       </div>
@@ -89,8 +88,8 @@
     :context="iconModalContext"
     title="Select Icon"
     @close="showIconModal = false"
-    @submit="selectIcon">
-    </select-icon-modal>
+    @submit="selectIcon"
+    />
 
   </div>
 </template>
@@ -113,31 +112,29 @@ const tooltips = {
 }
 
 export default {
+  name: 'WebexConnectConfig',
+
   components: {
     SelectIconModal
   },
 
   props: {
-    'model': {
+    value: {
+      type: Object,
+      required: true
+    },
+    working: {
+      type: Object
+    },
+    loading: {
+      type: Object
+    },
+    user: {
+      type: Object
+    },
+    defaults: {
       type: Object,
       default () { return {} }
-    },
-    'working': {
-      type: Object
-    },
-    'loading': {
-      type: Object
-    },
-    'user': {
-      type: Object
-    },
-    'defaults': {
-      type: Object,
-      default () { return {} }
-    },
-    disableSave: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -248,10 +245,6 @@ export default {
       } catch (e) {
         return ''
       }
-    },
-    submit () {
-      console.log('vertical config form submitted')
-      this.$emit('save')
     }
   },
 
