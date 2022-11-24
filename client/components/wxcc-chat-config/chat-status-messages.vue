@@ -65,6 +65,8 @@ const title = 'Chat Status Messages'
 const modelKey = 'chatStatusMessages'
 
 export default {
+  name: 'WebexCcChatStatusConfig',
+  
   props: {
     value: {
       type: Object,
