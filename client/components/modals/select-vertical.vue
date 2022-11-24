@@ -57,13 +57,14 @@
     </section>
     <footer class="modal-card-foot">
       <!-- <button class="button" type="button" @click="$parent.close()">}</button> -->
-      <button
-      class="button is-success"
+      <b-button
+      type="is-success"
       @click="clickSubmit"
       :disabled="!selectedVertical.length"
+      rounded
       >
         Load {{ selectedVerticalName }}
-      </button>
+      </b-button>
     </footer>
   </div>
 </template>
