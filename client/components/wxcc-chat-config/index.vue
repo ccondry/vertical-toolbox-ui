@@ -1,37 +1,41 @@
 <template>
   <!-- Webex CC Chat Template Customization -->
-  <collapse-card title="Webex CC Chat Template Customization">
+  <collapse-card title="Webex CC Chat Template Customization" v-if="model">
     <div class="card-content">
       <agent-name
-      v-model="model"
+      :value="model"
       :defaults="myDefaults"
+      @input="updateParent"
       />
 
-      <virtual-assistant
-      v-model="model"
-      :defaults="myDefaults"
+      <!-- <virtual-assistant
+      :value="model.virtualAssistant"
+      :defaults="defaults.virtualAssistant"
+      @input="updateParent"
       />
 
       <proactive-prompt
-      v-model="model"
-      :defaults="myDefaults"
+      :value="model.proactivePrompt"
+      :defaults="defaults.proactivePrompt"
+      @input="updateParent"
       />
 
       <chat-status-messages
-      v-model="model"
-      :defaults="myDefaults"
+      :value="model.chatStatusMessages"
+      :defaults="defaults.chatStatusMessages"
+      @input="updateParent"
       />
 
       <pages
-      v-model="model"
-      :defaults="myDefaults"
-      />
+      :value="model.pages"
+      :defaults="defaults.pages"
+      @input="updateParent"
+      /> -->
     </div>
   </collapse-card>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import AgentName from './agent-name.vue'
 import ChatStatusMessages from './chat-status-messages.vue'
 import Pages from './pages/index.vue'
@@ -39,6 +43,8 @@ import ProactivePrompt from './proactive-prompt.vue'
 import VirtualAssistant from './virtual-assistant.vue'
 
 export default {
+  name: 'Webex-CC-Chat-Config',
+
   components: {
     AgentName,
     ChatStatusMessages,
@@ -51,55 +57,50 @@ export default {
     value: {
       type: Object,
       required: true
+    },
+    defaults: {
+      type: Object,
+      default () {
+        return {}
+      }
     }
   },
 
   data () {
-    // copy value to model
-    const copy = JSON.parse(JSON.stringify(this.value))
-    const model = copy.wxccChatTemplate || {}
     return {
-      model
+      model: null
     }
   },
 
   computed: {
-    ...mapGetters([
-      'defaults'
-    ]),
     myDefaults () {
-      return this.defaults.verticals.wxccChatTemplate
-    }
-  },
-
-  methods: {
-    updateCache () {
-      // copy value to model
-      const copy = JSON.parse(JSON.stringify(this.value))
-      this.model = copy.wxccChatTemplate || {}
-    },
-    submit () {
-      // save the whole vertical
-      this.$emit('save')
+      return this.defaults.wxccChatTemplate
     }
   },
 
   watch: {
-    value (val, oldVal) {
-      // update cache if parent value actually changed
-      if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
-        this.updateCache()
-      }
+    value () {
+      this.updateCache()
+    }
+  },
+
+  mounted () {
+    this.updateCache()
+  },
+
+  methods: {
+    updateCache () {
+      // copy value to cache
+      this.model = JSON.parse(JSON.stringify(this.value.wxccChatTemplate || this.myDefaults))
     },
-    model () {
-      // model changed
-      // copy the original parent value
-      const valueCopy = JSON.parse(JSON.stringify(this.value))
-      // update the wxccChatTemplate part of the parent
-      const modelCopy = JSON.parse(JSON.stringify(this.model))
-      valueCopy.wxccChatTemplate = modelCopy
+    updateParent (value) {
+      // set model value from child component
+      // this.model = value
       // emit the changes to parent
-      this.$emit('input', valueCopy)
+      this.$emit('input', {
+        ...this.value,
+        wxccChatTemplate: value
+      })
     }
   }
 }

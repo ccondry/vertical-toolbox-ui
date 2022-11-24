@@ -18,7 +18,7 @@
         </b-field>
 
         <!-- AI/chat bot config -->
-        <ai-config
+        <!-- <ai-config
         :value="vertical"
         :working="working"
         :loading="loading"
@@ -26,15 +26,15 @@
         :user="user"
         @input="updateState"
         @upload="upload"
-        />
-
+        /> -->
+        
         <br />
         
         <!-- Webex CC Chat config -->
         <wxcc-chat-config
-        v-model="model"
-        @save="clickSave"
-        :disable-save="disableSave"
+        :value="vertical"
+        :defaults="defaults.verticals"
+        @input="updateState"
         />
 
         <!-- Save button -->

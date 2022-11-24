@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="model">
     <!-- Hidden File Uploader -->
     <input type="file" style="display:none" ref="file" accept="application/json/;text/json" v-uploader />
 
@@ -13,10 +13,9 @@
       </div>
 
       <div class="card-content">
-
         <!-- /TTS engine -->
         <b-field label="Conversational IVR TTS Engine">
-          <b-select v-model="model.ttsEngine">
+          <b-select v-model="model.ttsEngine" @input="updateParent">
             <option value="nuance">Nuance</option>
             <option value="google">Google</option>
           </b-select>
@@ -25,23 +24,39 @@
 
         <!-- /TTS voice -->
         <b-field label="Conversational IVR TTS Voice">
-          <b-select v-model="model.ttsVoice">
-            <option v-for="voice of voices" :value="voice.value">{{ voice.name }}</option>
+          <b-select v-model="model.ttsVoice" @input="updateParent">
+            <option
+            v-for="voice of voices"
+            :value="voice.value"
+            >
+              {{ voice.name }}
+            </option>
           </b-select>
         </b-field>
         <!-- /TTS voice -->
 
         <!-- Language -->
         <b-field label="Language">
-          <b-select v-model="model.languageCode" @change.native="changeLanguageCode($event)">
-            <option v-for="language of languages" :value="language.value">{{ language.name }}</option>
+          <b-select
+          v-model="model.languageCode"
+          @input="changeLanguageCode"
+          >
+            <option
+            v-for="language of languages"
+            :value="language.value"
+            >
+              {{ language.name }}
+            </option>
           </b-select>
         </b-field>
         <!-- /Language -->
 
         <!-- Chat Bot Enabled -->
         <b-field label="Chat Bot">
-          <b-select v-model="model.chatBotEnabled" @change.native="changeChatBotEnabled($event)">
+          <b-select
+          v-model="model.chatBotEnabled"
+          @input="changeChatBotEnabled"
+          >
             <option :value="true">Enabled</option>
             <option :value="false">Disabled</option>
           </b-select>
@@ -50,8 +65,16 @@
 
         <!-- UCCX Bubble Chat and PCCE ECE Docked Chat -->
         <b-field label="Enable Docked Chat (Disable Chat Bot if you want to use Docked Chat)">
-          <b-tooltip label="Disable Chat Bot if you want to use Docked Chat" position="is-right" :active="model.chatBotEnabled">
-            <b-select v-model="model.uccxBubbleChat" :disabled="model.chatBotEnabled">
+          <b-tooltip
+          label="Disable Chat Bot if you want to use Docked Chat"
+          position="is-right"
+          :active="model.chatBotEnabled"
+          >
+            <b-select
+            v-model="model.uccxBubbleChat"
+            :disabled="model.chatBotEnabled"
+            @input="updateParent"
+            >
               <option :value="true">Enabled</option>
               <option :value="false">Disabled</option>
             </b-select>
@@ -75,6 +98,7 @@
           v-model="gcpProjectIdModel"
           :data="[defaults.gcpProjectId]"
           :placeholder="defaults.gcpProjectId"
+          @input="updateParent"
           />
         </b-field>
         <p>
@@ -84,9 +108,11 @@
         </p>
         <b-field grouped>
           <b-field label="Upload Credentials JSON">
-            <button class="button is-primary"
+            <button
+            class="button is-primary"
             :disabled="working.images.credentials"
-            @click="launchFilePicker('credentials')">
+            @click="launchFilePicker('credentials')"
+            >
               {{ working.images.credentials ? 'Working...' : 'Browse...' }}
             </button>
           </b-field>
@@ -101,8 +127,16 @@
 
         <!-- Post Chat Survey -->
         <b-field label="Post-Chat-Bot Survey">
-          <b-tooltip label="Enable Chat Bot if you want to have a Post-Chat Survey" position="is-right" :active="!model.chatBotEnabled">
-            <b-select v-model="model.chatBotSurveyEnabled" :disabled="!model.chatBotEnabled">
+          <b-tooltip
+          label="Enable Chat Bot if you want to have a Post-Chat Survey"
+          position="is-right"
+          :active="!model.chatBotEnabled"
+          >
+            <b-select
+            v-model="model.chatBotSurveyEnabled"
+            :disabled="!model.chatBotEnabled"
+            @input="updateParent"
+            >
               <option :value="true">Enabled</option>
               <option :value="false">Disabled</option>
             </b-select>
@@ -150,6 +184,8 @@ const allLanguages = [
 ]
 
 export default {
+  name: 'Chat-AI-Config',
+
   directives: {
     uploader: {
       bind (el, binding, vnode) {
@@ -167,39 +203,35 @@ export default {
       }
     }
   },
+
   props: {
-    'model': {
+    value: {
       type: Object,
-      default () {
-        return {
-        }
-      }
+      required: true
     },
-    'working': {
+    working: {
       type: Object
     },
-    'loading': {
+    loading: {
       type: Object
     },
-    'user': {
+    user: {
       type: Object
     },
-    'defaults': {
+    defaults: {
       type: Object,
       default () { return {} }
     },
-    'verticalId': {
+    verticalId: {
       type: String
     }
-  },
-
-  mounted () {
   },
 
   data () {
     return {
       allLanguages,
-      allVoices
+      allVoices,
+      model: null
     }
   },
 
@@ -211,6 +243,7 @@ export default {
       set (value) {
         // trim whitespace from the project ID
         this.model.gcpProjectId = String(value).trim()
+        this.updateParent()
       }
     },
     intentsZipUrl () {
@@ -231,6 +264,16 @@ export default {
         const nuanceVoices = ['female']
         return this.allVoices.filter(v => nuanceVoices.includes(v.value))
       }
+    }
+  },
+
+  mounted () {
+    this.updateCache()
+  },
+
+  watch: {
+    value () {
+      this.updateCache()
     }
   },
 
@@ -263,34 +306,46 @@ export default {
         }
         // actually upload the file now. set brand ID in the 'vertical' property
         // to use the brand ID for the path
-        this.$emit('upload', {name, node: nodeName, vertical: this.verticalId, data, callback})
+        this.$emit('upload', {
+          name,
+          node: nodeName,
+          vertical: this.verticalId,
+          data,
+          callback
+        })
         // reset the file input
         this.$refs.file.value = ''
       }
       // read the file data
       reader.readAsDataURL(file)
     },
-    changeChatBotEnabled (event) {
-      console.log('changeChatBotEnabled', event)
-      if (event.target.value === 'true') {
+    changeChatBotEnabled (value) {
+      console.log('changeChatBotEnabled', value)
+      if (value === 'true') {
         // disable bubble chat if enabling chat bot
         this.model.uccxBubbleChat = false
       }
+      this.updateParent()
     },
-    changeLanguageCode (event) {
-      console.log('changeLanguageCode', event)
+    changeLanguageCode (value) {
+      console.log('changeLanguageCode', value)
       // legacy - when changing the languageCode, also set language and region
       // code separately into the model
       try {
-        this.model.language = event.target.value.split('-').shift()
-        this.model.region = event.target.value.split('-').pop()
+        this.model.language = value.split('-').shift()
+        this.model.region = value.split('-').pop()
       } catch (e) {
         console.log('failed during changeLanguageCode:', e)
       }
+      this.updateParent()
     },
-    submit () {
-      console.log('AI config form submitted')
-      this.$emit('save')
+    updateCache () {
+      // copy value prop to model cache
+      this.model = JSON.parse(JSON.stringify(this.value))
+    },
+    updateParent () {
+      // update the parent that we have changed the model
+      this.$emit('input', this.model)
     }
   }
 }

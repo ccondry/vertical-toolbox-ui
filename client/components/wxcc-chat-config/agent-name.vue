@@ -26,7 +26,7 @@
       <b-field label="Anonymous Agent Display Name">
         <b-input
         v-model="model.displayText"
-        :placeholder="myDefaults.displayText"
+        :placeholder="defaults.displayText"
         :disabled="model.useAgentRealName"
         @input="updateParent"
         />
@@ -44,10 +44,9 @@
 </template>
 
 <script>
-const title = 'Agent Name'
-const modelKey = 'mediaSpecificConfiguration'
-
 export default {
+  name: 'Webex-CC-chat-agent-name',
+
   props: {
     value: {
       type: Object,
@@ -60,28 +59,28 @@ export default {
   },
 
   data () {
-    // copy value to model
-    const copy = JSON.parse(JSON.stringify(this.value))
-    let model
-    try {
-      model = copy[modelKey]
-    } catch (e) {
-      // continue
-    }
-
     return {
-      model,
-      title,
-      modelKey
+      model: null,
+      title: 'Agent Name',
     }
   },
 
   computed: {
     myDefaults () {
-      return this.defaults[this.modelKey]
+      return this.defaults.mediaSpecificConfiguration
     },
     isConfigured () {
-      return typeof this.model === 'object'
+      return this.model ? true : false
+    }
+  },
+
+  mounted () {
+    this.updateCache()
+  },
+
+  watch: {
+    value () {
+      this.updateCache()
     }
   },
 
@@ -100,43 +99,26 @@ export default {
       })
     },
     configure () {
-      const copy = JSON.parse(JSON.stringify(this.myDefaults))
-      this.model = copy
+      // copy default values to model
+      this.model = JSON.parse(JSON.stringify(this.myDefaults))
+      // update parent/state
       this.updateParent()
     },
     updateCache () {
-      // copy parent value to local model
-      try {
-        const copy = JSON.parse(JSON.stringify(this.value))
-        this.model = copy[this.modelKey]
-      } catch (e) {
-        // continue
+      if (typeof this.value.mediaSpecificConfiguration === 'object') {
+        // copy parent value to local cache
+        this.model = JSON.parse(JSON.stringify(this.value.mediaSpecificConfiguration))
+      } else {
+        // set null/undefined?
+        this.model = this.value.mediaSpecificConfiguration
       }
     },
     updateParent () {
-      // copy the original parent value
-      const valueCopy = JSON.parse(JSON.stringify(this.value))
-      // if our model is configured
-      if (typeof this.model === 'object') {
-        // copy the model
-        const modelCopy = JSON.parse(JSON.stringify(this.model))
-        // update the proactivePrompt part of the wxccChatTemplate using our model
-        valueCopy[this.modelKey] = modelCopy
-      } else {
-        // else model is not configured, so remove this part of the parent config
-        delete valueCopy[this.modelKey]
-      }
-      // emit the changes to parent
-      this.$emit('input', valueCopy)
-    }
-  },
-
-  watch: {
-    value (val, oldVal) {
-      // update cache if parent value actually changed
-      if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
-        this.updateCache()
-      }
+      // emit changes to parent
+      this.$emit('input', {
+        ...this.value,
+        mediaSpecificConfiguration: this.model
+      })
     }
   }
 }
