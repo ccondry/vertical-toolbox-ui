@@ -18,7 +18,7 @@
         </b-field>
 
         <!-- AI/chat bot config -->
-        <!-- <ai-config
+        <ai-config
         :value="vertical"
         :working="working"
         :loading="loading"
@@ -26,7 +26,7 @@
         :user="user"
         @input="updateState"
         @upload="upload"
-        /> -->
+        />
         
         <br />
         
