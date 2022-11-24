@@ -66,7 +66,6 @@
     "rollup-plugin-visualizer": "5.8.3",
     "rollup-plugin-vue": "^5.1.9",
     "size-limit": "8.1.0",
-    "unplugin-vue2-script-setup": "^0.7.3",
     "vue-loader": "17.0.1",
     "vue-template-compiler": "^2.7.14"
   },
