@@ -82,7 +82,7 @@
   },
   "size-limit": [
     {
-      "path": "public/assets/app.js"
+      "path": "dist/app.js"
     }
   ]
 }

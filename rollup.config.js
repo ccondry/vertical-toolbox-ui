@@ -20,7 +20,7 @@ const port = 3000
 export default {
   input: 'client/main.js',
   output: {
-    dir: 'public/assets',
+    dir: 'dist',
     entryFileNames: 'app.js',
     format: 'iife',
     sourcemap: !production ? 'inline' : false,
