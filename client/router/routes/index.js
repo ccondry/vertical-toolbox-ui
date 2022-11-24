@@ -32,7 +32,7 @@ const routes = [{
   path: '/branding/ai',
   component: ai
 }, {
-  name: 'Connect',
+  name: 'Webex Connect',
   path: '/branding/connect',
   component: connect
 }, {
