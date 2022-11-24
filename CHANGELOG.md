@@ -3,6 +3,17 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2022.11.24
+
+### Features
+* **Site:** Update build tools and libraries.
+
+### Fixes
+* **Select Vertical:** Fix the search input for another user's verticals.
+* **Upload Images:** Fix the image uploader giving bad URLs after uploading
+the images.
+
+
 # 2022.5.26
 
 ### Fixes
