@@ -3,10 +3,16 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2022.11.24-2
+
+### Fixes
+* **Menu:** Fix menu not loading for normal users.
+
+
 # 2022.11.24-1
 
 ### Fixes
-* **Build:** Fix build scripts
+* **Build:** Fix build scripts.
 
 
 # 2022.11.24
