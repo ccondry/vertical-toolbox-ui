@@ -98,7 +98,13 @@ export default {
       return this.defaults[this.modelKey]
     },
     isConfigured () {
-      return typeof this.model === 'object'
+      return this.model ? true : false
+    }
+  },
+
+  watch: {
+    value () {
+      this.updateCache()
     }
   },
 
@@ -117,8 +123,7 @@ export default {
       })
     },
     configure () {
-      const copy = JSON.parse(JSON.stringify(this.myDefaults))
-      this.model = copy
+      this.model = JSON.parse(JSON.stringify(this.myDefaults))
       this.updateParent()
     },
     updateCache () {
@@ -131,29 +136,11 @@ export default {
       }
     },
     updateParent () {
-      // copy the original parent value
-      const valueCopy = JSON.parse(JSON.stringify(this.value))
-      // if our model is configured
-      if (typeof this.model === 'object') {
-        // copy the model
-        const modelCopy = JSON.parse(JSON.stringify(this.model))
-        // update the proactivePrompt part of the wxccChatTemplate using our model
-        valueCopy[this.modelKey] = modelCopy
-      } else {
-        // else model is not configured, so remove this part of the parent config
-        delete valueCopy[this.modelKey]
-      }
-      // emit the changes to parent
-      this.$emit('input', valueCopy)
-    }
-  },
-
-  watch: {
-    value (val, oldVal) {
-      // update cache if parent value actually changed
-      if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
-        this.updateCache()
-      }
+      // emit changes to parent
+      this.$emit('input', {
+        ...this.value,
+        [modelKey]: this.model
+      })
     }
   }
 }

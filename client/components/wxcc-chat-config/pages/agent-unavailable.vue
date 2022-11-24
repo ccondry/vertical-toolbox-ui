@@ -104,20 +104,11 @@ export default {
       }
     },
     updateParent () {
-      // copy the original parent value
-      const valueCopy = JSON.parse(JSON.stringify(this.value))
-      // if our model is configured
-      if (typeof this.model === 'object') {
-        // copy the model
-        const modelCopy = JSON.parse(JSON.stringify(this.model))
-        // update the proactivePrompt part of the wxccChatTemplate using our model
-        valueCopy[this.modelKey] = modelCopy
-      } else {
-        // else model is not configured, so remove this part of the parent config
-        delete valueCopy[this.modelKey]
-      }
-      // emit the changes to parent
-      this.$emit('input', valueCopy)
+      // emit changes to parent
+      this.$emit('input', {
+        ...this.value,
+        [modelKey]: this.model
+      })
     }
   },
 

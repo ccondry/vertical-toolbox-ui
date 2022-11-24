@@ -6,24 +6,28 @@
       <off-hours
       v-model="model"
       :defaults="myDefaults"
+      @update="updateParent"
       />
       
       <!-- Feedback -->
       <feedback
       v-model="model"
       :defaults="myDefaults"
+      @update="updateParent"
       />
       
       <!-- Agent Unavailable -->
       <agent-unavailable
       v-model="model"
       :defaults="myDefaults"
+      @update="updateParent"
       />
       
       <!-- Customer Information -->
       <customer-information
       v-model="model"
       :defaults="myDefaults"
+      @update="updateParent"
       />
     </div>
   </collapse-card>
@@ -34,6 +38,8 @@ import AgentUnavailable from './agent-unavailable.vue'
 import CustomerInformation from './customer-information.vue'
 import Feedback from './feedback.vue'
 import OffHours from './off-hours.vue'
+
+const modelKey = 'pages'
 
 export default {
   components: {
@@ -57,7 +63,7 @@ export default {
   data () {
     // copy value to model
     const copy = JSON.parse(JSON.stringify(this.value))
-    const model = copy.pages || {}
+    const model = copy[modelKey] || {}
     return {
       model
     }
@@ -65,19 +71,7 @@ export default {
 
   computed: {
     myDefaults () {
-      return this.defaults.pages
-    }
-  },
-
-  methods: {
-    updateCache () {
-      // copy value to model
-      const copy = JSON.parse(JSON.stringify(this.value))
-      this.model = copy.pages || {}
-    },
-    submit () {
-      // save the whole vertical
-      this.$emit('save')
+      return this.defaults[modelKey]
     }
   },
 
@@ -87,17 +81,21 @@ export default {
       if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
         this.updateCache()
       }
+    }
+  },
+
+  methods: {
+    updateCache () {
+      // copy value to model
+      const copy = JSON.parse(JSON.stringify(this.value))
+      this.model = copy[modelKey] || {}
     },
-    model () {
-      // model changed
-      console.log('wxcc chat config/pages changed')
-      // copy the original parent value
-      const valueCopy = JSON.parse(JSON.stringify(this.value))
-      // update the pages part of the parent
-      const modelCopy = JSON.parse(JSON.stringify(this.model))
-      valueCopy.pages = modelCopy
+    updateParent () {
       // emit the changes to parent
-      this.$emit('input', valueCopy)
+      this.$emit('input', {
+        ...this.value,
+        [modelKey]: this.model
+      })
     }
   }
 }

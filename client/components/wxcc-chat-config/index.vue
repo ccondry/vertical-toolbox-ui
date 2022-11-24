@@ -3,36 +3,34 @@
   <collapse-card title="Webex CC Chat Template Customization" v-if="model">
     <div class="card-content">
       <agent-name
-      :value="model"
+      v-model="model"
       :defaults="myDefaults"
       @input="updateParent"
       />
 
       <virtual-assistant
-      :value="model"
+      v-model="model"
       :defaults="myDefaults"
       @input="updateParent"
       />
       
-      <!-- 
       <proactive-prompt
-      :value="model"
+      v-model="model"
       :defaults="myDefaults"
       @input="updateParent"
       />
 
       <chat-status-messages
-      :value="model"
+      v-model="model"
       :defaults="myDefaults"
       @input="updateParent"
       />
 
       <pages
-      :value="model"
+      v-model="model"
       :defaults="myDefaults"
       @input="updateParent"
       />
-    -->
     </div>
   </collapse-card>
 </template>
@@ -43,6 +41,7 @@ import ChatStatusMessages from './chat-status-messages.vue'
 import Pages from './pages/index.vue'
 import ProactivePrompt from './proactive-prompt.vue'
 import VirtualAssistant from './virtual-assistant.vue'
+const modelKey = 'wxccChatTemplate'
 
 export default {
   name: 'Webex-CC-Chat-Config',
@@ -76,7 +75,7 @@ export default {
 
   computed: {
     myDefaults () {
-      return this.defaults.wxccChatTemplate
+      return this.defaults[modelKey]
     }
   },
 
@@ -93,15 +92,15 @@ export default {
   methods: {
     updateCache () {
       // copy value to cache
-      this.model = JSON.parse(JSON.stringify(this.value.wxccChatTemplate || this.myDefaults))
+      this.model = JSON.parse(JSON.stringify(this.value[modelKey] || this.myDefaults))
     },
-    updateParent (value) {
+    updateParent () {
       // set model value from child component
       // this.model = value
       // emit the changes to parent
       this.$emit('input', {
         ...this.value,
-        wxccChatTemplate: value
+        [modelKey]: this.model
       })
     }
   }

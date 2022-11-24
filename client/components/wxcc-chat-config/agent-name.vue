@@ -85,10 +85,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.updateCache()
-  },
-
   watch: {
     value () {
       this.updateCache()
