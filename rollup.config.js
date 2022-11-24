@@ -64,11 +64,11 @@ export default {
     !production &&
       serve({
         open: true,
-        contentBase: 'public',
+        contentBase: 'dist',
         historyApiFallback: true,
         port,
       }),
-    !production && livereload({ watch: 'public' }),
+    !production && livereload({ watch: 'dist' }),
     production && filesize(),
   ],
   watch: {
