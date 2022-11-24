@@ -9,131 +9,80 @@
         </a>
       </div>
 
-      <!-- Check if any Global field is empty -->
+      <!-- Check if any the base object field is missing -->
       <div
-      v-if="!model.webexconnect || !model.webexconnect.global"
+      v-if="!model.webexconnect"
       class="card-content"
       >
-      <!-- <div class="card-content" v-if="!model.webexconnect.global.brandName || !model.webexconnect.global.brandLogo || !model.webexconnect.global.mobileHomeWallpaper"> -->
         <button
         class="button is-primary"
-        @click="configureWebexConnect"
+        @click="clickConfigureWebexConnect"
         >
           Configure
         </button>
       </div>
+
+      <!-- else base object exists -->
       <div class="card-content" v-else>
+        <global
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
 
-        <!-- Global Branding -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Global Branding</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
+        <appointments
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
 
-          <div class="card-content">
-            <!-- Brand Name -->
-            <b-field label="Brand Name">
-              <b-input
-              v-model="model.webexconnect.global.brandName"
-              :placeholder="defaults.webexconnect.global.brandName"
-              @input="updateParent"
-              />
-            </b-field>
-            <!-- Brand Logo -->
-            <!-- Image URL manual edit, for admins only -->
-            <b-field label="Logo URL" v-if="user.admin">
-              <b-input
-              v-model.lazy="model.webexconnect.global.brandLogo"
-              :placeholder="defaults.webexconnect.global.brandLogo"
-              @input="updateParent"
-              />
-            </b-field>
-            <!-- Image image editor for users -->
-            <b-field grouped>
-              <b-loading
-              :is-full-page="false"
-              :active="working.images.logoFile"
-              :can-cancel="false"
-              />
-              <b-field label="Brand Logo Image">
-                <img
-                :src="model.webexconnect.global.brandLogo"
-                style="max-width: 256px; max-height: 64px;"
-                />
-              </b-field>
-              <b-tooltip
-              :label="getTooltip('mobileLogoUpload')"
-              multilined
-              position="is-top"
-              >
-                <b-icon type="is-primary" icon="information" />
-              </b-tooltip>
-              <b-field label="Upload">
-                <button
-                class="button is-primary"
-                type="button"
-                @click="launchFilePicker('logoFile')"
-                >
-                  Browse...
-                </button>
-              </b-field>
-            </b-field>
-            <!-- Mobile App Home Wallpaper -->
-            <!-- Image URL manual edit, for admins only -->
-            <b-field label="Mobile App Home Wallpaper URL" v-if="user.admin">
-              <b-input
-              v-model="model.webexconnect.global.mobileHomeWallpaper"
-              :placeholder="defaults.webexconnect.global.mobileHomeWallpaper"
-              @input="updateParent"
-              />
-            </b-field>
-            <!-- Image image editor for users -->
-            <b-field grouped>
-              <b-loading
-              :is-full-page="false"
-              :active="working.images.mobileHomeWallpaper"
-              :can-cancel="false"
-              />
-              <b-field label="Wallpaper">
-                <img
-                :src="model.webexconnect.global.mobileHomeWallpaper"
-                style="max-height: 256px;"
-                />
-              </b-field>
-              <b-tooltip
-              :label="getTooltip('mobileWallpaperUpload')"
-              multilined
-              position="is-top"
-              >
-                <b-icon type="is-primary" icon="information" />
-              </b-tooltip>
-              <b-field label="Upload">
-                <button
-                class="button is-primary"
-                type="button"
-                @click="launchFilePicker('mobileHomeWallpaper')"
-                >
-                  Browse...
-                </button>
-              </b-field>
-            </b-field>
-          </div>
-        </b-collapse>
-        <!-- /Global Branding -->
+        <collections
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
 
+        <call-deflection
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
+
+        <automotive
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
+
+        <product-activation-ts
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
+
+        <product-activation-so
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
+
+        <retail
+        v-model="model.webexconnect"
+        :defaults="myDefaults"
+        @input="updateParent"
+        />
+
+      </div>
+
+      <div class="card-content">
         <b-field>
           <save-button />
         </b-field>
-        
       </div>
-      <!-- /Check if any Global field is empty -->
-
     </b-collapse>
     <!-- /Webex Connect -->
 
+    <!-- hidden file input uploader -->
     <input
     type="file"
     style="display:none"
@@ -142,6 +91,7 @@
     v-uploader
     />
 
+    <!-- modal to select an icon -->
     <select-icon-modal
     v-if="showIconModal"
     :visible="showIconModal"
@@ -155,6 +105,14 @@
 </template>
 
 <script>
+import Appointments from 'client/components/connect-config/appointments.vue'
+import Automotive from 'client/components/connect-config/automotive.vue'
+import CallDeflection from 'client/components/connect-config/call-deflection.vue'
+import Collections from 'client/components/connect-config/collections.vue'
+import Global from 'client/components/connect-config/global.vue'
+import ProductActivationSo from 'client/components/connect-config/product-activation-so.vue'
+import ProductActivationTs from 'client/components/connect-config/product-activation-ts.vue'
+import Retail from 'client/components/connect-config/retail.vue'
 import SelectIconModal from 'client/components/modals/select-icon.vue'
 
 const tooltips = {
@@ -175,6 +133,14 @@ export default {
   name: 'WebexConnectConfig',
 
   components: {
+    Appointments,
+    Automotive,
+    CallDeflection,
+    Collections,
+    Global,
+    ProductActivationSo,
+    ProductActivationTs,
+    Retail,
     SelectIconModal
   },
 
@@ -231,6 +197,12 @@ export default {
     }
   },
 
+  computed: {
+    myDefaults () {
+      return this.defaults.webexconnect
+    }
+  },
+
   mounted () {
     this.updateCache()
     // when this.model.favicon changes, extract the domain of the google favicon
@@ -255,8 +227,12 @@ export default {
   },
 
   methods: {
-    configureWebexConnect () {
-      this.$set(this.model, 'webexconnect', this.defaults.webexconnect)
+    clickConfigureWebexConnect () {
+      this.$set(this.model, 'webexconnect', this.myDefaults)
+      this.updateParent()
+    },
+    clickConfigureAppointments () {
+      this.$set(this.model.webexconnect, 'appointments', this.myDefaults.appointments)
       this.updateParent()
     },
     launchFilePicker (ref, index) {
@@ -281,7 +257,7 @@ export default {
           // map out the node names to model data references
           const map = {
             // mobile app logo
-            'logoFile': (url) => {
+            'brandLogo': (url) => {
               // reset img
               this.model.webexconnect.global.brandLogo = ''
               // set img url
@@ -293,11 +269,11 @@ export default {
               // set img url
               this.model.webexconnect.global.mobileHomeWallpaper = url + '?nocache=' + Date.now()
             },
-            'mobileFraudWallpaper': (url) => {
+            'mobilePromoWallpaper': (url) => {
               // reset img
-              this.model.webexconnect.global.mobileFraudWallpaper = ''
+              this.model.webexconnect.global.mobilePromoWallpaper = ''
               // set img url
-              this.model.webexconnect.global.mobileFraudWallpaper = url + '?nocache=' + Date.now()
+              this.model.webexconnect.global.mobilePromoWallpaper = url + '?nocache=' + Date.now()
             }
           }
           // update our model with the new file URL
@@ -327,20 +303,6 @@ export default {
       }
       // read the file data
       reader.readAsDataURL(file)
-    },
-    getTooltip (type) {
-      try {
-        return this.tooltips[type]
-      } catch (e) {
-        return ''
-      }
-    },
-    getTtsTooltip (type) {
-      try {
-        return this.ttsTypes.find(v => v.value === type).tooltip
-      } catch (e) {
-        return ''
-      }
     },
     updateCache () {
       // copy value prop to model cache
