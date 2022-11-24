@@ -89,6 +89,7 @@
       >
         Add JDS Data
       </b-button>
+      <save-button />
     </div>
   </div>
 </template>
