@@ -1,11 +1,73 @@
-import * as types from '../../mutation-types'
-import main from './main.js'
-import admin from './admin.js'
-
 const state = {
   items: [
-    ...main,
-    ...admin
+    {
+      name: 'Home',
+      path: '/branding/home',
+      meta: {
+        icon: 'home',
+        description: 'Home'
+      }
+    },
+    {
+      name: 'IVR Prompts',
+      path: '/branding/ivr',
+      meta: {
+        icon: 'phone',
+        label: 'IVR',
+        description: 'IVR customization'
+      }
+    },
+    {
+      name: 'Branded Website',
+      path: '/branding/brand',
+      meta: {
+        icon: 'copyright',
+        description: 'Branded website customization'
+      }
+    },
+    {
+      name: 'Mobile App',
+      path: '/branding/mobile',
+      meta: {
+        icon: 'cellphone',
+        description: 'Mobile app customization'
+      }
+    },
+    {
+      name: 'AI',
+      path: '/branding/ai',
+      meta: {
+        icon: 'robot',
+        label: 'Chat/AI/Bot',
+        description: 'Chat and AI/Bot customization'
+      }
+    },
+    {
+      name: 'Webex Connect',
+      path: '/branding/connect',
+      meta: {
+        icon: 'cellphone',
+        description: 'Webex Connect customization',
+        groups: ['admin', 'QA']
+      }
+    },
+    {
+      name: 'Usage',
+      path: '/branding/admin/usage',
+      meta: {
+        icon: 'finance',
+        groups: ['admin']
+      }
+    },
+    {
+      name: 'Cumulus Website',
+      path: '/branding/admin/cumulus',
+      meta: {
+        icon: 'cloud',
+        description: 'Cumulus website customization',
+        groups: ['admin']
+      }
+    }
   ]
 }
 
@@ -13,20 +75,7 @@ const getters = {
   menu: state => state.items
 }
 
-const mutations = {
-  [types.EXPAND_MENU] (state, menuItem) {
-    if (menuItem.index > -1) {
-      if (state.items[menuItem.index] && state.items[menuItem.index].meta) {
-        state.items[menuItem.index].meta.expanded = menuItem.expanded
-      }
-    } else if (menuItem.item && 'expanded' in menuItem.item.meta) {
-      menuItem.item.meta.expanded = menuItem.expanded
-    }
-  }
-}
-
 export default {
   getters,
-  state,
-  mutations
+  state
 }

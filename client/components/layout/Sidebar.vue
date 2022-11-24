@@ -57,7 +57,16 @@ export default {
     ]),
     menuItems () {
       // filter out admin menu items from user view
-      return this.menu.filter(v => !v.meta.admin || this.user.admin)
+      return this.menu.filter(v => {
+        if (Array.isArray(v.meta.groups)) {
+          if (this.user.admin) {
+            return true
+          }
+          return v.meta.groups.some(x => this.user.groups.includes(x))
+        } else { 
+          return true
+        }
+      })
     }
   },
 
