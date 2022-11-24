@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2022.11.24-1
+
+### Fixes
+* **Build:** Fix build scripts
+
+
 # 2022.11.24
 
 ### Features
