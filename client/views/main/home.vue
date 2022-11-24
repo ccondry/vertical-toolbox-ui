@@ -26,28 +26,28 @@
           </div>
           <div class="buttons">
             <save-button />
-            <button
-            type="button"
-            class="button is-success"
+            <b-button
+            type="is-success"
+            rounded
             @click.prevent="clickSaveAs"
             >
               Save As
-            </button>
-            <button
-            type="button"
-            class="button is-primary"
+            </b-button>
+            <b-button
+            type="is-primary"
+            rounded
             @click.prevent="setSelectedVerticalId(null)"
             >
               Load
-            </button>
-            <button
-            type="button"
-            class="button is-danger"
-            @click.prevent="clickDelete"
+            </b-button>
+            <b-button
+            type="is-danger"
+            rounded
+            @click="clickDelete"
             :disabled="disableDelete"
             >
               Delete
-            </button>
+            </b-button>
             <!-- <button type="button" class="button is-info" @click.prevent="refresh">Reload</button> -->
           </div>
 
