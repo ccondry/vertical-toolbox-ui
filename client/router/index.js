@@ -29,11 +29,16 @@ router.beforeEach(async (to, from, next) => {
   }
   // if the route has a required group and the user is not in that group
   if (
-    to.meta.groups && 
+    to.meta &&
+    Array.isArray(to.meta.groups) && 
     !to.meta.groups.some(v => {
-      return store.getters.user &&
-        store.getters.user.groups &&
-        store.getters.user.groups.includes(v)
+      try {
+        return store.getters.user &&
+          Array.isArray(store.getters.user.groups) &&
+          store.getters.user.groups.includes(v)
+      } catch (e) {
+        return false
+      }
     })
   ) {
     // console.log('user groups', store.getters.user.groups, 'does not include', to.meta.groups, '- redirecting home')
