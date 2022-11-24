@@ -63,8 +63,7 @@
 
             <!-- Save Button -->
             <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
+              <save-button />
             </b-field>
           </div>
         </b-collapse>
@@ -138,16 +137,14 @@
 
                 <!-- Save Button -->
                 <b-field>
-                  <button type="button" class="button is-success"
-                  @click.prevent="submit" :disabled="disableSave">Save</button>
+                  <save-button />
                 </b-field>
               </div>
             </b-collapse>
 
             <!-- Save Button -->
             <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
+              <save-button />
             </b-field>
 
             <!-- <button v-if="user.admin || model.sliders.length < 3" class="button is-success" @click="model.sliders.push(JSON.parse(JSON.stringify(defaults.sliders[0])))">Add Option</button> -->
@@ -206,16 +203,14 @@
 
               <!-- Save Button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
           </b-collapse>
 
           <!-- Save Button -->
           <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
+            <save-button />
           </b-field>
 
           <!-- <button v-if="user.admin || model.blogItems.length < 3" class="button is-success" @click="model.blogItems.push(JSON.parse(JSON.stringify(defaults.blogItems[0])))">Add Option</button> -->
@@ -329,8 +324,7 @@
 
           <!-- Save Button -->
           <b-field>
-            <button type="button" class="button is-success"
-            @click.prevent="submit" :disabled="disableSave">Save</button>
+            <save-button />
           </b-field>
 
         </div>
@@ -404,16 +398,14 @@
 
             <!-- Save Button -->
             <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
+              <save-button />
             </b-field>
           </div>
         </b-collapse>
 
         <!-- Save Button -->
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <save-button />
         </b-field>
 
         <!-- <button v-if="user.admin" class="button is-success" @click="model.services.push(JSON.parse(JSON.stringify(defaults.services[0])))">Add Option</button> -->
@@ -471,8 +463,7 @@
             </b-field>
             <!-- Save Button -->
             <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
+              <save-button />
             </b-field>
 
           </div>
@@ -480,8 +471,7 @@
 
         <!-- Save Button -->
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <save-button />
         </b-field>
 
         <!-- <button v-if="user.admin" class="button is-success" @click="model.authors.push(JSON.parse(JSON.stringify(defaults.authors[0])))">Add Option</button> -->
@@ -540,8 +530,7 @@
 
             <!-- Save Button -->
             <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
+              <save-button />
             </b-field>
 
           </div>
@@ -549,8 +538,7 @@
 
         <!-- Save Button -->
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <save-button />
         </b-field>
         <!-- <button v-if="user.admin" class="button is-success" @click="model.timelinePosts.push(JSON.parse(JSON.stringify(defaults.timelinePosts[0])))">Add Option</button> -->
       </div>
@@ -592,8 +580,7 @@
 
         <!-- Save Button -->
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <save-button />
         </b-field>
 
         <!-- <button v-if="user.admin" class="button is-success" @click="model.testimonials.push(JSON.parse(JSON.stringify(defaults.testimonials[0])))">Add Option</button> -->
@@ -603,8 +590,7 @@
 
     <!-- Save Button -->
     <b-field>
-      <button type="button" class="button is-success"
-      @click.prevent="submit" :disabled="disableSave">Save</button>
+      <save-button />
     </b-field>
 
   </div>
@@ -727,10 +713,6 @@ export default {
     'defaults': {
       type: Object,
       default () { return {} }
-    },
-    disableSave: {
-      type: Boolean,
-      default: false
     }
   },
 

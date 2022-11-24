@@ -25,14 +25,7 @@
             </p>
           </div>
           <div class="buttons">
-            <button
-            type="button"
-            class="button is-success"
-            @click.prevent="clickSave"
-            :disabled="disableSave"
-            >
-              Save
-            </button>
+            <save-button />
             <button
             type="button"
             class="button is-success"

@@ -85,14 +85,7 @@
         <!-- /Main and SecondMenu -->
 
         <b-field>
-          <button
-          type="button"
-          class="button is-success"
-          @click.prevent="submit" 
-          :disabled="disableSave"
-          >
-            Save
-          </button>
+          <save-button />
         </b-field>
 
       </div>
@@ -145,14 +138,7 @@
         </b-field>
 
         <b-field>
-          <button
-          type="button"
-          class="button is-success"
-          @click.prevent="submit"
-          :disabled="disableSave"
-          >
-            Save
-          </button>
+          <save-button />
         </b-field>
 
       </div>
@@ -182,14 +168,7 @@
         </b-field>
 
         <b-field>
-          <button
-          type="button"
-          class="button is-success"
-          @click.prevent="submit"
-          :disabled="disableSave"
-          >
-            Save
-          </button>
+          <save-button />
         </b-field>
 
       </div>
@@ -231,8 +210,7 @@
         </div>
 
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <save-button />
         </b-field>
 
       </div>
@@ -381,10 +359,6 @@ export default {
     defaults: {
       type: Object,
       default () { return {} }
-    },
-    disableSave: {
-      type: Boolean,
-      default: false
     }
   },
 
