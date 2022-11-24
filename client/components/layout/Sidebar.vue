@@ -62,7 +62,13 @@ export default {
           if (this.user.admin) {
             return true
           }
-          return v.meta.groups.some(x => this.user.groups.includes(x))
+          return v.meta.groups.some(x => {
+            try {
+              return this.user.groups.includes(x)
+            } catch (e) {
+              return false
+            }
+          })
         } else { 
           return true
         }
