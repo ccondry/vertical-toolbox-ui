@@ -1763,11 +1763,11 @@ export default {
         const callback = ({url}) => {
           // map out the node names to model data references
           const map = {
-            'iframe': (url) => {
+            'iframe': ({url}) => {
               // set iframe url
               this.model.brand.iframe = url.url
             },
-            'advisor': (url) => {
+            'advisor': ({url}) => {
               // set advisor url
               this.model.brand.advisor = url
               // change advisor image in the UI

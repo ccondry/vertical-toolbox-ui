@@ -529,19 +529,19 @@ export default {
           // map out the node names to model data references
           const map = {
             // mobile app logo
-            'logoFile': (url) => {
+            'logoFile': ({url}) => {
               // reset img
               this.model.logo.rasterised = ''
               // set img url
               this.model.logo.rasterised = url + '?nocache=' + Date.now()
             },
-            'websiteLogoFile': (url) => {
+            'websiteLogoFile': ({url}) => {
               // reset img
               this.model.logo.website = ''
               // set img url
               this.model.logo.website = url + '?nocache=' + Date.now()
             },
-            'mobileWallpaper': (url) => {
+            'mobileWallpaper': ({url}) => {
               // reset img
               this.model.mobileWallpaper = ''
               // set img url

@@ -795,56 +795,56 @@ export default {
           // map out the node names to model data references
           const map = {
             // mobile app logo
-            'logoFile': (url) => {
+            'logoFile': ({url}) => {
               // reset img
               this.model.logo.rasterised = ''
               // set img url
               this.model.logo.rasterised = url + '?nocache=' + Date.now()
             },
-            'websiteLogoFile': (url) => {
+            'websiteLogoFile': ({url}) => {
               // reset img
               this.model.logo.website = ''
               // set img url
               this.model.logo.website = url + '?nocache=' + Date.now()
             },
-            'mobileWallpaper': (url) => {
+            'mobileWallpaper': ({url}) => {
               // reset img
               this.model.mobileWallpaper = ''
               // set img url
               this.model.mobileWallpaper = url + '?nocache=' + Date.now()
             },
             // homepage banner images
-            'slider': (url, index) => {
+            'slider': ({url}, index) => {
               // reset img
               this.model.sliders[index].image = ''
               // set img url
               this.model.sliders[index].image = url + '?nocache=' + Date.now()
             },
-            'blogItem': (url, index) => {
+            'blogItem': ({url}, index) => {
               // reset img
               this.model.blogItems[index].image = ''
               // set img url
               this.model.blogItems[index].image = url + '?nocache=' + Date.now()
             },
-            'authors': (url, index) => {
+            'authors': ({url}, index) => {
               // reset img
               this.model.authors[index].image = ''
               // set img url
               this.model.authors[index].image = url + '?nocache=' + Date.now()
             },
-            'services': (url, index) => {
+            'services': ({url}, index) => {
               // reset img
               this.model.services[index].image = ''
               // set img url
               this.model.services[index].image = url + '?nocache=' + Date.now()
             },
-            'servicesThumbnail': (url, index) => {
+            'servicesThumbnail': ({url}, index) => {
               // reset img
               this.model.services[index].thumbnail = ''
               // set img url
               this.model.services[index].thumbnail = url + '?nocache=' + Date.now()
             },
-            'timelinePosts': (url, index) => {
+            'timelinePosts': ({url}, index) => {
               // reset img
               this.model.timelinePosts[index].image = ''
               // set img url
