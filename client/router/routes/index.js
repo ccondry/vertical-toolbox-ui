@@ -34,15 +34,24 @@ const routes = [{
 }, {
   name: 'Webex Connect',
   path: '/branding/connect',
-  component: connect
+  component: connect,
+  meta: {
+    groups: ['admin', 'QA']
+  }
 }, {
   name: 'Usage',
   path: '/branding/admin/usage',
-  component: usage
+  component: usage,
+  meta: {
+    groups: ['admin']
+  }
 }, {
   name: 'Cumulus Website',
   path: '/branding/admin/cumulus',
-  component: cumulus
+  component: cumulus,
+  meta: {
+    groups: ['admin']
+  }
 }]
 
 export default routes
