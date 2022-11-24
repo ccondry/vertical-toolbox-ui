@@ -8,8 +8,8 @@
     <!-- Loading Indicator -->
     <b-loading :is-full-page="true" :active="isLoading || isWorking" />
     <div v-if="isLoggedIn">
-      <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
-      <app-main></app-main>
+      <sidebar />
+      <app-main />
     </div>
     <footer class="footer" style="margin-left: 220px; height: 1.6em; padding: 0; background-color: #ebebeb">
       <div class="content">
