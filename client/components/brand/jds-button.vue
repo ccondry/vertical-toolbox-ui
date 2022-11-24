@@ -79,6 +79,7 @@
     :key="j"
     v-model="model.data[j]"
     @input="updateParent"
+    @delete="deleteJdsData(j)"
     />
     
     <div class="buttons">
