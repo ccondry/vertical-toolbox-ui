@@ -40,12 +40,7 @@ const state = {
 
 const getters = {
   pkg: state => state.pkg,
-  app: state => state.app,
   device: state => state.device,
-  sidebar: state => state.sidebar,
-  effect: state => state.effect,
-  instance: (state) => state.instance,
-  authEnabled: () => true,
   loading: state => state.loading,
   working: state => state.working,
   production: () => process.env.NODE_ENV === 'production',
@@ -83,34 +78,6 @@ const mutations = {
     }
   },
 
-  [types.TOGGLE_DEVICE] (state, device) {
-    state.device.isMobile = device === 'mobile'
-    state.device.isTablet = device === 'tablet'
-  },
-
-  [types.TOGGLE_SIDEBAR] (state, config) {
-    if (state.device.isMobile && config.hasOwnProperty('opened')) {
-      state.sidebar.opened = config.opened
-    } else {
-      state.sidebar.opened = true
-    }
-
-    if (config.hasOwnProperty('hidden')) {
-      state.sidebar.hidden = config.hidden
-    }
-  },
-
-  [types.SWITCH_EFFECT] (state, effectItem) {
-    for (let name in effectItem) {
-      state.effect[name] = effectItem[name]
-    }
-  },
-
-  [types.SET_SESSION] (state, data) {
-    state.sessionId = data.sessionId
-    state.datacenter = data.datacenter
-  },
-
   [types.SET_API_VERSION] (state, data) {
     state.apiVersion = data.version
   },
@@ -121,13 +88,6 @@ const mutations = {
 }
 
 const actions = {
-  expandMenu ({ commit }, data) {
-    if (data) {
-      data.expanded = data.expanded || false
-      commit(types.EXPAND_MENU, data)
-    }
-  },
-
   setWorking ({commit}, {group, type, value = true}) {
     commit(types.SET_WORKING, {group, type, value})
   },
