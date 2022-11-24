@@ -10,9 +10,17 @@
       </div>
 
       <!-- Check if any Global field is empty -->
-      <div class="card-content" v-if="!model.webexconnect || !model.webexconnect.global">
+      <div
+      v-if="!model.webexconnect || !model.webexconnect.global"
+      class="card-content"
+      >
       <!-- <div class="card-content" v-if="!model.webexconnect.global.brandName || !model.webexconnect.global.brandLogo || !model.webexconnect.global.mobileHomeWallpaper"> -->
-        <button class="button is-primary" @click="$set(model, 'webexconnect', defaults.webexconnect)">Configure</button>
+        <button
+        class="button is-primary"
+        @click="configureWebexConnect"
+        >
+          Configure
+        </button>
       </div>
       <div class="card-content" v-else>
 
@@ -28,42 +36,88 @@
           <div class="card-content">
             <!-- Brand Name -->
             <b-field label="Brand Name">
-              <b-input v-model="model.webexconnect.global.brandName" :placeholder="defaults.webexconnect.global.brandName" />
+              <b-input
+              v-model="model.webexconnect.global.brandName"
+              :placeholder="defaults.webexconnect.global.brandName"
+              @input="updateParent"
+              />
             </b-field>
             <!-- Brand Logo -->
             <!-- Image URL manual edit, for admins only -->
             <b-field label="Logo URL" v-if="user.admin">
-              <b-input v-model.lazy="model.webexconnect.global.brandLogo" :placeholder="defaults.webexconnect.global.brandLogo" />
+              <b-input
+              v-model.lazy="model.webexconnect.global.brandLogo"
+              :placeholder="defaults.webexconnect.global.brandLogo"
+              @input="updateParent"
+              />
             </b-field>
             <!-- Image image editor for users -->
             <b-field grouped>
-              <b-loading :is-full-page="false" :active="working.images.logoFile" :can-cancel="false"></b-loading>
+              <b-loading
+              :is-full-page="false"
+              :active="working.images.logoFile"
+              :can-cancel="false"
+              />
               <b-field label="Brand Logo Image">
-                <img :src="model.webexconnect.global.brandLogo" style="max-width: 256px; max-height: 64px;"/>
+                <img
+                :src="model.webexconnect.global.brandLogo"
+                style="max-width: 256px; max-height: 64px;"
+                />
               </b-field>
-              <b-tooltip :label="getTooltip('mobileLogoUpload')" multilined position="is-top">
+              <b-tooltip
+              :label="getTooltip('mobileLogoUpload')"
+              multilined
+              position="is-top"
+              >
                 <b-icon type="is-primary" icon="information" />
               </b-tooltip>
               <b-field label="Upload">
-                <button class="button is-primary" type="button" @click="launchFilePicker('logoFile')">Browse...</button>
+                <button
+                class="button is-primary"
+                type="button"
+                @click="launchFilePicker('logoFile')"
+                >
+                  Browse...
+                </button>
               </b-field>
             </b-field>
             <!-- Mobile App Home Wallpaper -->
             <!-- Image URL manual edit, for admins only -->
             <b-field label="Mobile App Home Wallpaper URL" v-if="user.admin">
-              <b-input v-if="user.admin" v-model="model.webexconnect.global.mobileHomeWallpaper" :placeholder="defaults.webexconnect.global.mobileHomeWallpaper" />
+              <b-input
+              v-model="model.webexconnect.global.mobileHomeWallpaper"
+              :placeholder="defaults.webexconnect.global.mobileHomeWallpaper"
+              @input="updateParent"
+              />
             </b-field>
             <!-- Image image editor for users -->
             <b-field grouped>
-              <b-loading :is-full-page="false" :active="working.images.mobileHomeWallpaper" :can-cancel="false"></b-loading>
+              <b-loading
+              :is-full-page="false"
+              :active="working.images.mobileHomeWallpaper"
+              :can-cancel="false"
+              />
               <b-field label="Wallpaper">
-                <img :src="model.webexconnect.global.mobileHomeWallpaper" style="max-height: 256px;"/>
+                <img
+                :src="model.webexconnect.global.mobileHomeWallpaper"
+                style="max-height: 256px;"
+                />
               </b-field>
-              <b-tooltip :label="getTooltip('mobileWallpaperUpload')" multilined position="is-top">
+              <b-tooltip
+              :label="getTooltip('mobileWallpaperUpload')"
+              multilined
+              position="is-top"
+              >
                 <b-icon type="is-primary" icon="information" />
               </b-tooltip>
               <b-field label="Upload">
-                <button class="button is-primary" type="button" @click="launchFilePicker('mobileHomeWallpaper')">Browse...</button>
+                <button
+                class="button is-primary"
+                type="button"
+                @click="launchFilePicker('mobileHomeWallpaper')"
+                >
+                  Browse...
+                </button>
               </b-field>
             </b-field>
           </div>
@@ -80,7 +134,13 @@
     </b-collapse>
     <!-- /Webex Connect -->
 
-    <input type="file" style="display:none" ref="file" accept="image/*" v-uploader />
+    <input
+    type="file"
+    style="display:none"
+    ref="file"
+    accept="image/*"
+    v-uploader
+    />
 
     <select-icon-modal
     v-if="showIconModal"
@@ -158,6 +218,7 @@ export default {
 
   data () {
     return {
+      model: null,
       showIconModal: false,
       iconModalContext: {},
       active: {},
@@ -170,7 +231,34 @@ export default {
     }
   },
 
+  mounted () {
+    this.updateCache()
+    // when this.model.favicon changes, extract the domain of the google favicon
+    // tool url and set the v-model value for the "Favicon Website URL" of the favicon
+    try {
+      const url = this.model.favicon
+      const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
+      try {
+        this.faviconWebsite = arr[1] || ''
+      } catch (e) {
+        this.faviconWebsite = ''
+      }
+    } catch (e) {
+      // url was probably undefined - do nothing
+    }
+  },
+
+  watch: {
+    value () {
+      this.updateCache()
+    }
+  },
+
   methods: {
+    configureWebexConnect () {
+      this.$set(this.model, 'webexconnect', this.defaults.webexconnect)
+      this.updateParent()
+    },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
       // set ref
@@ -215,6 +303,8 @@ export default {
           // update our model with the new file URL
           try {
             map[node](url, index)
+            // update state with model changes
+            this.updateParent()
           } catch (e) {
             // continue
           }
@@ -225,7 +315,13 @@ export default {
           nodeName += index
         }
         // actually upload the file now
-        this.$emit('upload', {name, node: nodeName, vertical: this.model.id, data, callback})
+        this.$emit('upload', {
+          name,
+          node: nodeName,
+          vertical: this.model.id,
+          data, 
+          callback
+        })
         // reset the file input
         this.$refs.file.value = ''
       }
@@ -245,22 +341,14 @@ export default {
       } catch (e) {
         return ''
       }
-    }
-  },
-
-  mounted () {
-    // when this.model.favicon changes, extract the domain of the google favicon
-    // tool url and set the v-model value for the "Favicon Website URL" of the favicon
-    try {
-      const url = this.model.favicon
-      const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
-      try {
-        this.faviconWebsite = arr[1] || ''
-      } catch (e) {
-        this.faviconWebsite = ''
-      }
-    } catch (e) {
-      // url was probably undefined - do nothing
+    },
+    updateCache () {
+      // copy value prop to model cache
+      this.model = JSON.parse(JSON.stringify(this.value))
+    },
+    updateParent () {
+      // update the parent that we have changed the model
+      this.$emit('input', this.model)
     }
   }
 }

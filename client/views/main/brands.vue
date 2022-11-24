@@ -58,14 +58,9 @@ export default {
       console.log('brands.vue - upload vertical image', data)
       this.uploadImage({data})
     },
-    updateCache (data) {
-      // copy state data to local data
-      this.model = JSON.parse(JSON.stringify(data))
-      // make sure model.brand is an object
-      if (!this.model.brand) this.$set(this.model, 'brand', {})
+    updateState (value) {
+      this.setVertical(JSON.parse(JSON.stringify(value)))
     }
-  },
-  
-  
+  }
 }
 </script>

@@ -1,7 +1,13 @@
 <template>
-  <div>
+  <div v-if="model">
     <!-- Hidden File Uploader -->
-    <input type="file" style="display:none" ref="file" accept="image/*;text/html" v-uploader />
+    <input
+    type="file"
+    style="display:none"
+    ref="file"
+    accept="image/*;text/html"
+    v-uploader
+    />
 
     <!-- Branded Website Customization -->
     <b-collapse class="content card">
@@ -15,35 +21,61 @@
       <div class="card-content">
         <!-- Website Title -->
         <b-field label="HTML Title" :message="getTooltip('htmlTitle')">
-          <b-input v-model="model.brand.title" placeholder="Company" />
+          <b-input
+          v-model="model.brand.title"
+          placeholder="Company"
+          @input="updateParent"
+          />
         </b-field>
         <!-- iframe -->
         <b-field grouped>
           <b-field label="Upload">
-            <button class="button is-primary"
+            <button
+            class="button is-primary"
             :disabled="working.images.iframe"
-            @click="launchFilePicker('iframe')">
+            @click="launchFilePicker('iframe')"
+            >
               {{ working.images.iframe ? 'Working...' : 'Browse...' }}
             </button>
           </b-field>
-          <b-tooltip :label="getTooltip('iframe')" multilined position="is-top">
+          <b-tooltip
+          :label="getTooltip('iframe')"
+          multilined
+          position="is-top"
+          >
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field expanded label="Background iframe or image URL">
-            <b-input v-model="model.brand.iframe" placeholder="" :disabled="working.images.iframe" />
+            <b-input
+            v-model="model.brand.iframe"
+            placeholder=""
+            :disabled="working.images.iframe"
+            @input="updateParent"
+            />
           </b-field>
         </b-field>
         <!-- google favicon url -->
         <b-field grouped>
           <b-field label="Favicon Image">
-            <img :src="model.brand.favicon || 'https://mm.cxdemo.net/assets/favicon.png'" style="max-width: 32px; max-height: 32px;"/>
+            <img
+            :src="model.brand.favicon || 'https://mm.cxdemo.net/assets/favicon.png'"
+            style="max-width: 32px; max-height: 32px;"
+            />
           </b-field>
           &nbsp;&nbsp;
-          <b-tooltip :label="getTooltip('favicon')" multilined position="is-top">
+          <b-tooltip
+          :label="getTooltip('favicon')"
+          multilined
+          position="is-top"
+          >
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field expanded label="Favicon Website Domain Name">
-            <b-input v-model="faviconWebsite" placeholder="apple.com" />
+            <b-input
+            v-model="faviconWebsite"
+            placeholder="apple.com"
+            @input="updateParent"
+            />
           </b-field>
         </b-field>
 
@@ -53,12 +85,14 @@
             <b-colorpicker
             v-if="model.brand.color1"
             v-model="model.brand.color1"
+            @input="updateParent"
             />
           </b-field>
           <b-field label="Secondary Color">
             <b-colorpicker
             v-if="model.brand.color2"
             v-model="model.brand.color2"
+            @input="updateParent"
             />
           </b-field>
         </div>
@@ -69,12 +103,14 @@
               <b-colorpicker
               v-if="model.brand.color1"
               v-model="model.brand.color1"
+              @input="updateParent"
               />
             </b-field>
             <b-field label="Secondary Color">
               <b-colorpicker
               v-if="model.brand.color2"
               v-model="model.brand.color2"
+              @input="updateParent"
               />
             </b-field>
           </b-field>
@@ -82,7 +118,10 @@
 
         <!-- Expert Advisor Enable -->
         <b-field label="Show Expert Advisor Header">
-          <b-select v-model="model.brand.advisorEnabled">
+          <b-select
+          v-model="model.brand.advisorEnabled"
+          @input="updateParent"
+          >
             <option :value="true">
               Shown
             </option>
@@ -96,10 +135,16 @@
         <!-- Expert Advisor Image -->
         <b-field grouped v-show="model.brand.advisorEnabled">
           <b-field label="Expert Advisor Image">
-            <img :src="model.brand.advisorImage" style="max-width: 112px; max-height: 112px;"/>
+            <img
+            :src="model.brand.advisorImage"
+            style="max-width: 112px; max-height: 112px;"
+            />
           </b-field>
           <b-field label="Select Existing Image">
-            <b-select :value="model.brand.advisorImage" @change.native="changeAdvisorImage($event)">
+            <b-select
+            :value="model.brand.advisorImage"
+            @input="changeAdvisorImage"
+            >
               <!-- list of advisor images -->
               <option
               v-for="(advisor, index) of defaultAdvisors"
@@ -109,18 +154,29 @@
                 {{ advisor.name }}
               </option>
               <!-- custom advisor image, if not using default -->
-              <option default v-if="customAdvisorImageUrl" :value="customAdvisorImageUrl">
+              <option
+              v-if="customAdvisorImageUrl"
+              :value="customAdvisorImageUrl"
+              default
+              >
                 Custom
               </option>
             </b-select>
           </b-field>
-          <b-tooltip :label="getTooltip('advisorImage')" multilined position="is-top">
+          <b-tooltip
+          :label="getTooltip('advisorImage')"
+          multilined
+          position="is-top"
+          >
             <b-icon type="is-primary" icon="information" />
           </b-tooltip>
           <b-field label="Upload New Image">
-            <button class="button is-primary" type="button"
+            <button
+            class="button is-primary"
+            type="button"
             :disabled="working.images.advisor"
-            @click="launchFilePicker('advisor')">
+            @click="launchFilePicker('advisor')"
+            >
               {{ working.images.advisor ? 'Working...' : 'Browse...' }}
             </button>
           </b-field>
@@ -129,8 +185,7 @@
 
         <!-- Save button -->
         <b-field>
-          <button type="button" class="button is-success"
-          @click.prevent="submit" :disabled="disableSave">Save</button>
+          <save-button />
         </b-field>
       </div>
     </b-collapse>
@@ -139,7 +194,9 @@
     <!-- Advanced Website Customization -->
     <b-collapse class="content card" :open="false">
       <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">Advanced Website Customization</p>
+        <p class="card-header-title">
+          Advanced Website Customization
+        </p>
         <a class="card-header-icon">
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
@@ -149,7 +206,9 @@
       <div class="card-content">
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Localization</p>
+            <p class="card-header-title">
+              Localization
+            </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
@@ -158,74 +217,144 @@
           <div class="card-content">
 
             <!-- Expert Heading -->
-            <b-field expanded label="Advisor Heading Text Line 1" v-show="model.brand.advisorEnabled">
-              <b-input v-model="model.brand.advisorHeading" placeholder="Expert Advisor" />
+            <b-field
+            v-show="model.brand.advisorEnabled"
+            label="Advisor Heading Text Line 1"
+            expanded
+            >
+              <b-input
+              v-model="model.brand.advisorHeading"
+              placeholder="Expert Advisor"
+              @input="updateParent"
+              />
             </b-field>
 
-            <b-field expanded label="Advisor Heading Text Line 2" v-show="model.brand.advisorEnabled">
-              <b-input v-model="model.brand.advisorText" placeholder="We're here to help" />
+            <b-field
+            v-show="model.brand.advisorEnabled"
+            label="Advisor Heading Text Line 2"
+            expanded
+            >
+              <b-input
+              v-model="model.brand.advisorText"
+              placeholder="We're here to help"
+              @input="updateParent"
+              />
             </b-field>
             <!-- /Expert Heading -->
 
             <!-- Contact Button -->
-            <b-field expanded label="Contact Button Text (the button to open contact panel)">
-              <b-input v-model="model.brand.contactButtonText" placeholder="Talk to an Expert" />
+            <b-field
+            label="Contact Button Text (the button to open contact panel)"
+            expanded
+            >
+              <b-input
+              v-model="model.brand.contactButtonText"
+              placeholder="Talk to an Expert"
+              @input="updateParent"
+              />
             </b-field>
             <!-- /Contact Button -->
 
             <!-- Contact Menu Title -->
             <b-field expanded label="Contact Menu Title (normal)">
-              <b-input v-model="model.brand.menuTitle" placeholder="Need Help?" />
+              <b-input
+              v-model="model.brand.menuTitle"
+              placeholder="Need Help?"
+              @input="updateParent"
+              />
             </b-field>
             <!-- /Contact Menu Title -->
 
             <!-- Chat Menu Title -->
             <b-field expanded label="Contact Menu Title (while chatting)">
-              <b-input v-model="model.brand.chatBotMenuTitle" placeholder="Now Chatting" />
+              <b-input
+              v-model="model.brand.chatBotMenuTitle"
+              placeholder="Now Chatting"
+              @input="updateParent"
+              />
             </b-field>
             <!-- /Chat Menu Title -->
 
             <!-- Form Input Labels -->
             <b-field label="Name Input Label">
-              <b-input v-model="model.brand.nameLabel" placeholder="Your Name" />
+              <b-input
+              v-model="model.brand.nameLabel"
+              placeholder="Your Name"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="Phone Input Label">
-              <b-input v-model="model.brand.phoneLabel" placeholder="Your Phone Number" />
+              <b-input
+              v-model="model.brand.phoneLabel"
+              placeholder="Your Phone Number"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="Email Input Label">
-              <b-input v-model="model.brand.emailLabel" placeholder="Your Email Address" />
+              <b-input
+              v-model="model.brand.emailLabel"
+              placeholder="Your Email Address"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="Subject Input Label">
-              <b-input v-model="model.brand.subjectLabel" placeholder="Subject" />
+              <b-input
+              v-model="model.brand.subjectLabel"
+              placeholder="Subject"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="Message Input Label">
-              <b-input v-model="model.brand.messageLabel" placeholder="Message" />
+              <b-input
+              v-model="model.brand.messageLabel"
+              placeholder="Message"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="Request Type Input Label">
-              <b-input v-model="model.brand.requestTypeLabel" placeholder="Request Type" />
+              <b-input
+              v-model="model.brand.requestTypeLabel"
+              placeholder="Request Type"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="OK Button Text">
-              <b-input v-model="model.brand.okButton" placeholder="OK" />
+              <b-input
+              v-model="model.brand.okButton"
+              placeholder="OK"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="Send Button Text">
-              <b-input v-model="model.brand.sendButton" placeholder="Send" />
+              <b-input
+              v-model="model.brand.sendButton"
+              placeholder="Send"
+              @input="updateParent"
+              />
             </b-field>
             <b-field label="Cancel Button Text">
-              <b-input v-model="model.brand.cancelButton" placeholder="Cancel" />
+              <b-input
+              v-model="model.brand.cancelButton"
+              placeholder="Cancel"
+              @input="updateParent"
+              />
             </b-field>
             <!-- Form Input Labels -->
 
             <!-- Save button -->
             <b-field>
-              <button type="button" class="button is-success"
-              @click.prevent="submit" :disabled="disableSave">Save</button>
+              <save-button />
             </b-field>
           </div>
         </b-collapse>
         <!-- /Button and Menu Heading -->
 
         <!-- JDS -->
-        <jds v-if="isAdmin || isQa" v-model="model.brand" />
+        <jds
+        v-if="isAdmin || isQa"
+        v-model="model.brand"
+        @input="updateParent"
+        />
 
         <!-- Chat -->
         <b-collapse class="content card">
@@ -239,7 +368,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.chatEnabled">
+              <b-select
+              v-model="model.brand.chatEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -252,32 +384,57 @@
             <div v-show="model.brand.chatEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.chatIcon" placeholder="message-processing" />
+                  <b-input
+                  v-model="model.brand.chatIcon"
+                  placeholder="message-processing"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.chatIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.chatIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.chatHeading" placeholder="Chat Live" />
+                <b-input
+                v-model="model.brand.chatHeading"
+                placeholder="Chat Live"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.chatText" placeholder="An expert will chat with you live" />
+                <b-input
+                v-model="model.brand.chatText"
+                placeholder="An expert will chat with you live"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.brand.chatWaitTime" placeholder="1 min wait time" />
+                <b-input
+                v-model="model.brand.chatWaitTime"
+                placeholder="1 min wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -297,7 +454,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.chatBotEnabled">
+              <b-select
+              v-model="model.brand.chatBotEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -310,32 +470,57 @@
             <div v-show="model.brand.chatBotEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.chatBotIcon" placeholder="message-processing" />
+                  <b-input
+                  v-model="model.brand.chatBotIcon"
+                  placeholder="message-processing"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.chatBotIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.chatBotIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.chatBotHeading" placeholder="Chat with Bot" />
+                <b-input
+                v-model="model.brand.chatBotHeading"
+                placeholder="Chat with Bot"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.chatBotText" placeholder="An AI-driven chat bot will assist you" />
+                <b-input
+                v-model="model.brand.chatBotText"
+                placeholder="An AI-driven chat bot will assist you"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.brand.chatBotWaitTime" placeholder="No wait time" />
+                <b-input
+                v-model="model.brand.chatBotWaitTime"
+                placeholder="No wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -346,7 +531,9 @@
         <!-- Chat Translation -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Chat Translation Option (PCCE 12.6 EFT only)</p>
+            <p class="card-header-title">
+              Chat Translation Option (PCCE 12.6 EFT only)
+            </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
@@ -354,7 +541,10 @@
 
           <div class="card-content">
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.chatTranslationEnabled">
+              <b-select
+              v-model="model.brand.chatTranslationEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -367,30 +557,55 @@
             <div v-show="model.brand.chatTranslationEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.chatTranslationIcon" placeholder="message-processing" />
+                  <b-input
+                  v-model="model.brand.chatTranslationIcon"
+                  placeholder="message-processing"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.chatTranslationIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.chatTranslationIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.chatTranslationHeading" placeholder="Chat Translation" />
+                <b-input
+                v-model="model.brand.chatTranslationHeading"
+                placeholder="Chat Translation"
+                @input="updateParent"
+                />
               </b-field>
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.chatTranslationText" placeholder="Live chat with automatic translation" />
+                <b-input
+                v-model="model.brand.chatTranslationText"
+                placeholder="Live chat with automatic translation"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.brand.chatTranslationWaitTime" placeholder="No wait time" />
+                <b-input
+                v-model="model.brand.chatTranslationWaitTime"
+                placeholder="No wait time"
+                @input="updateParent"
+                />
               </b-field>
               
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -401,7 +616,9 @@
         <!-- SMS -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">SMS Live Option</p>
+            <p class="card-header-title">
+              SMS Live 
+            </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
@@ -423,36 +640,65 @@
             <div v-show="model.brand.smsEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.smsIcon" placeholder="message-processing" />
+                  <b-input
+                  v-model="model.brand.smsIcon"
+                  placeholder="message-processing"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.smsIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.smsIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field label="Heading">
-                <b-input v-model="model.brand.smsHeading" placeholder="Text Us" />
+                <b-input
+                v-model="model.brand.smsHeading"
+                placeholder="Text Us"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Text" :message="getTooltip('smsText')" >
-                <b-input v-model="model.brand.smsText" placeholder="{0}" />
+                <b-input
+                v-model="model.brand.smsText"
+                placeholder="{0}"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Wait Time">
-                <b-input v-model="model.brand.smsWaitTime" placeholder="1 min wait time" />
+                <b-input
+                v-model="model.brand.smsWaitTime"
+                placeholder="1 min wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.brand.smsModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting live with one of our experts." />
+                <b-input
+                v-model="model.brand.smsModalText"
+                placeholder="Enter your mobile phone number and we will text you. Reply to begin texting live with one of our experts."
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -472,7 +718,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.smsBotEnabled">
+              <b-select
+              v-model="model.brand.smsBotEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -485,36 +734,65 @@
             <div v-show="model.brand.smsBotEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.smsBotIcon" placeholder="message-processing" />
+                  <b-input
+                  v-model="model.brand.smsBotIcon"
+                  placeholder="message-processing"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.smsBotIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.smsBotIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field label="Heading">
-                <b-input v-model="model.brand.smsBotHeading" placeholder="Text with Bot" />
+                <b-input
+                v-model="model.brand.smsBotHeading"
+                placeholder="Text with Bot"
+                @input="updateParent"
+                />
               </b-field>
 
-              <b-field label="Text" :message="getTooltip('smsText')" >
-                <b-input v-model="model.brand.smsBotText" placeholder="{0}" />
+              <b-field label="Text" :message="getTooltip('smsText')">
+                <b-input
+                v-model="model.brand.smsBotText"
+                placeholder="{0}"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Wait Time">
-                <b-input v-model="model.brand.smsBotWaitTime" placeholder="No wait time" />
+                <b-input
+                v-model="model.brand.smsBotWaitTime"
+                placeholder="No wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.brand.smsBotModalText" placeholder="Enter your mobile phone number and we will text you. Reply to begin texting with an AI-driven chat bot." />
+                <b-input
+                v-model="model.brand.smsBotModalText"
+                placeholder="Enter your mobile phone number and we will text you. Reply to begin texting with an AI-driven chat bot."
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -535,7 +813,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.callEnabled">
+              <b-select
+              v-model="model.brand.callEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -548,92 +829,192 @@
             <div v-show="model.brand.callEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.callIcon" placeholder="phone" />
+                  <b-input
+                  v-model="model.brand.callIcon"
+                  placeholder="phone"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.callIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.callIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field label="Heading">
-                <b-input v-model="model.brand.callHeading" placeholder="Call Us" />
+                <b-input
+                v-model="model.brand.callHeading"
+                placeholder="Call Us"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Text" :message="getTooltip('callText')">
-                <b-input v-model="model.brand.callText" placeholder="{0}" />
+                <b-input
+                v-model="model.brand.callText"
+                placeholder="{0}"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Wait Time">
-                <b-input v-model="model.brand.callWaitTime" placeholder="8 min wait time" />
+                <b-input
+                v-model="model.brand.callWaitTime"
+                placeholder="8 min wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input type="textarea" v-model="model.brand.callModalText" :placeholder="placeholders.callModalText" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalText"
+                :placeholder="placeholders.callModalText"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Main Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalMainLabel" placeholder="Main" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalMainLabel"
+                placeholder="Main"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="CRM Number Label (PCCE only)">
-                <b-input type="textarea" v-model="model.brand.callModalCrmLabel" placeholder="CRM" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalCrmLabel"
+                placeholder="CRM"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Gold Phone Number Label (PCCE only)">
-                <b-input type="textarea" v-model="model.brand.callModalGoldLabel" placeholder="Gold" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalGoldLabel"
+                placeholder="Gold"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="VIVR Phone Number Label (PCCE only)">
-                <b-input type="textarea" v-model="model.brand.callModalVivrLabel" placeholder="VIVR" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalVivrLabel"
+                placeholder="VIVR"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="AI Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalAiLabel" placeholder="AI" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalAiLabel"
+                placeholder="AI"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="CVA AI Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalCvaAiLabel" placeholder="CVA AI" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalCvaAiLabel"
+                placeholder="CVA AI"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Custom AI Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalCustomAiLabel" placeholder="Custom AI" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalCustomAiLabel"
+                placeholder="Custom AI"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="2Ring Phone Number Label (UCCX only)">
-                <b-input type="textarea" v-model="model.brand.callModal2RingLabel" placeholder="2Ring" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModal2RingLabel"
+                placeholder="2Ring"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Salesforce Phone Number Label (Webex only)">
-                <b-input type="textarea" v-model="model.brand.callModalSalesforceLabel" placeholder="Salesforce" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalSalesforceLabel"
+                placeholder="Salesforce"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="CCAI Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalCcaiLabel" placeholder="CCAI" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalCcaiLabel"
+                placeholder="CCAI"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="WXM Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalWxmLabel" placeholder="WXM" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalWxmLabel"
+                placeholder="WXM"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="WXM (Voice) Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalWxmVoiceLabel" placeholder="WXM (Voice)" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalWxmVoiceLabel"
+                placeholder="WXM (Voice)"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="WXM (Email) Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalWxmEmailLabel" placeholder="WXM (Email)" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalWxmEmailLabel"
+                placeholder="WXM (Email)"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="WXM (SMS) Phone Number Label">
-                <b-input type="textarea" v-model="model.brand.callModalWxmSmsLabel" placeholder="WXM (SMS)" />
+                <b-input
+                type="textarea"
+                v-model="model.brand.callModalWxmSmsLabel"
+                placeholder="WXM (SMS)"
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -653,7 +1034,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.callbackEnabled">
+              <b-select
+              v-model="model.brand.callbackEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -666,36 +1050,65 @@
             <div v-show="model.brand.callbackEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.callbackIcon" placeholder="phone-forward" />
+                  <b-input
+                  v-model="model.brand.callbackIcon"
+                  placeholder="phone-forward"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.callbackIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.callbackIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.callbackHeading" placeholder="We'll Call You" />
+                <b-input
+                v-model="model.brand.callbackHeading"
+                placeholder="We'll Call You"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.callbackText" placeholder="Receive a call back from an expert" />
+                <b-input
+                v-model="model.brand.callbackText"
+                placeholder="Receive a call back from an expert"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.brand.callbackWaitTime" placeholder="8 min wait time" />
+                <b-input
+                v-model="model.brand.callbackWaitTime"
+                placeholder="8 min wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.brand.callbackModalText" placeholder="Enter your name and phone number and one of our experts will call you." />
+                <b-input
+                v-model="model.brand.callbackModalText"
+                placeholder="Enter your name and phone number and one of our experts will call you."
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -715,7 +1128,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.emailEnabled">
+              <b-select
+              v-model="model.brand.emailEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -728,36 +1144,65 @@
             <div v-show="model.brand.emailEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.emailIcon" placeholder="email" />
+                  <b-input
+                  v-model="model.brand.emailIcon"
+                  placeholder="email"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.emailIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.emailIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.emailHeading" placeholder="Email an Expert" />
+                <b-input
+                v-model="model.brand.emailHeading"
+                placeholder="Email an Expert"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.emailText" placeholder="An expert will respond to your email" />
+                <b-input
+                v-model="model.brand.emailText"
+                placeholder="An expert will respond to your email"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.brand.emailWaitTime" placeholder="12-24 hour wait time" />
+                <b-input
+                v-model="model.brand.emailWaitTime"
+                placeholder="12-24 hour wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.brand.emailModalText" placeholder="Enter your information and question and one of our experts will email you back." />
+                <b-input
+                v-model="model.brand.emailModalText"
+                placeholder="Enter your information and question and one of our experts will email you back."
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -777,7 +1222,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.taskEnabled">
+              <b-select
+              v-model="model.brand.taskEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -790,36 +1238,68 @@
             <div v-show="model.brand.taskEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.taskIcon" placeholder="clipboard-check" />
+                  <b-input
+                  v-model="model.brand.taskIcon"
+                  placeholder="clipboard-check"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.taskIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.taskIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.taskHeading" placeholder="Request" />
+                <b-input
+                v-model="model.brand.taskHeading"
+                placeholder="Request"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.taskText" placeholder="An expert will handle your task" />
+                <b-input
+                v-model="model.brand.taskText"
+                placeholder="An expert will handle your task"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.brand.taskWaitTime" placeholder="" />
+                <b-input
+                v-model="model.brand.taskWaitTime"
+                placeholder=""
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field label="Popup Window Text">
-                <b-input v-model="model.brand.taskModalText" placeholder="Enter your information and choose the task you would like to submit to our experts." />
+                <b-input
+                v-model="model.brand.taskModalText"
+                placeholder="Enter your information and choose the task you would like to submit to our experts."
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Task Request Options -->
               <b-collapse class="content card">
                 <div slot="trigger" slot-scope="props" class="card-header">
-                  <p class="card-header-title">Task Request Types</p>
+                  <p class="card-header-title">
+                    Task Request Types
+                  </p>
                   <a class="card-header-icon">
                     <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
                   </a>
@@ -829,23 +1309,36 @@
                     <li v-for="(task, i) of model.brand.taskOptions" :key="i">
                       <b-field grouped>
                         <b-field expanded>
-                          <b-input v-model="task.text" placeholder="Report a Problem" />
+                          <b-input
+                          v-model="task.text"
+                          placeholder="Report a Problem"
+                          @input="updateParent"
+                          />
                         </b-field>
                         <b-field>
-                          <button class="button is-danger" @click="model.brand.taskOptions.splice(i, 1)">Remove Type</button>
+                          <button
+                          class="button is-danger"
+                          @click="model.brand.taskOptions.splice(i, 1);updateParent()"
+                          >
+                            Remove Type
+                          </button>
                         </b-field>
                       </b-field>
                     </li>
                   </ol>
-                  <button class="button is-success" @click="model.brand.taskOptions.push({text:''})">Add Type</button>
+                  <button
+                  class="button is-success"
+                  @click="model.brand.taskOptions.push({text:''});updateParent()"
+                  >
+                    Add Type
+                  </button>
                 </div>
               </b-collapse>
               <!-- /Task Request Options -->
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -865,7 +1358,10 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.cobrowseEnabled">
+              <b-select
+              v-model="model.brand.cobrowseEnabled"
+              @input="updateParent"
+              >
                 <option :value="true">
                   Enabled
                 </option>
@@ -878,32 +1374,57 @@
             <div v-show="model.brand.cobrowseEnabled">
               <b-field grouped>
                 <b-field label="Icon Name">
-                  <b-input v-model="model.brand.cobrowseIcon" placeholder="lan-connect" />
+                  <b-input
+                  v-model="model.brand.cobrowseIcon"
+                  placeholder="lan-connect"
+                  @input="updateParent"
+                  />
                 </b-field>
                 <b-field label="Icon">
-                  <b-icon pack="mdi" :icon="model.brand.cobrowseIcon" size="is-large" />
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.cobrowseIcon"
+                  size="is-large"
+                  />
                 </b-field>
                 <b-field label="Search Icons">
-                  <a class="button is-info" :href="materialDesignIconsUrl" target="materialdesignicons">Material Design Icons {{ materialDesignIconsVersion }}</a>
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
                 </b-field>
               </b-field>
 
               <b-field expanded label="Heading">
-                <b-input v-model="model.brand.cobrowseHeading" placeholder="Cobrowse" />
+                <b-input
+                v-model="model.brand.cobrowseHeading"
+                placeholder="Cobrowse"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Text">
-                <b-input v-model="model.brand.cobrowseText" placeholder="An expert will cobrowse with you live" />
+                <b-input
+                v-model="model.brand.cobrowseText"
+                placeholder="An expert will cobrowse with you live"
+                @input="updateParent"
+                />
               </b-field>
 
               <b-field expanded label="Wait Time">
-                <b-input v-model="model.brand.cobrowseWaitTime" placeholder="8 min wait time" />
+                <b-input
+                v-model="model.brand.cobrowseWaitTime"
+                placeholder="8 min wait time"
+                @input="updateParent"
+                />
               </b-field>
 
               <!-- Save button -->
               <b-field>
-                <button type="button" class="button is-success"
-                @click.prevent="submit" :disabled="disableSave">Save</button>
+                <save-button />
               </b-field>
             </div>
 
@@ -1038,39 +1559,32 @@ const tooltips = {
 }
 
 export default {
+  name: 'BrandWebsiteConfig',
+  
   components: {
     Jds
   },
 
   props: {
-    'model': {
+    value: {
       type: Object,
-      default () {
-        return {
-          // color1: '#0b63ac',
-          // color2: '#2b83cc'
-        }
-      }
+      required: true
     },
-    'working': {
+    working: {
       type: Object
     },
-    'loading': {
+    loading: {
       type: Object
     },
-    'user': {
+    user: {
       type: Object
     },
-    'defaults': {
+    defaults: {
       type: Object,
       default () { return {} }
     },
-    'verticalId': {
+    verticalId: {
       type: String
-    },
-    disableSave: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -1093,11 +1607,14 @@ export default {
   },
 
   mounted () {
+    this.updateCache()
     this.initView()
   },
 
   data () {
     return {
+      model: null,
+      hasInited: false,
       defaultAdvisors,
       materialDesignIconsUrl: 'https://materialdesignicons.com/cdn/2.5.94/',
       materialDesignIconsVersion: '2.5.94',
@@ -1140,8 +1657,38 @@ export default {
     }
   },
 
+  watch: {
+    value () {
+      this.updateCache()
+      // make sure the UI is updated properly
+      this.initView()
+    },
+    faviconWebsite (val) {
+      this.changeFavicon(val)
+    }
+  },
+
   methods: {
     initView () {
+      if (this.hasInited) {
+        return
+      }
+      this.hasInited = true
+      // console.log('branding config form model changed', val)
+      // model changed - format and push those changes back to the parent
+      // when this.model changes, extract the domain of the google favicon
+      // tool url and set the v-model value for the "Favicon Website URL" of the favicon
+      try {
+        const url = this.model.favicon
+        const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
+        try {
+          this.faviconWebsite = arr[1] || ''
+        } catch (e) {
+          this.faviconWebsite = ''
+        }
+      } catch (e) {
+        // url was probably undefined - do nothing
+      }
       // init the view so that all UI elements are populated properly
       // make sure color1 and color2 are set to valid values for the color picker
       if (!this.model.brand.color1) {
@@ -1160,11 +1707,13 @@ export default {
         // the UI knows it is a custom value
         this.customAdvisorImageUrl = this.model.brand.advisorImage
       }
+      this.updateParent()
     },
-    changeAdvisorImage (event) {
+    changeAdvisorImage (value) {
       // advsior image b-select changed. update model.brand.
-      console.log('changeAdvisorImage', event.target.value)
-      this.model.brand.advisorImage = event.target.value
+      console.log('changeAdvisorImage', value)
+      this.model.brand.advisorImage = value
+      this.updateParent()
     },
     changeFavicon (event) {
       if (!event) return
@@ -1230,6 +1779,8 @@ export default {
           // update our model with the new file URL
           try {
             map[node](url, index)
+            // update state with model changes
+            this.updateParent()
           } catch (e) {
             // continue
           }
@@ -1241,7 +1792,13 @@ export default {
         }
         // actually upload the file now. set brand ID in the 'vertical' property
         // to use the brand ID for the path
-        this.$emit('upload', {name, node: nodeName, vertical: this.verticalId, data, callback})
+        this.$emit('upload', {
+          name,
+          node: nodeName,
+          vertical: this.verticalId,
+          data,
+          callback
+        })
         // reset the file input
         this.$refs.file.value = ''
       }
@@ -1261,10 +1818,6 @@ export default {
       } catch (e) {
         return ''
       }
-    },
-    submit () {
-      console.log('brand config form submitted')
-      this.$emit('save')
     },
     changeDataType (field, event, i, j) {
       // when choosing date type for mobile options, make sure the value is a valid date
@@ -1288,31 +1841,14 @@ export default {
     },
     modelFavicon () {
       return this.model.brand.favicon
-    }
-  },
-
-  watch: {
-    model (val, oldVal) {
-      // make sure the UI is updated properly
-      this.initView()
-      // console.log('branding config form model changed', val)
-      // model changed - format and push those changes back to the parent
-      // when this.model changes, extract the domain of the google favicon
-      // tool url and set the v-model value for the "Favicon Website URL" of the favicon
-      try {
-        const url = val.favicon
-        const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
-        try {
-          this.faviconWebsite = arr[1] || ''
-        } catch (e) {
-          this.faviconWebsite = ''
-        }
-      } catch (e) {
-        // url was probably undefined - do nothing
-      }
     },
-    faviconWebsite (val) {
-      this.changeFavicon(val)
+    updateCache () {
+      // copy value prop to model cache
+      this.model = JSON.parse(JSON.stringify(this.value))
+    },
+    updateParent () {
+      // update the parent that we have changed the model
+      this.$emit('input', this.model)
     }
   }
 }
