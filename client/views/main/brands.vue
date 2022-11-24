@@ -12,6 +12,11 @@
           </p>
         </div>
 
+        <!-- Save button -->
+        <b-field>
+          <save-button />
+        </b-field>
+
         <brand-config
         :value="vertical"
         :working="working"
@@ -22,6 +27,10 @@
         @upload="upload"
         />
 
+        <!-- Save button -->
+        <b-field>
+          <save-button />
+        </b-field>
       </article>
     </div>
   </div>
