@@ -42,7 +42,7 @@ export default [
     }
   },
   {
-    name: 'Admin',
+    name: 'Webex Connect',
     path: '/branding/connect',
     meta: {
       icon: 'cellphone',
