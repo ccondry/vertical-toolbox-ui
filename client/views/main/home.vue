@@ -43,7 +43,7 @@
             <button
             type="button"
             class="button is-danger"
-            @click.prevent="clickDeleteVertical"
+            @click.prevent="clickDelete"
             :disabled="disableDelete"
             >
               Delete
@@ -61,13 +61,18 @@
             </div>
             <div class="card-content">
               <b-field label="ID">
-                <b-input v-model="model.id" :placeholder="defaults.verticals.id" disabled="true" />
+                <p class="control">{{ model.id }}</p>
               </b-field>
               <b-field label="Owner">
-                <b-input v-model="model.owner" disabled="true" />
+                <p class="control">{{ model.owner }}</p>
               </b-field>
               <b-field label="Name">
-                <b-input v-model="model.name" :placeholder="defaults.verticals.name" :disabled="disableSave" />
+                <b-input
+                v-model="model.name"
+                :placeholder="defaults.verticals.name"
+                :disabled="disableSave"
+                @input="updateState"
+                />
               </b-field>
             </div>
           </b-collapse>
@@ -86,7 +91,7 @@
     <div class="tile is-ancestor" v-if="model.id">
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <h1 class="title">Configure {{ model.id }}</h1>
+          <h1 class="title">Configure {{ model.name }}</h1>
           <div class="content">
             <ul>
               <li>
@@ -106,7 +111,12 @@
               </li>
               <li>
                 <router-link :to="{ name: 'AI' }">
-                  AI/Bot
+                  Chat/AI/Bot
+                </router-link>
+              </li>
+              <li v-if="isAdmin || isQa">
+                <router-link :to="{ name: 'Webex Connect' }">
+                  Webex Connect
                 </router-link>
               </li>
             </ul>
@@ -129,76 +139,10 @@ export default {
     }
   },
 
-  methods: {
-    ...mapActions([
-      'confirmSaveVertical',
-      'confirmDeleteVertical',
-      'setSelectedVerticalId',
-      'createVertical'
-    ]),
-    clickSaveAs () {
-      this.$buefy.dialog.prompt({
-        message: `What would you like the name of your new vertical to be?`,
-        inputAttrs: {
-          placeholder: ''
-        },
-        onConfirm: (name) => {
-          // copy current vertical data
-          const body = JSON.parse(JSON.stringify(this.model))
-          // remove id
-          delete body.id
-          // remove _id
-          delete body._id
-          // set name from input
-          body.name = name
-          // create the new vertical
-          this.createVertical(body)
-        }
-      })
-    },
-    clickDeleteVertical () {
-      this.confirmDeleteVertical()
-    },
-    clickSave () {
-      // confirm with user and save the data to the server
-      this.confirmSaveVertical()
-    },
-    updateCache (data) {
-      // copy state data to local data
-      this.model = JSON.parse(JSON.stringify(data))
-      // if languageCode is not set, set it from lanaguage and region (or defaults)
-      if (!this.model.languageCode) {
-        let language = this.model.language || 'en'
-        let region = this.model.region || 'US'
-        this.model.languageCode = language + '-' + region
-      }
-      // set more defaults
-      const values = [
-        'gcpProjectId',
-        'chatBotEnabled',
-        'chatBotSurveyEnabled',
-        'language',
-        'region',
-        // 'smsDeflectionMessage',
-        // 'duoWelcomeMessage',
-        // 'duoFraudSmsMessage',
-        'ttsEngine'
-      ]
-      // fill in each model value with default value, if not set
-      for (const v of values) {
-        console.log('checking for value', v)
-        if (typeof this.model[v] === 'undefined') {
-          console.log(v, 'is not set. Setting it to default value', this.defaults.verticals[v])
-          this.model[v] = this.defaults.verticals[v]
-        } else {
-          console.log(v, 'is already set to', this.model[v])
-        }
-      }
-    }
-  },
-
   computed: {
     ...mapGetters([
+      'isAdmin',
+      'isQa',
       'disableSave',
       'user',
       'verticals',
@@ -231,12 +175,84 @@ export default {
     }
   },
 
+  mounted () {
+    this.updateCache()
+  },
+
   watch: {
     vertical (val, oldVal) {
       if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
         // selected vertical object in state has changed
         // update mutable cache of the state object
         this.updateCache(val)
+      }
+    }
+  },
+
+  methods: {
+    ...mapActions([
+      'confirmDeleteVertical',
+      'confirmSaveVertical',
+      'createVertical',
+      'setVertical',
+      'setSelectedVerticalId'
+    ]),
+    clickSaveAs () {
+      this.$buefy.dialog.prompt({
+        message: `What would you like the name of your new vertical to be?`,
+        inputAttrs: {
+          placeholder: ''
+        },
+        onConfirm: (name) => {
+          // copy current vertical data
+          const body = JSON.parse(JSON.stringify(this.model))
+          // remove id
+          delete body.id
+          // remove _id
+          delete body._id
+          // set name from input
+          body.name = name
+          // create the new vertical
+          this.createVertical(body)
+        }
+      })
+    },
+    clickDelete () {
+      this.confirmDeleteVertical()
+    },
+    updateState (value) {
+      this.setVertical(JSON.parse(JSON.stringify(value)))
+    },
+    updateCache () {
+      // copy state data to local data
+      this.model = JSON.parse(JSON.stringify(this.vertical))
+      // if languageCode is not set, set it from lanaguage and region (or defaults)
+      if (!this.model.languageCode) {
+        let language = this.model.language || 'en'
+        let region = this.model.region || 'US'
+        this.model.languageCode = language + '-' + region
+      }
+      // set more defaults
+      const values = [
+        'gcpProjectId',
+        'chatBotEnabled',
+        'chatBotSurveyEnabled',
+        'language',
+        'region',
+        // 'smsDeflectionMessage',
+        // 'duoWelcomeMessage',
+        // 'duoFraudSmsMessage',
+        'ttsEngine'
+      ]
+      // fill in each model value with default value, if not set
+      for (const v of values) {
+        console.log('checking for value', v)
+        if (typeof this.model[v] === 'undefined') {
+          console.log(v, 'is not set. Setting it to default value', this.defaults.verticals[v])
+          this.model[v] = this.defaults.verticals[v]
+        } else {
+          console.log(v, 'is already set to', this.model[v])
+        }
       }
     }
   }
