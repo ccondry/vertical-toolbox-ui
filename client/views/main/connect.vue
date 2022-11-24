@@ -29,7 +29,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import ConnectConfig from 'client/components/connect-config.vue'
+import ConnectConfig from 'client/components/connect-config/index.vue'
 
 export default {
   name: 'WebexConnect',
