@@ -1,7 +1,13 @@
 <template>
   <div v-if="model">
     <!-- Hidden File Uploader -->
-    <input type="file" style="display:none" ref="file" accept="application/json/;text/json" v-uploader />
+    <input
+    type="file"
+    style="display:none"
+    ref="file"
+    accept="application/json/;text/json"
+    v-uploader
+    />
 
     <!-- AI Customization -->
     <b-collapse class="content card">
