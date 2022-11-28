@@ -1760,14 +1760,15 @@ export default {
           name += '_' + Date.now()
         }
         // set up callback for when the file is done uploading
-        const callback = ({url}) => {
+        const callback = (response) => {
+          console.log('in callback for uploaded file. url = ', response)
           // map out the node names to model data references
           const map = {
-            'iframe': ({url}) => {
+            'iframe': (url) => {
               // set iframe url
-              this.model.brand.iframe = url.url
+              this.model.brand.iframe = url
             },
-            'advisor': ({url}) => {
+            'advisor': (url) => {
               // set advisor url
               this.model.brand.advisor = url
               // change advisor image in the UI
@@ -1778,7 +1779,7 @@ export default {
           }
           // update our model with the new file URL
           try {
-            map[node](url, index)
+            map[node](response.url.url, index)
             // update state with model changes
             this.updateParent()
           } catch (e) {
