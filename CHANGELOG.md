@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2022.11.28
+
+### Fixes
+* **Brand:** Fix file upload setting blank URL on the brand page.
+
+
 # 2022.11.24-3
 
 ### Fixes
