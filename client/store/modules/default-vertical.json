@@ -1,587 +1,528 @@
 {
   "id": "travel",
   "name": "Cumulus Travel",
-  "gcpProjectId": "cumulus-v2-hotikl",
-  "chatBotEnabled": true,
-  "chatBotSurveyEnabled": true,
-  "language": "en",
-  "region": "US",
-  "languageCode": "en-US",
-  "smsDeflectionMessage": "Hello, this is Cumulus. Please reply to this message to begin chatting with one of our agents.",
-  "duoWelcomeMessage": "Hello, and thanks for calling Cumulus internal service center.",
-  "duoFraudSmsMessage": "Mr Littlefoot,\n\nDue to a recorded fraudulent login attempt, we recommend changing your account information as it may be compromised. You can do that here:\n\nwww.cumulus.com/memberportal\n\nYou can also call us at 1-555-942-9464 if you would rather speak to a fraud specialist.",
-  "ttsEngine": "nuance",
-  "address": "170 West Tasman Dr., San Jose, CA",
-  "domain": "cumulus.com",
-  "favicon": "https://www.google.com/s2/favicons?domain=www.google.com",
-  "gps": {
-    "latitude": 37.4084425,
-    "longitude": -121.9561531
-  },
   "taskOptions": [
-    {
-      "text": "Send My Boarding Pass"
-    }
+      {
+          "text": "Send My Boarding Pass"
+      },
+      {
+          "text": "Send My Travel Vouchers"
+      },
+      {
+          "text": "Report Lost Luggage"
+      }
   ],
-  "chat": {
-    "entryPointId": "1001",
-    "bot": {
-      "aiToken": "a88ffa6256174c198e62e882d68af6fa"
-    }
-  },
   "form": {
-    "title": "Book Now Form",
-    "fields": [
-      "Username",
-      "Password",
-      "First and Last Name",
-      "Street Address",
-      "City",
-      "State",
-      "Zip",
-      "Country",
-      "Email Address",
-      "Phone Number",
-      "Number of People",
-      "Destination City",
-      "Departure Date",
-      "Departure Time",
-      "Return Date",
-      "Return Time",
-      "Vehicle Rental",
-      "Vehicle Type",
-      "Pick-Up Date",
-      "Pick-Up Time"
-    ],
-    "private": [
-      "Password"
-    ]
+      "title": "Book Now Form",
+      "fields": [
+          "First and Last Name",
+          "Street Address",
+          "City",
+          "State",
+          "Zip",
+          "Country",
+          "Email Address",
+          "Phone Number",
+          "Destination City",
+          "Departure Date",
+          "Return Date"
+      ],
+      "private": [
+          "Destination City"
+      ]
   },
   "rem": {
-    "reason": "Last Minute Deals",
-    "subreason": "Booking Form"
+      "reason": "Last Minute Deals",
+      "subreason": "Booking Form"
   },
   "cvp": {
-    "welcomePrompt": "Thank you for calling Cumulus Travel!",
-    "jacadaMenu": {
-      "interactionId": "1504902996437-2345b2a39832f45634e58e8004815e61d35ee1-38df",
-      "applicationKey": "f652b15a-999c-45f9-88ef-ff302451600a"
-    },
-    "mainMenu": {
-      "tts": "Press 1 for our last minute deals; 2 for flights and hotel booking; 3 for all the other services.",
-      "options": [
-        {
-          "name": "deals",
-          "description": "Last Minute Deals"
-        },
-        {
-          "name": "booking",
-          "description": "Flights and Hotel Booking"
-        },
-        {
-          "name": "other",
-          "description": "Other Services"
-        }
-      ]
-    },
-    "secondMenu": {
-      "tts": "Press 1 to select the trip to Italy; 2 for the Tahiti honeymoon package; 3 for the South America tour.",
-      "options": [
-        {
-          "name": "italy",
-          "description": "Italy in a Week"
-        },
-        {
-          "name": "tahiti",
-          "description": "Tahiti Honeymoon Package"
-        },
-        {
-          "name": "america",
-          "description": "South America Tour"
-        }
-      ]
-    }
+      "jacadaMenu": {
+          "interactionId": "1504902996437-2345b2a39832f45634e58e8004815e61d35ee1-38df",
+          "applicationKey": "f652b15a-999c-45f9-88ef-ff302451600a"
+      },
+      "welcomePrompt": "Thank you for calling Cumulus Travel!",
+      "mainMenu": {
+          "tts": "Press 1 for our last minute deals; 2 for flights and hotel booking; 3 for all the other services.",
+          "options": [
+              {
+                  "name": "deals",
+                  "description": "Last Minute Deals"
+              },
+              {
+                  "name": "booking",
+                  "description": "Flights and Hotel Booking"
+              },
+              {
+                  "name": "other",
+                  "description": "Other Services"
+              }
+          ]
+      },
+      "secondMenu": {
+          "tts": "Press 1 to select the trip to Italy; 2 for the Tahiti honeymoon package; 3 for the South America tour.",
+          "options": [
+              {
+                  "name": "italy",
+                  "description": "Italy in a Week"
+              },
+              {
+                  "name": "tahiti",
+                  "description": "Tahiti Honeymoon Package"
+              },
+              {
+                  "name": "america",
+                  "description": "South America Tour"
+              }
+          ]
+      }
   },
   "logo": {
-    "vector": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.svg",
-    "rasterised": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.png",
-    "website": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.png",
-    "title": "CUMULUS",
-    "subtitle": "TRAVEL",
-    "color": "#7CC153"
+      "vector": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.svg",
+      "rasterised": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.png",
+      "website": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/logo.png",
+      "title": "CUMULUS",
+      "subtitle": "TRAVEL",
+      "color": "#7CC153"
   },
   "mobileWallpaper": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/wallpaper.png",
   "mobileTitle": "Please Select an Option:",
   "mobileOptions": [
-    {
-      "caption": "Book a Flight",
-      "icon": "plane",
-      "fields": [
-        {
-          "name": "From Which Airport",
-          "type": "text",
-          "ttstype": "characters",
-          "value": "SFO"
-        },
-        {
-          "name": "To Which Airport",
-          "type": "text",
-          "ttstype": "characters",
-          "value": "JFK"
-        },
-        {
-          "name": "Departure Date",
-          "type": "date",
-          "ttstype": "date",
-          "value": "01 Oct 2018"
-        }
-      ]
-    },
-    {
-      "caption": "Book a Hotel",
-      "icon": "hotel",
-      "fields": [
-        {
-          "name": "Which City",
-          "type": "text",
-          "ttstype": "name",
-          "value": "San Francisco"
-        },
-        {
-          "name": "How Many Guests",
-          "type": "text",
-          "ttstype": "number",
-          "value": "2"
-        },
-        {
-          "name": "Check-in Date",
-          "type": "date",
-          "ttstype": "date",
-          "value": "01 Oct 2018"
-        }
-      ]
-    },
-    {
-      "caption": "Check-in",
-      "icon": "chevron-circle-down",
-      "fields": [
-        {
-          "name": "First Name",
-          "type": "text",
-          "ttstype": "name",
-          "value": "George"
-        },
-        {
-          "name": "Last Name",
-          "type": "text",
-          "ttstype": "name",
-          "value": "Washington"
-        },
-        {
-          "name": "Reservation Number",
-          "type": "text",
-          "ttstype": "characters",
-          "value": "87QVZ"
-        }
-      ]
-    }
+      {
+          "caption": "Book a Flight",
+          "icon": "plane",
+          "fields": [
+              {
+                  "name": "From Which Airport",
+                  "type": "text",
+                  "ttstype": "characters",
+                  "value": "SFO"
+              },
+              {
+                  "name": "To Which Airport",
+                  "type": "text",
+                  "ttstype": "characters",
+                  "value": "JFK"
+              },
+              {
+                  "name": "Departure Date",
+                  "type": "date",
+                  "ttstype": "date",
+                  "value": "01 Oct 2018"
+              }
+          ]
+      },
+      {
+          "caption": "Book a Hotel",
+          "icon": "hotel",
+          "fields": [
+              {
+                  "name": "Which City",
+                  "type": "text",
+                  "ttstype": "text",
+                  "value": "San Francisco"
+              },
+              {
+                  "name": "How Many Guests",
+                  "type": "text",
+                  "ttstype": "number",
+                  "value": "2"
+              },
+              {
+                  "name": "Check-in Date",
+                  "type": "date",
+                  "ttstype": "date",
+                  "value": "01 Oct 2018"
+              }
+          ]
+      },
+      {
+          "caption": "Check-in",
+          "icon": "chevron-circle-down",
+          "fields": [
+              {
+                  "name": "First Name",
+                  "type": "text",
+                  "ttstype": "text",
+                  "value": "George"
+              },
+              {
+                  "name": "Last Name",
+                  "type": "text",
+                  "ttstype": "text",
+                  "value": "Washington"
+              },
+              {
+                  "name": "Reservation Number",
+                  "type": "text",
+                  "ttstype": "characters",
+                  "value": "87QVZ"
+              }
+          ]
+      }
   ],
   "headingImage": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/bg-image.jpg",
   "blogItems": [
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/blogpost1.jpg",
-      "title": "Italy",
-      "subTitle": "Rome, Florence & Venice in a Week",
-      "description": "Like all famous trios, Rome, Florence, and Venice exist in a universe of perfect symmetry, three glorious cities where you can feel the whole of Italy in every glorious step. They are the cities that invented the European tour, the must-see locales of any would-be global traveler."
-    },
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/blogpost2.jpg",
-      "title": "Polynesia",
-      "subTitle": "Romantic Tahiti Honeymoon Package",
-      "description": "There is a place where time stands still, where the real world ends and living begins. There is a place where all your plans are yet to be determined and where all your worries are nowhere to be found. There is a place ruled by relaxation and dictated by pleasure. This place is called Tahiti; and Tahiti’s waiting for you."
-    },
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/blogpost3.jpg",
-      "title": "South America",
-      "subTitle": "Chile, Argentina, Uruguay, Brazil Tour",
-      "description": "Urbane sophistication and the grandness of nature, the epicurean pleasures of a fine glass of wine and the cultural delights of a tango show, the Great Outdoors and the Marvels of Civilization; all of this and more can be found in stupendous South America."
-    }
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/blogpost1.jpg",
+          "title": "Italy",
+          "subTitle": "Rome, Florence & Venice in a Week",
+          "description": "Like all famous trios, Rome, Florence, and Venice exist in a universe of perfect symmetry, three glorious cities where you can feel the whole of Italy in every glorious step. They are the cities that invented the European tour, the must-see locales of any would-be global traveler."
+      },
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/blogpost2.jpg",
+          "title": "Polynesia",
+          "subTitle": "Romantic Tahiti Honeymoon Package",
+          "description": "There is a place where time stands still, where the real world ends and living begins. There is a place where all your plans are yet to be determined and where all your worries are nowhere to be found. There is a place ruled by relaxation and dictated by pleasure. This place is called Tahiti; and Tahiti’s waiting for you."
+      },
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/blogpost3.jpg",
+          "title": "South America",
+          "subTitle": "Chile, Argentina, Uruguay, Brazil Tour",
+          "description": "Urbane sophistication and the grandness of nature, the epicurean pleasures of a fine glass of wine and the cultural delights of a tango show, the Great Outdoors and the Marvels of Civilization; all of this and more can be found in stupendous South America."
+      }
   ],
   "services": [
-    {
-      "name": "Italy",
-      "description": "Hidden Jewels of Italy’s Northern Route Tour",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product1.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product1_big.jpg",
-      "price": "$2100"
-    },
-    {
-      "name": "Brazil",
-      "description": "Brazil Insider's Tour of a Lifetime",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product2.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product2_big.jpg",
-      "price": "$2600"
-    },
-    {
-      "name": "Argentina",
-      "description": "Highlights of Argentina Tour",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product3.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product3_big.jpg",
-      "price": "$2900"
-    },
-    {
-      "name": "Namibia",
-      "description": "Best of Namibia Safari & Nature Tour",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product4.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product4_big.jpg",
-      "price": "$1900"
-    },
-    {
-      "name": "New Zealand",
-      "description": "An Ultimate Luxury New Zealand Tour",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product5.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product5_big.jpg",
-      "price": "$3300"
-    },
-    {
-      "name": "Argentia",
-      "description": "Southern Patagonia Tour",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product6.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product6_big.jpg",
-      "price": "$3100"
-    },
-    {
-      "name": "Polynesia",
-      "description": "Romantic Tahiti Honeymoon Package",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product7.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product7_big.jpg",
-      "price": "$3800"
-    },
-    {
-      "name": "Cook Islands",
-      "description": "Exotic Cook Islands Vacation: Rarotonga",
-      "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product8.jpg",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product8_big.jpg",
-      "price": "$3900"
-    }
+      {
+          "name": "Italy",
+          "description": "Hidden Jewels of Italy’s Northern Route Tour",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product1.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product1_big.jpg",
+          "price": "$2100"
+      },
+      {
+          "name": "Brazil",
+          "description": "Brazil Insider's Tour of a Lifetime",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product2.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product2_big.jpg",
+          "price": "$2600"
+      },
+      {
+          "name": "Argentina",
+          "description": "Highlights of Argentina Tour",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product3.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product3_big.jpg",
+          "price": "$2900"
+      },
+      {
+          "name": "Namibia",
+          "description": "Best of Namibia Safari & Nature Tour",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product4.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product4_big.jpg",
+          "price": "$1900"
+      },
+      {
+          "name": "New Zealand",
+          "description": "An Ultimate Luxury New Zealand Tour",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product5.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product5_big.jpg",
+          "price": "$3300"
+      },
+      {
+          "name": "Argentia",
+          "description": "Southern Patagonia Tour",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product6.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product6_big.jpg",
+          "price": "$3100"
+      },
+      {
+          "name": "Polynesia",
+          "description": "Romantic Tahiti Honeymoon Package",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product7.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product7_big.jpg",
+          "price": "$3800"
+      },
+      {
+          "name": "Cook Islands",
+          "description": "Exotic Cook Islands Vacation: Rarotonga",
+          "thumbnail": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product8.jpg",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/product8_big.jpg",
+          "price": "$3900"
+      }
   ],
   "authors": [
-    {
-      "firstName": "Sandra",
-      "lastName": "Jefferson",
-      "role": "Agent",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/common/author1.png"
-    },
-    {
-      "firstName": "Josh",
-      "lastName": "Peterson",
-      "role": "Agent",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/common/author2.png"
-    },
-    {
-      "firstName": "Rick",
-      "lastName": "Barrows",
-      "role": "Supervisor",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/common/author3.png"
-    },
-    {
-      "firstName": "Helen",
-      "lastName": "Liang",
-      "role": "Manager",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/common/author5.png"
-    }
+      {
+          "firstName": "Sandra",
+          "lastName": "Jefferson",
+          "role": "Agent",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/common/author1.png"
+      },
+      {
+          "firstName": "Josh",
+          "lastName": "Peterson",
+          "role": "Agent",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/common/author2.png"
+      },
+      {
+          "firstName": "Rick",
+          "lastName": "Barrows",
+          "role": "Supervisor",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/common/author3.png"
+      },
+      {
+          "firstName": "Helen",
+          "lastName": "Liang",
+          "role": "Manager",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/common/author5.png"
+      }
   ],
   "sliders": [
-    {
-      "title": "Where We Travel: The World",
-      "text1": "Book to more than 325 travel destinations and get vacation getaway ideas for your next trip.",
-      "text2": "Discover vacation destinations and explore your world.",
-      "buttonText": "Know Cumulus",
-      "buttonLink": "about",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/slide1.jpg"
-    },
-    {
-      "title": "Book Travel",
-      "text1": "Cumulus lets you arrange your travel safely and securely by providing you with real-time schedule and fare information.",
-      "text2": "Once you've selected your itinerary, you'll be asked for your credit card to secure your online booking.",
-      "buttonText": "Book Now",
-      "buttonLink": "services",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/slide2.jpg"
-    },
-    {
-      "title": "Need Help?",
-      "text1": "Here, you'll find answers to commonly asked questions about Flight and Hotel reservations, purchasing a ticket",
-      "text2": "boarding and baggage regulations, in-flight services and our wide array of travel programs.",
-      "buttonText": "Questions?",
-      "buttonLink": "contact",
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/slide3.jpg"
-    }
+      {
+          "title": "Where We Travel: The World",
+          "text1": "Book to more than 325 travel destinations and get vacation getaway ideas for your next trip.",
+          "text2": "Discover vacation destinations and explore your world.",
+          "buttonText": "Know Cumulus",
+          "buttonLink": "about",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/slide1.jpg"
+      },
+      {
+          "title": "Book Travel",
+          "text1": "Cumulus lets you arrange your travel safely and securely by providing you with real-time schedule and fare information.",
+          "text2": "Once you've selected your itinerary, you'll be asked for your credit card to secure your online booking.",
+          "buttonText": "Book Now",
+          "buttonLink": "services",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/slide2.jpg"
+      },
+      {
+          "title": "Need Help?",
+          "text1": "Here, you'll find answers to commonly asked questions about Flight and Hotel reservations, purchasing a ticket",
+          "text2": "boarding and baggage regulations, in-flight services and our wide array of travel programs.",
+          "buttonText": "Questions?",
+          "buttonLink": "contact",
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/slide3.jpg"
+      }
   ],
   "timelinePosts": [
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline1.jpg",
-      "title": "Finance",
-      "link": "finance",
-      "text": ""
-    },
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline2.jpg",
-      "title": "Healthcare",
-      "link": "healthcare",
-      "text": ""
-    },
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline3.jpg",
-      "title": "Travel",
-      "link": "travel",
-      "text": ""
-    },
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline4.jpg",
-      "title": "Gas",
-      "link": "utility",
-      "text": ""
-    },
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline5.jpg",
-      "title": "Electricity",
-      "link": "utility",
-      "text": ""
-    },
-    {
-      "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline6.jpg",
-      "title": "City",
-      "link": "city",
-      "text": ""
-    }
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline1.jpg",
+          "title": "Finance",
+          "link": "finance",
+          "text": ""
+      },
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline2.jpg",
+          "title": "Healthcare",
+          "link": "healthcare",
+          "text": ""
+      },
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline3.jpg",
+          "title": "Travel",
+          "link": "travel",
+          "text": ""
+      },
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline4.jpg",
+          "title": "Gas",
+          "link": "utility",
+          "text": ""
+      },
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline5.jpg",
+          "title": "Electricity",
+          "link": "utility",
+          "text": ""
+      },
+      {
+          "image": "https://mm.cxdemo.net/static/images/cumulus/verticals/travel/timeline6.jpg",
+          "title": "City",
+          "link": "city",
+          "text": ""
+      }
   ],
   "testimonials": [
-    {
-      "text": "Disney in December was absolutely delightful! From our 1 day at Magic Kingdom & 2 days at Animal Kingdom, our family was filled with excitement and magical memories.",
-      "author": "Lisa"
-    },
-    {
-      "text": "You were an excellent Travel Agency for us! You considered our unique needs while planning our itinerary. Every suggestion you made was excellent!",
-      "author": "Nicholas"
-    },
-    {
-      "text": "I'm sending you a sincere \"thank you\" for all of your assistance during my recent trip to Australia. It was invaluable to me and I realize and appreciate it greatly.",
-      "author": "Tanya"
-    }
+      {
+          "text": "Disney in December was absolutely delightful! From our 1 day at Magic Kingdom & 2 days at Animal Kingdom, our family was filled with excitement and magical memories.",
+          "author": "Lisa"
+      },
+      {
+          "text": "You were an excellent Travel Agency for us! You considered our unique needs while planning our itinerary. Every suggestion you made was excellent!",
+          "author": "Nicholas"
+      },
+      {
+          "text": "I'm sending you a sincere \"thank you\" for all of your assistance during my recent trip to Australia. It was invaluable to me and I realize and appreciate it greatly.",
+          "author": "Tanya"
+      }
   ],
-  "wxccChatTemplate": {
-    "mediaSpecificConfiguration": {
-      "useOrgProfile": false,
-      "displayText": "dCloudProd2",
-      "useAgentRealName": true
-    },
-    "proactivePrompt": {
-      "enabled": true,
-      "fields": {
-        "promptTime": 30,
-        "promptTitle": {
-          "displayText": "Agent"
-        },
-        "promptMessage": {
-          "message": "Chat with our solution specialists to help serve you better."
-        }
-      }
-    },
-    "virtualAssistant": {
-      "enabled": true,
-      "config": {
-        "id": "1cc5c2d1-5984-4199-890c-75fa0c7e3330",
-        "name": "cumulus-bot"
-      },
-      "welcomeMessage": "Hello, how can I help you today?"
-    },
-    "chatStatusMessages": {
-      "messages": {
-        "bubbleTitleMessage": null,
-        "connectingMessage": {
-          "displayText": "Connecting you to an Agent"
-        },
-        "waitingMessage": {
-          "displayText": "Waiting for an Agent..."
-        },
-        "enterRoomMessage": {
-          "displayText": "Agent has entered the chat room"
-        },
-        "leaveRoomMessage": {
-          "displayText": "Agent has left the chat"
-        },
-        "chattingMessage": {
-          "displayText": "Chat in progress..."
-        }
-      }
-    },
-    "pages": {
-      "customerInformation": {
-        "enabled": true,
-        "fields": {
-          "welcomeHeader": {
-            "attributes": [{
-              "name": "header",
-              "value": "Welcome"
-            }, {
-              "name": "organization",
-              "value": ""
-            }]
-          },
-          "field1": {
-            "attributes": [{
-              "name": "required",
-              "value": "required"
-            }, {
-              "name": "category",
-              "value": {
-                "text": "Customer Information",
-                "id": "customerInfo"
-              }
-            }, {
-              "name": "label",
-              "value": "Name"
-            }, {
-              "name": "hintText",
-              "value": "Name"
-            }, {
-              "name": "type",
-              "value": {
-                "id": "name",
-                "text": "Name",
-                "dictionaryType": {
-                  "fieldSet": "cisco.base.customer",
-                  "fieldName": "Context_First_Name"
+  "owner": "system",
+  "address": "170 West Tasman Dr., San Jose, CA",
+  "domain": "cumulus.com",
+  "gps": {
+      "latitude": 37.4084425,
+      "longitude": -121.9561531
+  },
+  "brand": {
+      "color1": "#0b63ac",
+      "color2": "#2b83cc",
+      "advisorImage": "https://mm.cxdemo.net/static/images/cumulus/common/author1.png",
+      "title": "Cumulus Travel",
+      "iframe": "",
+      "advisorEnabled": true
+  },
+  "languageCode": "en-US",
+  "chatBotToken": "5dc044d7822d43a5839627427ed28935",
+  "chatBotEnabled": true,
+  "chatBotSurveyEnabled": true,
+  "language": "en",
+  "region": "US",
+  "ttsEngine": "nuance",
+  "smsDeflectionMessage": "Hello, this is Cumulus. Please reply to this message to begin chatting with one of our agents.",
+  "duoWelcomeMessage": "Hello, and thanks for calling Cumulus internal service center.",
+  "duoFraudSmsMessage": "Mr Littlefoot,\n\nDue to a recorded fraudulent login attempt, we recommend changing your account information as it may be compromised. You can do that here:\n\nwww.cumulus.com/memberportal\n\nYou can also call us at 1-555-942-9464 if you would rather speak to a fraud specialist.",
+  "ttsVoice": "female",
+  "uccxBubbleChat": false,
+  "gcpProjectId": "cumulus-v2-hotikl",
+  "wxcc": {
+    "en": {
+        "language": "en",
+        "welcomePrompt": "Thank you for calling Cumulus Travel!",
+        "mainMenu": {
+            "tts": "Press 1 for our last minute deals; 2 for flights and hotel booking; 3 for all the other services.",
+            "options": [
+                {
+                    "name": "deals",
+                    "description": "Last Minute Deals"
+                },
+                {
+                    "name": "booking",
+                    "description": "Flights and Hotel Booking"
+                },
+                {
+                    "name": "other",
+                    "description": "Other Services"
                 }
-              },
-              "categoryOptions": ""
-            }]
-          },
-          "field2": {
-            "attributes": [{
-              "name": "required",
-              "value": "required"
-            }, {
-              "name": "category",
-              "value": {
-                "text": "Customer Information",
-                "id": "customerInfo"
-              }
-            }, {
-              "name": "label",
-              "value": "Email"
-            }, {
-              "name": "hintText",
-              "value": "e.g. abc@xyz.com"
-            }, {
-              "name": "type",
-              "value": {
-                "id": "email",
-                "text": "Email",
-                "dictionaryType": {
-                  "fieldSet": "cisco.base.customer",
-                  "fieldName": "Context_Work_Email"
+            ]
+        },
+        "secondMenu": {
+            "tts": "Press 1 to select the trip to Italy; 2 for the Tahiti honeymoon package; 3 for the South America tour.",
+            "options": [
+                {
+                    "name": "italy",
+                    "description": "Italy in a Week"
+                },
+                {
+                    "name": "tahiti",
+                    "description": "Tahiti Honeymoon Package"
+                },
+                {
+                    "name": "america",
+                    "description": "South America Tour"
                 }
-              },
-              "categoryOptions": ""
-            }]
-          },
-          "field3": {
-            "attributes": [{
-              "name": "required",
-              "value": "required"
-            }, {
-              "name": "category",
-              "value": {
-                "text": "Request Information",
-                "id": "requestInfo"
-              }
-            }, {
-              "name": "label",
-              "value": "How may I assist you?"
-            }, {
-              "name": "hintText",
-              "value": "Select from the list or type"
-            }, {
-              "name": "type",
-              "value": {
-                "id": "category",
-                "text": "Category",
-                "dictionaryType": {
-                  "fieldSet": "cisco.base.ccc.pod",
-                  "fieldName": "category"
+            ]
+        }
+    },
+    "es": {
+        "language": "es",
+        "welcomePrompt": "Gracias por llamar a Viajes Cumulus!",
+        "mainMenu": {
+            "tts": "Presione 1 para nuestras ofertas de última hora; 2 para vuelos y reserva de hotel; 3 para todos los demás servicios.",
+            "options": [
+                {
+                    "name": "ofertas",
+                    "description": "Ofertas de Ultimo Minuto"
+                },
+                {
+                    "name": "reserva",
+                    "description": "Reserva de Vuelos y Hoteles"
+                },
+                {
+                    "name": "otro",
+                    "description": "Otros Servicios"
                 }
-              },
-              "categoryOptions": "Sales"
-            }]
-          },
-          "field4": {
-            "attributes": [{
-              "name": "required",
-              "value": "optional"
-            }, {
-              "name": "category",
-              "value": {
-                "text": "Request Information",
-                "id": "requestInfo"
-              }
-            }, {
-              "name": "label",
-              "value": "Additional Details"
-            }, {
-              "name": "hintText",
-              "value": "Describe the issue you are experiencing"
-            }, {
-              "name": "type",
-              "value": {
-                "id": "reason",
-                "text": "Reason",
-                "dictionaryType": {
-                  "fieldSet": "cisco.base.ccc.pod",
-                  "fieldName": "cccChatReason"
+            ]
+        },
+        "secondMenu": {
+            "tts": "Presione 1 para seleccionar el viaje a Italia; 2 para el paquete de luna de miel Tahití; 3 para la gira sudamericana.",
+            "options": [
+                {
+                    "name": "italia",
+                    "description": "Italia en una Semana"
+                },
+                {
+                    "name": "tahiti",
+                    "description": "Paquete Luna de Miel Tahiti"
+                },
+                {
+                    "name": "america",
+                    "description": "Tour SurAmerica"
                 }
-              },
-              "categoryOptions": ""
-            }]
-          }
+            ]
         }
-      },
-      "agentUnavailable": {
-        "enabled": false,
-        "fields": {
-          "agentUnavailableMessage": {
-            "displayText": "Sorry, we are unavailable at the moment. Please try again later."
-          }
+    },
+    "pt": {
+        "language": "pt",
+        "welcomePrompt": "Obrigado por ligar para a Cumulus Travel!",
+        "mainMenu": {
+            "tts": "Pressione 1 para nossas ofertas de última hora; 2 para reservas de voos e hotéis; 3 para todos os outros serviços.",
+            "options": [
+                {
+                    "name": "ofertas",
+                    "description": "Ofertas de Ultima Hora"
+                },
+                {
+                    "name": "reserva",
+                    "description": "Reservas de Voos e Hotéis"
+                },
+                {
+                    "name": "outro",
+                    "description": "Ostros Serviços"
+                }
+            ]
+        },
+        "secondMenu": {
+            "tts": "Pressione 1 para selecionar a viagem para a Itália; 2 para o pacote de lua de mel no Taiti; 3 para a turnê na América do Sul.",
+            "options": [
+                {
+                    "name": "italia",
+                    "description": "Itália em uma Semana"
+                },
+                {
+                    "name": "tahiti",
+                    "description": "Pacote Lua de Mel Taiti"
+                },
+                {
+                    "name": "america",
+                    "description": "Excursão pela América do Sul"
+                }
+            ]
         }
-      },
-      "offHours": {
-        "enabled": true,
-        "message": "We are currently offline. Please try again during our business hours.",
-        "schedule": {
-          "businessDays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "open24Hours": true,
-          "timings": {
-            "startTime": "08:00 AM",
-            "endTime": "04:00 PM"
-          },
-          "timezone": "America/New_York"
+    },
+    "fr": {
+        "language": "fr",
+        "welcomePrompt": "Merci d'avoir appelé Cumulus Travel !",
+        "mainMenu": {
+            "tts": "Appuyez sur 1 pour nos offres de dernière minute ; 2 pour les réservations de vols et d'hôtels ; 3 pour tous les autres services.",
+            "options": [
+                {
+                    "name": "accord",
+                    "description": "Offres de Dernière Minute"
+                },
+                {
+                    "name": "réservation",
+                    "description": "Vols et Réservation d'Hôtel"
+                },
+                {
+                    "name": "autre",
+                    "description": "Autres Services"
+                }
+            ]
+        },
+        "secondMenu": {
+            "tts": "Appuyez sur 1 pour sélectionner le voyage en Italie ; 2 pour le forfait lune de miel Tahiti ; 3 pour la tournée en Amérique du Sud.",
+            "options": [
+                {
+                    "name": "italie",
+                    "description": "L'Italie en une Semaine"
+                },
+                {
+                    "name": "tahiti",
+                    "description": "Forfait Lune de Miel Tahiti"
+                },
+                {
+                    "name": "america",
+                    "description": "Tournée en Amérique du Sud"
+                }
+            ]
         }
-      },
-      "feedback": {
-        "enabled": true,
-        "fields": {
-          "feedbackQuery": {
-            "displayText": "Please rate your chat experience"
-          },
-          "comment": {
-            "displayText": "Add comments",
-            "dictionaryType": {
-              "fieldSet": "cisco.base.rating",
-              "fieldName": "cccRatingComments"
-            }
-          }
-        }
-      }
     }
   },
   "webexconnect": {
