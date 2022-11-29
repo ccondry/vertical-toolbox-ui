@@ -12,6 +12,8 @@ import livereload from 'rollup-plugin-livereload'
 import filesize from 'rollup-plugin-filesize'
 import requireContext from 'rollup-plugin-require-context'
 import { visualizer } from 'rollup-plugin-visualizer'
+import copy from 'rollup-plugin-copy'
+import cleaner from 'rollup-plugin-cleaner'
 
 const production = !process.env.ROLLUP_WATCH
 const port = 3000
@@ -19,13 +21,24 @@ const port = 3000
 export default {
   input: 'client/main.js',
   output: {
-    dir: 'dist',
+    dir: 'dist/branding',
     entryFileNames: 'app.js',
     format: 'iife',
     sourcemap: !production ? 'inline' : false,
     name: 'app',
   },
   plugins: [
+    cleaner({
+      targets: [
+        'dist'
+      ]
+    }),
+    copy({
+      targets: [
+        { src: 'client/index.html', dest: 'dist/branding' },
+        { src: 'client/assets/*', dest: 'dist/branding/assets' }
+      ]
+    }),
     json(),
     alias({
       entries: [{ find: 'client', replacement: __dirname + '/client' }],
@@ -64,8 +77,9 @@ export default {
     !production &&
       serve({
         open: true,
+        openPage: '/branding/',
         contentBase: 'dist',
-        historyApiFallback: true,
+        historyApiFallback: '/branding/index.html',
         port,
       }),
     !production && livereload({ watch: 'dist' }),
