@@ -79,10 +79,13 @@ export default {
         open: true,
         openPage: '/branding/',
         contentBase: 'dist',
-        historyApiFallback: '/branding/index.html',
+        historyApiFallback: '/branding/',
         port,
       }),
-    !production && livereload({ watch: 'dist' }),
+    !production &&
+      livereload({
+        watch: 'dist'
+      }),
     production && filesize(),
   ],
   watch: {
