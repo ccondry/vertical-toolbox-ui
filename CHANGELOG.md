@@ -3,6 +3,15 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2022.12.13
+
+### Features
+* **Webex Connect:** Build out Webex Connect options for QA.
+
+### Fixes
+* **Site:** Fix page reload sometimes resets the vertical selection.
+
+
 # 2022.11.28
 
 ### Fixes
