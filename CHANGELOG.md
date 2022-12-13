@@ -3,6 +3,11 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2022.12.13-1
+
+### Fixes
+* **Build:** Fix build and update script copying files to the wrong location.
+
 # 2022.12.13
 
 ### Features
