@@ -46,6 +46,7 @@
         v-model="model.Building"
         :placeholder="myDefaults.brandBuilding"
         @input="updateParent"
+        style="min-width: 30rem;"
         />
         <div class="control">
           <span class="button is-static">, please press 1.</span>
