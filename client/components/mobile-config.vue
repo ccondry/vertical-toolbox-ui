@@ -83,7 +83,7 @@
           :active="working.images.mobileWallpaper"
           :can-cancel="false"
           />
-          <b-field label="Wallpaper">
+          <b-field label="Wallpaper Image">
             <img :src="model.mobileWallpaper" style="max-height: 256px;"/>
           </b-field>
           <b-tooltip

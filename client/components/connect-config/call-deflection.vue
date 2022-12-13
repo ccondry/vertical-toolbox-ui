@@ -21,13 +21,35 @@
     </div>
     <!-- else object field exists -->
     <div class="card-content" v-else>
+
       <!-- Brand Name -->
       <b-field label="Brand Name">
+        <div class="control">
+          <span class="button is-static">Thank you for calling</span>
+        </div>
         <b-input
         v-model="model.brandName"
-        :placeholder="defaults.brandName"
+        :placeholder="myDefaults.brandName"
         @input="updateParent"
         />
+        <div class="control">
+          <span class="button is-static">customer support.</span>
+        </div>
+      </b-field>
+      
+      <!-- Brand Building -->
+      <b-field label="Brand Building">
+        <div class="control">
+          <span class="button is-static">To reach</span>
+        </div>
+        <b-input
+        v-model="model.Building"
+        :placeholder="myDefaults.brandBuilding"
+        @input="updateParent"
+        />
+        <div class="control">
+          <span class="button is-static">, please press 1.</span>
+        </div>
       </b-field>
       
       <b-field>

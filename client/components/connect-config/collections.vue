@@ -21,8 +21,12 @@
     </div>
     <!-- else object field exists -->
     <div class="card-content" v-else>
+
       <!-- Brand Name -->
       <b-field label="Brand Name">
+        <div class="control">
+          <span class="button is-static">Hi [Your Name], thanks for reaching out</span>
+        </div>
         <b-input
         v-model="model.brandName"
         :placeholder="myDefaults.brandName"

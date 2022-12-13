@@ -527,28 +527,56 @@
   },
   "webexconnect": {
     "global": {
-      "brandName": "Cumulus Finance"
+        "brandName": "Cumulus Finance",
+        "brandLogo": "https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg",
+        "mobileHomeWallpaper": "https://mm.cxdemo.net/static/images/cumulus/common/wxconnect-app-home-background.jpg",
+        "mobilePromoWallpaper": "https://mm.cxdemo.net/static/images/cumulus/common/wxconnect-app-promo-background.jpg",
+        "brandBuilding": "Cumulus Healthcare store",
+        "brandCurrency": "USD",
+        "brandWebsite": "https://www.webex.com/",
+        "brandAddress": "170 West Tasman Dr., San Jose, CA",
+        "repTitle": "your Financial Advisor",
+        "repName": "John Doe",
+        "repBuilding": "your branch",
+        "custName": "Michael Littlefoot",
+        "custAddress": "1125 Madison Avenue, New York, NY",
+        "custPostcode": "10028",
+        "custEmailAddress": "michael.littlefoot@dcloud.cisco.com"
     },
     "appointments": {
-      "brandName": "Cumulus Finance"
+        "brandName": "Cumulus Finance",
+        "repTitle": "your Financial Advisor",
+        "repName": "Mr. John Doe",
+        "repBuilding": "your branch"
     },
     "collections": {
-      "brandName": "Cumulus Finance"
+        "brandName": "Cumulus Finance"
     },
     "callDeflection": {
-      "brandName": "Cumulus Healthcare"
+        "brandName": "Cumulus Healthcare",
+        "brandBuilding": "Cumulus Healthcare store"
     },
     "automotive": {
-      "brandName": "Cumulus Automotive"
+        "brandName": "Cumulus Automotive",
+        "brandWebsite": "https://www.webex.com/"
     },
     "productActivationTS": {
-      "brandName": "Cumulus Utility"
+        "brandName": "Cumulus Utility",
+        "custName": "Michael Littlefoot",
+        "custAddress": "1125 Madison Avenue, New York, NY",
+        "custPostcode": "10028",
+        "custEmailAddress": "michael.littlefoot@dcloud.cisco.com"
     },
     "productActivationSO": {
-      "brandName": "Cumulus Mobile"
+        "brandName": "Cumulus Mobile",
+        "brandCurrency": "USD",
+        "brandWebsite": "https://www.webex.com/"
     },
     "retail": {
-      "brandName": "Cumulus Retail"
+        "brandName": "Cumulus Retail",
+        "brandWebsite": "https://www.webex.com/",
+        "brandCurrency": "USD",
+        "brandAddress": "170 West Tasman Dr., San Jose, CA"
     }
   }
 }

@@ -22,17 +22,132 @@
       </div>
       <!-- else global object field exists -->
       <div class="card-content" v-else>
+
         <!-- Brand Name -->
         <b-field label="Brand Name">
-          <b-input
-          v-model="model.brandName"
-          :placeholder="myDefaults.brandName"
-          @input="updateParent"
+          <template slot="message">
+            <!-- <strong>Brand Name</strong> -->
+            <!-- <div style="font-size: 200%; color: red;">Brand Name</div> -->
+            <div class="is-size-6 has-text-left has-text-info">Brand Name applies to all use cases.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Thanks for booking an appointment with <b>Cumulus Finance</b>, Thank you for calling <b>Cumulus Healthcare</b>, Welcome to <b>Cumulus Utility</b>.</div>
+          </template>
+            <b-input v-model="model.brandName" :placeholder="myDefaults.brandName" @input="updateParent"
           />
         </b-field>
+
+        <!-- Brand Building -->
+        <b-field label="Brand Building">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Brand Building applies to Call Deflection only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: To reach <b>Cumulus Healthcare store</b>, please press 1.</div>
+          </template>
+            <b-input v-model="model.brandBuilding" :placeholder="myDefaults.brandBuilding" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Brand Currency -->
+        <b-field label="Brand Currency">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Brand Currency applies to Product Activation (Sim Offer) and Retail Journey.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: 20GB Data at <b>USD</b> 15 per month, The applicable amount due is: <b>USD</b> 70.</div>
+          </template>
+            <b-input v-model="model.brandCurrency" :placeholder="myDefaults.brandCurrency" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Brand Website -->
+        <b-field label="Brand Website">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Brand Website applies to Automotive, Product Activation (Sim Offer) and Retail Journey.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Welcome to Cumulus Automotive <b>(website url)</b>, Welcome to Cumulus Mobile <b>(website url)</b>, Welcome to Cumulus Retail <b>(website url)</b>.</div>
+          </template>
+            <b-input v-model="model.brandWebsite" :placeholder="myDefaults.brandWebsite" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Brand Address -->
+        <b-field label="Brand Address">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Brand Address applies to Retail Journey only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Based on the location shared by you, we found the nearest store to be: Cumulus Retail - Location: <b>170 West Tasman Dr., San Jose, CA</b>.</div>
+          </template>
+            <b-input v-model="model.brandAddress" :placeholder="myDefaults.brandAddress" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Representative Title -->
+        <b-field label="Representative Title">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Representative Title applies to Appointments only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: The 45 minutes appointment with <b>your Financial Advisor</b>, is confirmed for.</div>
+          </template>
+            <b-input v-model="model.repTitle" :placeholder="myDefaults.repTitle" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Representative Name -->
+        <b-field label="Representative Name">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Representative Name applies to Appointments only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Your 45 minutes video appointment with your Financial Advisor, <b>Mr. John Doe</b>, is due to start shortly.</div>
+          </template>
+            <b-input v-model="model.repName" :placeholder="myDefaults.repName" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Representative Building -->
+        <b-field label="Representative Building">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Representative Building applies to Appointments only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: If you can't make it to <b>your branch</b> then you can book a video call consultation instead.</div>
+          </template>
+            <b-input v-model="model.repBuilding" :placeholder="myDefaults.repBuilding" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Customer Name -->
+        <b-field label="Customer Name">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Customer Name applies to Product Activation (Tariff Switch) only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Primary Account Holder Name: <b>Michael Littlefoot</b></div>
+          </template>
+            <b-input v-model="model.custName" :placeholder="myDefaults.custName" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Customer Address -->
+        <b-field label="Customer Address">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Customer Address applies to Product Activation (Tariff Switch) only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Address: <b>1125 Madison Avenue, New York, NY</b></div>
+          </template>
+            <b-input v-model="model.custAddress" :placeholder="myDefaults.custAddress" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Customer Postcode -->
+        <b-field label="Customer Postcode">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Customer Postcode applies to Product Activation (Tariff Switch) only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Postcode: <b>10028</b></div>
+          </template>
+            <b-input v-model="model.custPostcode" :placeholder="myDefaults.custPostcode" @input="updateParent"
+          />
+        </b-field>
+
+        <!-- Customer Email -->
+        <b-field label="Customer Email">
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Customer Email applies to Product Activation (Tariff Switch) only.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Email Address: <b>michael.littlefoot@dcloud.cisco.com</b></div>
+          </template>
+            <b-input v-model="model.custEmailAddress" :placeholder="myDefaults.custEmailAddress" @input="updateParent"
+          />
+        </b-field>
+
         <!-- Brand Logo -->
         <!-- Image URL manual edit, for admins only -->
-        <b-field label="Logo URL">
+        <b-field label="Brand Logo URL">
           <b-input
           v-model.lazy="model.brandLogo"
           :placeholder="myDefaults.brandLogo"
@@ -69,6 +184,7 @@
             </b-button>
           </b-field>
         </b-field>
+
         <!-- Mobile App Home Wallpaper -->
         <!-- Image URL manual edit, for admins only -->
         <b-field label="Mobile App Home Wallpaper URL">
@@ -85,7 +201,7 @@
           :active="working.images.mobileHomeWallpaper"
           :can-cancel="false"
           />
-          <b-field label="Wallpaper">
+          <b-field label="Mobile App Home Wallpaper Image">
             <img
             :src="model.mobileHomeWallpaper"
             style="max-height: 256px;"
@@ -108,11 +224,10 @@
             </button>
           </b-field>
         </b-field>
+
         <!-- Mobile App Promo Wallpaper -->
         <!-- Image URL manual edit, for admins only -->
-        <b-field
-        label="Mobile App Promo Wallpaper URL"
-        >
+        <b-field label="Mobile App Promo Wallpaper URL">
           <b-input
           v-model="model.mobilePromoWallpaper"
           :placeholder="myDefaults.mobilePromoWallpaper"
@@ -126,7 +241,7 @@
           :active="working.images.mobilePromoWallpaper" 
           :can-cancel="false"
           />
-          <b-field label="Wallpaper">
+          <b-field label="Mobile App Promo Wallpaper Image">
             <img
             :src="model.mobilePromoWallpaper"
             style="max-height: 256px;"

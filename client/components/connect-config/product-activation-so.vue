@@ -40,7 +40,7 @@
 <script>
 import {mapGetters} from 'vuex'
 
-const title = 'Product Activation Sim Offer Branding'
+const title = 'Product Activation (Sim Offer) Branding'
 const modelKey = 'productActivationSO'
 const tooltips = {
   mobileWallpaperUpload: 'test'

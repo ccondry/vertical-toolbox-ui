@@ -21,29 +21,78 @@
     </div>
     <!-- else object field exists -->
     <div class="card-content" v-else>
-      <!-- Brand Name -->
-      <b-field label="Brand Name">
+
+      <!--
+      <b-field label="Brand Name" message="Brand Name">
         <b-input
         v-model="model.brandName"
         :placeholder="myDefaults.brandName"
         @input="updateParent"
         />
       </b-field>
+      -->
 
-      <b-field message="Rep Title">
-        <p class="control">
-          <span class="button is-static">
-            The 45 minutes appointment with
-          </span>
-        </p>
+      <!-- Brand Name -->
+      <b-field label="Brand Name">
+        <!--
+        <template slot="message">
+          <div class="is-size-3 has-text-right has-text-info">large text message here</div>
+          <div class="is-size-3 has-text-right has-text-info">large text message here second row</div>
+        </template>
+        -->
+        <div class="control">
+          <span class="button is-static">Hi [Your Name], thanks for booking an appointment with</span>
+        </div>
+        <b-input
+        v-model="model.brandName"
+        :placeholder="myDefaults.brandName"
+        @input="updateParent"
+        />
+      </b-field>
+      
+      <!-- Representative Title -->
+      <b-field label="Representative Title">
+        <div class="control">
+          <span class="button is-static">The 45 minutes appointment with</span>
+        </div>
         <b-input
         v-model="model.repTitle"
         :placeholder="myDefaults.repTitle"
         @input="updateParent"
         />
-        <p class="control">
-          <span class="button is-static">, is confirmed for Tuesday, 27/9/2022, at 3pm.</span>
-        </p>
+        <div class="control">
+          <span class="button is-static">, is confirmed for</span>
+        </div>
+      </b-field>
+      
+      <!-- Representative Building -->
+      <b-field label="Representative Building">
+        <div class="control">
+          <span class="button is-static">If you can't make it to</span>
+        </div>
+        <b-input
+        v-model="model.repBuilding"
+        :placeholder="myDefaults.repBuilding"
+        @input="updateParent"
+        />
+        <div class="control">
+          <span class="button is-static">then you can book a video call consultation instead</span>
+        </div>
+      </b-field>
+      
+      <!-- Representative Name -->
+      <b-field label="Representative Name">
+        <div class="control">
+          <span class="button is-static">Your 45 minutes video appointment with [Representative Title],</span>
+        </div>
+        <b-input
+        v-model="model.repName"
+        :placeholder="myDefaults.repName"
+        @input="updateParent"
+        />
+        <div class="control">
+          <span class="button is-static">, is due to start shortly</span>
+        </div>
       </b-field>
       
       <b-field>
