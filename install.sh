@@ -11,7 +11,7 @@ if [ $? -eq 0 ]; then
     echo "making web files directory"
     mkdir -p /var/www/toolbox/branding
     echo "copying new web files"
-    cp -rf dist/* /var/www/toolbox/branding/
+    cp -rf dist/branding/* /var/www/toolbox/branding/
   else
     echo "npm failed to run build script"
   fi
