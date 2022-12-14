@@ -536,7 +536,7 @@
         "brandWebsite": "https://www.webex.com/",
         "brandAddress": "170 West Tasman Dr., San Jose, CA",
         "repTitle": "your Financial Advisor",
-        "repName": "John Doe",
+        "repName": "Mr. John Doe",
         "repBuilding": "your branch",
         "custName": "Michael Littlefoot",
         "custAddress": "1125 Madison Avenue, New York, NY",
@@ -558,7 +558,8 @@
     },
     "automotive": {
         "brandName": "Cumulus Automotive",
-        "brandWebsite": "https://www.webex.com/"
+        "brandWebsite": "https://www.webex.com/",
+        "brandLogo": "https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg"
     },
     "productActivationTS": {
         "brandName": "Cumulus Utility",
@@ -570,11 +571,13 @@
     "productActivationSO": {
         "brandName": "Cumulus Mobile",
         "brandCurrency": "USD",
-        "brandWebsite": "https://www.webex.com/"
+        "brandWebsite": "https://www.webex.com/",
+        "brandLogo": "https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg"
     },
     "retail": {
         "brandName": "Cumulus Retail",
         "brandWebsite": "https://www.webex.com/",
+        "brandLogo": "https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg",
         "brandCurrency": "USD",
         "brandAddress": "170 West Tasman Dr., San Jose, CA"
     }

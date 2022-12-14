@@ -47,6 +47,7 @@
         v-model="model.brandName"
         :placeholder="myDefaults.brandName"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
       </b-field>
       
@@ -59,6 +60,7 @@
         v-model="model.repTitle"
         :placeholder="myDefaults.repTitle"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
         <div class="control">
           <span class="button is-static">, is confirmed for</span>
@@ -74,6 +76,7 @@
         v-model="model.repBuilding"
         :placeholder="myDefaults.repBuilding"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
         <div class="control">
           <span class="button is-static">then you can book a video call consultation instead</span>
@@ -83,12 +86,13 @@
       <!-- Representative Name -->
       <b-field label="Representative Name">
         <div class="control">
-          <span class="button is-static">Your 45 minutes video appointment with [Representative Title],</span>
+          <span class="button is-static">Your 45 minutes video appointment with</span>
         </div>
         <b-input
         v-model="model.repName"
         :placeholder="myDefaults.repName"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
         <div class="control">
           <span class="button is-static">, is due to start shortly</span>

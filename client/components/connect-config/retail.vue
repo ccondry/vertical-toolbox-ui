@@ -21,15 +21,102 @@
     </div>
     <!-- else object field exists -->
     <div class="card-content" v-else>
+
       <!-- Brand Name -->
       <b-field label="Brand Name">
+        <div class="control">
+          <span class="button is-static">Welcome to</span>
+        </div>
         <b-input
         v-model="model.brandName"
-        :placeholder="defaults.brandName"
+        :placeholder="myDefaults.brandName"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
       </b-field>
       
+      <!-- Brand Website -->
+      <b-field label="Brand Website">
+        <div class="control">
+          <span class="button is-static">Website:</span>
+        </div>
+        <b-input
+        v-model="model.brandWebsite"
+        :placeholder="myDefaults.brandWebsite"
+        @input="updateParent"
+        style="min-width: 40rem;"
+        />
+      </b-field>
+      
+      <!-- Brand Currency -->
+      <b-field label="Brand Currency">
+        <div class="control">
+          <span class="button is-static">The applicable amount due is:</span>
+        </div>
+        <b-input
+        v-model="model.brandCurrency"
+        :placeholder="myDefaults.brandCurrency"
+        @input="updateParent"
+        style="max-width: 5rem;"
+        />
+        <div class="control">
+          <span class="button is-static">70</span>
+        </div>
+      </b-field>
+      
+      <!-- Brand Address -->
+      <b-field label="Brand Address">
+        <div class="control">
+          <span class="button is-static">Based on the location shared by you, we found the nearest store to be:</span>
+        </div>
+        <b-input
+        v-model="model.brandAddress"
+        :placeholder="myDefaults.brandAddress"
+        @input="updateParent"
+        style="min-width: 30rem;"
+        />
+      </b-field>
+      
+      <!-- Brand Logo -->
+      <!-- Image URL manual edit, for admins only -->
+      <b-field label="Brand Logo URL">
+        <b-input
+        v-model.lazy="model.brandLogo"
+        :placeholder="myDefaults.brandLogo"
+        @input="updateParent"
+        />
+      </b-field>
+      <!-- Image image editor for users -->
+      <b-field grouped>
+        <b-loading
+        :is-full-page="false"
+        :active="working.images.brandLogo"
+        :can-cancel="false"
+        />
+        <b-field label="Brand Logo Image">
+          <img
+          :src="model.brandLogo"
+          style="max-width: 256px; max-height: 64px;"
+          />
+        </b-field>
+        <b-tooltip
+        :label="getTooltip('brandLogoUpload')"
+        multilined
+        position="is-top"
+        >
+          <b-icon type="is-primary" icon="information" />
+        </b-tooltip>
+        <b-field label="Upload">
+          <b-button
+          type="is-primary"
+          rounded
+          @click="launchFilePicker('brandLogo')"
+          >
+            Browse...
+          </b-button>
+        </b-field>
+      </b-field>
+
       <b-field>
         <save-button />
       </b-field>
@@ -43,11 +130,30 @@ import {mapGetters} from 'vuex'
 const title = 'Retail Journey Branding'
 const modelKey = 'retail'
 const tooltips = {
-  mobileWallpaperUpload: 'test'
+  brandLogoUpload: 'The logo should not exceed 500x500 pixels to reduce loading times and device bandwidth use. It should be of high enough quality to not look blurred or distorted when displayed on the device.',
+  mobileWallpaperUpload: 'The mobile app wallpaper image will stretch to fit the available space. The wallpaper must be in Portrait format as the mobile app does not support Landscape view. We recommend using an image that is at least full HD resolution (i.e. 1080x1920). The app includes its own bottom navigation bar, so uploaded images should not include their own.'
 }
 
 export default {
   name: 'WebexConnectRetailConfig',
+
+  directives: {
+    uploader: {
+      bind (el, binding, vnode) {
+        el.addEventListener('change', e => {
+          // validate that a file was selected
+          if (!e.target.files || !e.target.files[0]) {
+            return
+          }
+          // console.log('change uploader with ref', vnode.data.ref, e.target.files)
+          console.log('change uploader with ref', vnode.context.uploadRef, e.target.files)
+          // vnode.context.uploadFile(vnode.data.ref, e.target.files[0])
+          vnode.context.uploadFile(vnode.context.uploadRef, e.target.files[0])
+          // vnode.context.chosenFiles = e.target.files
+        })
+      }
+    }
+  },
 
   props: {
     value: {
@@ -74,7 +180,8 @@ export default {
       model,
       modelKey,
       title,
-      tooltips
+      tooltips,
+      uploadRef: null
     }
   },
 
@@ -97,6 +204,60 @@ export default {
   },
 
   methods: {
+    launchFilePicker (ref) {
+      console.log('launching file picker for', ref)
+      // set ref
+      this.uploadRef = ref
+      // launch native file picker
+      this.$refs.file.click()
+    },
+    uploadFile (node, file) {
+      console.log('connect-config/global.vue - uploading file', node, file)
+      // init file reader
+      const reader = new window.FileReader()
+      reader.onload = (e) => {
+        const data = e.currentTarget.result
+        // get file name
+        const name = file.name.substring(0, file.name.lastIndexOf('.')) + '_' + Date.now()
+        // set up callback for when the file is done uploading
+        const callback = ({url}) => {
+          // map out the node names to model data references
+          const map = {
+            // brand logo
+            'brandLogo': ({url}) => {
+              console.log('brand logo url', url)
+              // reset img
+              this.model.brandLogo = ''
+              // set img url
+              this.model.brandLogo = url + '?nocache=' + Date.now()
+            }
+          }
+          // update our model with the new file URL
+          try {
+            map[node](url)
+            // update state with model changes
+            this.updateParent()
+          } catch (e) {
+            // continue
+          }
+        }
+        // determine node name
+        let nodeName = node
+
+        // actually upload the file now
+        this.$emit('upload', {
+          name,
+          node: nodeName,
+          vertical: this.model.id,
+          data, 
+          callback
+        })
+        // reset the file input
+        this.$refs.file.value = ''
+      }
+      // read the file data
+      reader.readAsDataURL(file)
+    },
     getTooltip (type) {
       try {
         return this.tooltips[type]

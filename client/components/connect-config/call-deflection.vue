@@ -31,6 +31,7 @@
         v-model="model.brandName"
         :placeholder="myDefaults.brandName"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
         <div class="control">
           <span class="button is-static">customer support.</span>
@@ -43,10 +44,10 @@
           <span class="button is-static">To reach</span>
         </div>
         <b-input
-        v-model="model.Building"
+        v-model="model.brandBuilding"
         :placeholder="myDefaults.brandBuilding"
         @input="updateParent"
-        style="min-width: 30rem;"
+        style="min-width: 20rem;"
         />
         <div class="control">
           <span class="button is-static">, please press 1.</span>

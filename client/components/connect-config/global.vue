@@ -49,7 +49,7 @@
         <b-field label="Brand Currency">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Brand Currency applies to Product Activation (Sim Offer) and Retail Journey.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: 20GB Data at <b>USD</b> 15 per month, The applicable amount due is: <b>USD</b> 70.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: 10GB Data at <b>USD</b> 10 per month, The applicable amount due is: <b>USD</b> 70.</div>
           </template>
             <b-input v-model="model.brandCurrency" :placeholder="myDefaults.brandCurrency" @input="updateParent"
           />
@@ -156,6 +156,9 @@
         </b-field>
         <!-- Image image editor for users -->
         <b-field grouped>
+          <template slot="message">
+            <div class="is-size-6 has-text-left has-text-info">Brand Logo applies to Automotive, Product Activation (Sim Offer) and Retail Journey.</div>
+          </template>
           <b-loading
           :is-full-page="false"
           :active="working.images.brandLogo"
@@ -168,7 +171,7 @@
             />
           </b-field>
           <b-tooltip
-          :label="getTooltip('mobileLogoUpload')"
+          :label="getTooltip('brandLogoUpload')"
           multilined
           position="is-top"
           >
@@ -288,8 +291,8 @@ import {mapGetters} from 'vuex'
 const title = 'Global Branding'
 const modelKey = 'global'
 const tooltips = {
-  mobileLogoUpload: 'This image will be proportionally scaled down to 50px height.',
-  mobileWallpaperUpload: 'test'
+  brandLogoUpload: 'The logo should not exceed 500x500 pixels to reduce loading times and device bandwidth use. It should be of high enough quality to not look blurred or distorted when displayed on the device.',
+  mobileWallpaperUpload: 'The mobile app wallpaper image will stretch to fit the available space. The wallpaper must be in Portrait format as the mobile app does not support Landscape view. We recommend using an image that is at least full HD resolution (i.e. 1080x1920). The app includes its own bottom navigation bar, so uploaded images should not include their own.'
 }
 
 export default {
@@ -381,7 +384,7 @@ export default {
         const callback = ({url}) => {
           // map out the node names to model data references
           const map = {
-            // mobile app logo
+            // brand logo
             'brandLogo': ({url}) => {
               console.log('brand logo url', url)
               // reset img

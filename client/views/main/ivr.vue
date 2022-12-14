@@ -30,7 +30,7 @@
         />
 
         <!-- Save button -->
-        <b-field>
+        <b-field style="margin-top: 1rem;">
           <save-button />
         </b-field>
       </article>

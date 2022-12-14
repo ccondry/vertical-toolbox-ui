@@ -21,12 +21,69 @@
     </div>
     <!-- else object field exists -->
     <div class="card-content" v-else>
+
       <!-- Brand Name -->
       <b-field label="Brand Name">
+        <div class="control">
+          <span class="button is-static">Welcome to</span>
+        </div>
         <b-input
         v-model="model.brandName"
-        :placeholder="defaults.brandName"
+        :placeholder="myDefaults.brandName"
         @input="updateParent"
+        style="min-width: 15rem;"
+        />
+      </b-field>
+      
+      <!-- Customer Name -->
+      <b-field label="Customer Name">
+        <div class="control">
+          <span class="button is-static">Primary Account Holder Name:</span>
+        </div>
+        <b-input
+        v-model="model.custName"
+        :placeholder="myDefaults.custName"
+        @input="updateParent"
+        style="min-width: 15rem;"
+        />
+      </b-field>
+      
+      <!-- Customer Address -->
+      <b-field label="Customer Address">
+        <div class="control">
+          <span class="button is-static">Address:</span>
+        </div>
+        <b-input
+        v-model="model.custAddress"
+        :placeholder="myDefaults.custAddress"
+        @input="updateParent"
+        style="min-width: 30rem;"
+        />
+      </b-field>
+      
+      <!-- Customer Postcode -->
+      <b-field label="Customer Postcode">
+        <div class="control">
+          <span class="button is-static">Postcode:</span>
+        </div>
+        <b-input
+        v-model="model.custPostcode"
+        :placeholder="myDefaults.custPostcode"
+        @input="updateParent"
+        style="max-width: 7rem;"
+        />
+      </b-field>
+      
+      <!-- Customer Email Address -->
+      <b-field label="Customer Email Address">
+        <div class="control">
+          <span class="button is-static">Email Address:</span>
+        </div>
+        <b-input
+        v-model="model.custEmailAddress"
+        :placeholder="myDefaults.custEmailAddress"
+        @input="updateParent"
+        style="min-width: 20rem;"
         />
       </b-field>
       

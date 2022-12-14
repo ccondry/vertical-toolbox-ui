@@ -31,6 +31,7 @@
         v-model="model.brandName"
         :placeholder="myDefaults.brandName"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
       </b-field>
       
