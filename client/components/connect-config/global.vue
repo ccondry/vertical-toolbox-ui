@@ -190,7 +190,7 @@
 
         <!-- Mobile App Home Wallpaper -->
         <!-- Image URL manual edit, for admins only -->
-        <b-field label="Mobile App Home Wallpaper URL">
+        <b-field label="Mobile App Home Wallpaper URL" style="margin-top: 3rem;">
           <b-input
           v-model="model.mobileHomeWallpaper"
           :placeholder="myDefaults.mobileHomeWallpaper"
