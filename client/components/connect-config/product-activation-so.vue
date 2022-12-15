@@ -66,7 +66,7 @@
       
       <!-- Brand Logo -->
       <!-- Image URL manual edit, for admins only -->
-      <b-field label="Brand Logo URL">
+      <b-field label="Brand Logo URL" v-if="isAdmin">
         <b-input
         v-model.lazy="model.brandLogo"
         :placeholder="myDefaults.brandLogo"
@@ -83,7 +83,7 @@
         <b-field label="Brand Logo Image">
           <img
           :src="model.brandLogo"
-          style="max-width: 256px; max-height: 64px;"
+          style="max-width: 128px;"
           />
         </b-field>
         <b-tooltip
@@ -96,7 +96,6 @@
         <b-field label="Upload">
           <b-button
           type="is-primary"
-          rounded
           @click="launchFilePicker('brandLogo')"
           >
             Browse...
@@ -107,6 +106,16 @@
       <b-field>
         <save-button />
       </b-field>
+
+      <!-- hidden file input uploader -->
+      <input
+      type="file"
+      style="display:none"
+      ref="file"
+      accept="image/*"
+      v-uploader
+      />
+
     </div>
   </b-collapse>
 </template>
@@ -174,6 +183,8 @@ export default {
 
   computed: {
     ...mapGetters([
+      'isAdmin',
+      'isQa',
       'working'
     ]),
     myDefaults () {

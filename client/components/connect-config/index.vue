@@ -10,15 +10,17 @@
       </div>
 
       <div class="card-content">
-        <p>
+        <b-message type="is-info" has-icon>
           Global Branding settings apply across use cases. Please note that not all settings apply to all use cases.
-          <br /><br />
+          <br />
+          <br />
+          To override these settings use the use case specific branding options. Where fields are empty, global branding will be used.
+          <!-- <br /> -->
           <!-- Global Branding fields apply to all use cases, where the fields are used in messaging. Examples of use are given for each field. -->
           <!-- <br /> -->
           <!-- Use case specific branding can be set further down this page. -->
           <!-- <br /> -->
-          To override these settings use the use case specific branding options. Where fields are empty, global branding will be used.
-        </p>
+        </b-message>
       </div>
 
       <!-- Check if any the base object field is missing -->
