@@ -147,7 +147,7 @@
 
         <!-- Brand Logo -->
         <!-- Image URL manual edit, for admins only -->
-        <b-field label="Brand Logo URL">
+        <b-field label="Brand Logo URL" v-if="isAdmin">
           <b-input
           v-model.lazy="model.brandLogo"
           :placeholder="myDefaults.brandLogo"
@@ -188,9 +188,16 @@
           </b-field>
         </b-field>
 
+        <p>
+          <br />
+          <br />
+          <b>Mobile App Branding</b>
+          <br />
+        </p>
+
         <!-- Mobile App Home Wallpaper -->
         <!-- Image URL manual edit, for admins only -->
-        <b-field label="Mobile App Home Wallpaper URL" style="margin-top: 3rem;">
+        <b-field label="Mobile App Home Wallpaper URL" v-if="isAdmin" style="margin-top: 1rem;">
           <b-input
           v-model="model.mobileHomeWallpaper"
           :placeholder="myDefaults.mobileHomeWallpaper"
@@ -230,7 +237,7 @@
 
         <!-- Mobile App Promo Wallpaper -->
         <!-- Image URL manual edit, for admins only -->
-        <b-field label="Mobile App Promo Wallpaper URL">
+        <b-field label="Mobile App Promo Wallpaper URL" v-if="isAdmin">
           <b-input
           v-model="model.mobilePromoWallpaper"
           :placeholder="myDefaults.mobilePromoWallpaper"
@@ -348,6 +355,8 @@ export default {
 
   computed: {
     ...mapGetters([
+      'isAdmin',
+      'isQa',
       'working'
     ]),
     myDefaults () {
