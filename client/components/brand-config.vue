@@ -351,7 +351,7 @@
 
         <!-- JDS -->
         <jds
-        v-if="isAdmin || isQa"
+        
         v-model="model.brand"
         @input="updateParent"
         />
