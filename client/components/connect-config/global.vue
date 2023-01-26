@@ -29,7 +29,7 @@
             <!-- <strong>Brand Name</strong> -->
             <!-- <div style="font-size: 200%; color: red;">Brand Name</div> -->
             <div class="is-size-6 has-text-left has-text-info">Brand Name applies to all use cases.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: Thanks for booking an appointment with <b>Cumulus Finance</b>, Thank you for calling <b>Cumulus Healthcare</b>, Welcome to <b>Cumulus Utility</b>.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Thanks for booking an appointment with <b>Cumulus Finance</b>, Thank you for calling <b>Cumulus Healthcare</b>, Welcome to <b>Cumulus Utility</b></div>
           </template>
             <b-input v-model="model.brandName" :placeholder="myDefaults.brandName" @input="updateParent"
           />
@@ -39,7 +39,7 @@
         <b-field label="Brand Building">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Brand Building applies to Call Deflection only.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: To reach <b>Cumulus Healthcare store</b>, please press 1.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: To reach <b>Cumulus Healthcare store</b>, please press 1</div>
           </template>
             <b-input v-model="model.brandBuilding" :placeholder="myDefaults.brandBuilding" @input="updateParent"
           />
@@ -49,7 +49,7 @@
         <b-field label="Brand Currency">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Brand Currency applies to Product Activation (Sim Offer) and Retail Journey.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: 10GB Data at <b>USD</b> 10 per month, The applicable amount due is: <b>USD</b> 70.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: 10GB Data at <b>USD</b> 10 per month, The applicable amount due is: <b>USD</b> 70</div>
           </template>
             <b-input v-model="model.brandCurrency" :placeholder="myDefaults.brandCurrency" @input="updateParent"
           />
@@ -59,7 +59,7 @@
         <b-field label="Brand Website">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Brand Website applies to Automotive, Product Activation (Sim Offer) and Retail Journey.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: Welcome to Cumulus Automotive <b>(website url)</b>, Welcome to Cumulus Mobile <b>(website url)</b>, Welcome to Cumulus Retail <b>(website url)</b>.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Welcome to Cumulus Automotive <b>(website url)</b>, Welcome to Cumulus Mobile <b>(website url)</b>, Welcome to Cumulus Retail <b>(website url)</b></div>
           </template>
             <b-input v-model="model.brandWebsite" :placeholder="myDefaults.brandWebsite" @input="updateParent"
           />
@@ -69,7 +69,7 @@
         <b-field label="Brand Address">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Brand Address applies to Retail Journey only.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: Based on the location shared by you, we found the nearest store to be: Cumulus Retail - Location: <b>170 West Tasman Dr., San Jose, CA</b>.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Based on the location shared by you, we found the nearest store to be: Cumulus Retail - Location: <b>170 West Tasman Dr., San Jose, CA</b></div>
           </template>
             <b-input v-model="model.brandAddress" :placeholder="myDefaults.brandAddress" @input="updateParent"
           />
@@ -79,7 +79,7 @@
         <b-field label="Representative Title">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Representative Title applies to Appointments only.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: The 45 minutes appointment with <b>your Financial Advisor</b>, is confirmed for.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: The 45 minutes appointment with <b>your Financial Advisor</b>, is confirmed for</div>
           </template>
             <b-input v-model="model.repTitle" :placeholder="myDefaults.repTitle" @input="updateParent"
           />
@@ -89,7 +89,7 @@
         <b-field label="Representative Name">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Representative Name applies to Appointments only.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: Your 45 minutes video appointment with your Financial Advisor, <b>Mr. John Doe</b>, is due to start shortly.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: Your appointment with <b>Mr. John Doe</b> has been changed to</div>
           </template>
             <b-input v-model="model.repName" :placeholder="myDefaults.repName" @input="updateParent"
           />
@@ -99,7 +99,7 @@
         <b-field label="Representative Building">
           <template slot="message">
             <div class="is-size-6 has-text-left has-text-info">Representative Building applies to Appointments only.</div>
-            <div class="is-size-6 has-text-left has-text-info">Example: If you can't make it to <b>your branch</b> then you can book a video call consultation instead.</div>
+            <div class="is-size-6 has-text-left has-text-info">Example: We look forward to seeing you at <b>your branch</b></div>
           </template>
             <b-input v-model="model.repBuilding" :placeholder="myDefaults.repBuilding" @input="updateParent"
           />

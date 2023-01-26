@@ -67,26 +67,10 @@
         </div>
       </b-field>
       
-      <!-- Representative Building -->
-      <b-field label="Representative Building">
-        <div class="control">
-          <span class="button is-static">If you can't make it to</span>
-        </div>
-        <b-input
-        v-model="model.repBuilding"
-        :placeholder="myDefaults.repBuilding"
-        @input="updateParent"
-        style="min-width: 15rem;"
-        />
-        <div class="control">
-          <span class="button is-static">then you can book a video call consultation instead</span>
-        </div>
-      </b-field>
-      
       <!-- Representative Name -->
       <b-field label="Representative Name">
         <div class="control">
-          <span class="button is-static">Your 45 minutes video appointment with</span>
+          <span class="button is-static">Your appointment with</span>
         </div>
         <b-input
         v-model="model.repName"
@@ -95,8 +79,24 @@
         style="min-width: 15rem;"
         />
         <div class="control">
-          <span class="button is-static">, is due to start shortly</span>
+          <span class="button is-static">has been changed to</span>
         </div>
+      </b-field>
+      
+      <!-- Representative Building -->
+      <b-field label="Representative Building">
+        <div class="control">
+          <span class="button is-static">We look forward to seeing you at</span>
+        </div>
+        <b-input
+        v-model="model.repBuilding"
+        :placeholder="myDefaults.repBuilding"
+        @input="updateParent"
+        style="min-width: 15rem;"
+        />
+        <!-- <div class="control">
+          <span class="button is-static">then you can book a video call consultation instead</span>
+        </div> -->
       </b-field>
       
       <b-field>

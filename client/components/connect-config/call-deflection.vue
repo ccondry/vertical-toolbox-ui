@@ -34,7 +34,7 @@
         style="min-width: 15rem;"
         />
         <div class="control">
-          <span class="button is-static">customer support.</span>
+          <span class="button is-static">customer support</span>
         </div>
       </b-field>
       
@@ -50,7 +50,7 @@
         style="min-width: 20rem;"
         />
         <div class="control">
-          <span class="button is-static">, please press 1.</span>
+          <span class="button is-static">, please press 1</span>
         </div>
       </b-field>
       
