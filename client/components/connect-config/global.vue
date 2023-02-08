@@ -195,7 +195,7 @@
         </v-divider>
         -->
 
-        <b-collapse class="content card" style="margin-top: 2rem;">
+        <b-collapse class="content card" style="margin-top: 2rem;" v-if="isAdmin">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">{{ titleMobileAppBranding }}</p>
             <a class="card-header-icon">
