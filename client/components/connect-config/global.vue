@@ -214,7 +214,7 @@
               />
             </b-field>
             <!-- Image image editor for users -->
-            <b-field grouped v-if="isAdmin">
+            <b-field grouped>
               <b-loading
               :is-full-page="false"
               :active="working.images.mobileHomeWallpaper"
@@ -254,7 +254,7 @@
               />
             </b-field>
             <!-- Image image editor for users -->
-            <b-field grouped v-if="isAdmin">
+            <b-field grouped>
               <b-loading
               :is-full-page="false"
               :active="working.images.mobilePromoWallpaper" 
