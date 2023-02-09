@@ -112,7 +112,6 @@ import {mapGetters} from 'vuex'
 const title = 'Appointments Branding'
 const modelKey = 'appointments'
 const tooltips = {
-  mobileWallpaperUpload: 'test'
 }
 
 export default {

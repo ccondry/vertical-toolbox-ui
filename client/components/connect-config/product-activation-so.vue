@@ -118,7 +118,6 @@ const title = 'Product Activation (Sim Offer) Branding'
 const modelKey = 'productActivationSO'
 const tooltips = {
   brandLogoUpload: 'The logo should not exceed 500x500 pixels to reduce loading times and device bandwidth use. It should be of high enough quality to not look blurred or distorted when displayed on the device.',
-  mobileWallpaperUpload: 'The mobile app wallpaper image will stretch to fit the available space. The wallpaper must be in Portrait format as the mobile app does not support Landscape view. We recommend using an image that is at least full HD resolution (i.e. 1080x1920). The app includes its own bottom navigation bar, so uploaded images should not include their own.'
 }
 
 export default {

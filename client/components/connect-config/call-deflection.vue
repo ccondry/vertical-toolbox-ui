@@ -67,7 +67,6 @@ import {mapGetters} from 'vuex'
 const title = 'Call Deflection Branding'
 const modelKey = 'callDeflection'
 const tooltips = {
-  mobileWallpaperUpload: 'test'
 }
 
 export default {

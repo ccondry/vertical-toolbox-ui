@@ -48,7 +48,6 @@ import {mapGetters} from 'vuex'
 const title = 'Collections or Promise to Pay Branding'
 const modelKey = 'collections'
 const tooltips = {
-  mobileWallpaperUpload: 'test'
 }
 
 export default {
