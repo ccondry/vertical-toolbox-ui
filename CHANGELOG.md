@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.2.9-1
+
+### Fixes
+* **Webex Connect:** Fix file upload buttons again.
+
+
 # 2023.2.9
 
 ### Fixes
