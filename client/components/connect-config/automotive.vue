@@ -143,7 +143,7 @@ export default {
       'working'
     ]),
     myDefaults () {
-      return this.defaults[this.modelKey]
+      return this.defaults[modelKey]
     },
     isConfigured () {
       return this.model ? true : false
@@ -158,7 +158,7 @@ export default {
 
   methods: {
     launchFilePicker (ref) {
-      this.$emit('upload', ref)
+      this.$emit('upload', this.modelKey + '.' + ref)
     },
     getTooltip (type) {
       try {

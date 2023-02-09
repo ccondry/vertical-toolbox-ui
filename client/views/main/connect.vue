@@ -47,6 +47,29 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import ConnectConfig from 'client/components/connect-config/index.vue'
+// set a nested value in an object
+function jpathSet (object, path, value) {
+  let cursor = object
+  console.log('cursor', cursor)
+  const parts = path.split('.')
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i]
+    // last part?
+    if (i === parts.length - 1) {
+      // set value
+      cursor[part] = value
+      // done
+      return
+    } 
+    // is the next part not an object yet?
+    if (typeof cursor[part] === 'undefined') {
+      // create next container part
+      cursor[part] = {}
+    }
+    // move cursor
+    cursor = cursor[part]
+  }
+}
 
 export default {
   name: 'WebexConnect',
@@ -121,10 +144,10 @@ export default {
           try {
             // update our model with the new file URL
             // .url.url is correct
-            this.model[node] = response.url.url
-            //  + '?nocache=' + Date.now()
+            const model = JSON.parse(JSON.stringify(this.vertical))
+            jpathSet(model, node, response.url.url)
             // update state with model changes
-            this.updateParent()
+            this.updateState(model)
           } catch (e) {
             // continue?
             console.error(e)

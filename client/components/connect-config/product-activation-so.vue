@@ -174,7 +174,7 @@ export default {
 
   methods: {
     launchFilePicker (ref) {
-      this.$emit('upload', ref)
+      this.$emit('upload', modelKey + '.' + ref)
     },
     getTooltip (type) {
       try {

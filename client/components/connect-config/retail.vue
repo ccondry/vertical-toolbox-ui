@@ -186,8 +186,7 @@ export default {
 
   methods: {
     launchFilePicker (ref) {
-      // launch native file picker
-      this.$emit('upload', ref)
+      this.$emit('upload', modelKey + '.' + ref)
     },
     getTooltip (type) {
       try {

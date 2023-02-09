@@ -184,7 +184,7 @@ export default {
     },
     upload (ref) {
       console.log('connect-config/index.vue - upload image', ref)
-      this.$emit('upload', ref)
+      this.$emit('upload', modelKey + '.' + ref)
     },
     updateCache () {
       // copy value prop to model cache
