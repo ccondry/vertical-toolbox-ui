@@ -107,15 +107,6 @@
         <save-button />
       </b-field>
 
-      <!-- hidden file input uploader -->
-      <input
-      type="file"
-      style="display:none"
-      ref="file"
-      accept="image/*"
-      v-uploader
-      />
-
     </div>
   </b-collapse>
 </template>
@@ -132,24 +123,6 @@ const tooltips = {
 
 export default {
   name: 'WebexConnectProductActivationSOConfig',
-
-  directives: {
-    uploader: {
-      bind (el, binding, vnode) {
-        el.addEventListener('change', e => {
-          // validate that a file was selected
-          if (!e.target.files || !e.target.files[0]) {
-            return
-          }
-          // console.log('change uploader with ref', vnode.data.ref, e.target.files)
-          console.log('change uploader with ref', vnode.context.uploadRef, e.target.files)
-          // vnode.context.uploadFile(vnode.data.ref, e.target.files[0])
-          vnode.context.uploadFile(vnode.context.uploadRef, e.target.files[0])
-          // vnode.context.chosenFiles = e.target.files
-        })
-      }
-    }
-  },
 
   props: {
     value: {
@@ -177,7 +150,6 @@ export default {
       modelKey,
       title,
       tooltips,
-      uploadRef: null
     }
   },
 
@@ -203,58 +175,7 @@ export default {
 
   methods: {
     launchFilePicker (ref) {
-      console.log('launching file picker for', ref)
-      // set ref
-      this.uploadRef = ref
-      // launch native file picker
-      this.$refs.file.click()
-    },
-    uploadFile (node, file) {
-      console.log('connect-config/global.vue - uploading file', node, file)
-      // init file reader
-      const reader = new window.FileReader()
-      reader.onload = (e) => {
-        const data = e.currentTarget.result
-        // get file name
-        const name = file.name.substring(0, file.name.lastIndexOf('.')) + '_' + Date.now()
-        // set up callback for when the file is done uploading
-        const callback = ({url}) => {
-          // map out the node names to model data references
-          const map = {
-            // brand logo
-            'brandLogo': ({url}) => {
-              console.log('brand logo url', url)
-              // reset img
-              this.model.brandLogo = ''
-              // set img url
-              this.model.brandLogo = url + '?nocache=' + Date.now()
-            }
-          }
-          // update our model with the new file URL
-          try {
-            map[node](url)
-            // update state with model changes
-            this.updateParent()
-          } catch (e) {
-            // continue
-          }
-        }
-        // determine node name
-        let nodeName = node
-
-        // actually upload the file now
-        this.$emit('upload', {
-          name,
-          node: nodeName,
-          vertical: this.model.id,
-          data, 
-          callback
-        })
-        // reset the file input
-        this.$refs.file.value = ''
-      }
-      // read the file data
-      reader.readAsDataURL(file)
+      this.$emit('upload', ref)
     },
     getTooltip (type) {
       try {

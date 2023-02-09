@@ -49,42 +49,49 @@
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
+        @upload="upload"
         />
 
         <collections
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
+        @upload="upload"
         />
 
         <call-deflection
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
+        @upload="upload"
         />
 
         <automotive
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
+        @upload="upload"
         />
 
         <product-activation-ts
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
+        @upload="upload"
         />
 
         <product-activation-so
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
+        @upload="upload"
         />
 
         <retail
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
+        @upload="upload"
         />
 
       </div>
@@ -102,7 +109,6 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
 import Appointments from 'client/components/connect-config/appointments.vue'
 import Automotive from 'client/components/connect-config/automotive.vue'
 import CallDeflection from 'client/components/connect-config/call-deflection.vue'
@@ -170,18 +176,15 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'uploadImage'
-    ]),
     clickConfigure () {
       // copy defaults to model
       this.model = JSON.parse(JSON.stringify(this.myDefaults))
       // update parent/state
       this.updateParent()
     },
-    upload (data) {
-      console.log('connect-config/index.vue - upload image', data)
-      this.uploadImage({data})
+    upload (ref) {
+      console.log('connect-config/index.vue - upload image', ref)
+      this.$emit('upload', ref)
     },
     updateCache () {
       // copy value prop to model cache
