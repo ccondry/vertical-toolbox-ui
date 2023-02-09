@@ -132,13 +132,15 @@ export default {
         }
         // actually upload the file now
         this.uploadImage({
-          name,
-          node,
-          // set brand ID in the 'vertical' property
-          // to use the brand ID for the path
-          vertical: this.verticalId,
-          data,
-          callback
+          data: {
+            name,
+            node,
+            // set brand ID in the 'vertical' property
+            // to use the brand ID for the path
+            vertical: this.verticalId,
+            data,
+            callback
+          }
         })
         // reset the file input
         this.$refs.file.value = ''
