@@ -77,10 +77,6 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'expandMenu'
-    ]),
-
     isNew (item) {
       // menu items are new if less than 14 days old
       try {
@@ -114,13 +110,6 @@ export default {
       return item.meta.expanded
     },
 
-    toggle (index, item) {
-      this.expandMenu({
-        index: index,
-        expanded: !item.meta.expanded
-      })
-    },
-
     shouldExpandMatchItem (route) {
       let matched = route.matched
       let lastMatched = matched[matched.length - 1]
@@ -133,16 +122,6 @@ export default {
         }
       }
 
-      this.expandMenu({
-        item: parent,
-        expanded: true
-      })
-      // if ('expanded' in parent.meta && !isParent) {
-      //   this.expandMenu({
-      //     item: parent,
-      //     expanded: true
-      //   })
-      // }
     },
 
     generatePath (item, subItem) {
