@@ -13,8 +13,8 @@ const state = {
       path: '/branding/ivr',
       meta: {
         icon: 'phone',
-        label: 'IVR',
-        description: 'IVR customization'
+        label: 'IVR Prompts',
+        description: 'IVR prompts customization'
       }
     },
     {

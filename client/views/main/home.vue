@@ -199,7 +199,7 @@ export default {
     ]),
     clickSaveAs () {
       this.$buefy.dialog.prompt({
-        message: `What would you like the name of your new branding to be?`,
+        message: `Type a name for your new branding.`,
         inputAttrs: {
           placeholder: ''
         },
