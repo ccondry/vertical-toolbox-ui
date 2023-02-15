@@ -199,7 +199,7 @@ export default {
     ]),
     clickSaveAs () {
       this.$buefy.dialog.prompt({
-        message: `What would you like the name of your new vertical to be?`,
+        message: `What would you like the name of your new branding to be?`,
         inputAttrs: {
           placeholder: ''
         },
