@@ -1,7 +1,7 @@
 <template>
   <div class="modal-card" style="width: auto">
     <header class="modal-card-head">
-      <p class="modal-card-title">Select a Vertical</p>
+      <p class="modal-card-title">Select a Branding</p>
     </header>
     <section class="modal-card-body">
       <p class="content">
@@ -11,7 +11,7 @@
           v-model="verticalFilter"
           native-value="mine"
           >
-            Show my verticals
+            Show my brandings
           </b-radio>
         </b-field>
 
@@ -22,7 +22,7 @@
             v-model="verticalFilter"
             native-value="other"
             >
-              Show another user's verticals:
+              Show another user's brandings:
             </b-radio>
           </b-field>
           <b-field v-if="verticalFilter === 'other'">
@@ -44,9 +44,9 @@
       </p>
       <b-loading :is-full-page="false" :active="isLoading" :can-cancel="false"></b-loading>
       <div v-if="isLoading">Loading...</div>
-      <b-field label="Choose the vertical to load">
+      <b-field label="Choose the branding to load">
         <b-select v-model="selectedVertical" v-if="!isLoading">
-          <option value="" disabled selected>Choose a vertical to load</option>
+          <option value="" disabled selected>Choose a branding to load</option>
           <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
           <option disabled>-----------------------------------------</option>
           <option v-for="vertical in userVerticals" :value="vertical.id" v-if="verticalFilter === 'all'">{{ `${vertical.name} (${vertical.id})` }}</option>
@@ -105,7 +105,7 @@ export default {
       try {
         return this.verticals.find(v => v.id === this.selectedVertical).name
       } catch (e) {
-        return 'Vertical'
+        return 'Branding'
       }
     },
     isLoading () {
