@@ -310,7 +310,7 @@ const tooltips = {
   authorsImageUpload: '',
   timelineImageUpload: '',
   favicon: `Enter a customer website here to automatically find and copy the
-    favicon image to this vertical.`
+    favicon image to this branding.`
 }
 
 const jacadaVerticals = {

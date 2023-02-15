@@ -374,7 +374,11 @@ const ttsTypes = [
 ]
 
 const tooltips = {
-  logoUpload: 'This image will be proportionally scaled down to 50px height.',
+  mobileLogoUpload: 'This image will be proportionally scaled down to 50px height.',
+  mobileWallpaperUpload: `The mobile app wallpaper image will have a light blue filter applied by the mobile app to provide
+                          proper contrast with the menu options. The wallpaper must be in Portrait format as the mobile app
+                          does not support Landscape view. We recommend using an image that is at least full HD resolution
+                          (i.e. 1080 x 1920).`,
   sliderUpload: `We recommend using an image that has a 2:1 aspect ratio
     (i.e. 1000 x 500 pixels).`,
   blogItemUpload: `We recommend using an image that has a 3:2 aspect ratio
@@ -384,7 +388,7 @@ const tooltips = {
   authorsImageUpload: '',
   timelineImageUpload: '',
   favicon: `Enter a customer website here to automatically find and copy the
-    favicon image to this vertical.`
+    favicon image to this branding.`
 }
 
 export default {
