@@ -7,22 +7,22 @@
             {{ model.name }} Basic Information
           </h1>
           <div class="block content">
-            <p>
-              You can update your verticals by using any of the save buttons
-              on this website. You will only be able to delete or save over
-              verticals that you own.
-            </p>
-            <p>
-              Click Load or click the vertical name in the title bar to edit a
-              different vertical. Any unsaved changes on the current vertical
-              will be lost.
-            </p>
-            <p>
-              You can create new verticals by using the 'Save As' button.
-              If you use Save As and specify a vertical
-              ID that already exists, it will overwrite the existing vertical
-              configuration.
-            </p>
+            <b-message type="is-success" has-icon icon="information">
+              <p>
+                You can <strong>create</strong> new brandings by using the <strong>Save As</strong> button.
+                If you specify a branding name that <strong>already exists</strong>,
+                it will <strong>overwrite</strong> the existing branding configuration.
+              </p>
+              <p>
+                You can <strong>update</strong> your brandings by using any of the <strong>Save</strong> buttons
+                on this website. You will <strong>only be able</strong> to save or delete <strong>over
+                brandings that you own</strong>.
+              </p>
+              <p>
+                Click <strong>Load</strong> to edit a different branding. Any <strong>unsaved changes</strong>
+                on the current branding <strong>will be lost</strong>.
+              </p>
+            </b-message>
           </div>
           <div class="buttons">
             <save-button />

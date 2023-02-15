@@ -6,10 +6,13 @@
           {{ vertical.name }} Branded Website
         </h1>
         <div class="block">
-          <p>
-            You can update your vertical by using any of the save buttons
-            on this panel. You will only be able to save verticals that you own.
-          </p>
+          <b-message type="is-success" has-icon icon="information">
+            <p>
+              You can <strong>update</strong> your brandings by using any of the <strong>Save</strong> buttons
+              on this website. You will <strong>only be able</strong> to save <strong>over
+              brandings that you own</strong>.
+            </p>
+          </b-message>
         </div>
 
         <!-- Save button -->
