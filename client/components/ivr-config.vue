@@ -300,17 +300,10 @@ const ttsTypes = [
 ]
 
 const tooltips = {
-  logoUpload: 'This image will be proportionally scaled down to 50px height.',
-  sliderUpload: `We recommend using an image that has a 2:1 aspect ratio
-    (i.e. 1000 x 500 pixels).`,
-  blogItemUpload: `We recommend using an image that has a 3:2 aspect ratio
-    (i.e. 800 x 500 pixels).`,
   servicesThumbnailImageUpload: '',
   servicesImageUpload: '',
   authorsImageUpload: '',
-  timelineImageUpload: '',
-  favicon: `Enter a customer website here to automatically find and copy the
-    favicon image to this branding.`
+  timelineImageUpload: ''
 }
 
 const jacadaVerticals = {

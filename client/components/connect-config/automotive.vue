@@ -101,7 +101,8 @@ import {mapGetters} from 'vuex'
 const title = 'Automotive Branding'
 const modelKey = 'automotive'
 const tooltips = {
-  brandLogoUpload: 'The logo should not exceed 500x500 pixels to reduce loading times and device bandwidth use. It should be of high enough quality to not look blurred or distorted when displayed on the device.',
+  brandLogoUpload: `The logo should not exceed 500x500 pixels to reduce loading times and device bandwidth use.
+                    It should be of high enough quality to not look blurred or distorted when displayed on the device.`,
 }
 
 export default {

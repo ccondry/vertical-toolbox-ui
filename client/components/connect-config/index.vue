@@ -9,19 +9,16 @@
         </a>
       </div>
 
+      <!--
       <div class="card-content">
         <b-message type="is-info" has-icon>
           Global Branding settings apply across use cases. Please note that not all settings apply to all use cases.
           <br />
           <br />
           To override these settings use the use case specific branding options. Where fields are empty, global branding will be used.
-          <!-- <br /> -->
-          <!-- Global Branding fields apply to all use cases, where the fields are used in messaging. Examples of use are given for each field. -->
-          <!-- <br /> -->
-          <!-- Use case specific branding can be set further down this page. -->
-          <!-- <br /> -->
         </b-message>
       </div>
+      -->
 
       <!-- Check if any the base object field is missing -->
       <div
@@ -38,13 +35,6 @@
 
       <!-- else base object exists -->
       <div class="card-content" v-else>
-        <global
-        v-model="model"
-        :defaults="myDefaults"
-        @input="updateParent"
-        @upload="upload"
-        />
-
         <appointments
         v-model="model"
         :defaults="myDefaults"
@@ -94,6 +84,20 @@
         @upload="upload"
         />
 
+        <mobile-app
+        v-model="model"
+        :defaults="myDefaults"
+        @input="updateParent"
+        @upload="upload"
+        />
+
+        <global
+        v-model="model"
+        :defaults="myDefaults"
+        @input="updateParent"
+        @upload="upload"
+        />
+
       </div>
 
       <!--
@@ -114,6 +118,7 @@ import Automotive from 'client/components/connect-config/automotive.vue'
 import CallDeflection from 'client/components/connect-config/call-deflection.vue'
 import Collections from 'client/components/connect-config/collections.vue'
 import Global from 'client/components/connect-config/global.vue'
+import MobileApp from 'client/components/connect-config/mobile-app.vue'
 import ProductActivationSo from 'client/components/connect-config/product-activation-so.vue'
 import ProductActivationTs from 'client/components/connect-config/product-activation-ts.vue'
 import Retail from 'client/components/connect-config/retail.vue'
@@ -130,6 +135,7 @@ export default {
     CallDeflection,
     Collections,
     Global,
+    MobileApp,
     ProductActivationSo,
     ProductActivationTs,
     Retail,
