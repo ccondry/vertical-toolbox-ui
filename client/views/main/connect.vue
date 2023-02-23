@@ -139,8 +139,11 @@ export default {
       reader.onload = (e) => {
         const data = e.currentTarget.result
         // get file name
+        const filenameNoSpaces = file.name.replaceAll(/' '/, '-')
+        const filenameNoExtension = filenameNoSpaces.substring(0, filenameNoSpaces.lastIndexOf('.'))
         // append timestamp to images
-        const name = file.name.substring(0, file.name.lastIndexOf('.')) + '_' + Date.now()
+        const filenameWithDate = filenameNoExtension + '_' + Date.now()
+        const name = filenameWithDate
         // set up callback for when the file is done uploading
         const callback = response => {
           console.log('in callback for uploaded file. url = ', response)

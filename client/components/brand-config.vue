@@ -1754,7 +1754,9 @@ export default {
       reader.onload = (e) => {
         const data = e.currentTarget.result
         // get file name
-        let name = file.name.substring(0, file.name.lastIndexOf('.'))
+        const filenameNoSpaces = file.name.replaceAll(/' '/, '-')
+        const filenameNoExtension = filenameNoSpaces.substring(0, filenameNoSpaces.lastIndexOf('.'))
+        let name = filenameNoExtension
         if (node !== 'iframe') {
           // append timestamp to images, not iframes
           name += '_' + Date.now()
