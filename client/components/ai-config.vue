@@ -300,7 +300,7 @@ export default {
       reader.onload = (e) => {
         const data = e.currentTarget.result
         // get file name
-        const filenameNoSpaces = file.name.replaceAll(/' '/, '-')
+        const filenameNoSpaces = file.name.replaceAll(' ', '-')
         const filenameNoExtension = filenameNoSpaces.substring(0, filenameNoSpaces.lastIndexOf('.'))
         const name = filenameNoExtension
         // set up callback for when the file is done uploading
