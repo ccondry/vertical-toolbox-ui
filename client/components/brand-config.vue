@@ -1662,11 +1662,17 @@ export default {
           console.log('favicon website regex matches =', matches)
           // if no value, use the url as-is
           trimDomain = matches[1]
+          // remove trailing slash, if any
           console.log('favicon website without http:// or https:// =', trimDomain)
         } catch (e) {
           console.log('couldn\'t find http:// or http:// in URL. URL =', value)
         }
-
+        const lastCharacter = trimDomain.slice(-1)
+        console.log('favicon last character', lastCharacter)
+        // remove trailing slash(es), if any
+        while (trimDomain.slice(-1) === '/') {
+          trimDomain = trimDomain.slice(0, -1)
+        }
         // update model favicon to prefix it with the google favicons getter url
         this.model.brand.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
         console.log('set this.model.brand.favicon. it is now', this.model.brand.favicon)
