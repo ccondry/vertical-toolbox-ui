@@ -70,6 +70,7 @@
                 <b-input
                 v-model="model.name"
                 :placeholder="defaults.verticals.name"
+                @input="updateState"
                 />
               </b-field>
             </div>
@@ -195,6 +196,9 @@ export default {
       'setVertical',
       'setSelectedVerticalId'
     ]),
+    updateState () {
+      this.setVertical(JSON.parse(JSON.stringify(this.model)))
+    },
     clickSaveAs () {
       this.$buefy.dialog.prompt({
         message: `Type a name for your new branding.`,
