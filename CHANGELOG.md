@@ -3,6 +3,18 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.2.28
+
+### Updates
+* **Site:** Replace "vertical" text with "branding". Remove trailing slashes
+from favicon URL.
+
+### Fixes
+* **Site:** Fix file uploads not working. Fix favicon not always saving the last
+typed character, and not displaying the current value after loading vertical.
+Fix vertical name field breaking UI when value is changed.
+
+
 # 2023.2.9-2
 
 ### Fixes
