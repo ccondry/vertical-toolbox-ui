@@ -1628,7 +1628,7 @@ export default {
       images: [],
       uploadRef: null,
       uploadIndex: null,
-      faviconWebsite: '',
+      // faviconWebsite: '',
       color1: '#0b63ac',
       color2: '#2b83cc',
       customAdvisorImageUrl: ''
@@ -1640,6 +1640,38 @@ export default {
       'isAdmin',
       'isQa'
     ]),
+    faviconWebsite: {
+      get () {
+        try {
+          const url = this.model.brand.favicon
+          const matches = url.match(/https:\/\/www\.google\.com\/s2\/favicons\?domain=(.*)/)
+          return matches[1] || ''
+        } catch (e) {
+          return ''
+        }
+      },
+      set (value) {
+        if (!value) return
+        console.log('favicon website URL changed', value)
+        // get input value
+        console.log('favicon website URL =', value)
+        let trimDomain = value
+        try {
+          // remove https:// from it
+          const matches = value.match(/http[s?]:\/\/(.*)/)
+          console.log('favicon website regex matches =', matches)
+          // if no value, use the url as-is
+          trimDomain = matches[1]
+          console.log('favicon website without http:// or https:// =', trimDomain)
+        } catch (e) {
+          console.log('couldn\'t find http:// or http:// in URL. URL =', value)
+        }
+
+        // update model favicon to prefix it with the google favicons getter url
+        this.model.brand.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
+        console.log('set this.model.brand.favicon. it is now', this.model.brand.favicon)
+      }
+    },
     isCustomAdvisor () {
       // true if the advisor image in the vertical is not one of the default advisors
       return !this.defaultAdvisorImages.includes(this.model.brand.advisorImage)
@@ -1663,9 +1695,9 @@ export default {
       // make sure the UI is updated properly
       this.initView()
     },
-    faviconWebsite (val) {
-      this.changeFavicon(val)
-    }
+    // faviconWebsite (val) {
+      
+    // }
   },
 
   methods: {
@@ -1678,17 +1710,7 @@ export default {
       // model changed - format and push those changes back to the parent
       // when this.model changes, extract the domain of the google favicon
       // tool url and set the v-model value for the "Favicon Website URL" of the favicon
-      try {
-        const url = this.model.favicon
-        const arr = url.match(/https:\/\/www.google.com\/s2\/favicons?domain=(.*)/m)
-        try {
-          this.faviconWebsite = arr[1] || ''
-        } catch (e) {
-          this.faviconWebsite = ''
-        }
-      } catch (e) {
-        // url was probably undefined - do nothing
-      }
+      
       // init the view so that all UI elements are populated properly
       // make sure color1 and color2 are set to valid values for the color picker
       if (!this.model.brand.color1) {
@@ -1714,29 +1736,6 @@ export default {
       console.log('changeAdvisorImage', value)
       this.model.brand.advisorImage = value
       this.updateParent()
-    },
-    changeFavicon (event) {
-      if (!event) return
-      console.log('favicon website URL changed', event)
-      // get input value
-      // const url = event.target.value
-      const url = event
-      console.log('favicon website URL =', url)
-      let trimDomain = url
-      try {
-        // remove https:// from it
-        const arr = url.match(/http[s?]:\/\/(.*)/m)
-        console.log('favicon website regex matches =', arr)
-        // if no value, use the url as-is
-        trimDomain = arr[1]
-        console.log('favicon website without http:// or https:// =', trimDomain)
-      } catch (e) {
-        console.log('couldn\'t find http:// or http:// in URL. URL =', url)
-      }
-
-      // update model favicon to prefix it with the google favicons getter url
-      this.model.brand.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
-      console.log('set this.model.brand.favicon. it is now', this.model.brand.favicon)
     },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
