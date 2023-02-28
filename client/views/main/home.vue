@@ -70,8 +70,6 @@
                 <b-input
                 v-model="model.name"
                 :placeholder="defaults.verticals.name"
-                :disabled="disableSave"
-                @input="updateState"
                 />
               </b-field>
             </div>
@@ -219,9 +217,6 @@ export default {
     },
     clickDelete () {
       this.confirmDeleteVertical()
-    },
-    updateState (value) {
-      this.setVertical(JSON.parse(JSON.stringify(value)))
     },
     updateCache () {
       // copy state data to local data
