@@ -1644,7 +1644,7 @@ export default {
       get () {
         try {
           const url = this.model.brand.favicon
-          const matches = url.match(/https:\/\/www\.google\.com\/s2\/favicons\?domain=(.*)/)
+          const matches = url.match(/^https:\/\/www\.google\.com\/s2\/favicons\?domain=(.*)$/)
           return matches[1] || ''
         } catch (e) {
           return ''
@@ -1656,7 +1656,7 @@ export default {
         let trimDomain = value
         try {
           // remove https:// from it
-          const matches = value.match(/http[s?]:\/\/(.*)/)
+          const matches = value.match(/^http[s?]:\/\/(.*)$/)
           // if no value, use the url as-is
           trimDomain = matches[1]
         } catch (e) {
