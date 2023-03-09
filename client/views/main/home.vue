@@ -113,7 +113,6 @@
                   Chat/AI/Bot
                 </router-link>
               </li>
-              <!-- <li v-if="isAdmin || isQa"> -->
               <li>
                 <router-link :to="{ name: 'Webex Connect' }">
                   Webex Connect
