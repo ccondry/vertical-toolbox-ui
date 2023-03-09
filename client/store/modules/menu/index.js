@@ -48,7 +48,7 @@ const state = {
       meta: {
         icon: 'cellphone',
         description: 'Webex Connect customization',
-        groups: ['admin', 'QA']
+        // groups: ['admin', 'QA']
       }
     },
     {
