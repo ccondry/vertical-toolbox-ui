@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-collapse class="content card" v-if="isAdmin || isQa">
+    <!-- <b-collapse class="content card" v-if="isAdmin || isQa"> -->
+    <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
         <p class="card-header-title">{{ titleMobileAppBranding }}</p>
         <a class="card-header-icon">
