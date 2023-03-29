@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.3.29-1
+
+### Fixes
+* **Brand:** Fix color1 or color2 not saving the data when save button is used.
+
+
 # 2023.3.29
 
 ### Updates
