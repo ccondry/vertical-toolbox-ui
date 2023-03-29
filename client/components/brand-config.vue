@@ -82,32 +82,20 @@
         <!-- mobile color picker view - arrange vertically -->
         <div class="is-hidden-tablet">
           <b-field label="Primary Color">
-            <b-colorpicker
-            v-model="color1"
-            @input="updateParent"
-            />
+            <b-colorpicker v-model="color1" />
           </b-field>
           <b-field label="Secondary Color">
-            <b-colorpicker
-            v-model="color2"
-            @input="updateParent"
-            />
+            <b-colorpicker v-model="color2" />
           </b-field>
         </div>
         <!-- desktop color picker view - arrange horizontally -->
         <div class="is-hidden-mobile">
           <b-field grouped>
             <b-field label="Primary Color">
-              <b-colorpicker
-              v-model="color1"
-              @input="updateParent"
-              />
+              <b-colorpicker v-model="color1" />
             </b-field>
             <b-field label="Secondary Color">
-              <b-colorpicker
-              v-model="color2"
-              @input="updateParent"
-              />
+              <b-colorpicker v-model="color2" />
             </b-field>
           </b-field>
         </div>
@@ -1636,22 +1624,25 @@ export default {
     ]),
     color1: {
       get () {
+        const defaultColor = '#0b63ac'
         try {
-          return this.model.brand.color1
+          return this.model.brand.color1 || defaultColor
         } catch (e) {
-          return '#0b63ac'
+          return defaultColor
         }
       },
       set (value) {
         this.$set(this.model.brand, 'color1', value.toString('hex'))
+        this.updateParent()
       },
     },
     color2: {
       get () {
+        const defaultColor = '#2b83cc'
         try {
-          return this.model.brand.color2
+          return this.model.brand.color2 || defaultColor
         } catch (e) {
-          return '#2b83cc'
+          return defaultColor
         }
       },
       set (value) {
