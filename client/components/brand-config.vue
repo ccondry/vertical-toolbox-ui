@@ -83,15 +83,13 @@
         <div class="is-hidden-tablet">
           <b-field label="Primary Color">
             <b-colorpicker
-            v-if="model.brand.color1"
-            v-model="model.brand.color1"
+            v-model="color1"
             @input="updateParent"
             />
           </b-field>
           <b-field label="Secondary Color">
             <b-colorpicker
-            v-if="model.brand.color2"
-            v-model="model.brand.color2"
+            v-model="color2"
             @input="updateParent"
             />
           </b-field>
@@ -101,15 +99,13 @@
           <b-field grouped>
             <b-field label="Primary Color">
               <b-colorpicker
-              v-if="model.brand.color1"
-              v-model="model.brand.color1"
+              v-model="color1"
               @input="updateParent"
               />
             </b-field>
             <b-field label="Secondary Color">
               <b-colorpicker
-              v-if="model.brand.color2"
-              v-model="model.brand.color2"
+              v-model="color2"
               @input="updateParent"
               />
             </b-field>
@@ -1629,8 +1625,6 @@ export default {
       uploadRef: null,
       uploadIndex: null,
       // faviconWebsite: '',
-      color1: '#0b63ac',
-      color2: '#2b83cc',
       customAdvisorImageUrl: ''
     }
   },
@@ -1640,6 +1634,30 @@ export default {
       'isAdmin',
       'isQa'
     ]),
+    color1: {
+      get () {
+        try {
+          return this.model.brand.color1
+        } catch (e) {
+          return '#0b63ac'
+        }
+      },
+      set (value) {
+        this.$set(this.model.brand, 'color1', value.toString('hex'))
+      },
+    },
+    color2: {
+      get () {
+        try {
+          return this.model.brand.color2
+        } catch (e) {
+          return '#2b83cc'
+        }
+      },
+      set (value) {
+        this.$set(this.model.brand, 'color2', value.toString('hex'))
+      },
+    },
     faviconWebsite: {
       get () {
         try {
@@ -1708,13 +1726,6 @@ export default {
       // tool url and set the v-model value for the "Favicon Website URL" of the favicon
       
       // init the view so that all UI elements are populated properly
-      // make sure color1 and color2 are set to valid values for the color picker
-      if (!this.model.brand.color1) {
-        this.$set(this.model, 'color1', '#0b63ac')
-      }
-      if (!this.model.brand.color2) {
-        this.$set(this.model, 'color2', '#2b83cc')
-      }
       // make sure the advisor image is set to a value with Vue.set so that
       // v-model works on the selection
       if (!this.model.brand.advisorImage) {
