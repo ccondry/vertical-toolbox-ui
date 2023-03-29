@@ -3,6 +3,17 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.3.29
+
+### Updates
+* **Site:** Set Webex Connect page to be visible for all users.
+
+### Fixes
+* **Brand:** Fix color pickers causing 500 error when saving a brand after
+changing color1 or color2.
+* **Site:** Fix vertical name not saving after clicking save.
+
+
 # 2023.2.28
 
 ### Updates
