@@ -48,7 +48,7 @@
           @input="changeLanguageCode"
           >
             <option
-            v-for="language of languages"
+            v-for="language of languageOptions"
             :value="language.value"
             >
               {{ language.name }}
@@ -157,36 +157,11 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 const allVoices = [
   { value: 'female', name: 'Female' },
   { value: 'male', name: 'Male' }
-]
-
-const allLanguages = [
-  { value: 'ar-SA', name: 'Arabic (Saudi Arabia)' },
-  { value: 'ar-AE', name: 'Arabic (U.A.E.)' },
-  { value: 'zh-CN', name: 'Chinese Simplified (China)' },
-  { value: 'zh-TW', name: 'Chinese Traditional (Taiwan)' },
-  { value: 'da-DK', name: 'Danish (Denmark)' },
-  { value: 'nl-NL', name: 'Dutch (Netherlands)' },
-  { value: 'en-UK', name: 'English (UK)' },
-  { value: 'en-US', name: 'English (US)' },
-  { value: 'fr-CA', name: 'French (Canada)' },
-  { value: 'fr-FR', name: 'French (France)' },
-  { value: 'de-DE', name: 'German (Germany)' },
-  { value: 'el-GR', name: 'Greek (Greece)' },
-  { value: 'hi-IN', name: 'Hindi (India)' },
-  { value: 'it-IT', name: 'Italian (Italy)' },
-  { value: 'ja-JP', name: 'Japanese (Japan)' },
-  { value: 'ko-KR', name: 'Korean (Korea)' },
-  { value: 'nb-NO', name: 'Nowegian (Norway)' },
-  { value: 'pl-Pl', name: 'Polish (Poland)' },
-  { value: 'pt-BR', name: 'Portuguese (Brazil)' },
-  { value: 'ru-RU', name: 'Russian (Russian Federation)' },
-  { value: 'es-MX', name: 'Spanish (Mexico)' },
-  { value: 'es-ES', name: 'Spanish (Spain)' },
-  { value: 'sv-SE', name: 'Swedish (Sweden)' },
-  { value: 'tr-TR', name: 'Turkish (Turkey)' }
 ]
 
 export default {
@@ -235,13 +210,15 @@ export default {
 
   data () {
     return {
-      allLanguages,
       allVoices,
       model: null
     }
   },
 
   computed: {
+    ...mapGetters([
+      'languages'
+    ]),
     gcpProjectIdModel: {
       get () {
         return this.model.gcpProjectId
@@ -255,12 +232,11 @@ export default {
     intentsZipUrl () {
       return 'https://mm-static.cxdemo.net/intents.zip?nocache=' + Date.now()
     },
-    languages () {
+    languageOptions () {
       if (this.model.ttsEngine === 'google') {
-        return this.allLanguages
+        return this.languages
       } else {
-        const nuanceLanguages = ['en-US']
-        return this.allLanguages.filter(v => nuanceLanguages.includes(v.value))
+        return this.languages.filter(v => v.value === 'en-US')
       }
     },
     voices () {
