@@ -35,6 +35,20 @@
 
       <!-- else base object exists -->
       <div class="card-content" v-else>
+
+        <!-- Language -->
+        <b-field label="Language" v-if="isAdmin">
+          <b-select v-model="language">
+            <option
+            v-for="lang of languages"
+            :value="lang.value"
+            >
+              {{ lang.name }}
+            </option>
+          </b-select>
+        </b-field>
+        <!-- /Language -->
+
         <appointments
         v-model="model"
         :defaults="myDefaults"
@@ -113,6 +127,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import Appointments from 'client/components/connect-config/appointments.vue'
 import Automotive from 'client/components/connect-config/automotive.vue'
 import CallDeflection from 'client/components/connect-config/call-deflection.vue'
@@ -166,6 +181,31 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'isAdmin',
+      'languages'
+    ]),
+    language: {
+      get () {
+        // get value from webexconnect.global.language, or use en-US as default
+        try {
+          return this.model.global.language || 'en-US'
+        } catch (e) {
+          return 'en-US'
+        }
+      },
+      set (value) {
+        console.log('set language', value)
+        // make sure webexconnect.global section exists first
+        if (!this.model.global) {
+          this.model.global = {}
+        }
+        // set webexconnect.global.language
+        this.model.global.language = value
+        // update the root value with our changes
+        this.updateParent()
+      }
+    },
     myDefaults () {
       return this.defaults[modelKey]
     }
