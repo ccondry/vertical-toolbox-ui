@@ -37,7 +37,7 @@
       <div class="card-content" v-else>
 
         <!-- Language -->
-        <b-field label="Language" v-if="isAdmin">
+        <b-field label="Language" v-if="isAdmin || isQa">
           <b-select v-model="language">
             <option
             v-for="lang of languages"
@@ -183,6 +183,7 @@ export default {
   computed: {
     ...mapGetters([
       'isAdmin',
+      'isQa',
       'languages'
     ]),
     language: {
