@@ -40,8 +40,9 @@
         <b-field label="Language" v-if="isAdmin || isQa">
           <b-select v-model="language">
             <option
-            v-for="lang of languages"
+            v-for="lang of filteredLanguages"
             :value="lang.value"
+            :key="lang.value"
             >
               {{ lang.name }}
             </option>
@@ -206,6 +207,9 @@ export default {
         // update the root value with our changes
         this.updateParent()
       }
+    },
+    filteredLanguages () {
+      return this.languages.filter(v => ['en-US', 'es-ES', 'pt-BR', 'fr-FR'].includes(v.value))
     },
     myDefaults () {
       return this.defaults[modelKey]
