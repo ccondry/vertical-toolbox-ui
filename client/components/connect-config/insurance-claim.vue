@@ -22,27 +22,23 @@
     <!-- else object field exists -->
     <div class="card-content" v-else>
 
-      <!--
-      <b-field label="Brand Name" message="Brand Name">
+      <!-- Customer Name -->
+      <b-field label="Customer Name">
+        <div class="control">
+          <span class="button is-static">Hi</span>
+        </div>
         <b-input
-        v-model="model.brandName"
-        :placeholder="myDefaults.brandName"
+        v-model="model.custName"
+        :placeholder="myDefaults.custName"
         @input="updateParent"
+        style="min-width: 15rem;"
         />
       </b-field>
-      -->
-
+      
       <!-- Brand Name -->
       <b-field label="Brand Name">
-        <!--
-        <template slot="message">
-          <div class="is-size-3 has-text-right has-text-info">large text message here</div>
-          <div class="is-size-3 has-text-right has-text-info">large text message here second row</div>
-        </template>
-        -->
         <div class="control">
-          <span class="button is-static">Hi [Your Name], thanks for booking an appointment with</span>
-          <!-- <span class="button is-static">{{model[value.global.language].message1}} [Your Name], {{model[value.global.language].message2}}</span> -->
+          <span class="button is-static">this is your insurance provider</span>
         </div>
         <b-input
         v-model="model.brandName"
@@ -52,57 +48,94 @@
         />
       </b-field>
       
-      <!-- Representative Title -->
-      <b-field label="Representative Title">
+      <!-- Weather Event -->
+      <b-field label="Weather Event">
         <div class="control">
-          <span class="button is-static">The 45 minutes appointment with</span>
+          <span class="button is-static">The information we have from the national weather service indicates that there is</span>
         </div>
         <b-input
-        v-model="model.repTitle"
-        :placeholder="myDefaults.repTitle"
+        v-model="model.weatherEvent"
+        :placeholder="myDefaults.weatherEvent"
         @input="updateParent"
         style="min-width: 15rem;"
         />
         <div class="control">
-          <span class="button is-static">, is confirmed for</span>
+          <span class="button is-static">affecting your area</span>
         </div>
       </b-field>
       
-      <!-- Representative Name -->
-      <b-field label="Representative Name">
+      <!-- Brand Currency -->
+      <!-- <b-field label="Brand Currency">
         <div class="control">
-          <span class="button is-static">Your appointment with</span>
+          <span class="button is-static">10GB Data at</span>
         </div>
         <b-input
-        v-model="model.repName"
-        :placeholder="myDefaults.repName"
+        v-model="model.brandCurrency"
+        :placeholder="myDefaults.brandCurrency"
         @input="updateParent"
-        style="min-width: 15rem;"
+        style="max-width: 5rem;"
         />
         <div class="control">
-          <span class="button is-static">has been changed to</span>
+          <span class="button is-static">10 per month</span>
         </div>
-      </b-field>
+      </b-field> -->
       
-      <!-- Representative Building -->
-      <b-field label="Representative Building">
+      <!-- Brand Website -->
+      <!-- <b-field label="Brand Website">
         <div class="control">
-          <span class="button is-static">We look forward to seeing you at</span>
+          <span class="button is-static">Website:</span>
         </div>
         <b-input
-        v-model="model.repBuilding"
-        :placeholder="myDefaults.repBuilding"
+        v-model="model.brandWebsite"
+        :placeholder="myDefaults.brandWebsite"
         @input="updateParent"
-        style="min-width: 15rem;"
+        style="min-width: 40rem;"
         />
-        <!-- <div class="control">
-          <span class="button is-static">then you can book a video call consultation instead</span>
-        </div> -->
-      </b-field>
+      </b-field> -->
       
+      <!-- Brand Logo -->
+      <!-- Image URL manual edit, for admins only -->
+      <!-- <b-field label="Brand Logo URL" v-if="isAdmin">
+        <b-input
+        v-model.lazy="model.brandLogo"
+        :placeholder="myDefaults.brandLogo"
+        @input="updateParent"
+        />
+      </b-field> -->
+      <!-- Image image editor for users -->
+      <!-- <b-field grouped>
+        <b-loading
+        :is-full-page="false"
+        :active="working.images.brandLogo"
+        :can-cancel="false"
+        />
+        <b-field label="Brand Logo Image">
+          <img
+          :src="model.brandLogo"
+          style="max-width: 128px;"
+          />
+        </b-field>
+        <b-tooltip
+        :label="getTooltip('brandLogoUpload')"
+        multilined
+        position="is-top"
+        >
+          <b-icon type="is-primary" icon="information" />
+        </b-tooltip>
+        <b-field label="Upload">
+          <b-button
+          type="is-primary"
+          @click="launchFilePicker('brandLogo')"
+          >
+            Browse...
+          </b-button>
+        </b-field>
+      </b-field> -->
+
       <b-field>
         <save-button />
       </b-field>
+
     </div>
   </b-collapse>
 </template>
@@ -110,13 +143,15 @@
 <script>
 import {mapGetters} from 'vuex'
 
-const title = 'Appointments Branding'
-const modelKey = 'appointments'
+const title = 'Insurance Claim Branding'
+const modelKey = 'insuranceClaim'
 const tooltips = {
+  brandLogoUpload: `The logo should not exceed 500x500 pixels to reduce loading times and device bandwidth use.
+                    It should be of high enough quality to not look blurred or distorted when displayed on the device.`,
 }
 
 export default {
-  name: 'WebexConnectAppointmentsConfig',
+  name: 'WebexConnectInsuranceClaimConfig',
 
   props: {
     value: {
@@ -143,12 +178,14 @@ export default {
       model,
       modelKey,
       title,
-      tooltips
+      tooltips,
     }
   },
 
   computed: {
     ...mapGetters([
+      'isAdmin',
+      'isQa',
       'working'
     ]),
     myDefaults () {
@@ -166,6 +203,9 @@ export default {
   },
 
   methods: {
+    launchFilePicker (ref) {
+      this.$emit('upload', modelKey + '.' + ref)
+    },
     getTooltip (type) {
       try {
         return this.tooltips[type]

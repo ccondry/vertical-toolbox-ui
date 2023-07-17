@@ -99,6 +99,20 @@
         @upload="upload"
         />
 
+        <insurance-claim v-if="isAdmin || isQa"
+        v-model="model"
+        :defaults="myDefaults"
+        @input="updateParent"
+        @upload="upload"
+        />
+
+        <insurance-renew v-if="isAdmin || isQa"
+        v-model="model"
+        :defaults="myDefaults"
+        @input="updateParent"
+        @upload="upload"
+        />
+
         <mobile-app
         v-model="model"
         :defaults="myDefaults"
@@ -138,6 +152,8 @@ import MobileApp from 'client/components/connect-config/mobile-app.vue'
 import ProductActivationSo from 'client/components/connect-config/product-activation-so.vue'
 import ProductActivationTs from 'client/components/connect-config/product-activation-ts.vue'
 import Retail from 'client/components/connect-config/retail.vue'
+import InsuranceClaim from 'client/components/connect-config/insurance-claim.vue'
+import InsuranceRenew from 'client/components/connect-config/insurance-renew.vue'
 import SelectIconModal from 'client/components/modals/select-icon.vue'
 
 const modelKey = 'webexconnect'
@@ -155,6 +171,8 @@ export default {
     ProductActivationSo,
     ProductActivationTs,
     Retail,
+    InsuranceClaim,
+    InsuranceRenew,
     SelectIconModal
   },
 

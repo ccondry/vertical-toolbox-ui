@@ -541,7 +541,8 @@
         "custName": "Michael Littlefoot",
         "custAddress": "1125 Madison Avenue, New York, NY",
         "custPostcode": "10028",
-        "custEmailAddress": "michael.littlefoot@dcloud.cisco.com"
+        "custEmailAddress": "michael.littlefoot@dcloud.cisco.com",
+        "language": "en-US"
     },
     "appointments": {
         "brandName": "Cumulus Finance",
@@ -580,6 +581,21 @@
         "brandLogo": "https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg",
         "brandCurrency": "USD",
         "brandAddress": "170 West Tasman Dr., San Jose, CA"
+    },
+    "insuranceClaim": {
+        "custName": "Michael Littlefoot",
+        "brandName": "Cumulus Insurance",
+        "weatherEvent": "a flood event"
+    },
+    "insuranceRenew": {
+        "custName": "Michael Littlefoot",
+        "brandName": "Cumulus Insurance",
+        "policyCost": "125",
+        "brandCurrency": "USD",
+        "custEmailAddress": "michael.littlefoot@dcloud.cisco.com",
+        "brandWebsite": "https://www.webex.com/",
+        "brandLogo": "https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg",
+        "walletTemplateId": "5c4b710d-c56d-4989-810b-28a4ec73b676"
     }
   }
 }
