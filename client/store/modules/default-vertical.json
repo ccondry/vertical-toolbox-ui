@@ -585,7 +585,9 @@
     "insuranceClaim": {
         "custName": "Michael Littlefoot",
         "brandName": "Cumulus Insurance",
-        "weatherEvent": "a flood event"
+        "weatherEvent": "a flood event",
+        "brandWebsite": "https://www.webex.com/",
+        "brandLogo": "https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg"
     },
     "insuranceRenew": {
         "custName": "Michael Littlefoot",
