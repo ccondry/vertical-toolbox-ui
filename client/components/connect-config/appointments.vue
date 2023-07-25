@@ -41,8 +41,8 @@
         </template>
         -->
         <div class="control">
-          <span class="button is-static">Hi [Your Name], thanks for booking an appointment with</span>
-          <!-- <span class="button is-static">{{model[value.global.language].message1}} [Your Name], {{model[value.global.language].message2}}</span> -->
+          <!-- <span class="button is-static">Hi [Your Name], thanks for booking an appointment with</span> -->
+          <span class="button is-static">{{model[value.global.language].welcomeMsg1}} [{{model[value.global.language].yourName}}], {{model[value.global.language].welcomeMsg2}}</span>
         </div>
         <b-input
         v-model="model.brandName"
@@ -55,7 +55,8 @@
       <!-- Representative Title -->
       <b-field label="Representative Title">
         <div class="control">
-          <span class="button is-static">The 45 minutes appointment with</span>
+          <!-- <span class="button is-static">The 45 minutes appointment with</span> -->
+          <span class="button is-static">{{model[value.global.language].welcomeMsg3}}</span>
         </div>
         <b-input
         v-model="model.repTitle"
@@ -64,14 +65,16 @@
         style="min-width: 15rem;"
         />
         <div class="control">
-          <span class="button is-static">, is confirmed for</span>
+          <!-- <span class="button is-static">, is confirmed for</span> -->
+          <span class="button is-static">, {{model[value.global.language].welcomeMsg4}}</span>
         </div>
       </b-field>
       
       <!-- Representative Name -->
       <b-field label="Representative Name">
         <div class="control">
-          <span class="button is-static">Your appointment with</span>
+          <!-- <span class="button is-static">Your appointment with</span> -->
+          <span class="button is-static">{{model[value.global.language].optionMsg2}}</span>
         </div>
         <b-input
         v-model="model.repName"
@@ -80,14 +83,16 @@
         style="min-width: 15rem;"
         />
         <div class="control">
-          <span class="button is-static">has been changed to</span>
+          <!-- <span class="button is-static">has been changed to</span> -->
+          <span class="button is-static">{{model[value.global.language].optionMsg3}}</span>
         </div>
       </b-field>
       
       <!-- Representative Building -->
       <b-field label="Representative Building">
         <div class="control">
-          <span class="button is-static">We look forward to seeing you at</span>
+          <!-- <span class="button is-static">We look forward to seeing you at</span> -->
+          <span class="button is-static">{{model[value.global.language].optionMsg5}}</span>
         </div>
         <b-input
         v-model="model.repBuilding"
