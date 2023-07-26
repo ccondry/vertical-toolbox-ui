@@ -40,9 +40,11 @@
           <div class="is-size-3 has-text-right has-text-info">large text message here second row</div>
         </template>
         -->
-        <div class="control">
-          <!-- <span class="button is-static">Hi [Your Name], thanks for booking an appointment with</span> -->
+        <div class="control" v-if="model[value.global.language]">
           <span class="button is-static">{{model[value.global.language].welcomeMsg1}} [{{model[value.global.language].yourName}}], {{model[value.global.language].welcomeMsg2}}</span>
+        </div>
+        <div class="control" v-else>
+          <span class="button is-static">Hi [Your Name], thanks for booking an appointment with</span>
         </div>
         <b-input
         v-model="model.brandName"
@@ -54,9 +56,11 @@
       
       <!-- Representative Title -->
       <b-field label="Representative Title">
-        <div class="control">
-          <!-- <span class="button is-static">The 45 minutes appointment with</span> -->
+        <div class="control" v-if="model[value.global.language]">
           <span class="button is-static">{{model[value.global.language].welcomeMsg3}}</span>
+        </div>
+        <div class="control" v-else>
+          <span class="button is-static">The 45 minutes appointment with</span>
         </div>
         <b-input
         v-model="model.repTitle"
@@ -64,17 +68,21 @@
         @input="updateParent"
         style="min-width: 15rem;"
         />
-        <div class="control">
-          <!-- <span class="button is-static">, is confirmed for</span> -->
+        <div class="control" v-if="model[value.global.language]">
           <span class="button is-static">, {{model[value.global.language].welcomeMsg4}}</span>
+        </div>
+        <div class="control" v-else>
+          <span class="button is-static">, is confirmed for</span>
         </div>
       </b-field>
       
       <!-- Representative Name -->
       <b-field label="Representative Name">
-        <div class="control">
-          <!-- <span class="button is-static">Your appointment with</span> -->
+        <div class="control" v-if="model[value.global.language]">
           <span class="button is-static">{{model[value.global.language].optionMsg2}}</span>
+        </div>
+        <div class="control" v-else>
+          <span class="button is-static">Your appointment with</span>
         </div>
         <b-input
         v-model="model.repName"
@@ -82,17 +90,21 @@
         @input="updateParent"
         style="min-width: 15rem;"
         />
-        <div class="control">
-          <!-- <span class="button is-static">has been changed to</span> -->
+        <div class="control" v-if="model[value.global.language]">
           <span class="button is-static">{{model[value.global.language].optionMsg3}}</span>
+        </div>
+        <div class="control" v-else>
+            <span class="button is-static">has been changed to</span>
         </div>
       </b-field>
       
       <!-- Representative Building -->
       <b-field label="Representative Building">
-        <div class="control">
-          <!-- <span class="button is-static">We look forward to seeing you at</span> -->
+        <div class="control" v-if="model[value.global.language]">
           <span class="button is-static">{{model[value.global.language].optionMsg5}}</span>
+        </div>
+        <div class="control" v-else>
+          <span class="button is-static">We look forward to seeing you at</span>
         </div>
         <b-input
         v-model="model.repBuilding"
