@@ -66,6 +66,8 @@ if (journey == "appointments") {
     var changeMsg1 = defaultValue(localizationMessages.changeMsg1,"Please choose from a date and time below by replying A, B or C. If you need more options, reply MORE.");
     var changeMsg2 = defaultValue(localizationMessages.changeMsg2,"at");
     var changeMsg3 = defaultValue(localizationMessages.changeMsg3,"Or if you would like to have a chat with our customer service team first, reply CHAT.");
+    var changeMsg4 = defaultValue(localizationMessages.changeMsg4,"Please choose from a date and time. If you need more options, reply MORE. Or if you would like to have a chat with our customer service team first, reply CHAT.");
+    var changeMsg5 = defaultValue(localizationMessages.changeMsg5,"Please choose from a date and time below by replying A, B or C.");
     var moreKeyword = defaultValue(localizationMessages.moreKeyword,"more");
     var moreKeywordSimple = defaultValue(localizationMessages.moreKeywordSimple,"more");
     var optionMsg1 = defaultValue(localizationMessages.optionMsg1,"Thank you");

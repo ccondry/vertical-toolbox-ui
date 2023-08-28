@@ -114,6 +114,11 @@
                 </router-link>
               </li>
               <li>
+                <router-link :to="{ name: 'Webex Contact Center' }">
+                  Webex Contact Center
+                </router-link>
+              </li>
+              <li>
                 <router-link :to="{ name: 'Webex Connect' }">
                   Webex Connect
                 </router-link>

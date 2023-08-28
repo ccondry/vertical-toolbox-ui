@@ -43,6 +43,15 @@ const state = {
       }
     },
     {
+      name: 'Webex Contact Center',
+      path: '/branding/wxcc',
+      meta: {
+        icon: 'cellphone',
+        description: 'Webex Contact Center customization',
+        groups: ['admin', 'QA']
+      }
+    },
+    {
       name: 'Webex Connect',
       path: '/branding/connect',
       meta: {

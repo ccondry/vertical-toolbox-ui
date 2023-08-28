@@ -4,6 +4,7 @@ import brandedWebsite from 'client/views/main/brands.vue'
 import mobileWebsite from 'client/views/main/mobile.vue'
 import ai from 'client/views/main/ai.vue'
 import connect from 'client/views/main/connect.vue'
+import wxcc from 'client/views/main/wxcc.vue'
 import usage from 'client/views/admin/usage.vue'
 import cumulus from 'client/views/admin/cumulus.vue'
 
@@ -31,6 +32,13 @@ const routes = [{
   name: 'AI',
   path: '/branding/ai',
   component: ai
+}, {
+  name: 'Webex Contact Center',
+  path: '/branding/wxcc',
+  component: wxcc,
+  meta: {
+    groups: ['admin', 'QA']
+  }
 }, {
   name: 'Webex Connect',
   path: '/branding/connect',
