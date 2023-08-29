@@ -55,7 +55,7 @@ const state = {
       name: 'Webex Connect',
       path: '/branding/connect',
       meta: {
-        icon: 'comments',
+        icon: 'whatsapp',
         description: 'Webex Connect customization',
         // groups: ['admin', 'QA']
       }
