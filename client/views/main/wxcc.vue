@@ -75,7 +75,7 @@ function jpathSet (object, path, value) {
 }
 
 export default {
-  name: 'WxCC',
+  name: 'WxCCConfig',
   
   components: {
     Wxcc
