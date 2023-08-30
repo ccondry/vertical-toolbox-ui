@@ -335,7 +335,6 @@
 
         <!-- JDS -->
         <jds
-        
         v-model="model.brand"
         @input="updateParent"
         />
