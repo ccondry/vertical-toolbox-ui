@@ -64,6 +64,11 @@
         @upload="upload"
         />
 
+        <jds
+        :value="value.brand"
+        @input="value.brand = $event; $emit('input', {...value, brand: $event})" 
+        />
+
       </div>
 
       <!--
@@ -82,6 +87,7 @@
 import {mapGetters} from 'vuex'
 import Appointments from 'client/components/wxcc/appointments.vue'
 import CallDeflection from 'client/components/wxcc/call-deflection.vue'
+import Jds from 'client/components/brand/jds.vue'
 import SelectIconModal from 'client/components/modals/select-icon.vue'
 
 const modelKey = 'wxcc'
@@ -92,6 +98,7 @@ export default {
   components: {
     Appointments,
     CallDeflection,
+    Jds,
     SelectIconModal
   },
 
