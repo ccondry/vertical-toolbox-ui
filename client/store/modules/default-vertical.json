@@ -973,7 +973,14 @@
                 "errorMsg4": "As we haven't received a response, we have cancelled your appointment. If you want to book another appointment, just visit us again. Thanks.",
                 "errorMsg5": "To change your appointment, just reply, CHANGE. To cancel, reply, CANCEL.",
                 "errorMsg6": "We are connecting you to one of our customer service representatives now.",
-                "errorMsg7": "If you are sure you want to cancel then please reply, YES. Or to chat with our customer service team, reply CHAT."
+                "errorMsg7": "If you are sure you want to cancel then please reply, YES. Or to chat with our customer service team, reply CHAT.",
+                "MondayMsg": "Monday",
+                "TuesdayMsg": "Tuesday",
+                "WednesdayMsg": "Wednesday",
+                "ThursdayMsg": "Thursday",
+                "FridayMsg": "Friday",
+                "SaturdayMsg": "Saturday",
+                "SundayMsg": "Sunday"
             },
             "es-ES": {
                 "language": "es-ES",
@@ -1032,7 +1039,14 @@
                 "errorMsg4": "Como no hemos recibido una respuesta, hemos cancelado tu reunión. Si quieres reservar otra, simplemente visítanos de nuevo. Gracias.",
                 "errorMsg5": "Para cambiar tu reunión, simplemente contesta, CAMBIAR. Para cancelarla, contesta, CANCELAR.",
                 "errorMsg6": "Te ponemos ahora en contacto con uno de nuestros representantes de atención al cliente.",
-                "errorMsg7": "Si estás seguro de que quieres cancelar, por favor contesta, SÍ. O para hablar con el equipo de atención al cliente, contesta CHAT."
+                "errorMsg7": "Si estás seguro de que quieres cancelar, por favor contesta, SÍ. O para hablar con el equipo de atención al cliente, contesta CHAT.",
+                "MondayMsg": "Lunes",
+                "TuesdayMsg": "Martes",
+                "WednesdayMsg": "Miércoles",
+                "ThursdayMsg": "Jueves",
+                "FridayMsg": "Viernes",
+                "SaturdayMsg": "Sábado",
+                "SundayMsg": "Domingo"
             },
             "pt-BR": {
                 "language": "pt-BR",
@@ -1091,14 +1105,21 @@
                 "errorMsg4": "Como não recebemos uma resposta, estamos cancelando seu agendamento. Se você quiser agendar novamente, volte a nos visitar. Obrigado.",
                 "errorMsg5": "Para mudar seu horário, responda MUDAR. Para cancelar, responda CANCELAR.",
                 "errorMsg6": "Estamos te conectando com um de nossos representantes de atendimento.",
-                "errorMsg7": "Se você tem certeza que quer cancelar, responda SIM. Ou para conversar por chat com nosso atendimento a cliente, responda CHAT."
+                "errorMsg7": "Se você tem certeza que quer cancelar, responda SIM. Ou para conversar por chat com nosso atendimento a cliente, responda CHAT.",
+                "MondayMsg": "Segunda-feira",
+                "TuesdayMsg": "Terça-feira",
+                "WednesdayMsg": "Quarta-feira",
+                "ThursdayMsg": "Quinta-feira",
+                "FridayMsg": "Sexta-feira",
+                "SaturdayMsg": "Sábado",
+                "SundayMsg": "Domingo"
             },
             "fr-FR": {
                 "language": "fr-FR",
                 "enterName": "Veuillez saisir votre nom.",
                 "yourName": "Votre Nom",
                 "enterPhoneNumber": "Veuillez saisir votre numéro mobile, en incluant le code pays, mais sans le signe + ou 0.",
-                "welcomeTitle": "Rendez-vous Confirmée",
+                "welcomeTitle": "Rendez-vous Confirmé",
                 "welcomeMsg1": "Bonjour",
                 "welcomeMsg2": "Merci de vouloir prendre RDV avec",
                 "welcomeMsg3": "Le RDV de 45' avec",
@@ -1150,7 +1171,14 @@
                 "errorMsg4": "N'ayant pas reçu de réponse, nous avons annulé votre rendez-vous. Si vous souhaitez prendre un autre rendez-vous, revenez nous voir. Merci.",
                 "errorMsg5": "Pour modifier votre rendez-vous, répondez simplement MODIFIER. Pour annuler, répondez, ANNULER.",
                 "errorMsg6": "Nous vous connectons maintenant à l'un de nos agents du service client.",
-                "errorMsg7": "Si vous êtes sûr de vouloir annuler, veuillez répondre OUI. Ou pour discuter avec notre équipe du service client, répondez CHAT."
+                "errorMsg7": "Si vous êtes sûr de vouloir annuler, veuillez répondre OUI. Ou pour discuter avec notre équipe du service client, répondez CHAT.",
+                "MondayMsg": "Lundi",
+                "TuesdayMsg": "Mardi",
+                "WednesdayMsg": "Mercredi",
+                "ThursdayMsg": "Jeudi",
+                "FridayMsg": "Vendredi",
+                "SaturdayMsg": "Samedi",
+                "SundayMsg": "Dimanche"
             }
         },
         "collections": {

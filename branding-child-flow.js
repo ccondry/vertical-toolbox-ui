@@ -92,6 +92,13 @@ if (journey == "appointments") {
     var errorMsg5 = defaultValue(localizationMessages.errorMsg5,"To change your appointment, just reply, CHANGE. To cancel, reply, CANCEL.");
     var errorMsg6 = defaultValue(localizationMessages.errorMsg6,"We are connecting you to one of our customer service representatives now.");
     var errorMsg7 = defaultValue(localizationMessages.errorMsg7,"If you are sure you want to cancel then please reply, YES. Or to chat with our customer service team, reply CHAT.");
+    var MondayMsg = defaultValue(localizationMessages.MondayMsg,"Monday");
+    var TuesdayMsg = defaultValue(localizationMessages.TuesdayMsg,"Tuesday");
+    var WednesdayMsg = defaultValue(localizationMessages.WednesdayMsg,"Wednesday");
+    var ThursdayMsg = defaultValue(localizationMessages.ThursdayMsg,"Thursday");
+    var FridayMsg = defaultValue(localizationMessages.FridayMsg,"Friday");
+    var SaturdayMsg = defaultValue(localizationMessages.SaturdayMsg,"Saturday");
+    var SundayMsg = defaultValue(localizationMessages.SundayMsg,"Sunday");
 }
 
 if (journey == "collections") {
