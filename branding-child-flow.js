@@ -85,6 +85,7 @@ if (journey == "appointments") {
     var moreMsg6 = defaultValue(localizationMessages.moreMsg6,"Please choose from a time below by replying A, B or C.");
     var moreMsg7 = defaultValue(localizationMessages.moreMsg7,"Or if none of the above times suit you, you can chat with our customer service team, just reply CHAT.");
     var moreMsg8 = defaultValue(localizationMessages.moreMsg8,"We didn't recognise your input. Can you please try sending us a date that suits you again?");
+    var moreMsg9 = defaultValue(localizationMessages.moreMsg9,"Please note that displayed date is in day/month/year format.");
     var errorMsg1 = defaultValue(localizationMessages.errorMsg1,"Sorry, we didn't recognise your response.");
     var errorMsg2 = defaultValue(localizationMessages.errorMsg2,"Sorry, we didn't recognise your response again.");
     var errorMsg3 = defaultValue(localizationMessages.errorMsg3,"You timed out, please note you have 3 minutes to respond for the demo.");
