@@ -160,6 +160,7 @@ if (journey == "insuranceRenew") {
     var custName = defaultValue(insuranceRenew.custName,"Michael Littlefoot");
     var custEmailAddress = defaultValue(insuranceRenew.custEmailAddress,"michael.littlefoot@dcloud.cisco.com");
     var policyCost = defaultValue(insuranceRenew.policyCost,"125");
+    var brandWebsite = defaultValue(insuranceRenew.brandWebsite,"https://www.webex.com/");
     var brandLogo = defaultValue(insuranceRenew.brandLogo,"https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg");
     var walletTemplateId = defaultValue(insuranceRenew.walletTemplateId,"5c4b710d-c56d-4989-810b-28a4ec73b676");
 }
@@ -170,8 +171,8 @@ if (journey == "insuranceClaim") {
     var custName = defaultValue(insuranceClaim.custName,"Michael Littlefoot");
     var brandName = defaultValue(insuranceClaim.brandName,"Cumulus Insurance");
     var weatherEvent = defaultValue(insuranceClaim.weatherEvent,"a flood event");
-    var brandWebsite = defaultValue(insuranceRenew.brandWebsite,"https://www.webex.com/");
-    var brandLogo = defaultValue(insuranceRenew.brandLogo,"https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg");
+    var brandWebsite = defaultValue(insuranceClaim.brandWebsite,"https://www.webex.com/");
+    var brandLogo = defaultValue(insuranceClaim.brandLogo,"https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg");
 }
 
 "1"
