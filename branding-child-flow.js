@@ -115,6 +115,44 @@ if (journey == "callDeflection") {
 
     var brandName = defaultValue(callDeflection.brandName,"Cumulus Healthcare");
     var brandBuilding = defaultValue(callDeflection.brandBuilding,"Cumulus Healthcare store");
+    var callReason = defaultValue(callDeflection.callReason,"a prescription refill");
+    var formReason = defaultValue(callDeflection.formReason,"refill your prescription");
+    var formUrl = defaultValue(callDeflection.formUrl,"http://cs.co/wxconnectform");
+
+    var localizationMessages = callDeflection[jsonObjct.global.language];
+
+    var ivrLanguage = defaultValue(localizationMessages.ivrLanguage,"en-US");
+    var ivrVoice = defaultValue(localizationMessages.ivrVoice,"GuyNeural");
+    var chatKeyword = defaultValue(localizationMessages.chatKeyword,"Chat");
+    var chatKeywordSimple = defaultValue(localizationMessages.chatKeywordSimple,"Chat");
+    var welcomeMsg1 = defaultValue(localizationMessages.welcomeMsg1,"Thank you for calling");
+    var welcomeMsg2 = defaultValue(localizationMessages.welcomeMsg2,"customer support.");
+    var recordingMsg = defaultValue(localizationMessages.recordingMsg,"This call may be recorded for quality assurance. You may also be selected for a brief survey after the call.");
+    var firstIvrMsg1 = defaultValue(localizationMessages.firstIvrMsg1,"To reach");
+    var firstIvrMsg2 = defaultValue(localizationMessages.firstIvrMsg2,"please press 1. To reach");
+    var firstIvrMsg3 = defaultValue(localizationMessages.firstIvrMsg3,"website and mobile customer support, please press 2. For any other services, including technical support, please press 3.");
+    var secondIvrMsg1 = defaultValue(localizationMessages.secondIvrMsg1,"To request");
+    var secondIvrMsg2 = defaultValue(localizationMessages.secondIvrMsg2,"); please press 1.");
+    var secondIvrMsg3 = defaultValue(localizationMessages.secondIvrMsg3,"To learn about the status of an existing request, please press 2.");
+    var thirdIvrMsg1 = defaultValue(localizationMessages.thirdIvrMsg1,"We are currently experiencing higher than expected call volumes. We can send a message to your number with a link to the");
+    var thirdIvrMsg2 = defaultValue(localizationMessages.thirdIvrMsg2,"portal, to request");
+    var thirdIvrMsg3 = defaultValue(localizationMessages.thirdIvrMsg3,"To receive a text message through SMS, please press 1. To receive a text message through WhatsApp, please press 2.");
+    var waInitialMsg1 = defaultValue(localizationMessages.waInitialMsg1,"Thank you for calling. Please use the link to");
+    var waInitialMsg2 = defaultValue(localizationMessages.waInitialMsg2,"Please feel free to reply CHAT if you would like to speak with an agent.");
+    var waConfirmationMsg1 = defaultValue(localizationMessages.waConfirmationMsg1,"Thank you for choosing to interact with us over Whatsapp. Please follow the instructions provided within the message.");
+    var waConfirmationMsg2 = defaultValue(localizationMessages.waConfirmationMsg2,"Goodbye!");
+    var smsInitialMsg1 = defaultValue(localizationMessages.smsInitialMsg1,"Thank you for calling. Please use the link to");
+    var smsInitialMsg2 = defaultValue(localizationMessages.smsInitialMsg2,"Please feel free to reply CHAT if you would like to speak with an agent.");
+    var smsConfirmationMsg1 = defaultValue(localizationMessages.smsConfirmationMsg1,"Thank you for choosing to interact with us over SMS. Please follow the instructions provided within the message.");
+    var smsConfirmationMsg2 = defaultValue(localizationMessages.smsConfirmationMsg2,"Goodbye!");
+    var deflectionMsg1 = defaultValue(localizationMessages.deflectionMsg1,"Thanks, we are connecting you to one of our customer service representatives now.");
+    var deflectionMsg2 = defaultValue(localizationMessages.deflectionMsg2,"Unknown action from website, please try again.");
+    var deflectionMsg3 = defaultValue(localizationMessages.deflectionMsg3,"Hi");
+    var deflectionMsg4 = defaultValue(localizationMessages.deflectionMsg4,"We can confirm your request for");
+    var deflectionMsg5 = defaultValue(localizationMessages.deflectionMsg5,"has been successfully submitted.");
+    var deflectionMsg6 = defaultValue(localizationMessages.deflectionMsg6,"You will receive a notification to");
+    var deflectionMsg7 = defaultValue(localizationMessages.deflectionMsg7,"when it has been processed.");
+    var errorMsg1 = defaultValue(localizationMessages.errorMsg1,"You timed out, please note you have 30 minutes to submit the form.");
 }
 
 if (journey == "productActivationTS") {
