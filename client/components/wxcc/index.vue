@@ -36,6 +36,14 @@
       <!-- else base object exists -->
       <div class="card-content" v-else>
 
+        <!-- reset button -->
+        <b-button
+        type="is-primary"
+        @click="clickConfigure"
+        >
+          Reset to Defaults
+        </b-button>
+
         <!-- Language -->
         <b-field label="Language" v-if="isAdmin || isQa">
           <b-select v-model="language">
