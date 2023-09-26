@@ -211,7 +211,16 @@ const actions = {
       }
     } else {
       // successful
-      return response
+      // get default vertical JSON
+      const defaultVertical = getters.defaults.verticals
+      // copy current vertical data
+      const copy = JSON.parse(JSON.stringify(getters.vertical))
+      // fix wxcc section in copy
+      fixVertical(copy, defaultVertical, 'wxcc')
+      // fix webexconnect section in copy
+      fixVertical(copy, defaultVertical, 'webexconnect')
+      // update vertical in state with copy
+      dispatch('setVertical', copy)
     }
   },
   setVertical ({commit}, data) {
@@ -226,4 +235,67 @@ export default {
   mutations,
   actions,
   getters
+}
+
+function fixVertical (currentValue, defaultValue, section) {
+  // if current vertical does not have this section
+  if (typeof currentValue[section] === 'undefined') {
+    // don't change anything
+    return currentValue
+  }
+
+  if (
+    // if current vertical section is not an object
+    typeof currentValue[section] !== 'object' ||
+    // or current vertical section is null
+    currentValue[section] === null
+  ) {
+    // set it to an object
+    currentValue[section] = {}
+  }
+
+  // fill any missing parts in current value
+  fillObject(defaultValue[section], currentValue[section])
+}
+
+function fillObject (from, to) {
+  // for each key in the default value section
+  for (const key of Object.keys(from)) {
+    // if default value is an array
+    if (Array.isArray(from[key])) {
+      // if copy value is not an array
+      if (!Array.isArray(to[key])) {
+        // set copy value to a clone of default value
+        to[key] = JSON.parse(JSON.stringify(from[key]))
+      }
+      // continue to next key
+      continue
+    }
+    
+    if (
+      // if default value is a string
+      typeof from[key] === 'string' &&
+      // and copy value is not a string
+      typeof to[key] !== 'string'
+    ) {
+      // set the string value
+      to[key] = from[key]
+      // continue to next key
+      continue
+    }
+
+    // if default value is an object
+    if (typeof from[key] === 'object') {
+      // if copy value is also not an object
+      if (typeof to[key] !== 'object') {
+        // set copy value to a clone of default value
+        to[key] = JSON.parse(JSON.stringify(from[key]))
+      } else {
+        // copy value is also an object, so recurse into it
+        fillObject(from[key], to[key])
+      }
+      // continue to next key
+      continue
+    }
+  }
 }
