@@ -3,7 +3,7 @@
 // To be used for testing using node
 // node branding-child-flow.js
 var jsonObjct = require("./client/store/modules/default-vertical.json").webexconnect;
-var journey = "appointments";
+var journey = "callDeflection";
 
 function defaultValue(jsonVariable,defValue) {
     if (typeof jsonVariable != "string" || jsonVariable.length === 0) {
@@ -218,7 +218,7 @@ if (journey == "insuranceClaim") {
 "1"
 
 // To be used for testing using node
-console.log("welcomeMessage:", welcomeMessage)
+console.log("welcomeMsg1:", welcomeMsg1)
 
 //////////////////////////////
 // Original Code from David //
