@@ -929,7 +929,10 @@
         },
         "callDeflection": {
             "brandName": "Cumulus Healthcare",
-            "brandBuilding": "Cumulus Healthcare store"
+            "brandBuilding": "Cumulus Healthcare store",
+            "callReason": "a prescription refill",
+            "formReason": "refill your prescription",
+            "formUrl": "http://cs.co/wxconnectform"
         }
     },
     "webexconnect": {

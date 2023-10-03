@@ -1,7 +1,7 @@
 // var jsonObjct = JSON.parse("$(n23.webexConnect)");
 
 // To be used for testing using node
-// node branding-child-flow.js
+// Open a termina and type: node branding-child-flow.js
 var jsonObjct = require("./client/store/modules/default-vertical.json").webexconnect;
 var journey = "callDeflection";
 
@@ -12,29 +12,48 @@ function defaultValue(jsonVariable,defValue) {
     return jsonVariable;
 }
 
-var brandName = defaultValue(jsonObjct.global.brandName,"Cumulus Finance");
-var brandLogo = defaultValue(jsonObjct.global.brandLogo,"https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg");
-var brandBuilding = defaultValue(jsonObjct.global.brandBuilding,"Cumulus Healthcare store");
-var brandCurrency = defaultValue(jsonObjct.global.brandCurrency,"USD");
-var brandWebsite = defaultValue(jsonObjct.global.brandWebsite,"https://www.webex.com/");
-var brandAddress = defaultValue(jsonObjct.global.brandAddress,"170 West Tasman Dr., San Jose, CA");
-var repTitle = defaultValue(jsonObjct.global.repTitle,"your Financial Advisor");
-var repName = defaultValue(jsonObjct.global.repName,"Mr. John Doe");
-var repBuilding = defaultValue(jsonObjct.global.repBuilding,"your branch");
-var custName = defaultValue(jsonObjct.global.custName,"Michael Littlefoot");
-var custAddress = defaultValue(jsonObjct.global.custAddress,"1125 Madison Avenue, New York, NY");
-var custPostcode = defaultValue(jsonObjct.global.custPostcode,"10028");
-var custEmailAddress = defaultValue(jsonObjct.global.custEmailAddress,"michael.littlefoot@dcloud.cisco.com");
+var globalBranding = jsonObjct.global;
+if (!globalBranding)
+{
+    globalBranding = {};
+}
+
+var brandName = defaultValue(globalBranding.brandName,"Cumulus Finance");
+var brandLogo = defaultValue(globalBranding.brandLogo,"https://mm.cxdemo.net/static/images/cumulus/common/webex-logo.jpg");
+var brandBuilding = defaultValue(globalBranding.brandBuilding,"Cumulus Healthcare store");
+var brandCurrency = defaultValue(globalBranding.brandCurrency,"USD");
+var brandWebsite = defaultValue(globalBranding.brandWebsite,"https://www.webex.com/");
+var brandAddress = defaultValue(globalBranding.brandAddress,"170 West Tasman Dr., San Jose, CA");
+var repTitle = defaultValue(globalBranding.repTitle,"your Financial Advisor");
+var repName = defaultValue(globalBranding.repName,"Mr. John Doe");
+var repBuilding = defaultValue(globalBranding.repBuilding,"your branch");
+var custName = defaultValue(globalBranding.custName,"Michael Littlefoot");
+var custAddress = defaultValue(globalBranding.custAddress,"1125 Madison Avenue, New York, NY");
+var custPostcode = defaultValue(globalBranding.custPostcode,"10028");
+var custEmailAddress = defaultValue(globalBranding.custEmailAddress,"michael.littlefoot@dcloud.cisco.com");
+
+var language = jsonObjct.global.language
+if (!language) {
+    language = "en-US";
+} 
 
 if (journey == "appointments") {
     var appointments = jsonObjct.appointments;
+    if (!appointments)
+    {
+        appointments = {};
+    }
 
     var brandName = defaultValue(appointments.brandName,"Cumulus Finance");
     var repTitle = defaultValue(appointments.repTitle,"your Financial Advisor");
     var repName = defaultValue(appointments.repName,"Mr. John Doe");
     var repBuilding = defaultValue(appointments.repBuilding,"your branch");
 
-    var localizationMessages = appointments[jsonObjct.global.language];
+    var localizationMessages = appointments[language];
+    if (!localizationMessages)
+    {
+        localizationMessages = {};
+    }
 
     var enterName = defaultValue(localizationMessages.enterName,"Please enter your full name.");
     var yourName = defaultValue(localizationMessages.yourName,"Your Name");
@@ -106,12 +125,20 @@ if (journey == "appointments") {
 
 if (journey == "collections") {
     var collections = jsonObjct.collections;
+    if (!collections)
+    {
+        collections = {};
+    }
 
     var brandName = defaultValue(collections.brandName,"Cumulus Finance");
 }
 
 if (journey == "callDeflection") {
     var callDeflection = jsonObjct.callDeflection;
+    if (!callDeflection)
+    {
+        callDeflection = {};
+    }
 
     var brandName = defaultValue(callDeflection.brandName,"Cumulus Healthcare");
     var brandBuilding = defaultValue(callDeflection.brandBuilding,"Cumulus Healthcare store");
@@ -119,7 +146,11 @@ if (journey == "callDeflection") {
     var formReason = defaultValue(callDeflection.formReason,"refill your prescription");
     var formUrl = defaultValue(callDeflection.formUrl,"http://cs.co/wxconnectform");
 
-    var localizationMessages = callDeflection[jsonObjct.global.language];
+    var localizationMessages = callDeflection[language];
+    if (!localizationMessages)
+    {
+        localizationMessages = {};
+    }
 
     var ivrLanguage = defaultValue(localizationMessages.ivrLanguage,"en-US");
     var ivrVoice = defaultValue(localizationMessages.ivrVoice,"GuyNeural");
@@ -157,6 +188,10 @@ if (journey == "callDeflection") {
 
 if (journey == "productActivationTS") {
     var productActivationTS = jsonObjct.productActivationTS;
+    if (!productActivationTS)
+    {
+        productActivationTS = {};
+    }
 
     var brandName = defaultValue(productActivationTS.brandName,"Cumulus Utility");
     var custName = defaultValue(productActivationTS.custName,"Michael Littlefoot");
@@ -167,6 +202,10 @@ if (journey == "productActivationTS") {
 
 if (journey == "productActivationSO") {
     var productActivationSO = jsonObjct.productActivationSO;
+    if (!productActivationSO)
+    {
+        productActivationSO = {};
+    }
 
     var brandName = defaultValue(productActivationSO.brandName,"Cumulus Mobile");
     var brandCurrency = defaultValue(productActivationSO.brandCurrency,"USD");
@@ -176,6 +215,10 @@ if (journey == "productActivationSO") {
 
 if (journey == "automotive") {
     var automotive = jsonObjct.automotive;
+    if (!automotive)
+    {
+        automotive = {};
+    }
 
     var brandName = defaultValue(automotive.brandName,"Cumulus Automotive");
     var brandWebsite = defaultValue(automotive.brandWebsite,"https://www.webex.com/");
@@ -184,6 +227,10 @@ if (journey == "automotive") {
 
 if (journey == "retail") {
     var retail = jsonObjct.retail;
+    if (!retail)
+    {
+        retail = {};
+    }
 
     var brandName = defaultValue(retail.brandName,"Cumulus Retail");
     var brandCurrency = defaultValue(retail.brandCurrency,"USD");
@@ -194,6 +241,10 @@ if (journey == "retail") {
 
 if (journey == "insuranceRenew") {
     var insuranceRenew = jsonObjct.insuranceRenew;
+    if (!insuranceRenew)
+    {
+        insuranceRenew = {};
+    }
 
     var brandName = defaultValue(insuranceRenew.brandName,"Cumulus Insurance");
     var brandCurrency = defaultValue(insuranceRenew.brandCurrency,"USD");
@@ -207,6 +258,10 @@ if (journey == "insuranceRenew") {
 
 if (journey == "insuranceClaim") {
     var insuranceClaim = jsonObjct.insuranceClaim;
+    if (!insuranceClaim)
+    {
+        insuranceClaim = {};
+    }
 
     var custName = defaultValue(insuranceClaim.custName,"Michael Littlefoot");
     var brandName = defaultValue(insuranceClaim.brandName,"Cumulus Insurance");
