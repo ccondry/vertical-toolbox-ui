@@ -37,7 +37,7 @@
       <div class="card-content" v-else>
 
         <!-- Language -->
-        <b-field label="Language" v-if="isAdmin || isQa">
+        <b-field label="Language" v-if="isAdmin">
           <b-select v-model="language">
             <option
             v-for="lang of filteredLanguages"
