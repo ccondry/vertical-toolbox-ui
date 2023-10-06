@@ -163,17 +163,19 @@ if (journey == "callDeflection") {
     var firstIvrMsg2 = defaultValue(localizationMessages.firstIvrMsg2,"please press 1. To reach");
     var firstIvrMsg3 = defaultValue(localizationMessages.firstIvrMsg3,"website and mobile customer support, please press 2. For any other services, including technical support, please press 3.");
     var secondIvrMsg1 = defaultValue(localizationMessages.secondIvrMsg1,"To request");
-    var secondIvrMsg2 = defaultValue(localizationMessages.secondIvrMsg2,"); please press 1.");
+    var secondIvrMsg2 = defaultValue(localizationMessages.secondIvrMsg2,"please press 1.");
     var secondIvrMsg3 = defaultValue(localizationMessages.secondIvrMsg3,"To learn about the status of an existing request, please press 2.");
     var thirdIvrMsg1 = defaultValue(localizationMessages.thirdIvrMsg1,"We are currently experiencing higher than expected call volumes. We can send a message to your number with a link to the");
     var thirdIvrMsg2 = defaultValue(localizationMessages.thirdIvrMsg2,"portal, to request");
     var thirdIvrMsg3 = defaultValue(localizationMessages.thirdIvrMsg3,"To receive a text message through SMS, please press 1. To receive a text message through WhatsApp, please press 2.");
     var waInitialMsg1 = defaultValue(localizationMessages.waInitialMsg1,"Thank you for calling. Please use the link to");
-    var waInitialMsg2 = defaultValue(localizationMessages.waInitialMsg2,"Please feel free to reply CHAT if you would like to speak with an agent.");
+    var waInitialMsg2 = defaultValue(localizationMessages.waInitialMsg2,"Please feel free to reply");
+    var waInitialMsg3 = defaultValue(localizationMessages.waInitialMsg3,"if you would like to speak with an agent.");
     var waConfirmationMsg1 = defaultValue(localizationMessages.waConfirmationMsg1,"Thank you for choosing to interact with us over Whatsapp. Please follow the instructions provided within the message.");
     var waConfirmationMsg2 = defaultValue(localizationMessages.waConfirmationMsg2,"Goodbye!");
     var smsInitialMsg1 = defaultValue(localizationMessages.smsInitialMsg1,"Thank you for calling. Please use the link to");
-    var smsInitialMsg2 = defaultValue(localizationMessages.smsInitialMsg2,"Please feel free to reply CHAT if you would like to speak with an agent.");
+    var smsInitialMsg2 = defaultValue(localizationMessages.smsInitialMsg2,"Please feel free to reply");
+    var smsInitialMsg3 = defaultValue(localizationMessages.smsInitialMsg3,"if you would like to speak with an agent.");
     var smsConfirmationMsg1 = defaultValue(localizationMessages.smsConfirmationMsg1,"Thank you for choosing to interact with us over SMS. Please follow the instructions provided within the message.");
     var smsConfirmationMsg2 = defaultValue(localizationMessages.smsConfirmationMsg2,"Goodbye!");
     var deflectionMsg1 = defaultValue(localizationMessages.deflectionMsg1,"Thanks, we are connecting you to one of our customer service representatives now.");
@@ -183,7 +185,8 @@ if (journey == "callDeflection") {
     var deflectionMsg5 = defaultValue(localizationMessages.deflectionMsg5,"has been successfully submitted.");
     var deflectionMsg6 = defaultValue(localizationMessages.deflectionMsg6,"You will receive a notification to");
     var deflectionMsg7 = defaultValue(localizationMessages.deflectionMsg7,"when it has been processed.");
-    var errorMsg1 = defaultValue(localizationMessages.errorMsg1,"You timed out, please note you have 30 minutes to submit the form.");
+    var errorMsg1 = defaultValue(localizationMessages.errorMsg1,"You timed out, please note you have 10 minutes to submit the form.");
+    var errorMsg2 = defaultValue(localizationMessages.errorMsg2,"This menu option is not supported. Please select option 1.");
 }
 
 if (journey == "productActivationTS") {
