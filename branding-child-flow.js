@@ -168,12 +168,12 @@ if (journey == "callDeflection") {
     var thirdIvrMsg1 = defaultValue(localizationMessages.thirdIvrMsg1,"We are currently experiencing higher than expected call volumes. We can send a message to your number with a link to the");
     var thirdIvrMsg2 = defaultValue(localizationMessages.thirdIvrMsg2,"portal, to request");
     var thirdIvrMsg3 = defaultValue(localizationMessages.thirdIvrMsg3,"To receive a text message through SMS, please press 1. To receive a text message through WhatsApp, please press 2.");
-    var waInitialMsg1 = defaultValue(localizationMessages.waInitialMsg1,"Thank you for calling. Please use the link to");
+    var waInitialMsg1 = defaultValue(localizationMessages.waInitialMsg1,"Thank you for calling. Please use the link to request");
     var waInitialMsg2 = defaultValue(localizationMessages.waInitialMsg2,"Please feel free to reply");
     var waInitialMsg3 = defaultValue(localizationMessages.waInitialMsg3,"if you would like to speak with an agent.");
     var waConfirmationMsg1 = defaultValue(localizationMessages.waConfirmationMsg1,"Thank you for choosing to interact with us over Whatsapp. Please follow the instructions provided within the message.");
     var waConfirmationMsg2 = defaultValue(localizationMessages.waConfirmationMsg2,"Goodbye!");
-    var smsInitialMsg1 = defaultValue(localizationMessages.smsInitialMsg1,"Thank you for calling. Please use the link to");
+    var smsInitialMsg1 = defaultValue(localizationMessages.smsInitialMsg1,"Thank you for calling. Please use the link to request");
     var smsInitialMsg2 = defaultValue(localizationMessages.smsInitialMsg2,"Please feel free to reply");
     var smsInitialMsg3 = defaultValue(localizationMessages.smsInitialMsg3,"if you would like to speak with an agent.");
     var smsConfirmationMsg1 = defaultValue(localizationMessages.smsConfirmationMsg1,"Thank you for choosing to interact with us over SMS. Please follow the instructions provided within the message.");
