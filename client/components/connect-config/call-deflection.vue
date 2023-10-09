@@ -54,6 +54,31 @@
         </div>
       </b-field>
       
+      <!-- Call Reason -->
+      <b-field label="Call Reason">
+        <div class="control">
+          <span class="button is-static">To request</span>
+        </div>
+        <b-input
+        v-model="model.callReason"
+        :placeholder="myDefaults.callReason"
+        @input="updateParent"
+        style="min-width: 20rem;"
+        />
+        <div class="control">
+          <span class="button is-static">, please press 1</span>
+        </div>
+      </b-field>
+      
+      <!-- Form URL -->
+      <b-field label="Form URL" v-if="isAdmin || isQa">
+        <b-input
+        v-model.lazy="model.formUrl"
+        :placeholder="myDefaults.formUrl"
+        @input="updateParent"
+        />
+      </b-field>
+      
       <b-field>
         <save-button />
       </b-field>
@@ -103,6 +128,8 @@ export default {
 
   computed: {
     ...mapGetters([
+      'isAdmin',
+      'isQa',
       'working'
     ]),
     myDefaults () {

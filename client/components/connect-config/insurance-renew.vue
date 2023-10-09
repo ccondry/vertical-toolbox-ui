@@ -108,7 +108,7 @@
         @input="updateParent"
         />
       </b-field>
-      <!-- Image image editor for users -->
+      <!-- Image editor for users -->
       <b-field grouped>
         <b-loading
         :is-full-page="false"
