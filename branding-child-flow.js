@@ -142,8 +142,8 @@ if (journey == "callDeflection") {
 
     var brandName = defaultValue(callDeflection.brandName,"Cumulus Healthcare");
     var brandBuilding = defaultValue(callDeflection.brandBuilding,"Cumulus Healthcare store");
-    var callReason = defaultValue(callDeflection.callReason,"a prescription refill");
-    var formReason = defaultValue(callDeflection.formReason,"refill your prescription");
+    var callReason = defaultValue(callDeflection.callReason,"cleaning services");
+    var formReason = defaultValue(callDeflection.formReason,"request cleaning services");
     var formUrl = defaultValue(callDeflection.formUrl,"http://cs.co/wxconnectform");
 
     var localizationMessages = callDeflection[language];
