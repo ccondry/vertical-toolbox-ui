@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.10.9
+
+### Updates
+* **Brand:** Added callReason and formURL to the Call Deflection branding.
+
+
 # 2023.3.29-1
 
 ### Fixes
