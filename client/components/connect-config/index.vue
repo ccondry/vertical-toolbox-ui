@@ -37,7 +37,8 @@
       <div class="card-content" v-else>
 
         <!-- Language -->
-        <b-field label="Language" v-if="isAdmin || isQa">
+        <!-- <b-field label="Language" v-if="isAdmin || isQa"> -->
+        <b-field label="Language">
           <b-select v-model="language">
             <option
             v-for="lang of filteredLanguages"
@@ -99,14 +100,15 @@
         @upload="upload"
         />
 
-        <insurance-claim v-if="isAdmin || isQa"
+        <!-- <insurance-claim v-if="isAdmin || isQa" -->
+        <insurance-claim
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
         @upload="upload"
         />
 
-        <insurance-renew v-if="isAdmin || isQa"
+        <insurance-renew
         v-model="model"
         :defaults="myDefaults"
         @input="updateParent"
