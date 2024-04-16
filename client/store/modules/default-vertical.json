@@ -1135,7 +1135,7 @@
                 "confirmMsg2": "Ready to Join?",
                 "confirmMsg3": "is approaching.",
                 "confirmMsg4": "To join the video call, reply, VIDEO.",
-                "confirmMsg5": "Thanks for confirming a video call, one of our video agents will be available shortly. Your Instant Connect Url is: ",
+                "confirmMsg5": "Thanks for confirming a video call, one of our video agents will be available shortly. Your Instant Connect Url is:",
                 "videoKeyword": "Video",
                 "videoKeywordSimple": "Video",
                 "cancelMsg1": "If you are sure you want to cancel your appointment for",
