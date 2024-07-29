@@ -679,6 +679,14 @@
                 />
               </b-field>
 
+              <b-field label="Popup Phone Input Label">
+                <b-input
+                v-model="model.brand.phoneLabelSms"
+                placeholder="Your Phone Number (including the country code prefix, but without leading 0 or +)"
+                @input="updateParent"
+                />
+              </b-field>
+
               <!-- Save button -->
               <b-field>
                 <save-button />
