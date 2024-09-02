@@ -488,6 +488,8 @@
     "language": "en",
     "region": "US",
     "gcpProjectId": "cumulus-v2-hotikl",
+    "cxConfigId": "d6037f1a-f842-47e8-92e4-ff91c8a753dd",
+    "botName": "Nimbus",
     "wxccChatTemplate": {},
     "wxcc": {
         "en": {
