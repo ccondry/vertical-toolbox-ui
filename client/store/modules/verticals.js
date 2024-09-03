@@ -216,9 +216,11 @@ const actions = {
       // copy current vertical data
       const copy = JSON.parse(JSON.stringify(getters.vertical))
       // fix wxcc section in copy
-      fixVertical(copy, defaultVertical, 'wxcc')
+      fixVerticalSection(copy, defaultVertical, 'wxcc')
       // fix webexconnect section in copy
-      fixVertical(copy, defaultVertical, 'webexconnect')
+      fixVerticalSection(copy, defaultVertical, 'webexconnect')
+      // fix webexconnect root in copy
+      fixVerticalRoot(copy, defaultVertical)
       // update vertical in state with copy
       dispatch('setVertical', copy)
     }
@@ -237,7 +239,21 @@ export default {
   getters
 }
 
-function fixVertical (currentValue, defaultValue, section) {
+// copy any missing or invalid values in the 'to' object from 'from' object, 
+// if they are string or boolean type and on the root of the objects
+function fixVerticalRoot (to, from) {
+  for (const key of Object.keys(from)) {
+    if (
+      (typeof from[key] === 'string' && typeof to[key] !== 'string') ||
+      (typeof from[key] === 'boolean' && typeof to[key] !== 'boolean')
+    ) {
+      to[key] = from[key]
+      continue
+    }
+  }
+}
+
+function fixVerticalSection (currentValue, defaultValue, section) {
   // if current vertical does not have this section
   if (typeof currentValue[section] === 'undefined') {
     // don't change anything
