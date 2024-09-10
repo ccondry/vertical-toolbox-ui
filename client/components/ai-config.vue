@@ -88,49 +88,6 @@
         </b-field>
         <!-- /UCCX Bubble Chat and PCCE ECE Docked Chat -->
 
-        <!-- DialogFlow Token -->
-        <p>
-          You can customize the AI bot script with your own messages
-          and intents by using your own DialgFlow Client Access API Token
-          here. Download the
-          <a :href="intentsZipUrl">
-            <strong>dCloud DialogFlow intents</strong>
-          </a>
-          zip file and import it into your DialogFlow to use as a base
-          for customizing your demo AI bots.
-        </p>
-        <b-field label="DialogFlow Project ID (for Chat Bot and Conversational IVR)">
-          <b-autocomplete
-          v-model="gcpProjectIdModel"
-          :data="[defaults.gcpProjectId]"
-          :placeholder="defaults.gcpProjectId"
-          @input="updateParent"
-          />
-        </b-field>
-        <p>
-          The DialogFlow Project ID you specify must have a corresponding
-          credentials JSON file uploaded in order for it to work. Upload your
-          credentials JSON file here:
-        </p>
-        <b-field grouped>
-          <b-field label="Upload Credentials JSON">
-            <button
-            class="button is-primary"
-            :disabled="working.images.credentials"
-            @click="launchFilePicker('credentials')"
-            >
-              {{ working.images.credentials ? 'Working...' : 'Browse...' }}
-            </button>
-          </b-field>
-          <!-- <b-tooltip label="this is a tooltip" multilined position="is-top">
-            <b-icon type="is-primary" icon="information" />
-          </b-tooltip> -->
-          <!-- <b-field expanded label="Background iframe or image URL">
-            <b-input v-model="model.brand.iframe" placeholder="" :disabled="working.images.iframe" />
-          </b-field> -->
-        </b-field>
-        <!-- /DialogFlow Token -->
-
         <!-- Post Chat Survey -->
         <b-field label="Post-Chat-Bot Survey">
           <b-tooltip
@@ -149,6 +106,104 @@
           </b-tooltip>
         </b-field>
         <!-- /Post Chat Survey -->
+
+        <!-- DialogFlow CX Configuration -->
+        <b-collapse class="content card" :open="true" v-if="isAdmin">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">
+              DialogFlow CX
+            </p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content">
+            <!-- DialogFlow CX Token -->
+            <p>
+              *** Customizing the AI Bot script is currently in development. ***
+            </p>
+            <b-field label="Config ID (taken Control Hub Contact Center Feature)">
+              <b-input
+              v-model="model.cxConfigId"
+              :placeholder="defaults.cxConfigId"
+              @input="updateParent"
+              />
+            </b-field>
+            <!-- <b-field label="Config ID (taken from Control Hub Contact Center Feature)">
+              <b-autocomplete
+              v-model="gcpProjectIdModel"
+              :data="[defaults.cxConfigId]"
+              :placeholder="defaults.cxConfigId"
+              @input="updateParent"
+              />
+            </b-field> -->
+            <b-field label="Bot Name">
+              <b-input
+              v-model="model.botName"
+              :placeholder="defaults.botName"
+              @input="updateParent"
+              />
+            </b-field>
+            <!-- /DialogFlow CX Token -->
+          </div>
+        </b-collapse>
+
+        <!-- DialogFlow ES Configuration -->
+        <b-collapse class="content card" :open="true">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">
+              DialogFlow ES
+            </p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content">
+            <!-- DialogFlow ES Token -->
+            <p>
+              You can customize the AI Bot script with your own messages
+              and intents by using your own DialgFlow Client Access API Token
+              here. Download the
+              <a :href="intentsZipUrl">
+                <strong>dCloud DialogFlow intents</strong>
+              </a>
+              zip file and import it into your DialogFlow to use as a base
+              for customizing your demo AI Bots.
+            </p>
+            <b-field label="Project ID (taken from Google Project Settings -> Service Accounts -> Manage Keys -> Create New Key)">
+              <b-autocomplete
+              v-model="gcpProjectIdModel"
+              :data="[defaults.gcpProjectId]"
+              :placeholder="defaults.gcpProjectId"
+              @input="updateParent"
+              />
+            </b-field>
+            <p>
+              The DialogFlow Project ID you specify must have a corresponding
+              credentials JSON file uploaded in order for it to work. The JSON file
+              is downloaded when creating the <strong>Service Account Key</strong> above. Upload your
+              credentials JSON file here:
+            </p>
+            <b-field grouped>
+              <b-field label="Upload Credentials JSON">
+                <button
+                class="button is-primary"
+                :disabled="working.images.credentials"
+                @click="launchFilePicker('credentials')"
+                >
+                  {{ working.images.credentials ? 'Working...' : 'Browse...' }}
+                </button>
+              </b-field>
+              <!-- <b-tooltip label="this is a tooltip" multilined position="is-top">
+                <b-icon type="is-primary" icon="information" />
+              </b-tooltip> -->
+              <!-- <b-field expanded label="Background iframe or image URL">
+                <b-input v-model="model.brand.iframe" placeholder="" :disabled="working.images.iframe" />
+              </b-field> -->
+            </b-field>
+            <!-- /DialogFlow ES Token -->
+          </div>
+        </b-collapse>
       </div>
     </b-collapse>
     <!-- /AI Customization -->
@@ -217,6 +272,8 @@ export default {
 
   computed: {
     ...mapGetters([
+      'isAdmin',
+      'isQa',
       'languages'
     ]),
     gcpProjectIdModel: {
