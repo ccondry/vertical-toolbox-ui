@@ -123,6 +123,11 @@
                   Webex Connect
                 </router-link>
               </li>
+              <li v-if="isAdmin || isQa">
+                <router-link :to="{ name: 'Surveys' }">
+                  Surveys
+                </router-link>
+              </li>
             </ul>
           </div>
         </article>

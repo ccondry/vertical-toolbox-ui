@@ -5,6 +5,7 @@ import mobileWebsite from 'client/views/main/mobile.vue'
 import ai from 'client/views/main/ai.vue'
 import connect from 'client/views/main/connect.vue'
 import wxcc from 'client/views/main/wxcc.vue'
+import surveys from 'client/views/main/surveys.vue'
 import usage from 'client/views/admin/usage.vue'
 import cumulus from 'client/views/admin/cumulus.vue'
 
@@ -43,6 +44,13 @@ const routes = [{
   name: 'Webex Connect',
   path: '/branding/connect',
   component: connect,
+  meta: {
+    groups: ['admin', 'QA']
+  }
+}, {
+  name: 'Surveys',
+  path: '/branding/surveys',
+  component: surveys,
   meta: {
     groups: ['admin', 'QA']
   }

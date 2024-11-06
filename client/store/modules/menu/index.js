@@ -48,7 +48,7 @@ const state = {
       meta: {
         icon: 'headphones',
         description: 'Webex Contact Center customization',
-        groups: ['admin', 'QA']
+        // groups: ['admin', 'QA']
       }
     },
     {
@@ -58,6 +58,16 @@ const state = {
         icon: 'whatsapp',
         description: 'Webex Connect customization',
         // groups: ['admin', 'QA']
+      }
+    },
+    {
+      name: 'Surveys',
+      path: '/branding/surveys',
+      meta: {
+        icon: 'comment-question',
+        label: 'Surveys',
+        description: 'Surveys customization',
+        groups: ['admin', 'QA']
       }
     },
     {
