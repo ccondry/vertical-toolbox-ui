@@ -3,7 +3,7 @@
     <!-- Cumulus IVR Menu -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">Cumulus IVR Menu</p>
+        <p class="card-header-title">IVR Menu Customization</p>
         <a class="card-header-icon">
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>

@@ -219,6 +219,8 @@ const actions = {
       fixVerticalSection(copy, defaultVertical, 'wxcc')
       // fix webexconnect section in copy
       fixVerticalSection(copy, defaultVertical, 'webexconnect')
+      // fix surveys section in copy
+      fixVerticalSection(copy, defaultVertical, 'surveys')
       // fix webexconnect root in copy
       fixVerticalRoot(copy, defaultVertical)
       // update vertical in state with copy

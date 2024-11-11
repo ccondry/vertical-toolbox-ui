@@ -76,6 +76,20 @@
             ]
         }
     },
+    "surveys": {
+        "voice": {
+            "greeting": "We would like to thank you for taking time to comment on your service today.",
+            "question1": "On a scale of one to ten, with ten being the highest, how would you rate your service today?",
+            "question2": "On a scale of one to ten, with ten being most likely, would you recommend us to a friend?",
+            "goodBye": "Thank you for helping us be the best. Good Bye!"
+        },
+        "digital": {
+            "greeting": "We would like to thank you for taking time to comment on your service today.",
+            "question1": "On a scale of one to ten, with ten being the highest, how would you rate your service today?",
+            "question2": "On a scale of one to ten, with ten being most likely, would you recommend us to a friend?",
+            "goodBye": "Thank you for helping us be the best. Good Bye!"
+        }
+    },
     "logo": {
         "vector": "https://mm.cxdemo.net/static/images/cumulus/verticals/finance/logo.svg",
         "rasterised": "https://mm.cxdemo.net/static/images/cumulus/verticals/finance/logo.png",

@@ -98,6 +98,11 @@
                   IVR Prompts
                 </router-link>
               </li>
+              <li v-if="isAdmin || isQa">
+                <router-link :to="{ name: 'Surveys' }">
+                  Surveys
+                </router-link>
+              </li>
               <li>
                 <router-link :to="{ name: 'Branded Website' }">
                   Branded Website
@@ -121,11 +126,6 @@
               <li>
                 <router-link :to="{ name: 'Webex Connect' }">
                   Webex Connect
-                </router-link>
-              </li>
-              <li v-if="isAdmin || isQa">
-                <router-link :to="{ name: 'Surveys' }">
-                  Surveys
                 </router-link>
               </li>
             </ul>

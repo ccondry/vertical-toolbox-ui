@@ -18,6 +18,16 @@ const state = {
       }
     },
     {
+      name: 'Surveys',
+      path: '/branding/surveys',
+      meta: {
+        icon: 'comment-question',
+        label: 'Surveys',
+        description: 'Surveys customization',
+        groups: ['admin', 'QA']
+      }
+    },
+    {
       name: 'Branded Website',
       path: '/branding/brand',
       meta: {
@@ -58,16 +68,6 @@ const state = {
         icon: 'whatsapp',
         description: 'Webex Connect customization',
         // groups: ['admin', 'QA']
-      }
-    },
-    {
-      name: 'Surveys',
-      path: '/branding/surveys',
-      meta: {
-        icon: 'comment-question',
-        label: 'Surveys',
-        description: 'Surveys customization',
-        groups: ['admin', 'QA']
       }
     },
     {

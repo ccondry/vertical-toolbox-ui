@@ -50,6 +50,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Wxcc from 'client/components/wxcc/index.vue'
+
 // set a nested value in an object
 function jpathSet (object, path, value) {
   let cursor = object

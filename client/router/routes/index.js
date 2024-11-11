@@ -22,6 +22,13 @@ const routes = [{
   path: '/branding/ivr',
   component: ivr
 }, {
+  name: 'Surveys',
+  path: '/branding/surveys',
+  component: surveys,
+  meta: {
+    groups: ['admin', 'QA']
+  }
+}, {
   name: 'Branded Website',
   path: '/branding/brand',
   component: brandedWebsite
@@ -44,13 +51,6 @@ const routes = [{
   name: 'Webex Connect',
   path: '/branding/connect',
   component: connect,
-  meta: {
-    groups: ['admin', 'QA']
-  }
-}, {
-  name: 'Surveys',
-  path: '/branding/surveys',
-  component: surveys,
   meta: {
     groups: ['admin', 'QA']
   }

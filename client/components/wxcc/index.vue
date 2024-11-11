@@ -3,7 +3,7 @@
     <!-- Webex Connect -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
-        <p class="card-header-title">Webex Contact Center</p>
+        <p class="card-header-title">Webex Contact Center Customization</p>
         <a class="card-header-icon">
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>

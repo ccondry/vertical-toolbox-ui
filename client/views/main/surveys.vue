@@ -20,8 +20,8 @@
           <save-button />
         </b-field>
 
-        <!-- IVR config -->
-        <ivr-config
+        <!-- Surveys config -->
+        <surveys-config
         :value="vertical"
         :working="working"
         :loading="loading"
@@ -42,13 +42,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import IvrConfig from 'client/components/ivr-config.vue'
+import SurveysConfig from 'client/components/surveys-config.vue'
 
 export default {
-  name: 'IVR',
+  name: 'Surveys',
   
   components: {
-    IvrConfig
+    SurveysConfig
   },
 
   computed: {
@@ -68,7 +68,7 @@ export default {
       'setVertical'
     ]),
     upload (data) {
-      console.log('ivr.vue - upload vertical image', data)
+      console.log('surveys.vue - upload vertical image', data)
       this.uploadImage({data})
     },
     updateState (value) {
