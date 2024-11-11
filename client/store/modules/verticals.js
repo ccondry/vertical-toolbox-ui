@@ -1,6 +1,7 @@
 import * as types from 'client/store/mutation-types'
 import { DialogProgrammatic as Dialog } from 'buefy'
 import router from 'client/router'
+import Vue from 'vue'
 
 const state = {
   verticals: [],
@@ -228,7 +229,7 @@ const actions = {
     }
   },
   setVertical ({commit}, data) {
-    console.log('setVertical')
+    console.log('setVertical', data)
     // update vertical data in state
     commit(types.SET_VERTICAL_DETAILS, data)
   }
@@ -256,20 +257,18 @@ function fixVerticalRoot (to, from) {
 }
 
 function fixVerticalSection (currentValue, defaultValue, section) {
-  // if current vertical does not have this section
-  if (typeof currentValue[section] === 'undefined') {
-    // don't change anything
-    return currentValue
-  }
-
+  console.log(`fixing vertical section "${section}"`)
   if (
-    // if current vertical section is not an object
+    // if current vertical does not have this section
+    typeof currentValue[section] === 'undefined' ||
+    // or if current vertical section is not an object
     typeof currentValue[section] !== 'object' ||
     // or current vertical section is null
     currentValue[section] === null
   ) {
     // set it to an object
-    currentValue[section] = {}
+    Vue.set(currentValue, section, {})
+    // currentVaule[section] = {}
   }
 
   // fill any missing parts in current value
