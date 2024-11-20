@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2024.11.20
+
+### Updates
+* **Surveys:** Added the surveys customization page.
+
+
 # 2023.10.9
 
 ### Updates
