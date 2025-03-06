@@ -100,7 +100,7 @@
               </li>
               <!-- <li v-if="isAdmin || isQa"> -->
               <li>
-                  <router-link :to="{ name: 'Surveys' }">
+                <router-link :to="{ name: 'Surveys' }">
                   Surveys
                 </router-link>
               </li>

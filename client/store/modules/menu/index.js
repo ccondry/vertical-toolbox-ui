@@ -24,7 +24,7 @@ const state = {
         icon: 'comment-question',
         label: 'Surveys',
         description: 'Surveys customization',
-        groups: ['admin', 'QA']
+        // groups: ['admin', 'QA']
       }
     },
     {
