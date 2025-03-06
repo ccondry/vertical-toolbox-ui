@@ -98,8 +98,9 @@
                   IVR Prompts
                 </router-link>
               </li>
-              <li v-if="isAdmin || isQa">
-                <router-link :to="{ name: 'Surveys' }">
+              <!-- <li v-if="isAdmin || isQa"> -->
+              <li>
+                  <router-link :to="{ name: 'Surveys' }">
                   Surveys
                 </router-link>
               </li>
