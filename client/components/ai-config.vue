@@ -107,6 +107,41 @@
         </b-field>
         <!-- /Post Chat Survey -->
 
+        <!-- AI Agent Configuration -->
+        <b-collapse class="content card" :open="true" v-if="isAdmin">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">
+              AI Agent
+            </p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content">
+            <!-- AI Agent Token -->
+            <!--
+            <p>
+              *** Customizing the AI Bot script is currently in development. ***
+            </p>
+            -->
+            <b-field label="Config ID (provided by dCloud after uploading AI Agent json into Demo Configurations page)">
+              <b-input
+              v-model="model.aiConfigId"
+              :placeholder="defaults.aiConfigId"
+              @input="updateParent"
+              />
+            </b-field>
+            <b-field label="Bot Name">
+              <b-input
+              v-model="model.botName"
+              :placeholder="defaults.botName"
+              @input="updateParent"
+              />
+            </b-field>
+            <!-- /AI Agent Token -->
+          </div>
+        </b-collapse>
+
         <!-- DialogFlow CX Configuration -->
         <b-collapse class="content card" :open="true" v-if="isAdmin">
           <div slot="trigger" slot-scope="props" class="card-header">
@@ -119,10 +154,12 @@
           </div>
           <div class="card-content">
             <!-- DialogFlow CX Token -->
+            <!--
             <p>
               *** Customizing the AI Bot script is currently in development. ***
             </p>
-            <b-field label="Config ID (taken Control Hub Contact Center Feature)">
+            -->
+            <b-field label="Config ID (provided by dCloud after uploading Google CX zip into Demo Configurations page)">
               <b-input
               v-model="model.cxConfigId"
               :placeholder="defaults.cxConfigId"

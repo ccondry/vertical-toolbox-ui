@@ -228,7 +228,7 @@
 
             <!-- Contact Button -->
             <b-field
-            label="Contact Button Text (the button to open contact panel)"
+            label="Contact Button Text"
             expanded
             >
               <b-input
@@ -240,7 +240,7 @@
             <!-- /Contact Button -->
 
             <!-- Contact Menu Title -->
-            <b-field expanded label="Contact Menu Title (normal)">
+            <b-field expanded label="Contact Menu Title">
               <b-input
               v-model="model.brand.menuTitle"
               placeholder="Need Help?"
@@ -250,7 +250,7 @@
             <!-- /Contact Menu Title -->
 
             <!-- Chat Menu Title -->
-            <b-field expanded label="Contact Menu Title (while chatting)">
+            <b-field expanded label="Contact Menu Chat Title">
               <b-input
               v-model="model.brand.chatBotMenuTitle"
               placeholder="Now Chatting"
@@ -338,6 +338,244 @@
         v-model="model.brand"
         @input="updateParent"
         />
+
+        <!-- Call -->
+        <b-collapse class="content card">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Call Option</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+
+          <div class="card-content">
+
+            <b-field label="Option Enabled">
+              <b-select
+              v-model="model.brand.callEnabled"
+              @input="updateParent"
+              >
+                <option :value="true">
+                  Enabled
+                </option>
+                <option :value="false">
+                  Disabled
+                </option>
+              </b-select>
+            </b-field>
+
+            <div v-show="model.brand.callEnabled">
+              <b-field grouped>
+                <b-field label="Icon Name">
+                  <b-input
+                  v-model="model.brand.callIcon"
+                  placeholder="phone"
+                  @input="updateParent"
+                  />
+                </b-field>
+                <b-field label="Icon">
+                  <b-icon
+                  pack="mdi"
+                  :icon="model.brand.callIcon"
+                  size="is-large"
+                  />
+                </b-field>
+                <b-field label="Search Icons">
+                  <a
+                  class="button is-info"
+                  :href="materialDesignIconsUrl"
+                  target="materialdesignicons"
+                  >
+                    Material Design Icons {{ materialDesignIconsVersion }}
+                  </a>
+                </b-field>
+              </b-field>
+
+              <b-field label="Heading">
+                <b-input
+                v-model="model.brand.callHeading"
+                placeholder="Call Us"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Text" :message="getTooltip('callText')">
+                <b-input
+                v-model="model.brand.callText"
+                placeholder="{0}"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Wait Time">
+                <b-input
+                v-model="model.brand.callWaitTime"
+                placeholder="8 min wait time"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Popup Window Text">
+                <b-input
+                v-model="model.brand.callModalText"
+                :placeholder="placeholders.callModalText"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Main Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalMainLabel"
+                placeholder="Main"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="CCAI Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalCcaiLabel"
+                placeholder="CCAI"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Agent Answers Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalAgentAnswersLabel"
+                placeholder="Agent Answers"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="AI Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalAiLabel"
+                placeholder="AI"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Google ES Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalGoogleEsLabel"
+                placeholder="Google ES"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Google CX Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalGoogleCxLabel"
+                placeholder="Google CX"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="AI Agent Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalAiAgentLabel"
+                placeholder="AI Agent"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="CRM Number Label">
+                <b-input
+                v-model="model.brand.callModalCrmLabel"
+                placeholder="CRM"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Gold Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalGoldLabel"
+                placeholder="Gold"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="VIVR Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalVivrLabel"
+                placeholder="VIVR"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="CVA AI Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalCvaAiLabel"
+                placeholder="CVA AI"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Custom AI Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalCustomAiLabel"
+                placeholder="Custom AI"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="2Ring Phone Number Label">
+                <b-input
+                v-model="model.brand.callModal2RingLabel"
+                placeholder="2Ring"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Salesforce Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalSalesforceLabel"
+                placeholder="Salesforce"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="WXM Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalWxmLabel"
+                placeholder="WXM"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="WXM (Voice) Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalWxmVoiceLabel"
+                placeholder="WXM (Voice)"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="WXM (Email) Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalWxmEmailLabel"
+                placeholder="WXM (Email)"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="WXM (SMS) Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalWxmSmsLabel"
+                placeholder="WXM (SMS)"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <!-- Save button -->
+              <b-field>
+                <save-button />
+              </b-field>
+            </div>
+
+          </div>
+        </b-collapse>
+        <!-- /Call -->
 
         <!-- Chat -->
         <b-collapse class="content card">
@@ -515,7 +753,7 @@
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
-              Chat Translation Option (PCCE 12.6 EFT only)
+              Chat Translation Option
             </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
@@ -594,7 +832,7 @@
 
           </div>
         </b-collapse>
-        <!-- /Chat Bot -->
+        <!-- /Chat Translation -->
 
         <!-- SMS -->
         <b-collapse class="content card">
@@ -789,229 +1027,7 @@
 
           </div>
         </b-collapse>
-        <!-- /SMS -->
-
-
-        <!-- Call -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Call Option</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-
-          <div class="card-content">
-
-            <b-field label="Option Enabled">
-              <b-select
-              v-model="model.brand.callEnabled"
-              @input="updateParent"
-              >
-                <option :value="true">
-                  Enabled
-                </option>
-                <option :value="false">
-                  Disabled
-                </option>
-              </b-select>
-            </b-field>
-
-            <div v-show="model.brand.callEnabled">
-              <b-field grouped>
-                <b-field label="Icon Name">
-                  <b-input
-                  v-model="model.brand.callIcon"
-                  placeholder="phone"
-                  @input="updateParent"
-                  />
-                </b-field>
-                <b-field label="Icon">
-                  <b-icon
-                  pack="mdi"
-                  :icon="model.brand.callIcon"
-                  size="is-large"
-                  />
-                </b-field>
-                <b-field label="Search Icons">
-                  <a
-                  class="button is-info"
-                  :href="materialDesignIconsUrl"
-                  target="materialdesignicons"
-                  >
-                    Material Design Icons {{ materialDesignIconsVersion }}
-                  </a>
-                </b-field>
-              </b-field>
-
-              <b-field label="Heading">
-                <b-input
-                v-model="model.brand.callHeading"
-                placeholder="Call Us"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="Text" :message="getTooltip('callText')">
-                <b-input
-                v-model="model.brand.callText"
-                placeholder="{0}"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="Wait Time">
-                <b-input
-                v-model="model.brand.callWaitTime"
-                placeholder="8 min wait time"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="Popup Window Text">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalText"
-                :placeholder="placeholders.callModalText"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="Main Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalMainLabel"
-                placeholder="Main"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="CRM Number Label (PCCE only)">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalCrmLabel"
-                placeholder="CRM"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="Gold Phone Number Label (PCCE only)">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalGoldLabel"
-                placeholder="Gold"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="VIVR Phone Number Label (PCCE only)">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalVivrLabel"
-                placeholder="VIVR"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="AI Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalAiLabel"
-                placeholder="AI"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="CVA AI Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalCvaAiLabel"
-                placeholder="CVA AI"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="Custom AI Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalCustomAiLabel"
-                placeholder="Custom AI"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="2Ring Phone Number Label (UCCX only)">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModal2RingLabel"
-                placeholder="2Ring"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="Salesforce Phone Number Label (Webex only)">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalSalesforceLabel"
-                placeholder="Salesforce"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="CCAI Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalCcaiLabel"
-                placeholder="CCAI"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="WXM Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalWxmLabel"
-                placeholder="WXM"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="WXM (Voice) Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalWxmVoiceLabel"
-                placeholder="WXM (Voice)"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="WXM (Email) Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalWxmEmailLabel"
-                placeholder="WXM (Email)"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <b-field label="WXM (SMS) Phone Number Label">
-                <b-input
-                type="textarea"
-                v-model="model.brand.callModalWxmSmsLabel"
-                placeholder="WXM (SMS)"
-                @input="updateParent"
-                />
-              </b-field>
-
-              <!-- Save button -->
-              <b-field>
-                <save-button />
-              </b-field>
-            </div>
-
-          </div>
-        </b-collapse>
-        <!-- /Call -->
+        <!-- /SMS with Bot -->
 
         <!-- Callback -->
         <b-collapse class="content card">
