@@ -108,8 +108,9 @@
         <!-- /Post Chat Survey -->
 
         <!-- AI Agent Configuration -->
-        <b-collapse class="content card" :open="true" v-if="isAdmin">
-          <div slot="trigger" slot-scope="props" class="card-header">
+        <!-- <b-collapse class="content card" :open="true" v-if="isAdmin"> -->
+        <b-collapse class="content card" :open="true">
+            <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
               AI Agent
             </p>
@@ -143,7 +144,7 @@
         </b-collapse>
 
         <!-- DialogFlow CX Configuration -->
-        <b-collapse class="content card" :open="true" v-if="isAdmin">
+        <b-collapse class="content card" :open="true">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
               DialogFlow CX
