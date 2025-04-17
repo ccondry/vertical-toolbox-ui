@@ -125,7 +125,14 @@
               *** Customizing the AI Bot script is currently in development. ***
             </p>
             -->
-            <b-field label="Config ID (provided by dCloud after uploading AI Agent json into Demo Configurations page)">
+            <b-field>
+              <template #label>
+                Config ID (provided by dCloud after uploading AI Agent json into
+                <a href="/cloud-config" target="_blank">
+                  <strong>Demo Configurations</strong>
+                </a>
+                page) 
+              </template>
               <b-input
               v-model="model.aiConfigId"
               :placeholder="defaults.aiConfigId"
@@ -160,7 +167,14 @@
               *** Customizing the AI Bot script is currently in development. ***
             </p>
             -->
-            <b-field label="Config ID (provided by dCloud after uploading Google CX zip into Demo Configurations page)">
+            <b-field label="Config ID (provided by dCloud after uploading DialogFlow CX zip into Demo Configurations page)">
+              <template #label>
+                Config ID (provided by dCloud after uploading DialogFlow CX zip into
+                <a href="/cloud-config" target="_blank">
+                  <strong>Demo Configurations</strong>
+                </a>
+                page) 
+              </template>
               <b-input
               v-model="model.cxConfigId"
               :placeholder="defaults.cxConfigId"
