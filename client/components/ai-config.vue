@@ -18,6 +18,83 @@
         </a>
       </div>
 
+      <!-- user PIN data values -->
+      <b-table :data="userPins">
+        <b-table-column
+        label="User PIN"
+        v-slot="props"
+        >
+          <b-input
+          v-model="userPins[props.index].userPIN"
+          :placeholder="getDefaultAiAgent(props.index).userPIN"
+          />
+        </b-table-column>
+        <b-table-column
+        label="Value 1"
+        v-slot="props"
+        >
+          <b-input
+          v-model="userPins[props.index].value1"
+          :placeholder="getDefaultAiAgent(props.index).value1"
+          />
+        </b-table-column>
+        <b-table-column
+        label="Value 2"
+        v-slot="props"
+        >
+          <b-input
+          v-model="userPins[props.index].value2"
+          :placeholder="getDefaultAiAgent(props.index).value2"
+          />
+        </b-table-column>
+      </b-table>
+      <!-- <b-table
+      :data="Object.entries(model.aiAgent)"
+      >
+        <b-table-column
+        label="User PIN"
+        v-slot="props"
+        >
+          {{ props.row[0] }}
+          <b-input
+          v-model="model.aiAgent[props.row[0]].value1"
+          :placeholder="Object.entries(defaults.aiAgent)[index].value1"
+          @input="updateParent"
+          />
+        </b-table-column>
+        <b-table-column
+        label="Value 1"
+        v-slot="props"
+        >
+          {{ props.row[1].value1 }}
+        </b-table-column>
+        <b-table-column
+        label="Value 2"
+        v-slot="props"
+        >
+          {{ props.row[1].value2 }}
+        </b-table-column>
+      </b-table> -->
+      <div
+      class="card-content"
+      v-for="(key, index) of Object.keys(model.aiAgent)"
+      >
+        <b-field label="Value 1">
+          <b-input
+          v-model="model.aiAgent[key].value1"
+          :placeholder="Object.entries(defaults.aiAgent)[index].value1"
+          @input="updateParent"
+          />
+        </b-field>
+        <b-field label="Value 2">
+          <b-input
+          v-model="model.aiAgent[key].value2"
+          :placeholder="Object.entries(defaults.aiAgent)[index].value2"
+          @input="updateParent"
+          />
+        </b-field>
+      </div>
+
       <div class="card-content">
         <!-- /TTS engine -->
         <b-field label="Conversational IVR TTS Engine">
@@ -276,6 +353,27 @@ export default {
       'isQa',
       'languages'
     ]),
+    userPins: {
+      get () {
+        // convert object to array
+        return Object.entries(this.model.aiAgent).map(([key, value]) => {
+          return {
+            userPIN: key,
+            ...value
+          }
+        })
+      },
+      set (value) {
+        // convert array to object with userPIN as the key
+        this.model.aiAgent = value.reduce((p, c) => {
+          const { userPIN, ...values } = c
+          p[userPIN] = values
+          return p
+        }, {})
+        // emit data to parent component
+        this.updateParent()
+      }
+    },
     gcpProjectIdModel: {
       get () {
         return this.model.gcpProjectId
@@ -317,6 +415,16 @@ export default {
   },
 
   methods: {
+    getDefaultAiAgent (index) {
+      // try to return matching aiAgent value
+      const match = this.defaults.aiAgent[index]
+      if (match) {
+        return match
+      } else {
+        // return the last default aiAgent value
+        return this.defaults.aiAgent[this.defaults.aiAgent.length - 1]
+      }
+    },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
       // set ref
