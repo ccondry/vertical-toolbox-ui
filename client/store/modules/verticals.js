@@ -249,10 +249,11 @@ function fixVerticalRoot (to, from) {
     if (
       (typeof from[key] === 'string' && typeof to[key] !== 'string') ||
       (typeof from[key] === 'boolean' && typeof to[key] !== 'boolean')
-    ) {
-      to[key] = from[key]
+    ) 
+      console.log('fix vertical root', key)
+      Vue.set(to, key, from[key])
       continue
-    }
+    
   }
 }
 

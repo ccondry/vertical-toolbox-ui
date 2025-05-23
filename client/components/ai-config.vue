@@ -19,6 +19,16 @@
       </div>
 
       <div class="card-content">
+        <!-- user PIN data values -->
+        <ai-agent-table
+        v-model="model.aiAgent"
+        @input="updateParent"
+        :defaults="defaults.aiAgent"
+        />
+
+        <!-- <pre>model.aiAgent: {{ model.aiAgent }}</pre> -->
+        <!-- <pre>defaults.aiAgent: {{ defaults.aiAgent }}</pre> -->
+
         <!-- /TTS engine -->
         <b-field label="Conversational IVR TTS Engine">
           <b-select v-model="model.ttsEngine" @input="updateParent">
@@ -265,6 +275,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import AiAgentTable from './ai-agent-table.vue'
 
 const allVoices = [
   { value: 'female', name: 'Female' },
@@ -273,6 +284,10 @@ const allVoices = [
 
 export default {
   name: 'Chat-AI-Config',
+
+  components: {
+    AiAgentTable
+  },
 
   directives: {
     uploader: {
@@ -328,6 +343,37 @@ export default {
       'isQa',
       'languages'
     ]),
+    userPins: {
+      get () {
+        // convert object to array
+        try {
+          return Object.entries(this.model.aiAgent).map(([key, value]) => {
+            return {
+              userPIN: key,
+              ...value
+            }
+          })
+        } catch (e) {
+          return []
+        }
+      },
+      set (value) {
+        console.log('set userPins', value)
+        // convert array to object with userPIN as the key
+        const asdf = value.reduce((p, c) => {
+          const { userPIN, ...values } = c
+          p[userPIN] = values
+          return p
+        }, {})
+        console.log('asdf', asdf)
+        // if (!this.model.aiAgent) {
+        // this.$set(this.model, 'aiAgent', asdf)
+        // }
+        this.model.aiAgent = asdf
+        // emit data to parent component
+        this.updateParent()
+      }
+    },
     gcpProjectIdModel: {
       get () {
         return this.model.gcpProjectId
@@ -369,6 +415,24 @@ export default {
   },
 
   methods: {
+    clickAddRow () {
+      console.log('clickAddRow', this.model)
+      if (!this.model.aiAgent) {
+        this.$set(this.model, 'aiAgent', {})
+      }
+      this.userPins.push({userPIN: '', value1: '', value2: ''})
+      // this.updateParent()
+    },
+    getDefaultAiAgent (index) {
+      // try to return matching aiAgent value
+      const match = this.defaults.aiAgent[index]
+      if (match) {
+        return match
+      } else {
+        // return the last default aiAgent value
+        return this.defaults.aiAgent[this.defaults.aiAgent.length - 1]
+      }
+    },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
       // set ref

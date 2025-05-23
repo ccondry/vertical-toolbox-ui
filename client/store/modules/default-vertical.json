@@ -506,33 +506,13 @@
     "aiConfigId": "682c8263c3dcc3106ae5286e",
     "botName": "Nimbus",
     "wxccChatTemplate": {},
-    "aiAgent": [
-        {
-            "userPIN": "1212",
-            "value1": "$10,500",
-            "value2": "12"
-        },
-        {
-            "userPIN": "3434",
-            "value1": "$25,700",
-            "value2": "18"
-        },
-        {
-            "userPIN": "5656",
-            "value1": "$32,400",
-            "value2": "26"
-        },
-        {
-            "userPIN": "7878",
-            "value1": "$41,800",
-            "value2": "38"
-        },
-        {
-            "userPIN": "9090",
-            "value1": "$53,200",
-            "value2": "49"
-        }
-    ],
+    "aiAgent": {
+      "1212": {"value1": "$10,500", "value2": "12"},
+      "3434": {"value1": "$25,700", "value2": "18"},
+      "5656": {"value1": "$32,400", "value2": "26"},
+      "7878": {"value1": "$41,800", "value2": "38"},
+      "9090": {"value1": "$53,200", "value2": "49"}
+    },
     "wxcc": {
         "en": {
             "language": "en",

@@ -1,7 +1,7 @@
 <template>
   <!-- Webex CC Chat Template Customization - Pages -->
   <collapse-card title="Pages">
-    <div class="card-content">
+    <div class="card-content" v-if="myDefaults">
       <!-- Off Hours -->
       <off-hours
       v-model="model"
