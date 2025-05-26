@@ -131,7 +131,7 @@ const actions = {
       group: 'app',
       type: 'verticals',
       message: 'save vertical',
-      url: getters.endpoints.verticals + '/' + getters.vertical.id,
+      url: getters.endpoints.verticals + '/' + getters.selectedVerticalId,
       options: {
         method: 'PUT',
         body: getters.vertical
@@ -149,7 +149,7 @@ const actions = {
   async confirmDeleteVertical ({dispatch, getters}) {
      Dialog.confirm({
       title: `Delete Vertical?`,
-      message: `Are you sure you want to delete the vertical ${getters.vertical.name} (${getters.vertical.id})?`,
+      message: `Are you sure you want to delete the vertical ${getters.vertical.name} (${getters.selectedVerticalId})?`,
       confirmText: 'Confirm Delete',
       type: 'is-danger',
       rounded: true,
@@ -163,14 +163,14 @@ const actions = {
       group: 'app',
       type: 'verticals',
       message: 'delete vertical',
-      url: getters.endpoints.verticals + '/' + getters.vertical.id,
+      url: getters.endpoints.verticals + '/' + getters.selectedVerticalId,
       options: {
         method: 'DELETE'
       },
       showNotification: true
     })
     // remove that vertical from state verticals list
-    commit(types.UNSET_VERTICAL, getters.vertical.id)
+    commit(types.UNSET_VERTICAL, getters.selectedVerticalId)
     // unset full vertical data from state
     commit(types.SET_VERTICAL_DETAILS, {})
     // set vertical ID to null so modal will pop for user to select another
@@ -249,11 +249,10 @@ function fixVerticalRoot (to, from) {
     if (
       (typeof from[key] === 'string' && typeof to[key] !== 'string') ||
       (typeof from[key] === 'boolean' && typeof to[key] !== 'boolean')
-    ) 
+    ) {
       console.log('fix vertical root', key)
       Vue.set(to, key, from[key])
-      continue
-    
+    }
   }
 }
 

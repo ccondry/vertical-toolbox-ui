@@ -1,12 +1,15 @@
 <template>
-  <b-table :data="userPins">
+  <b-table :data="userPins" custom-row-key="userPIN">
     <b-table-column
     label="User PIN"
     v-slot="props"
     >
       <b-input
-      v-model.lazy="userPins[props.index].userPIN"
+      v-model="userPins[props.index].userPIN"
+      type="text"
+      lazy
       @input="updateParent"
+      :placeholder="getDefaultAiAgent(props.index).userPIN"
       />
     </b-table-column>
     <b-table-column
@@ -15,7 +18,9 @@
     >
       <b-input
       v-model="userPins[props.index].value1"
+      lazy
       @input="updateParent"
+      :placeholder="getDefaultAiAgent(props.index).value1"
       />
     </b-table-column>
     <b-table-column
@@ -24,21 +29,20 @@
     >
       <b-input
       v-model="userPins[props.index].value2"
+      :placeholder="getDefaultAiAgent(props.index).value2"
+      lazy
       @input="updateParent"
       />
     </b-table-column>
     <!-- AI agents user PIN table footer -->
     <template #footer>
-      <!-- <pre>{{ userPins }}</pre> -->
       <div class="has-text-right">
         <b-button
         rounded
         type="is-success"
-        icon-pack="md-icon"
-        icon-left="add_16"
         @click="clickAddRow"
         >
-          Add Row
+          Add AI Agent Row
         </b-button>
       </div>
     </template>
@@ -75,14 +79,12 @@ export default {
         }
       },
       set (value) {
-        console.log('set userPins', value)
         // convert array to object with userPIN as the key
         const asdf = value.reduce((p, c) => {
           const { userPIN, ...values } = c
           p[userPIN] = values
           return p
         }, {})
-        console.log('asdf', asdf)
         // if (!this.model.aiAgent) {
         // this.$set(this.model, 'aiAgent', asdf)
         // }
@@ -94,36 +96,28 @@ export default {
 
   methods: {
     clickAddRow () {
-      console.log('clickAddRow', this.value)
-      // if (!this.value) {
-      //   this.$set(this.model, 'aiAgent', {})
-      // }
-      this.userPins.push({userPIN: '', value1: '', value2: ''})
+      this.userPins.push(this.getDefaultAiAgent(this.userPins.length))
       this.updateParent()
     },
     getDefaultAiAgent (index) {
       // try to return matching aiAgent value
+      const df = {
+        userPIN: '',
+        value1: '$10,500',
+        value2: '12',
+      }
       try {
-        const match = this.defaults[index]
+        const match = Object.entries(this.defaults)[index]
+        // console.log('match', index, match)
         if (match) {
-          return match
-        } else {
-          // return the last default aiAgent value
-          // return this.defaults[this.defaults.length - 1]
-
           return {
-            userPIN: '',
-            value1: '',
-            value2: '',
+            userPIN: match[0],
+            value1: match[1].value1,
+            value2: match[1].value2,
           }
         }
-      } catch (e) {
-        return {
-          userPIN: '',
-          value1: '',
-          value2: '',
-        }
-      }
+      } catch (e) {}
+      return df
     },
     updateParent () {
       const asdf = this.userPins.reduce((p, c) => {
@@ -131,7 +125,6 @@ export default {
         p[userPIN] = values
         return p
       }, {})
-      console.log('asdf', asdf)
       // emit data to parent component
       this.$emit('input', asdf)
     }

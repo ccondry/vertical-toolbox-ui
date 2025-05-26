@@ -415,24 +415,6 @@ export default {
   },
 
   methods: {
-    clickAddRow () {
-      console.log('clickAddRow', this.model)
-      if (!this.model.aiAgent) {
-        this.$set(this.model, 'aiAgent', {})
-      }
-      this.userPins.push({userPIN: '', value1: '', value2: ''})
-      // this.updateParent()
-    },
-    getDefaultAiAgent (index) {
-      // try to return matching aiAgent value
-      const match = this.defaults.aiAgent[index]
-      if (match) {
-        return match
-      } else {
-        // return the last default aiAgent value
-        return this.defaults.aiAgent[this.defaults.aiAgent.length - 1]
-      }
-    },
     launchFilePicker (ref, index) {
       console.log('launching file picker for', ref, index)
       // set ref
@@ -501,6 +483,7 @@ export default {
       this.model = JSON.parse(JSON.stringify(this.value))
     },
     updateParent () {
+      console.log('ai-config updateParent', this.model)
       // update the parent that we have changed the model
       this.$emit('input', this.model)
     }
