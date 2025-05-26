@@ -19,16 +19,6 @@
       </div>
 
       <div class="card-content">
-        <!-- user PIN data values -->
-        <ai-agent-table
-        v-model="model.aiAgent"
-        @input="updateParent"
-        :defaults="defaults.aiAgent"
-        />
-
-        <!-- <pre>model.aiAgent: {{ model.aiAgent }}</pre> -->
-        <!-- <pre>defaults.aiAgent: {{ defaults.aiAgent }}</pre> -->
-
         <!-- /TTS engine -->
         <b-field label="Conversational IVR TTS Engine">
           <b-select v-model="model.ttsEngine" @input="updateParent">
@@ -120,7 +110,7 @@
         <!-- AI Agent Configuration -->
         <!-- <b-collapse class="content card" :open="true" v-if="isAdmin"> -->
         <b-collapse class="content card" :open="true">
-            <div slot="trigger" slot-scope="props" class="card-header">
+          <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
               AI Agent
             </p>
@@ -157,6 +147,25 @@
               />
             </b-field>
             <!-- /AI Agent Token -->
+
+            <b-collapse class="content card" :open="true">
+              <div slot="trigger" slot-scope="props" class="card-header">
+                <p class="card-header-title">
+                  AI Agent Customization
+                </p>
+                <a class="card-header-icon">
+                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                </a>
+              </div>
+              <div class="card-content">
+                <!-- user PIN data values -->
+                <ai-agent-table
+                v-model="model.aiAgent"
+                @input="updateParent"
+                :defaults="defaults.aiAgent"
+                />
+              </div>
+            </b-collapse>
           </div>
         </b-collapse>
 

@@ -34,12 +34,21 @@
       @input="updateParent"
       />
     </b-table-column>
+    <b-table-column v-slot="props">
+      <b-button
+      v-if="props.index >= 3"
+      rounded
+      type="is-danger"
+      @click="userPins.splice(props.index, 1); updateParent()"
+      icon-left="delete"
+      />
+    </b-table-column>
     <!-- AI agents user PIN table footer -->
     <template #footer>
       <div class="has-text-right">
         <b-button
         rounded
-        type="is-success"
+        type="is-primary"
         @click="clickAddRow"
         >
           Add AI Agent Row
@@ -103,7 +112,7 @@ export default {
       // try to return matching aiAgent value
       const df = {
         userPIN: '',
-        value1: '$10,500',
+        value1: '$10500',
         value2: '12',
       }
       try {
