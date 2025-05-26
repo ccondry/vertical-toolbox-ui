@@ -222,6 +222,8 @@ const actions = {
       fixVerticalSection(copy, defaultVertical, 'webexconnect')
       // fix surveys section in copy
       fixVerticalSection(copy, defaultVertical, 'surveys')
+      // fix ai agent customizations
+      fixVerticalSection(copy, defaultVertical, 'aiAgent')
       // fix webexconnect root in copy
       fixVerticalRoot(copy, defaultVertical)
       // update vertical in state with copy
