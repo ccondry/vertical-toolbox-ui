@@ -58,7 +58,7 @@
     </b-table-column>
     <b-table-column v-slot="props">
       <b-button
-      v-if="props.index >= 3"
+      v-if="userPins.length > 1"
       rounded
       type="is-danger"
       @click="userPins.splice(props.index, 1); updateParent()"
