@@ -34,6 +34,28 @@
       @input="updateParent"
       />
     </b-table-column>
+    <b-table-column
+    label="Value 3"
+    v-slot="props"
+    >
+      <b-input
+      v-model="userPins[props.index].value3"
+      :placeholder="getDefaultAiAgent(props.index).value3"
+      lazy
+      @input="updateParent"
+      />
+    </b-table-column>
+    <b-table-column
+    label="Value 4"
+    v-slot="props"
+    >
+      <b-input
+      v-model="userPins[props.index].value4"
+      :placeholder="getDefaultAiAgent(props.index).value4"
+      lazy
+      @input="updateParent"
+      />
+    </b-table-column>
     <b-table-column v-slot="props">
       <b-button
       v-if="props.index >= 3"
@@ -114,6 +136,8 @@ export default {
         userPIN: '',
         value1: '$10500',
         value2: '12',
+        value3: '1.99%',
+        value4: '60',
       }
       try {
         const match = Object.entries(this.defaults)[index]
@@ -123,6 +147,8 @@ export default {
             userPIN: match[0],
             value1: match[1].value1,
             value2: match[1].value2,
+            value3: match[1].value3,
+            value4: match[1].value4,
           }
         }
       } catch (e) {}
