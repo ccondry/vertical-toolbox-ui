@@ -2,6 +2,11 @@
 
 Dates are in YYYY-MM-DD format
 
+# 2025.9.11
+
+### Updates
+* **Chat/AI/Bot:** Added config id's for AI Agent.
+
 
 # 2024.11.20
 
