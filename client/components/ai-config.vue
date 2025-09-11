@@ -125,20 +125,86 @@
               *** Customizing the AI Bot script is currently in development. ***
             </p>
             -->
-            <b-field>
-              <template #label>
-                Config ID (provided by dCloud after uploading AI Agent json into
-                <a href="/cloud-config" target="_blank">
-                  <strong>Demo Configurations</strong>
+            <b-collapse class="content card" :open="true">
+              <div slot="trigger" slot-scope="props" class="card-header">
+                <p class="card-header-title">
+                  PCCE / WxCCE
+                </p>
+                <a class="card-header-icon">
+                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
                 </a>
-                page) 
-              </template>
-              <b-input
-              v-model="model.aiConfigId"
-              :placeholder="defaults.aiConfigId"
-              @input="updateParent"
-              />
-            </b-field>
+              </div>
+              <div class="card-content">
+                <b-field>
+                  <template #label>
+                    Scripted Config ID (provided by dCloud after uploading AI Agent json into
+                    <a href="/cloud-config" target="_blank">
+                      <strong>Demo Configurations</strong>
+                    </a>
+                    page) 
+                  </template>
+                  <b-input
+                  v-model="model.aiConfigId"
+                  :placeholder="defaults.aiConfigId"
+                  @input="updateParent"
+                  />
+                </b-field>
+                <b-field>
+                  <template #label>
+                    Autonomous Config ID (provided by dCloud after uploading AI Agent zip into
+                    <a href="/cloud-config" target="_blank">
+                      <strong>Demo Configurations</strong>
+                    </a>
+                    page) 
+                  </template>
+                  <b-input
+                  v-model="model.aiConfigIdAutonomous"
+                  :placeholder="defaults.aiConfigIdAutonomous"
+                  @input="updateParent"
+                  />
+                </b-field>
+              </div>
+            </b-collapse>
+            <b-collapse class="content card" :open="true">
+              <div slot="trigger" slot-scope="props" class="card-header">
+                <p class="card-header-title">
+                  WxCC
+                </p>
+                <a class="card-header-icon">
+                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                </a>
+              </div>
+              <div class="card-content">
+                <b-field>
+                  <template #label>
+                    Scripted Config ID (provided by dCloud after uploading AI Agent json into
+                    <a href="/cloud-config" target="_blank">
+                      <strong>Demo Configurations</strong>
+                    </a>
+                    page) 
+                  </template>
+                  <b-input
+                  v-model="model.aiConfigIdWxcc"
+                  :placeholder="defaults.aiConfigIdWxcc"
+                  @input="updateParent"
+                  />
+                </b-field>
+                <b-field>
+                  <template #label>
+                    Autonomous Config ID (provided by dCloud after uploading AI Agent zip into
+                    <a href="/cloud-config" target="_blank">
+                      <strong>Demo Configurations</strong>
+                    </a>
+                    page) 
+                  </template>
+                  <b-input
+                  v-model="model.aiConfigIdWxccAutonomous"
+                  :placeholder="defaults.aiConfigIdWxccAutonomous"
+                  @input="updateParent"
+                  />
+                </b-field>
+              </div>
+            </b-collapse>
             <b-field label="Bot Name">
               <b-input
               v-model="model.botName"

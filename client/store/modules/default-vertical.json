@@ -504,7 +504,9 @@
     "gcpProjectId": "cumulus-v2-hotikl",
     "cxConfigId": "d6037f1a-f842-47e8-92e4-ff91c8a753dd",
     "aiConfigId": "682c8263c3dcc3106ae5286e",
-    "aiConfigIdWxcc": "682c8263c3dcc3106ae5286e",
+    "aiConfigIdWxcc": "683dcabc4e5099f6e2d2c264",
+    "aiConfigIdAutonomous": "68c19e8ccaefbfd33ab3e47a",
+    "aiConfigIdWxccAutonomous": "68c19e8ccaefbfd33ab3e47a",
     "botName": "Nimbus",
     "wxccChatTemplate": {},
     "aiAgent": {
