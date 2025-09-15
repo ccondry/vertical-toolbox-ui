@@ -471,10 +471,18 @@
                 />
               </b-field>
 
-              <b-field label="AI Agent Phone Number Label">
+              <b-field label="Scripted AI Agent Phone Number Label">
                 <b-input
                 v-model="model.brand.callModalAiAgentLabel"
-                placeholder="AI Agent"
+                placeholder="Scripted AI Agent"
+                @input="updateParent"
+                />
+              </b-field>
+
+              <b-field label="Autonomous AI Agent Phone Number Label">
+                <b-input
+                v-model="model.brand.callModalAiAgentAutonomousLabel"
+                placeholder="Autonomous AI Agent"
                 @input="updateParent"
                 />
               </b-field>
