@@ -1,5 +1,6 @@
 {
     "id": "finance",
+    "baseId": "finance",
     "name": "Cumulus Finance",
     "taskOptions": [
         {

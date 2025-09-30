@@ -73,6 +73,13 @@
                 @input="updateState"
                 />
               </b-field>
+              <b-field label="Base ID" v-if="user.admin">
+                <b-input
+                v-model="model.baseId"
+                :placeholder="defaults.verticals.baseId"
+                @input="updateState"
+                />
+              </b-field>
             </div>
           </b-collapse>
           <!-- /Basic Information -->
