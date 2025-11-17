@@ -1783,8 +1783,8 @@ export default {
         const data = e.currentTarget.result
         // get file name
         const filenameNoSpaces = file.name.replaceAll(' ', '-')
-        const filenameNoExtension = filenameNoSpaces.substring(0, filenameNoSpaces.lastIndexOf('.'))
-        let name = filenameNoExtension
+        // const filenameNoExtension = filenameNoSpaces.substring(0, filenameNoSpaces.lastIndexOf('.'))
+        let name = filenameNoSpaces
         if (node !== 'iframe') {
           // append timestamp to images, not iframes
           name += '_' + Date.now()
