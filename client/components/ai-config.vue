@@ -70,7 +70,7 @@
         <!-- /Chat Bot Enabled -->
 
         <!-- UCCX Bubble Chat and PCCE ECE Docked Chat -->
-        <b-field label="Enable Docked Chat (Disable Chat Bot if you want to use Docked Chat)">
+        <b-field label="ECE Docked Chat (Disable Chat Bot if you want to enable this setting)">
           <b-tooltip
           label="Disable Chat Bot if you want to use Docked Chat"
           position="is-right"
