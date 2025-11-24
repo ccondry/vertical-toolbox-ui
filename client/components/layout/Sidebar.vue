@@ -155,9 +155,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '~bulma/sass/utilities/initial-variables';
-// @import '~bulma/sass/utilities/derived-variables';
-// @import '~bulma';
 .app-sidebar {
   position: fixed;
   // top: 50px;

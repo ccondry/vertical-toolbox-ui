@@ -41,18 +41,10 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '~bulma/sass/utilities/initial-variables';
-// @import '~bulma/sass/utilities/derived-variables';
-// @import '~bulma';
 .app-main {
   padding-top: 50px;
   margin-left: 220px;
   transform: translate3d(0, 0, 0);
-
-  // @include mobile() {
-  //   margin-left: 0;
-  // }
-
 }
 
 .app-content {
