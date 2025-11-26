@@ -89,7 +89,7 @@
         <!-- /UCCX Bubble Chat and PCCE ECE Docked Chat -->
 
         <!-- Post Chat Survey -->
-        <b-field label="Post Chat Bot Survey">
+        <b-field label="Post ECE Chat Bot Survey">
           <b-tooltip
           label="Enable Chat Bot if you want to have a Post-Chat Survey"
           position="is-right"
