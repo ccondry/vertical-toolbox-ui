@@ -58,7 +58,7 @@
         <!-- /Language -->
 
         <!-- Chat Bot Enabled -->
-        <b-field label="Chat Bot">
+        <b-field label="ECE Chat Bot">
           <b-select
           v-model="model.chatBotEnabled"
           @input="changeChatBotEnabled"
@@ -70,7 +70,7 @@
         <!-- /Chat Bot Enabled -->
 
         <!-- UCCX Bubble Chat and PCCE ECE Docked Chat -->
-        <b-field label="ECE Docked Chat (Disable Chat Bot if you want to enable this setting)">
+        <b-field label="ECE Docked Chat (Disable ECE Chat Bot if you want to enable this setting)">
           <b-tooltip
           label="Disable Chat Bot if you want to use Docked Chat"
           position="is-right"
@@ -89,7 +89,7 @@
         <!-- /UCCX Bubble Chat and PCCE ECE Docked Chat -->
 
         <!-- Post Chat Survey -->
-        <b-field label="Post-Chat-Bot Survey">
+        <b-field label="Post Chat Bot Survey">
           <b-tooltip
           label="Enable Chat Bot if you want to have a Post-Chat Survey"
           position="is-right"
