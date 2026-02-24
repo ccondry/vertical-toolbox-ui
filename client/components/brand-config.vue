@@ -1678,6 +1678,7 @@ export default {
       },
       set (value) {
         this.$set(this.model.brand, 'color2', value.toString('hex'))
+        this.updateParent()
       },
     },
     faviconWebsite: {
@@ -1709,6 +1710,7 @@ export default {
         // update model favicon to prefix it with the google favicons getter url
         this.model.brand.favicon = 'https://www.google.com/s2/favicons?domain=' + trimDomain
         console.log('set this.model.brand.favicon. it is now', this.model.brand.favicon)
+        this.updateParent()
       }
     },
     isCustomAdvisor () {
