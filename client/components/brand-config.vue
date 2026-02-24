@@ -1692,7 +1692,11 @@ export default {
         }
       },
       set (value) {
-        if (!value) return
+        if (value.trim() === '') {
+          this.model.brand.favicon = ''
+          this.updateParent()
+          return
+        }
         // get input value
         let trimDomain = value
         try {
