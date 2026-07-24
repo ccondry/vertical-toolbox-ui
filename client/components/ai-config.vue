@@ -137,7 +137,7 @@
               <div class="card-content">
                 <b-field>
                   <template #label>
-                    Scripted Config ID (provided by dCloud after uploading AI Agent json into
+                    Scripted Agent ID (provided by dCloud after uploading AI Agent json into
                     <a href="/cloud-config" target="_blank">
                       <strong>Demo Configurations</strong>
                     </a>
@@ -151,7 +151,7 @@
                 </b-field>
                 <b-field>
                   <template #label>
-                    Autonomous Config ID (provided by dCloud after uploading AI Agent zip into
+                    Autonomous Agent ID (provided by dCloud after uploading AI Agent zip into
                     <a href="/cloud-config" target="_blank">
                       <strong>Demo Configurations</strong>
                     </a>
@@ -160,6 +160,20 @@
                   <b-input
                   v-model="model.aiConfigIdAutonomous"
                   :placeholder="defaults.aiConfigIdAutonomous"
+                  @input="updateParent"
+                  />
+                </b-field>
+                <b-field>
+                  <template #label>
+                    AI Assistant Skill Agent ID (provided by dCloud after uploading AI Agent zip into
+                    <a href="/cloud-config" target="_blank">
+                      <strong>Demo Configurations</strong>
+                    </a>
+                    page) 
+                  </template>
+                  <b-input
+                  v-model="model.aiAssistantSkillId"
+                  :placeholder="defaults.aiAssistantSkillId"
                   @input="updateParent"
                   />
                 </b-field>

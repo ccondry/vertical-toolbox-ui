@@ -508,6 +508,7 @@
     "aiConfigIdWxcc": "683dcabc4e5099f6e2d2c264",
     "aiConfigIdAutonomous": "68c19e8ccaefbfd33ab3e47a",
     "aiConfigIdWxccAutonomous": "68c19e8ccaefbfd33ab3e47a",
+    "aiAssistantSkillId": "6a63548daeba0b646f6e6887",
     "botName": "Nimbus",
     "wxccChatTemplate": {},
     "aiAgent": {
