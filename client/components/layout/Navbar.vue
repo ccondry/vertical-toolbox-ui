@@ -91,18 +91,17 @@ export default {
 
 <style lang="scss">
 .app-navbar {
-  color: #28374B;
-  background-color: white;
+  color: var(--fg-strong);
+  background-color: rgba(11, 17, 24, 0.75);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   font-weight: bold;
-  a {
-    color: #7957d5;
-  }
   position: fixed;
   top: 0;
   min-width: 100%;
   line-height: 2.35em;
   z-index: 4;
-  box-shadow: 0 2px 3px rgba(17, 17, 17, 0.1), 0 0 0 1px rgba(17, 17, 17, 0.1);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .level > .level-item:not(.is-narrow) {

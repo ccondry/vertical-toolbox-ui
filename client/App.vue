@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="app-shell">
+    <!-- page background glow -->
+    <ambient-bg />
     <navbar
     :show="true"
     :menu-filter.sync="menuFilter" @change-vertical="showModal = true"
@@ -11,18 +13,17 @@
       <sidebar />
       <app-main />
     </div>
-    <footer class="footer" style="margin-left: 220px; height: 1.6em; padding: 0; background-color: #ebebeb">
-      <div class="content">
-        <small style="padding-right: 2em; padding-left: 1em;">
-          UI version {{ uiVersion }}
-        </small>
-        <small style="padding-right: 2em; padding-left: 1em;">
-          API version {{ apiVersion }}
-        </small>
-        <small style="padding-right: 2em; padding-left: 1em;">
-          Auth API version {{ authApiVersion }}
-        </small>
-      </div>
+    <footer class="footer app-footer">
+      <cisco-mark class="app-footer-logo" />
+      <small>
+        UI version {{ uiVersion }}
+      </small>
+      <small>
+        API version {{ apiVersion }}
+      </small>
+      <small>
+        Auth API version {{ authApiVersion }}
+      </small>
     </footer>
   </div>
 </template>
@@ -32,6 +33,8 @@ import SelectVertical from 'client/components/modals/select-vertical.vue'
 import Navbar from 'client/components/layout/Navbar.vue'
 import Sidebar from 'client/components/layout/Sidebar.vue'
 import AppMain from 'client/components/layout/AppMain.vue'
+import AmbientBg from 'client/components/ambient-bg.vue'
+import CiscoMark from 'client/components/cisco-mark.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -43,6 +46,8 @@ export default {
   },
 
   components: {
+    AmbientBg,
+    CiscoMark,
     Navbar,
     Sidebar,
     AppMain,
@@ -145,14 +150,33 @@ export default {
 </script>
 
 <style lang="scss">
-html {
-  background-color: whitesmoke;
-}
-
 .content .card-header .card-header-title {
   margin-bottom: 0;
 }
-.card-header-title, .card-header-icon {
-  background-color: #f3f3f3;
+
+.footer.app-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-left: 220px;
+  padding: 1rem 1.5rem 1.5rem;
+  background-color: transparent;
+  color: var(--fg-faint);
+  font-size: 12px;
+
+  small {
+    font-size: 12px;
+  }
+}
+
+.app-footer-logo {
+  display: block;
+  height: 2rem;
+  width: auto;
+  margin-bottom: 8px;
+  color: var(--fg-strong);
 }
 </style>

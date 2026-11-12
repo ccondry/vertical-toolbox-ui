@@ -42,6 +42,8 @@ export default {
 
 <style lang="scss">
 .app-main {
+  position: relative;
+  z-index: 1;
   padding-top: 50px;
   margin-left: 220px;
   transform: translate3d(0, 0, 0);

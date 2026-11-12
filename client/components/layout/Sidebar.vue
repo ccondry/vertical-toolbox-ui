@@ -166,9 +166,10 @@ export default {
   max-height: 100vh;
   height: 100%;
   z-index: 3;
-  background: #FFF;
-  box-shadow: 0 2px 3px rgba(17, 17, 17, 0.1), 0 0 0 1px rgba(17, 17, 17, 0.1);
-  background-color: rgb(245, 245, 245);
+  background-color: rgba(11, 16, 28, 0.6);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-right: 1px solid var(--hairline);
   overflow-y: auto;
   overflow-x: hidden;
   margin-right: 20px;

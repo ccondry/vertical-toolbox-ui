@@ -1,0 +1,156 @@
+// Vision / Figma catalog palette
+$app-bg: #0B1118;
+$surface: #101a24;
+$surface-raised: #131a23;
+$card-surface: rgba(11, 16, 28, 0.97);
+$accent: #7cadf7;
+$accent-hover: #a3c8ff;
+$accent-active: #bad6ff;
+$accent-cyan: #6eaffd;
+$status-green: #00a88f;
+$status-red: #ff5c4a;
+$status-yellow: #d67f04;
+$fg-strong: #ffffff;
+$fg: rgba(255, 255, 255, 0.85);
+$fg-muted: rgba(255, 255, 255, 0.55);
+$fg-faint: rgba(255, 255, 255, 0.4);
+$hairline: rgba(255, 255, 255, 0.08);
+
+// set fonts in bulma
+$family-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$family-sans-serif: $family-primary;
+
+// set bulma colors to the dark glass palette
+$primary: $accent;
+$primary-invert: $surface;
+$info: $accent-cyan;
+$info-invert: $surface;
+$link: $accent-cyan;
+$link-hover: $accent-hover;
+$success: $status-green;
+$danger: $status-red;
+$warning: $status-yellow;
+
+$scheme-main: $surface;
+$scheme-main-bis: $surface-raised;
+$scheme-main-ter: $surface-raised;
+$scheme-invert: $fg-strong;
+$background: $surface-raised;
+$border: rgba(255, 255, 255, 0.14);
+$border-hover: rgba(255, 255, 255, 0.28);
+$border-light: $hairline;
+$text: $fg;
+$text-light: $fg-muted;
+$text-strong: $fg-strong;
+$body-background-color: $app-bg;
+$body-color: $fg;
+
+$input-background-color: rgba(255, 255, 255, 0.04);
+$input-color: $fg-strong;
+$input-placeholder-color: $fg-faint;
+$input-border-color: rgba(255, 255, 255, 0.14);
+$input-hover-border-color: rgba(255, 255, 255, 0.28);
+$input-focus-border-color: $accent;
+$input-focus-box-shadow-color: rgba(124, 173, 247, 0.25);
+$label-color: $fg-strong;
+
+$modal-background-background-color: rgba(3, 6, 12, 0.7);
+$modal-card-head-background-color: $surface;
+$modal-card-head-border-bottom: 1px solid $hairline;
+$modal-card-title-color: $fg-strong;
+$modal-card-body-background-color: $surface;
+$modal-card-foot-border-top: 1px solid $hairline;
+
+$dropdown-content-background-color: $surface;
+$dropdown-item-color: $fg;
+$dropdown-item-hover-color: $fg-strong;
+$dropdown-item-hover-background-color: rgba(255, 255, 255, 0.06);
+$dropdown-divider-background-color: $hairline;
+
+$card-color: $fg;
+$card-background-color: transparent;
+$card-shadow: none;
+$card-header-background-color: transparent;
+$card-header-color: $fg-strong;
+$card-header-shadow: none;
+$card-footer-border-top: 1px solid $hairline;
+
+$menu-item-color: $fg;
+$menu-item-hover-color: $fg-strong;
+$menu-item-hover-background-color: rgba(255, 255, 255, 0.06);
+$menu-item-active-color: $accent-cyan;
+$menu-item-active-background-color: rgba(110, 175, 253, 0.12);
+
+$table-background-color: transparent;
+
+// keep button hover and active states subtle on the dark background
+$button-darken-full: 0%;
+$button-darken-half: 0%;
+
+// import bulma source
+@import "~bulma";
+
+// import buefy source
+@import "~buefy/src/scss/buefy";
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: clip;
+}
+
+// Figma catalog card: 2px gradient border, blue glow, dark frosted surface
+.card {
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background:
+    linear-gradient(var(--card-surface), var(--card-surface)) padding-box,
+    var(--card-border) border-box;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 0 8px 2px var(--glow), 0 8px 32px -8px rgba(0, 0, 0, 0.45);
+  transition: box-shadow 0.2s ease-out;
+
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  &:hover {
+    box-shadow: 0 0 8px 2px var(--glow), 0 20px 48px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  .card-header {
+    cursor: pointer;
+  }
+
+  .card-header-title {
+    padding: 18px 20px;
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 22px;
+    color: var(--fg-strong);
+  }
+
+  .card-header-icon {
+    color: var(--fg-muted);
+  }
+
+  .card-content {
+    padding: 4px 20px 20px;
+    background-color: transparent;
+  }
+}
+
+// cards inside cards: no stacked glows
+.card .card {
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.45);
+
+  &:hover {
+    box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@import './theme.scss';
