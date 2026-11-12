@@ -32,7 +32,7 @@ else
     fi
   else
     echo "failed to pull repo"
-    echo "trying to remove package-lock.json and try on next iteration"
-    rm package-lock.json
+    echo "restoring package-lock.json and trying again on next iteration"
+    git checkout -- package-lock.json
   fi
 fi
