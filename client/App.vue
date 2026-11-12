@@ -66,7 +66,8 @@ export default {
       'uiVersion',
       'apiVersion',
       'authApiVersion',
-      'working'
+      'working',
+      'production'
     ]),
     isLoading () {
       return this.loading.app.user || this.loading.app.verticals
@@ -100,8 +101,10 @@ export default {
     isLoggedIn (val, oldVal) {
       // if user goes from logged in to logged out, forward them to the login page
       if (oldVal === true && val === false) {
-        // this.$router.push('Login')
-        window.location = '/auth/login?destination=' + window.location
+        // development has no SSO login page - the navbar shows a Login link instead
+        if (this.production) {
+          window.location = '/auth/login?destination=' + window.location
+        }
       } else {
         // user just logged in - show vertical selection modal now
         this.showModal()

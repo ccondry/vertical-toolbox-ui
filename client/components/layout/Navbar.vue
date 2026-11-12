@@ -65,21 +65,13 @@ export default {
     ...mapActions([
       'toggleSidebar',
       'logout',
-      'setJwt'
+      'promptForJwt'
     ]),
     clickLogout () {
       this.logout()
     },
     clickLogin () {
-      this.$buefy.dialog.prompt({
-        message: `Enter your JWT`,
-        inputAttrs: {
-          placeholder: 'JWT'
-        },
-        onConfirm: (value) => {
-          this.setJwt(value)
-        }
-      })
+      this.promptForJwt()
     },
     changeVertical () {
       // pop the vertical modal

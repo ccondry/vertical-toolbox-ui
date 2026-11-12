@@ -1,9 +1,18 @@
 import * as types from '../mutation-types'
+import { DialogProgrammatic as Dialog } from 'buefy'
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1]
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
   return JSON.parse(window.atob(base64))
+}
+
+function isExpired (user) {
+  return typeof user.exp === 'number' && user.exp <= new Date().getTime() / 1000
+}
+
+function forwardToLogin () {
+  window.location = '/auth/login?destination=' + window.location
 }
 
 const state = {
@@ -36,6 +45,31 @@ const actions = {
     window.localStorage.setItem('jwt', data)
     // decode jwt and store as user data
     commit(types.SET_USER, parseJwt(data))
+  },
+  // development only - there is no SSO login page on the local dev server
+  promptForJwt ({dispatch}, message = 'Enter your JWT') {
+    Dialog.prompt({
+      message,
+      inputAttrs: {
+        placeholder: 'JWT'
+      },
+      onConfirm: (value) => {
+        // strip whitespace and the quotes the browser console shows around localStorage.jwt
+        const jwt = value.trim().replace(/^['"]|['"]$/g, '')
+        let user
+        try {
+          user = parseJwt(jwt)
+        } catch (e) {
+          dispatch('errorNotification', 'That is not a valid JWT')
+          return
+        }
+        if (isExpired(user)) {
+          dispatch('errorNotification', 'That JWT has expired. Get a new one and try again.')
+          return
+        }
+        dispatch('setJwt', jwt)
+      }
+    })
   },
   unsetJwt ({commit}) {
     // unset JWT in state
@@ -123,16 +157,20 @@ const actions = {
       console.log('JWT login token found in localStorage')
       console.log('saving JWT in state')
       await dispatch('setJwt', jwt)
-      console.log(getters.user.exp, (new Date().getTime() / 1000))
-      if (getters.user.exp <= (new Date().getTime() / 1000)) {
-        // JWT expired
+      if (isExpired(getters.user)) {
+        console.log('JWT expired')
         dispatch('unsetJwt')
+        if (process.env.NODE_ENV === 'production') {
+          forwardToLogin()
+        } else {
+          dispatch('promptForJwt', 'Your JWT has expired. Paste a new one:')
+        }
       }
     } else {
       console.log('JWT not found in localstorage.')
       // forward user to login page, if in production
       if (process.env.NODE_ENV === 'production') {
-        window.location = '/auth/login?destination=' + window.location
+        forwardToLogin()
       }
       // const error = {
       //   error: 'JWT not found'
