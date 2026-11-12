@@ -13,30 +13,42 @@ import requireContext from 'rollup-plugin-require-context'
 import { visualizer } from 'rollup-plugin-visualizer'
 import copy from 'rollup-plugin-copy'
 import cleaner from 'rollup-plugin-cleaner'
+import { mkdirSync } from 'fs'
 
 const production = !process.env.ROLLUP_WATCH
 const port = 3000
+const outputDir = 'dist/branding'
+
+// livereload can't watch a directory that doesn't exist yet
+if (!production) {
+  mkdirSync(outputDir, { recursive: true })
+}
 
 export default {
   input: 'client/main.js',
   output: {
-    dir: 'dist/branding',
+    dir: outputDir,
     entryFileNames: 'app.js',
     format: 'iife',
     sourcemap: !production ? 'inline' : false,
     name: 'app',
   },
   plugins: [
-    cleaner({
-      targets: [
-        'dist'
-      ]
-    }),
+    // cleaning on every watch rebuild deletes the served files and breaks the
+    // livereload watcher, so only clean for production builds
+    production &&
+      cleaner({
+        targets: [
+          'dist'
+        ]
+      }),
     copy({
       targets: [
-        { src: 'client/index.html', dest: 'dist/branding' },
-        { src: 'client/assets/*', dest: 'dist/branding/assets' }
-      ]
+        { src: 'client/index.html', dest: outputDir },
+        { src: 'client/assets/*', dest: `${outputDir}/assets` }
+      ],
+      // re-copying on every watch rebuild triggers a livereload per file
+      copyOnce: !production
     }),
     json(),
     alias({
@@ -83,7 +95,9 @@ export default {
       }),
     !production &&
       livereload({
-        watch: 'dist'
+        watch: outputDir,
+        // let rollup finish writing the bundle before the browser fetches it
+        delay: 300
       }),
   ],
   watch: {
