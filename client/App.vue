@@ -2,10 +2,7 @@
   <div id="app" class="app-shell">
     <!-- page background glow -->
     <ambient-bg />
-    <navbar
-    :show="true"
-    :menu-filter.sync="menuFilter" @change-vertical="showModal = true"
-    />
+    <navbar @change-vertical="showModal" />
     <!-- <b-loading :is-full-page="true" :active="loading.app.endpoints" :can-cancel="false"></b-loading> -->
     <!-- Loading Indicator -->
     <b-loading :is-full-page="true" :active="isLoading || isWorking" />
@@ -13,17 +10,15 @@
       <sidebar />
       <app-main />
     </div>
-    <footer class="footer app-footer">
-      <cisco-mark class="app-footer-logo" />
-      <small>
-        UI version {{ uiVersion }}
-      </small>
-      <small>
-        API version {{ apiVersion }}
-      </small>
-      <small>
-        Auth API version {{ authApiVersion }}
-      </small>
+    <footer class="app-footer">
+      <div class="app-footer-inner">
+        <p class="app-footer-copyright">© 2026 Cisco Systems, Inc.</p>
+        <div class="app-footer-versions">
+          <span>UI version {{ uiVersion }}</span>
+          <span>API version {{ apiVersion }}</span>
+          <span>Auth API version {{ authApiVersion }}</span>
+        </div>
+      </div>
     </footer>
   </div>
 </template>
@@ -34,20 +29,17 @@ import Navbar from 'client/components/layout/Navbar.vue'
 import Sidebar from 'client/components/layout/Sidebar.vue'
 import AppMain from 'client/components/layout/AppMain.vue'
 import AmbientBg from 'client/components/ambient-bg.vue'
-import CiscoMark from 'client/components/cisco-mark.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      menuFilter: '',
       modal: null
     }
   },
 
   components: {
     AmbientBg,
-    CiscoMark,
     Navbar,
     Sidebar,
     AppMain,
@@ -157,29 +149,39 @@ export default {
   margin-bottom: 0;
 }
 
-.footer.app-footer {
+.app-footer {
   position: relative;
   z-index: 1;
+  margin-left: 220px;
+  padding: 0 12px 12px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.app-footer-inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  margin-left: 220px;
-  padding: 1rem 1.5rem 1.5rem;
-  background-color: transparent;
-  color: var(--fg-faint);
-  font-size: 12px;
+  gap: 12px;
+  min-height: 56px;
+  padding: 17px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
 
-  small {
-    font-size: 12px;
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
-.app-footer-logo {
-  display: block;
-  height: 2rem;
-  width: auto;
-  margin-bottom: 8px;
-  color: var(--fg-strong);
+.app-footer-copyright {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.app-footer-versions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  color: var(--fg-muted);
 }
 </style>
