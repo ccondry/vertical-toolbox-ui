@@ -122,7 +122,8 @@ export default {
       'getAuthApiVersion'
     ]),
     showModal () {
-      if (this.user) {
+      // mounted and the isLoggedIn watcher can both ask for the modal on load
+      if (this.user && !this.modal) {
         this.modal = this.$buefy.modal.open({
           parent: this,
           component: SelectVertical,
@@ -137,6 +138,7 @@ export default {
           }
         })
         this.modal.$on('close', () => {
+          this.modal = null
         })
       }
     }
