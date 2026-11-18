@@ -2,6 +2,16 @@
 
 Dates are in YYYY-MM-DD format
 
+# 2026.11.18-1
+
+### Updates
+* **Site:** Replace the browser's select menus with styled glass dropdown
+menus.
+
+### Fixes
+* **Branding:** Fix the branding picker opening twice on page load.
+
+
 # 2026.11.18
 
 ### Updates
