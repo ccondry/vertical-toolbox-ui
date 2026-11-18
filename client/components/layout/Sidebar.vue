@@ -192,6 +192,8 @@ export default {
   }
 
   .menu-list {
+    padding-top: 12px;
+
     // li a {
     //   &[aria-expanded="true"] {
     //     .is-angle {
@@ -204,8 +206,53 @@ export default {
       margin: 0 10px 0 15px;
     }
 
+    li + li {
+      margin-top: 2px;
+    }
+
     a {
-      padding-right: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 20px;
+      color: var(--fg-strong);
+      transition: background-color 0.15s, color 0.15s;
+
+      .icon {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        color: rgba(255, 255, 255, 0.85);
+        transition: color 0.15s;
+
+        .mdi::before {
+          font-size: 18px;
+        }
+      }
+
+      .tag {
+        margin-left: auto;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.06);
+        color: var(--fg-strong);
+      }
+
+      // current page: blue icon and text on a soft grey background
+      &.router-link-active {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: var(--accent-cyan);
+
+        .icon {
+          color: var(--accent-cyan);
+        }
+      }
     }
   }
 
