@@ -2,6 +2,37 @@
 
 Dates are in YYYY-MM-DD format
 
+# 2026.11.18
+
+### Updates
+* **Site:** Apply the dark glass theme.
+* **Header:** Show the dCloud Collaboration Toolbox title beside the Cisco
+logo, add Home, Demo Branding and Admin nav buttons with an animated border on
+the active page (Admin is only shown to admins), add a branding picker button,
+a dCloud Applications launcher menu with links to the toolbox apps, instant
+demos and dCloud Home, and move the username, user ID and log out into an
+account menu.
+* **Sidebar:** Restyle the menu, and highlight the current page with a blue
+icon, text and left edge.
+* **Footer:** Show the copyright and UI, API and Auth API versions in a page
+footer.
+
+### Fixes
+* **Header:** Fix the header branding link not opening the branding picker.
+* **Upload:** Upload files with their file extension.
+* **Buttons:** Keep disabled color buttons outlined so their text stays
+visible.
+* **Login:** Prompt for a new JWT in development instead of redirecting to the
+SSO login page.
+* **Build:** Fix npm audit warnings while staying on Vue 2.
+* **Dev:** Fix dev server livereload and 404s during rebuilds, and pin
+rollup-plugin-serve's mime dependency to v3 so the dev server doesn't crash.
+
+### Chores
+* **Dev:** Use a unique dev server and livereload port.
+* **Build:** Track package-lock.json and stop deleting it in update.sh.
+
+
 # 2025.9.11
 
 ### Updates
