@@ -21,29 +21,29 @@
       <div class="card-content">
         <!-- /TTS engine -->
         <b-field label="Conversational IVR TTS Engine">
-          <b-select v-model="model.ttsEngine" @input="updateParent">
+          <glass-select v-model="model.ttsEngine" @input="updateParent">
             <option value="nuance">Nuance</option>
             <option value="google">Google</option>
-          </b-select>
+          </glass-select>
         </b-field>
         <!-- /TTS engine -->
 
         <!-- /TTS voice -->
         <b-field label="Conversational IVR TTS Voice">
-          <b-select v-model="model.ttsVoice" @input="updateParent">
+          <glass-select v-model="model.ttsVoice" @input="updateParent">
             <option
             v-for="voice of voices"
             :value="voice.value"
             >
               {{ voice.name }}
             </option>
-          </b-select>
+          </glass-select>
         </b-field>
         <!-- /TTS voice -->
 
         <!-- Language -->
         <b-field label="Language">
-          <b-select
+          <glass-select
           v-model="model.languageCode"
           @input="changeLanguageCode"
           >
@@ -53,19 +53,19 @@
             >
               {{ language.name }}
             </option>
-          </b-select>
+          </glass-select>
         </b-field>
         <!-- /Language -->
 
         <!-- Chat Bot Enabled -->
         <b-field label="ECE Chat Bot">
-          <b-select
+          <glass-select
           v-model="model.chatBotEnabled"
           @input="changeChatBotEnabled"
           >
             <option :value="true">Enabled</option>
             <option :value="false">Disabled</option>
-          </b-select>
+          </glass-select>
         </b-field>
         <!-- /Chat Bot Enabled -->
 
@@ -76,14 +76,14 @@
           position="is-right"
           :active="model.chatBotEnabled"
           >
-            <b-select
+            <glass-select
             v-model="model.uccxBubbleChat"
             :disabled="model.chatBotEnabled"
             @input="updateParent"
             >
               <option :value="true">Enabled</option>
               <option :value="false">Disabled</option>
-            </b-select>
+            </glass-select>
           </b-tooltip>
         </b-field>
         <!-- /UCCX Bubble Chat and PCCE ECE Docked Chat -->
@@ -95,14 +95,14 @@
           position="is-right"
           :active="!model.chatBotEnabled"
           >
-            <b-select
+            <glass-select
             v-model="model.chatBotSurveyEnabled"
             :disabled="!model.chatBotEnabled"
             @input="updateParent"
             >
               <option :value="true">Enabled</option>
               <option :value="false">Disabled</option>
-            </b-select>
+            </glass-select>
           </b-tooltip>
         </b-field>
         <!-- /Post Chat Survey -->

@@ -45,14 +45,14 @@
       <b-loading :is-full-page="false" :active="isLoading" :can-cancel="false"></b-loading>
       <div v-if="isLoading">Loading...</div>
       <b-field label="Choose the branding to load">
-        <b-select v-model="selectedVertical" v-if="!isLoading">
+        <glass-select v-model="selectedVertical" v-if="!isLoading">
           <option value="" disabled selected>Choose a branding to load</option>
           <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
           <option disabled>-----------------------------------------</option>
           <option v-for="vertical in userVerticals" :value="vertical.id" v-if="verticalFilter === 'all'">{{ `${vertical.name} (${vertical.id})` }}</option>
           <option v-for="vertical in myVerticals" :value="vertical.id" v-if="verticalFilter === 'mine'">{{ `${vertical.name} (${vertical.id})` }}</option>
           <option v-for="vertical in filteredSortedVerticals" :value="vertical.id" v-if="verticalFilter === 'other'">{{ `${vertical.name} (${vertical.id})` }}</option>
-        </b-select>
+        </glass-select>
       </b-field>
     </section>
     <footer class="modal-card-foot">

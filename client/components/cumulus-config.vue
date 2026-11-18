@@ -107,13 +107,13 @@
                   <b-input v-model="slider.buttonText" :placeholder="defaults.sliders[i] ? defaults.sliders[i].buttonText : defaults.sliders[0].buttonText" />
                 </b-field>
                 <b-field label="Button Destination">
-                  <b-select :placeholder="defaults.sliders[i] ? defaults.sliders[i].buttonLink : defaults.sliders[0].buttonLink" v-model="slider.buttonLink">
+                  <glass-select :placeholder="defaults.sliders[i] ? defaults.sliders[i].buttonLink : defaults.sliders[0].buttonLink" v-model="slider.buttonLink">
                     <option value="about">About Us Page</option>
                     <option value="contact">Contact Us Page</option>
                     <option value="home">Home Page</option>
                     <!-- <option value="products">Products Page</option> -->
                     <option value="services">Services Page</option>
-                  </b-select>
+                  </glass-select>
                 </b-field>
                 <b-field label="Image URL" v-if="user.admin">
                   <b-input v-model.lazy="slider.image" :placeholder="defaults.sliders[i] ? defaults.sliders[i].image : defaults.sliders[0].image" />
@@ -238,10 +238,10 @@
             </div>
             <div class="card-content">
               <b-field label="Enable Bubble Chat (UCCX Only)">
-                <b-select v-model="model.uccxBubbleChat">
+                <glass-select v-model="model.uccxBubbleChat">
                   <option :value="true">Enabled</option>
                   <option :value="false">Disabled</option>
-                </b-select>
+                </glass-select>
               </b-field>
             </div>
           </b-collapse>

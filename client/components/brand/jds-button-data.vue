@@ -15,7 +15,7 @@
 
       <!-- type -->
       <b-field label="Data Type">
-        <b-select
+        <glass-select
         :value="model.type"
         @input="setType"
         >
@@ -34,7 +34,7 @@
           <!-- <option value="datetime">
             Datetime
           </option> -->
-        </b-select>
+        </glass-select>
       </b-field>
 
       <!-- value -->

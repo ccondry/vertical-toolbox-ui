@@ -102,7 +102,7 @@
 
         <!-- Expert Advisor Enable -->
         <b-field label="Show Expert Advisor Header">
-          <b-select
+          <glass-select
           v-model="model.brand.advisorEnabled"
           @input="updateParent"
           >
@@ -112,7 +112,7 @@
             <option :value="false">
               Hidden
             </option>
-          </b-select>
+          </glass-select>
         </b-field>
         <!-- /Expert Advisor Enable -->
 
@@ -125,7 +125,7 @@
             />
           </b-field>
           <b-field label="Select Existing Image">
-            <b-select
+            <glass-select
             :value="model.brand.advisorImage"
             @input="changeAdvisorImage"
             >
@@ -145,7 +145,7 @@
               >
                 Custom
               </option>
-            </b-select>
+            </glass-select>
           </b-field>
           <b-tooltip
           :label="getTooltip('advisorImage')"
@@ -351,7 +351,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.callEnabled"
               @input="updateParent"
               >
@@ -361,7 +361,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.callEnabled">
@@ -597,7 +597,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.chatEnabled"
               @input="updateParent"
               >
@@ -607,7 +607,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.chatEnabled">
@@ -683,7 +683,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.chatBotEnabled"
               @input="updateParent"
               >
@@ -693,7 +693,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.chatBotEnabled">
@@ -770,7 +770,7 @@
 
           <div class="card-content">
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.chatTranslationEnabled"
               @input="updateParent"
               >
@@ -780,7 +780,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.chatTranslationEnabled">
@@ -856,14 +856,14 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select v-model="model.brand.smsEnabled">
+              <glass-select v-model="model.brand.smsEnabled">
                 <option :value="true">
                   Enabled
                 </option>
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.smsEnabled">
@@ -955,7 +955,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.smsBotEnabled"
               @input="updateParent"
               >
@@ -965,7 +965,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.smsBotEnabled">
@@ -1049,7 +1049,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.callbackEnabled"
               @input="updateParent"
               >
@@ -1059,7 +1059,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.callbackEnabled">
@@ -1143,7 +1143,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.emailEnabled"
               @input="updateParent"
               >
@@ -1153,7 +1153,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.emailEnabled">
@@ -1237,7 +1237,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.taskEnabled"
               @input="updateParent"
               >
@@ -1247,7 +1247,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.taskEnabled">
@@ -1373,7 +1373,7 @@
           <div class="card-content">
 
             <b-field label="Option Enabled">
-              <b-select
+              <glass-select
               v-model="model.brand.cobrowseEnabled"
               @input="updateParent"
               >
@@ -1383,7 +1383,7 @@
                 <option :value="false">
                   Disabled
                 </option>
-              </b-select>
+              </glass-select>
             </b-field>
 
             <div v-show="model.brand.cobrowseEnabled">

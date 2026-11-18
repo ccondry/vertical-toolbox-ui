@@ -114,13 +114,13 @@
       </div>
       <!-- show Jacada config when Jacada is configured -->
       <div class="card-content" v-else>
-        <b-select placeholder="Select a preconfigured VIVR vertical" @change.native="changeJacadaVertical($event)">
+        <glass-select placeholder="Select a preconfigured VIVR vertical" @input="changeJacadaVertical">
           <option value="travel">Travel</option>
           <option value="finance">Finance</option>
           <option value="healthcare">Healthcare</option>
           <option value="city">City</option>
           <option value="utility">Utility</option>
-        </b-select>
+        </glass-select>
 
         <b-field label="interactionId">
           <b-input
@@ -391,10 +391,10 @@ export default {
       this.$set(this.model.cvp, 'jacadaMenu', defaults)
       this.updateParent()
     },
-    changeJacadaVertical (event) {
+    changeJacadaVertical (value) {
       // set jacada interaction ID and application key when friendly vertical
       // name is selected from option menu
-      const vertical = jacadaVerticals[event.target.value]
+      const vertical = jacadaVerticals[value]
       this.model.cvp.jacadaMenu.interactionId = vertical.interactionId
       this.model.cvp.jacadaMenu.applicationKey = vertical.applicationKey
     },

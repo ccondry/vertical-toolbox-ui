@@ -38,7 +38,7 @@
 
         <!-- Language -->
         <b-field label="Language" v-if="isAdmin">
-          <b-select v-model="language">
+          <glass-select v-model="language">
             <option
             v-for="lang of filteredLanguages"
             :value="lang.value"
@@ -46,7 +46,7 @@
             >
               {{ lang.name }}
             </option>
-          </b-select>
+          </glass-select>
         </b-field>
         <!-- /Language -->
 

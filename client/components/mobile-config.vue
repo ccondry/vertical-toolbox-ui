@@ -204,14 +204,14 @@
 
                       <!-- data type -->
                       <b-field label="Data Type">
-                        <b-select
+                        <glass-select
                         :placeholder="defaults.mobileOptions[i].fields[j].type"
                         v-model="field.type"
                         @input="changeDataType(field, $event, i, j)"
                         >
                           <option value="date">Date</option>
                           <option value="text">Text</option>
-                        </b-select>
+                        </glass-select>
                       </b-field>
 
                       <!-- TTS type -->
@@ -220,7 +220,7 @@
                         :label="getTtsTooltip(field.ttstype)"
                         multilined
                         >
-                          <b-select
+                          <glass-select
                           :placeholder="defaults.mobileOptions[i].fields[j].ttstype"
                           v-model="field.ttstype"
                           @input="updateParent"
@@ -232,7 +232,7 @@
                             >
                               {{ ttsType.name }}
                             </option>
-                          </b-select>
+                          </glass-select>
                         </b-tooltip>
                       </b-field>
 

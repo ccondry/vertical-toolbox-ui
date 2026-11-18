@@ -9,10 +9,12 @@ import store from './store'
 import VueRouter from 'vue-router'
 import CollapseCard from './components/collapse-card.vue'
 import SaveButton from './components/save-button.vue'
+import GlassSelect from './components/glass-select.vue'
 
 // add global components
 Vue.component('CollapseCard', CollapseCard)
 Vue.component('SaveButton', SaveButton)
+Vue.component('GlassSelect', GlassSelect)
 
 Vue.use(VueRouter)
 Vue.use(Buefy)

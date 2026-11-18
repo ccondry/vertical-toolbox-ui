@@ -11,14 +11,14 @@
     <div class="card-content">
       <!-- enable JDS -->
       <b-field label="Enable JDS Buttons">
-        <b-select v-model="model.jdsEnabled" @input="updateParent">
+        <glass-select v-model="model.jdsEnabled" @input="updateParent">
           <option :value="true">
             JDS Buttons Enabled
           </option>
           <option :value="false">
             JDS Buttons Disabled
           </option>
-        </b-select>
+        </glass-select>
       </b-field>
 
       <div v-show="model.jdsEnabled">
