@@ -2,6 +2,15 @@
 
 Dates are in YYYY-MM-DD format
 
+# 2026.11.18-2
+
+### Updates
+* **Branding:** Show the branding picker below the header, so the header
+buttons and menus can still be used while it is open.
+* **Header:** Show "Choose a branding" on the branding button when no branding
+is loaded.
+
+
 # 2026.11.18-1
 
 ### Updates
