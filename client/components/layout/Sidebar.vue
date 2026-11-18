@@ -246,9 +246,20 @@ export default {
 
       // current page: blue icon and text on a soft grey background
       &.router-link-active {
+        position: relative;
         background-color: rgba(255, 255, 255, 0.08);
-        box-shadow: inset 3px 0 0 var(--accent-cyan);
         color: var(--accent-cyan);
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 4px;
+          bottom: 4px;
+          left: 0;
+          width: 4px;
+          border-radius: 4px 0 0 4px;
+          background-color: var(--accent-cyan);
+        }
 
         .icon {
           color: var(--accent-cyan);
