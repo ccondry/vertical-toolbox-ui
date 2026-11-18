@@ -128,8 +128,10 @@ export default {
           parent: this,
           component: SelectVertical,
           hasModalCard: true,
-          trapFocus: true,
+          // the header stays usable while this modal is open, so let focus reach it
+          trapFocus: false,
           canCancel: false,
+          customClass: 'select-vertical-modal',
           events: {
             submit: (verticalId) => {
               // delete an action recipe input
@@ -149,6 +151,13 @@ export default {
 <style lang="scss">
 .content .card-header .card-header-title {
   margin-bottom: 0;
+}
+
+// cover the page below the header, and stay under the header (z-index 30) so
+// its buttons and menus can still be used
+.modal.select-vertical-modal {
+  top: 56px;
+  z-index: 29;
 }
 
 .app-footer {

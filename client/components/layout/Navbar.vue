@@ -25,7 +25,7 @@
       title="Change branding"
       @click="changeVertical"
       >
-        <span class="app-navbar-vertical-name">{{ vertical.name }}</span>
+        <span class="app-navbar-vertical-name">{{ vertical.name || 'Choose a branding' }}</span>
         <span class="app-navbar-vertical-id">{{ selectedVerticalId }}</span>
         <b-icon icon="swap-horizontal" size="is-small" />
       </button>
