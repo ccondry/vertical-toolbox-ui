@@ -247,6 +247,7 @@ export default {
       // current page: blue icon and text on a soft grey background
       &.router-link-active {
         background-color: rgba(255, 255, 255, 0.08);
+        box-shadow: inset 3px 0 0 var(--accent-cyan);
         color: var(--accent-cyan);
 
         .icon {
